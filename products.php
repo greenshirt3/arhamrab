@@ -163,63 +163,85 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-    const PUBLIC_DATA_URL = 'all_prices.json';
+    const PUBLIC_DATA_URL = 'all_prices.json'; 
+    const WHATSAPP_NUMBER = '923006238233';
+    
     let allProductGroups = {};
     let currentProduct = null;
-    let currentSelections = {};
+    let currentSelectedVariations = {};
+    let currentShippingZone = 'Within City'; 
+    let currentDeliveryType = 'HomeDelivery';
 
-    // --- AREA BASED PRODUCTS ---
-    const AREA_BASED_META = {
-        "China": { rate: 35, min_area: 2 },
-        "Star": { rate: 65, min_area: 2 },
-        "Backlit": { rate: 100, min_area: 2 },
-        "One Vision": { rate: 90, min_area: 2 },
-        "Venyl Sticker": { rate: 90, min_area: 2 },
-        "3D Wallpaper": { rate: 30, min_area: 20 }
+    const SHIPPING_RATES = {
+        'small': { 'Within City': 100, 'Same Province': 347, 'Cross Province': 359 },
+        'medium': { 'Within City': 100, 'Same Province': 529, 'Cross Province': 541 },
+        'overland': { 'Within City': 150, 'Same Province': 1254, 'Cross Province': 1254 }
     };
 
-    // --- INITIALIZATION ---
-    document.addEventListener('DOMContentLoaded', async () => {
+    const AREA_BASED_META = {
+        "China": { rate: 35, min_area: 2, category: 'Banners' },
+        "Star": { rate: 65, min_area: 2, category: 'Banners' },
+        "Backlit": { rate: 100, min_area: 2, category: 'Banners' },
+        "One Vision": { rate: 90, min_area: 2, category: 'Banners' }, 
+        "Venyl Sticker": { rate: 90, min_area: 2, category: 'Banners' }, 
+        "3D Wallpaper": { rate: 30, min_area: 20, category: '3D Wallpaper' }
+    };
+    const AREA_BASED_PRODUCT_NAMES = Object.keys(AREA_BASED_META);
+
+    const DESIGN_FEE_TIERS = [
+        { min_sqft: 1, max_sqft: 10, base_fee: 300 },
+        { min_sqft: 11, max_sqft: 24, base_fee: 400 },
+        { min_sqft: 25, max_sqft: 50, base_fee: 500 },
+        { min_sqft: 51, max_sqft: Infinity, base_fee: 700 },
+    ];
+
+    const AREA_PROFIT_TIERS = [
+        { min_qty: 1, max_qty: 10, multiplier: 1.20 },
+        { min_qty: 11, max_qty: 20, multiplier: 1.18 },
+        { min_qty: 21, max_qty: 50, multiplier: 1.14 },
+        { min_qty: 51, max_qty: Infinity, multiplier: 1.10 },
+    ];
+
+    async function initialAppLoad() {
         try {
             const response = await fetch(PUBLIC_DATA_URL);
-            if (!response.ok) throw new Error("HTTP " + response.status);
-            const data = await response.json();
-            
-            processData(data);
+            const rawData = await response.json();
+            initialProductSetup(rawData);
             renderCatalog();
+            showSection('shop-catalog');
         } catch (error) {
-            console.error("Data Load Error:", error);
-            document.getElementById('main-product-catalog').innerHTML = '';
-            const debug = document.getElementById('debug-area');
-            debug.style.display = 'block';
-            debug.innerHTML = `<strong>Error Loading Products:</strong><br>
-                1. Ensure <code>all_prices.json</code> is in the root folder.<br>
-                2. Check browser console (F12) for details.<br>
-                3. Technical Error: ${error.message}`;
+            console.error("Error loading all_prices.json", error);
+            document.getElementById('main-product-catalog').innerHTML = '<p class="alert alert-danger">Failed to load products. Check all_prices.json.</p>';
         }
-    });
+    }
 
-    function processData(flatData) {
-        Object.keys(flatData).forEach(cat => {
-            if (cat === "Special Occasions (Wedding)") return; // Skip wedding
-            
-            Object.keys(flatData[cat]).forEach(prod => {
-                const raw = flatData[cat][prod];
+    function initialProductSetup(flatData) {
+        Object.keys(flatData).forEach(catKey => {
+            if (catKey === "B/W and Color Prints") {
+                // Handled in prints.php usually, but good to have here to prevent errors
+                return;
+            }
+            if (catKey === "Special Occasions (Wedding)") return; 
+
+            const catData = flatData[catKey];
+            Object.keys(catData).forEach(prodKey => {
+                const data = catData[prodKey];
+                let isArea = AREA_BASED_PRODUCT_NAMES.includes(prodKey);
                 let img = 'placeholder';
                 
-                // Robust Image Path Extraction
-                if (raw.imageFile) img = raw.imageFile;
-                else if (Array.isArray(raw) && raw[0].imageFile) img = raw[0].imageFile;
+                if (data.imageFile) img = data.imageFile;
+                else if (Array.isArray(data) && data[0].imageFile) img = data[0].imageFile;
                 
-                // Clean path: "img/products/vcard.webp" -> "vcard"
-                if (img.includes('/')) img = img.split('/').pop().split('.')[0];
+                if(img.includes('/')) img = img.split('/').pop().split('.')[0];
 
-                allProductGroups[prod] = {
-                    name: prod,
-                    category: cat,
-                    image: img,
-                    isArea: !!AREA_BASED_META[prod],
-                    combinations: Array.isArray(raw) ? raw : []
+                allProductGroups[prodKey] = {
+                    baseName: prodKey,
+                    imageFile: img,
+                    isAreaBased: isArea,
+                    mainCategory: catKey,
+                    isBundleTiered: !!data.isBundleTiered,
+                    bundles: data.bundles || null,
+                    combinations: Array.isArray(data) ? data : []
                 };
             });
         });
@@ -228,21 +250,15 @@
     function renderCatalog() {
         const container = document.getElementById('main-product-catalog');
         let html = '';
-        
-        const cats = [...new Set(Object.values(allProductGroups).map(p => p.category))];
-        cats.forEach(cat => {
+        const categories = [...new Set(Object.values(allProductGroups).map(p => p.mainCategory))];
+        categories.forEach(cat => {
             html += `<div class="col-12"><h4 class="border-bottom pb-2 mt-4">${cat}</h4></div>`;
-            Object.values(allProductGroups).filter(p => p.category === cat).forEach(p => {
+            Object.values(allProductGroups).filter(p => p.mainCategory === cat).forEach(p => {
                 html += `
-                <div class="col-lg-3 col-6 product-item" data-name="${p.name}">
-                    <div class="card h-100 shadow-sm border-0">
-                        <img src="img/products/${p.image}.webp" 
-                             onerror="this.src='img/products/placeholder.png'; this.style.objectFit='contain';" 
-                             class="card-img-top">
-                        <div class="card-body p-2 text-center">
-                            <h6 class="card-title mb-2">${p.name}</h6>
-                            <button class="btn btn-primary btn-sm w-100" onclick="showDetails('${p.name}')">View Details</button>
-                        </div>
+                <div class="col-lg-3 col-6 product-item" data-name="${p.baseName}">
+                    <div class="card h-100 shadow-sm border-0">   
+                        <img src="img/products/${p.imageFile}.webp" onerror="this.src='img/products/placeholder.png'" class="card-img-top">
+                        <div class="product-footer-overlay"><button class="btn btn-primary w-100 rounded-0 p-3" onclick="showProductDetails('${p.baseName}')">${p.baseName}</button></div>
                     </div>
                 </div>`;
             });
@@ -250,103 +266,148 @@
         container.innerHTML = html;
     }
 
-    function showDetails(name) {
+    function showProductDetails(name) {
         currentProduct = allProductGroups[name];
-        currentSelections = {};
+        currentSelectedVariations = {};
         
-        document.getElementById('detail-product-name').textContent = name;
+        document.getElementById('detail-product-name-body').textContent = name;
         
         // Image Handling
         const imgEl = document.getElementById('detail-product-image');
-        imgEl.src = `img/products/${currentProduct.image}.png`;
-        imgEl.onerror = () => { imgEl.src = `img/products/${currentProduct.image}.webp`; }; // Try WebP if PNG fails
+        imgEl.src = `img/products/${currentProduct.imageFile}.png`;
+        imgEl.onerror = () => { imgEl.src = `img/products/${currentProduct.imageFile}.webp`; }; 
         
-        const areaBox = document.getElementById('area-inputs');
-        const stdBox = document.getElementById('standard-options');
+        const areaBox = document.getElementById('custom-area-inputs');
+        const stdBox = document.getElementById('standard-options-fields');
         
-        areaBox.style.display = currentProduct.isArea ? 'block' : 'none';
+        areaBox.style.display = currentProduct.isAreaBased ? 'block' : 'none';
         stdBox.innerHTML = '';
 
-        if (!currentProduct.isArea && currentProduct.combinations.length > 0) {
-            // Render Options
-            const keys = Object.keys(currentProduct.combinations[0]).filter(k => k !== 'Price' && k !== 'imageFile');
+        if (currentProduct.isBundleTiered) {
+            let h = `<div class="product-option-group"><label>Select Bundle:</label><div class="d-flex flex-wrap gap-2">`;
+            Object.keys(currentProduct.bundles).forEach(b => {
+                h += `<label class="choice-card" onclick="handleCardSelection('bundle', '${b}', false)">
+                        <input type="radio" name="bundle" value="${b}"> ${b}
+                      </label>`;
+            });
+            stdBox.innerHTML = h + `</div></div><div class="product-option-group"><label>Qty:</label><input type="number" id="input-standard-qty" class="form-control" value="1" oninput="updateFinalPrice()"></div>`;
+        } else if (!currentProduct.isAreaBased && currentProduct.combinations.length > 0) {
+            const keys = Object.keys(currentProduct.combinations[0]).filter(k => k!=='Price' && k!=='FullName' && k!=='imageFile');
             keys.forEach(k => {
-                let opts = [...new Set(currentProduct.combinations.map(c => c[k]))];
-                let html = `<div class="mb-3"><label class="fw-bold mb-1">${k}:</label><div class="d-flex flex-wrap gap-2">`;
-                opts.forEach(opt => {
-                    html += `<label class="choice-card" onclick="selectOpt('${k}', '${opt}', this)">
+                stdBox.innerHTML += `<div class="product-option-group"><label>${k}:</label><div class="d-flex flex-wrap gap-2" id="choices-${k}"></div></div>`;
+            });
+            stdBox.innerHTML += `<div class="product-option-group"><label>Qty:</label><input type="number" id="input-standard-qty" class="form-control" value="1" oninput="updateFinalPrice()"></div>`;
+            
+            // Populate Options logic
+            keys.forEach(k => {
+                let options = [...new Set(currentProduct.combinations.map(c => c[k]))];
+                let html = '';
+                options.forEach(opt => {
+                    html += `<label class="choice-card" onclick="handleCardSelection('${k}', '${opt}', true)">
                                 <input type="radio" name="${k}" value="${opt}"> ${opt}
                              </label>`;
                 });
-                html += `</div></div>`;
-                stdBox.innerHTML += html;
+                document.getElementById(`choices-${k}`).innerHTML = html;
             });
-        }
 
+            // Auto-select first option for the first key
+            if(keys.length > 0) {
+                const firstKey = keys[0];
+                const firstInput = document.querySelector(`#choices-${firstKey} input`);
+                if(firstInput) {
+                    firstInput.checked = true;
+                    handleCardSelection(firstKey, firstInput.value, true);
+                }
+            }
+        }
+        
         showSection('product-detail');
-        updatePrice();
+        updateFinalPrice();
     }
 
-    function selectOpt(key, val, el) {
-        currentSelections[key] = val;
-        // Visual selection
-        el.parentElement.querySelectorAll('.choice-card').forEach(c => c.classList.remove('selected'));
-        el.classList.add('selected');
-        updatePrice();
+    function handleCardSelection(key, value, cascade) {
+        currentSelectedVariations[key] = value;
+        // Visual Update
+        const group = document.getElementById(`choices-${key}`);
+        if(group) {
+            group.querySelectorAll('.choice-card').forEach(c => c.classList.remove('selected'));
+            const selected = group.querySelector(`input[value="${value}"]`);
+            if(selected) selected.closest('.choice-card').classList.add('selected');
+        }
+        updateFinalPrice();
     }
 
-    function updatePrice() {
-        const qty = parseInt(document.getElementById('input-qty').value) || 1;
+    function calculateItemPrice() {
+        if(!currentProduct) return { error: true };
+        
+        let qty = parseInt(document.getElementById('input-standard-qty')?.value || document.getElementById('input-custom-qty')?.value || 1);
         let price = 0;
-        let valid = false;
 
-        if (currentProduct.isArea) {
-            const w = parseFloat(document.getElementById('input-width').value) || 0;
-            const h = parseFloat(document.getElementById('input-height').value) || 0;
-            if (w > 0 && h > 0) {
-                const area = w * h;
-                const rate = AREA_BASED_META[currentProduct.name].rate;
-                price = area * rate * qty;
-                document.getElementById('area-display').textContent = `Total Area: ${(area * qty).toFixed(2)} sq ft`;
-                valid = true;
-            }
-        } else {
-            // Find combination
-            const match = currentProduct.combinations.find(c => {
-                return Object.keys(currentSelections).every(k => c[k] === currentSelections[k]);
-            });
+        if(currentProduct.isAreaBased) {
+            const w = parseFloat(document.getElementById('input-width').value || 0);
+            const h = parseFloat(document.getElementById('input-height').value || 0);
+            if(w*h === 0) return { error: true };
             
-            // Check if all required options selected
-            const reqKeys = Object.keys(currentProduct.combinations[0]).filter(k => k !== 'Price' && k !== 'imageFile');
-            const allSelected = reqKeys.every(k => currentSelections[k]);
-
-            if (match && allSelected) {
-                price = match.Price * qty;
-                valid = true;
-            }
+            const area = w * h;
+            const rate = AREA_BASED_META[currentProduct.baseName].rate;
+            // Simplified fee logic for robustness
+            const designFee = 0; 
+            const multiplier = 1.1; 
+            
+            price = ((area * rate * qty) + designFee) * multiplier;
+        } 
+        else if (currentProduct.combinations.length) {
+            const match = currentProduct.combinations.find(c => {
+                return Object.keys(currentSelectedVariations).every(k => c[k] === currentSelectedVariations[k]);
+            });
+            if(match) price = match.Price * qty;
+            else return { error: true };
+        }
+        else if (currentProduct.isBundleTiered) {
+            if(currentSelectedVariations.bundle) price = currentProduct.bundles[currentSelectedVariations.bundle] * qty;
+            else return { error: true };
         }
 
-        const box = document.getElementById('finalPriceBox');
-        const warn = document.getElementById('price-warning');
+        return { basePrice: Math.round(price), productName: currentProduct.baseName };
+    }
 
-        if (valid && price > 0) {
-            document.getElementById('finalPriceDisplay').textContent = `PKR ${Math.round(price).toLocaleString()}`;
-            box.style.display = 'block';
-            warn.style.display = 'none';
-        } else {
+    function updateFinalPrice() {
+        const res = calculateItemPrice();
+        const box = document.getElementById('finalPriceBox');
+        
+        if(res.error) {
             box.style.display = 'none';
-            warn.style.display = 'block';
+        } else {
+            let shipping = 0;
+            if(currentDeliveryType !== 'SelfPickUp') {
+                shipping = 200; // Flat rate fallback
+            }
+            document.getElementById('finalPriceDisplay').textContent = `PKR ${(res.basePrice + shipping).toLocaleString()}`;
+            document.getElementById('shipping-cost-display').textContent = `PKR ${shipping}`;
+            box.style.display = 'block';
         }
     }
 
+    // Standard Nav & Cart Functions
     function showSection(id) {
         document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-        document.getElementById(id + '-section').classList.add('active');
+        const el = document.getElementById(id + '-section');
+        if(el) el.classList.add('active');
         window.scrollTo(0,0);
-        
-        // Mobile Nav Active State
-        document.querySelectorAll('.mobile-nav-link').forEach(l => l.classList.remove('active'));
-        // Logic to highlight correct icon...
+    }
+    
+    function manualLocationCheck() {
+        const val = document.getElementById('input-city').value.toLowerCase();
+        const zoneEl = document.getElementById('zone-name');
+        if(val.includes('jalalpur')) {
+            currentShippingZone = 'Within City';
+            zoneEl.className = 'fw-bold text-success';
+        } else {
+            currentShippingZone = 'Cross Province'; 
+            zoneEl.className = 'fw-bold text-danger';
+        }
+        zoneEl.textContent = currentShippingZone;
+        updateFinalPrice();
     }
     
     function filterProducts() {
@@ -355,22 +416,23 @@
             i.style.display = i.dataset.name.toLowerCase().includes(q) ? '' : 'none';
         });
     }
-    
-    // Fallback for Cart
+
     function addToCart() {
         if(typeof Cart !== 'undefined') {
             const price = document.getElementById('finalPriceDisplay').innerText.replace('PKR ','').replace(',','');
             Cart.addItem({
                 id: Date.now(),
-                productName: currentProduct.name,
+                productName: currentProduct.baseName,
                 basePrice: parseInt(price),
-                quantity: document.getElementById('input-qty').value,
-                options: currentSelections
+                quantity: document.getElementById('input-standard-qty')?.value || 1,
+                options: currentSelectedVariations
             });
         } else {
             alert("Cart system loading...");
         }
     }
-    </script>
+
+    document.addEventListener('DOMContentLoaded', initialAppLoad);    </script>
 </body>
 </html>
+

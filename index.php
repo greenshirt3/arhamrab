@@ -4,7 +4,6 @@ require_once 'includes/config.php';
 $pageTitle = "Arham Printers - Printing & Advertising Service";
 include 'includes/header.php';
 ?>
-
 <style>
     :root {
         --bs-primary: #f28b00; /* Your Brand Orange */

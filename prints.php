@@ -13,687 +13,361 @@
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="lib/animate/animate.min.css" rel="stylesheet">
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     
     <style>
-        /* Page Specific Styles */
         :root {
             --bs-primary: #f28b00;
-            --bs-secondary: #ff5722; 
+            --bs-secondary: #ff5722;
             --bs-dark: #212529;
             --mobile-nav-height: 60px;
         }
-
-        .page-content-wrapper {
-            background-color: #f8fafc;
-            min-height: 80vh; 
-            padding-bottom: calc(var(--mobile-nav-height) + 40px);
-        }
-        
-        .navbar-brand h1 { margin: 0 !important; }
         
         .page-header {
-            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(img/banners/printbanner-mobile.webp) center center no-repeat;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(img/banners/prints.webp) center center no-repeat;
             background-size: cover;
-            min-height: 200px;
-        }
-        @media (min-width: 768px) {
-            .page-header {
-                background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(img/banners/printbanner-desktop.webp) center center no-repeat;
-                background-size: cover;
-                min-height: 300px;
-            }
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         
-        .option-group {
-            border: 1px solid #dee2e6;
-            padding: 1rem;
-            border-radius: 0;
-            margin-bottom: 1.5rem;
-            background-color: #ffffff;
-        }
-
-        .option-group h4 {
-            border-bottom: 2px solid var(--bs-primary);
-            padding-bottom: 0.5rem;
-            margin-bottom: 1rem;
-            color: var(--bs-dark);
-            font-weight: 600;
-        }
-
-        .option-label {
-            font-weight: 700;
-            color: var(--bs-dark);
-            margin-bottom: 0.5rem;
-            display: block;
-        }
-
-        /* Custom Radio Button Styling */
-        .choice-card-label {
+        .choice-card {
             cursor: pointer;
             border: 2px solid #ddd;
-            border-radius: 4px;
-            padding: 10px 15px;
-            transition: all 0.2s ease;
-            font-weight: 500;
-            display: inline-block;
-            margin-right: 10px;
-            margin-bottom: 10px;
-            width: 100%;
+            border-radius: 8px;
+            padding: 15px;
             text-align: center;
+            transition: all 0.2s;
+            flex: 1;
+            min-width: 120px;
         }
-        .choice-card-label:hover {
-            border-color: var(--bs-secondary);
-            background-color: #fff8f8;
-        }
-        input[type="radio"] { display: none; }
-        input[type="radio"]:checked + .choice-card-label {
-            border-color: var(--bs-primary);
-            background-color: var(--bs-primary);
-            color: white;
-        }
+        .choice-card:hover { border-color: var(--bs-secondary); background: #fff5f0; }
+        .choice-card.selected { border-color: var(--bs-primary); background: var(--bs-primary); color: white; }
+        .choice-card input { display: none; }
         
-        .price-summary-box {
-            background-color: var(--bs-dark); 
-            color: white;
-            padding: 1rem;
-            border-radius: 0;
-            text-align: right;
-            display: flex; 
-            flex-direction: column;
-            justify-content: center; 
-        }
-        
-        .price-summary-box #totalPrice {
-            color: var(--bs-primary); 
-            display: block;
-            font-size: 1.5em;
-            font-weight: bold;
-        }
-        
-        .whatsapp-action-block {
-            background-color: #f7f7f7; 
-            border: 1px solid #eee;
-            padding: 1.5rem;
-            border-radius: 0;
-            margin-top: 1.5rem;
-        }
-
-        /* Mobile Nav Styles */
         #mobile-bottom-nav {
             position: fixed; bottom: 0; left: 0; right: 0; height: var(--mobile-nav-height);
-            background: white; border-top: 1px solid #ddd; box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
-            z-index: 1030; display: flex; align-items: center; justify-content: space-around;
+            background: white; border-top: 1px solid #ddd; z-index: 1030; display: flex;
+            justify-content: space-around; align-items: center;
         }
-        #mobile-bottom-nav > a, #mobile-bottom-nav > div { flex: 1 1 0%; }
         .mobile-nav-link {
-            display: flex; flex-direction: column; align-items: center; text-align: center;
-            text-decoration: none; color: var(--bs-dark); font-size: 0.6rem; padding: 5px 0;
-            transition: color 0.2s; position: relative; height: 100%; justify-content: center;
+            flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-decoration: none; color: var(--bs-dark); font-size: 0.7rem;
         }
-        .mobile-nav-link:hover { color: var(--bs-primary); }
-        .mobile-nav-link i { font-size: 1.1rem; margin-bottom: 2px; line-height: 1; }
         .mobile-nav-link.active { color: var(--bs-primary); }
+        .mobile-nav-link i { font-size: 1.2rem; margin-bottom: 2px; }
         
-        #mobile-nav-logo { display: flex; justify-content: center; align-items: center; position: relative; }
-        #mobile-nav-logo a {
-            background-color: var(--bs-primary); color: white; width: 45px; height: 45px;
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 0 10px rgba(242, 139, 0, 0.6); position: absolute; top: -15px; 
-            left: 50%; transform: translateX(-50%); 
+        body { padding-bottom: 80px; } 
+        
+        .price-display {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--bs-primary);
         }
         
-        @media (max-width: 991.98px) {
-            .page-content-wrapper { padding-bottom: calc(var(--mobile-nav-height) + 15px) !important; }
+        /* Drag and Drop Zone */
+        #drop-zone {
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            background: #f9f9f9;
+            transition: all 0.3s;
+            cursor: pointer;
         }
-        
-        #mobile-bottom-nav .dropdown-menu {
-            position: absolute; bottom: var(--mobile-nav-height); left: 50%; 
-            transform: translateX(-50%); width: 250px; box-shadow: 0 -5px 15px rgba(0,0,0,0.2);
-            border-radius: 8px 8px 0 0; padding: 10px 0;
+        #drop-zone.dragover {
+            background: #e9ecef;
+            border-color: var(--bs-primary);
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-    </div>
-    
     <div class="container-fluid bg-dark text-white-50 py-2 px-0 d-none d-lg-block">
         <div class="row gx-0 align-items-center">
             <div class="col-lg-7 px-5 text-start">
-                <div class="h-100 d-inline-flex align-items-center me-4">
-                    <small class="fa fa-phone-alt me-2"></small>
-                    <small>+92 300 6238233</small>
-                </div>
-                <div class="h-100 d-inline-flex align-items-center me-4">
-                    <small class="far fa-envelope-open me-2"></small>
-                    <small>info@arhamprinters.pk</small>
-                </div>
-                <div class="h-100 d-inline-flex align-items-center me-4">
-                    <small class="far fa-clock me-2"></small>
-                    <small>Sat - Thu : 09 AM - 09 PM</small>
-                </div>
+                <small class="fa fa-phone-alt me-2"></small> <small>+92 300 6238233</small>
             </div>
             <div class="col-lg-5 px-5 text-end">
-                <div class="h-100 d-inline-flex align-items-center">
-                    <a class="text-white-50 ms-4" href=""><i class="fab fa-facebook-f"></i></a>
-                    <a class="text-white-50 ms-4" href=""><i class="fab fa-twitter"></i></a>
-                    <a class="text-white-50 ms-4" href=""><i class="fab fa-linkedin-in"></i></a>
-                    <a class="text-white-50 ms-4" href=""><i class="fab fa-instagram"></i></a>
-                </div>
+               <small>Sat - Thu : 09 AM - 09 PM</small>
             </div>
         </div>
     </div>
     
     <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top px-4 px-lg-5 d-none d-lg-block">
         <div class="d-flex w-100 justify-content-between align-items-center">
-        <a href="https://arhamprinters.pk/" class="navbar-brand d-flex align-items-center">
-             <img src="img/logo2.webp" alt="Arham Printers Logo" style="height: 40px; margin-right: 1rem;">
-        </a>
-        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <div class="navbar-nav mx-auto bg-light pe-4 py-3 py-lg-0">
-                <a href="https://arhamprinters.pk/" class="nav-item nav-link">Home</a>
-                <a href="https://shop.arhamprinters.pk/" class="nav-item nav-link">Products</a>
-                <a href="https://wedding.arhamprinters.pk/" class="nav-item nav-link">Wedding Cards</a>
-                <a href="#" class="nav-item nav-link active">Print Order</a>
-                <a href="https://arhamprinters.pk/#quote-section" class="nav-item nav-link">Contact</a>
-            </div>
-             <div class="h-100 d-lg-inline-flex align-items-center">
-                <a href="https://arhamprinters.pk/#quote-section" class="btn btn-primary py-2 px-3 rounded-0 d-none d-lg-block">Get a Quote<i class="fa fa-arrow-right ms-3"></i></a>
+            <a href="index.php" class="navbar-brand d-flex align-items-center me-4">
+                <img src="img/logo2.webp" alt="Arham Printers" style="height: 40px; margin-right: 1rem;">
+            </a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse flex-grow-1" id="navbarCollapse">
+                <div class="navbar-nav me-auto bg-light pe-4 py-3 py-lg-0 d-flex align-items-center">
+                    <a href="index.php" class="nav-item nav-link">Home</a>
+                    <a href="products.php" class="nav-item nav-link">Products</a>
+                    <a href="wedding.php" class="nav-item nav-link">Wedding Cards</a>
+                    <a href="#" class="nav-item nav-link active">Paper Printing</a>
+                    <a href="#" onclick="window.location.href='index.php#contact-section'" class="nav-item nav-link">Contact</a>
+                </div>
             </div>
         </div>
     </nav>
 
     <nav id="mobile-bottom-nav" class="d-lg-none">
-        <a href="https://arhamprinters.pk/" class="mobile-nav-link" id="mobile-link-home">
-            <i class="fas fa-home"></i>
-            <span>Home</span>
-        </a>
-        <a href="https://shop.arhamprinters.pk/" class="mobile-nav-link" id="mobile-link-products">
-            <i class="fas fa-th-list"></i>
-            <span>Products</span>
-        </a>
-        <a href="https://wedding.arhamprinters.pk/" class="mobile-nav-link" id="mobile-link-wedding">
-            <i class="fas fa-gift"></i>
-            <span>Wedding Cards</span>
-        </a> 
-        <a href="#" class="mobile-nav-link active" id="mobile-link-print">
-            <i class="fas fa-print"></i>
-            <span>Custom Prints</span>
-        </a> 
-        <a href="https://shop.arhamprinters.pk/#cart-section" class="mobile-nav-link" id="mobile-link-cart">
-            <i class="fas fa-shopping-cart"></i>
-            <span id="cart-count" class="position-absolute translate-middle badge rounded-pill bg-primary" style="top: 8px; right: 10px; font-size: 0.7em;">0</span>
-            <span>Cart</span>
-        </a>
+        <a href="index.php" class="mobile-nav-link"><i class="fas fa-home"></i> Home</a>
+        <a href="products.php" class="mobile-nav-link"><i class="fas fa-th-list"></i> Products</a>
+        <a href="#" class="mobile-nav-link active"><i class="fas fa-print"></i> Prints</a>
+        <a href="#" class="mobile-nav-link" onclick="Cart.toggleCart()"><i class="fas fa-shopping-cart"></i> Cart</a>
     </nav>
-    
-    <div class="container page-content-wrapper py-1">
-        <div class="row justify-content-center">
-            <div class="col-lg-10">
-                <div class="bg-white p-4 p-md-5 rounded-0 shadow-lg"> 
-                    <h3 class="fw-bold mb-4 text-center">Configure Your Print Order</h3>
+
+    <div class="container-fluid page-header mb-5">
+        <h1 class="display-3 text-white text-center mb-3">Custom Document Printing</h1>
+        <p class="text-white text-center fs-5">Fast, high-quality printing for your documents, assignments, and books.</p>
+    </div>
+
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-7">
+                <div class="bg-light p-5 rounded shadow-sm">
+                    <h3 class="mb-4 border-bottom pb-2">Configure Your Print</h3>
                     
-                    <form id="printOrderForm" method="POST" enctype="multipart/form-data" class="row g-4" onsubmit="handlePrintOrderSubmission(event)">
-                        
-                        <div class="col-12">
-                            <div class="option-group">
-                                <h4>1. Print Specifications</h4>
-                                <div class="row g-4">
-                                    <div class="col-md-6">
-                                        <label class="option-label">Print Colour</label>
-                                        <div class="d-flex choice-card-group">
-                                            <input type="radio" name="color" id="color-bw" value="Black & White" checked>
-                                            <label class="choice-card-label" for="color-bw">Black & White</label>
-                                            
-                                            <input type="radio" name="color" id="color-full" value="Colour">
-                                            <label class="choice-card-label" for="color-full">Colour</label>
-                                        </div>
-                                    </div>
-                                    
-                                    <input type="hidden" name="siding" value="Single Sided">
-
-                                    <div class="col-md-6">
-                                        <label class="option-label">Paper Size</label>
-                                        <div class="d-flex choice-card-group">
-                                            <input type="radio" name="size" id="size-a4" value="A4" checked>
-                                            <label class="choice-card-label" for="size-a4">A4</label>
-                                            
-                                            <input type="radio" name="size" id="size-legal" value="Legal">
-                                            <label class="choice-card-label" for="size-legal">Legal</label>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="col-md-6">
-                                        <label class="option-label">Paper GSM</label>
-                                        <div class="d-flex choice-card-group">
-                                            <input type="radio" name="paperGsm" id="gsm-70" value="70g" checked>
-                                            <label class="choice-card-label" for="gsm-70">70g</label>
-                                            
-                                            <input type="radio" name="paperGsm" id="gsm-80" value="80g">
-                                            <label class="choice-card-label" for="gsm-80">80g</label>
-
-                                            <input type="radio" name="paperGsm" id="gsm-100" value="100g">
-                                            <label class="choice-card-label" for="gsm-100">100g</label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="mt-4">
-                                    <label for="quantity" class="option-label">Number of Sheets (Quantity)</label>
-                                    <div class="quantity-group">
-                                        <input type="number" id="quantity" name="quantity" value="1" min="1" required class="form-control w-100">
-                                    </div>
-                                    <small class="text-muted">Enter the number of physical sheets to be printed.</small>
-                                </div>
+                    <div class="mb-4">
+                        <label class="fw-bold mb-2">1. Paper Size</label>
+                        <div class="d-flex gap-3" id="options-Size">
                             </div>
-                        </div>
-                        
-                        <div class="col-12">
-                             <div class="option-group">
-                                <h4>2. Upload Document File</h4>
-                                <label for="documentFile" class="option-label">Select File (PDF, DOCX, JPG recommended)</label>
-                                <input type="file" id="documentFile" name="documentFile" required class="form-control" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
-                                <small class="text-danger mt-2 d-block">
-                                    *Required. File will be uploaded to our secure server.*
-                                </small>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="fw-bold mb-2">2. Print Type</label>
+                        <div class="d-flex gap-3" id="options-ColorType">
                             </div>
-                        </div>
-
-                        <div class="col-12">
-                            <div class="option-group">
-                                <h4>3. Delivery Method</h4>
-                                <div class="row g-3">
-                                    <div class="col-md-6">
-                                        <input type="radio" name="deliveryType" id="del-pickup" value="SelfPickUp" checked onchange="handleDeliveryChange()">
-                                        <label class="choice-card-label" for="del-pickup">
-                                            <i class="fas fa-store me-2 text-primary"></i> Self Pickup<br>
-                                            <small class="text-muted">Collect from Shop (Jalalpur Jattan)</small>
-                                        </label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input type="radio" name="deliveryType" id="del-home" value="HomeDelivery" onchange="handleDeliveryChange()">
-                                        <label class="choice-card-label" for="del-home">
-                                            <i class="fas fa-truck me-2 text-primary"></i> Home Delivery<br>
-                                            <small class="text-muted">Local & National Courier</small>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <div id="city-input-container" class="mt-3" style="display:none;">
-                                    <label class="option-label">Enter Delivery City</label>
-                                    <input type="text" id="input-city" placeholder="e.g. Jalalpur Jattan, Lahore, Gujrat" class="form-control" oninput="manualLocationCheck()">
-                                    <small class="text-muted d-block mt-1" id="zone-display">Type city name to check rates.</small>
-                                </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="fw-bold mb-2">3. Paper Quality (GSM)</label>
+                        <div class="d-flex gap-3 flex-wrap" id="options-GSM">
                             </div>
-                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="fw-bold mb-2">4. Binding (Optional)</label>
+                        <select class="form-control rounded-0" id="input-binding" onchange="updatePrice()">
+                            <option value="None" data-price="0">No Binding</option>
+                            <option value="Stapled" data-price="20">Stapled Corner (PKR 20)</option>
+                            <option value="Spiral" data-price="100">Spiral Binding (PKR 100)</option>
+                            <option value="Tape" data-price="50">Tape Binding (PKR 50)</option>
+                        </select>
+                    </div>
 
-                        <input type="hidden" name="orderId" id="orderId">
-                        
-                        <div class="col-12">
-                            <div class="whatsapp-action-block">
-                                <h4 class="text-primary fw-bold text-center">Finalize Order</h4>
-                                   <div class="row g-3 align-items-center justify-content-center">
-                                        <div class="col-md-6">
-                                            <div class="price-summary-box">
-                                                Order Subtotal:
-                                                <span id="totalPrice"><span class="fw-bold">0.00</span></span>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="price-summary-box bg-success p-2">
-                                                Delivery Cost:
-                                                <span id="shipping-cost-display" class="fw-bold" style="color: white; font-size: 1.2em;">FREE</span>
-                                                <p class="small text-white-75 mb-0" id="shipping-note-display" style="font-weight: normal; font-size: 0.7em;">
-                                                    Free Instore Pickup
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <button type="submit" class="btn btn-primary py-3 w-100 fw-bold rounded-0" id="submitButton">
-                                                <i class="fas fa-envelope me-2"></i> Place Order & Upload
-                                            </button>
-                                        </div>
-                                    </div>
-                            </div>
+                    <div class="mb-4">
+                        <label class="fw-bold mb-2">5. Total Pages</label>
+                        <input type="number" id="input-pages" class="form-control p-3 fs-5" value="1" min="1" oninput="updatePrice()">
+                        <small class="text-muted">Enter total number of pages in your document.</small>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="fw-bold mb-2">6. Upload File (PDF/DOCX/IMG)</label>
+                        <div id="drop-zone">
+                            <i class="fas fa-cloud-upload-alt fs-1 text-muted mb-2"></i>
+                            <p class="mb-0">Drag & Drop file here or Click to Browse</p>
+                            <input type="file" id="file-upload" class="d-none" accept=".pdf,.doc,.docx,.jpg,.png,.jpeg">
+                            <p id="file-name" class="mt-2 text-primary fw-bold small"></p>
                         </div>
-                        
-                        <div class="col-12 text-center mt-3">
-                            <p class="small text-muted">
-                                By placing an order, you confirm you have read and agree to our <a href="https://shipping.arhamprinters.pk/" target="_blank" class="text-primary fw-bold">Terms & Conditions</a>.
-                            </p>
+                    </div>
+
+                    <div class="alert alert-info d-flex align-items-center">
+                        <i class="fas fa-info-circle fs-4 me-3"></i>
+                        <div>
+                            <strong>Bulk Discounts Applied Automatically</strong><br>
+                            Price per page decreases as quantity increases (100+, 500+ pages).
                         </div>
-                    </form>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-5">
+                <div class="bg-white p-5 rounded shadow border sticky-top" style="top: 100px;">
+                    <h3 class="mb-4">Cost Estimation</h3>
+                    <div class="d-flex justify-content-between mb-3">
+                        <span>Rate per Page:</span>
+                        <span class="fw-bold" id="rate-display">PKR 0</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-3">
+                        <span>Pages:</span>
+                        <span id="qty-display">0</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-3 border-bottom pb-3">
+                        <span>Binding:</span>
+                        <span id="binding-cost-display">PKR 0</span>
+                    </div>
+                    <div class="text-center mb-4">
+                        <span class="text-muted">Total Estimated Cost</span>
+                        <div class="price-display" id="total-display">PKR 0</div>
+                    </div>
+                    
+                    <button class="btn btn-primary w-100 py-3 rounded-0 mb-3" onclick="handleOrderSubmission()">
+                        <i class="fas fa-check-circle me-2"></i> Place Order via WhatsApp
+                    </button>
+                    <button class="btn btn-outline-secondary w-100 py-2 rounded-0" onclick="addToCart()">
+                        <i class="fas fa-cart-plus me-2"></i> Add to Cart (Upload Later)
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="container-fluid footer py-2">
-            <div class="container py-2">
-                <div class="row g-3">
-                    <div class="col-6 col-md-3">
-                        <div class="rounded p-2 d-flex flex-column align-items-center">
-                            <h6 class="text-white mt-1 mb-1">Address</h6>
-                            <p class="text-white mb-1 small text-left">Domela Chowk, Tanda Road, Jalalpur Jattan</p>
-                        </div>
-                    </div>
-                    <div class="col-6 col-md-3">
-                        <div class="rounded p-2 d-flex flex-column align-items-center">
-                            <h6 class="text-white mt-1 mb-1">Mail Us</h6>
-                            <p class="text-white mb-1 small text-center">info@arhamprinters.pk</p>
-                        </div>
-                    </div>
-                    <div class="col-6 col-md-3">
-                        <div class="rounded p-2 d-flex flex-column align-items-center">
-                            <h6 class="text-white mt-1 mb-1">Direct Contact</h6>
-                            <a href="https://wa.me/923006238233" target="_blank" class="text-white-50 text-decoration-none">
-                                <p class="text-white mb-1 small text-center">+92 300 6238233</p>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-6 col-md-3">
-                        <div class="rounded p-2 d-flex flex-column align-items-center">
-                            <h6 class="text-white mt-1 mb-1">Policies</h6>
-                            <div>
-                                <ul class="list-unstyled text-left">
-                                    <li><a class="text-white" href="https://shipping.arhamprinters.pk/">Shipping Policy</a></li>
-                                    <li><a class="text-white" href="https://return.arhamprinters.pk/">Return Policy</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="container-fluid copyright py-2">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12 text-center">
-                            <span class="text-white small">
-                                <i class="fas fa-copyright text-light me-1"></i>
-                                Arham Printers, All rights reserved 2025.
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    </div>
-    <a href="#" class="btn btn-primary btn-lg-square back-to-top"><i class="fa fa-arrow-up"></i></a>
+    <?php include 'includes/footer.php'; ?>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/counterup/counterup.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/cart-manager.js"></script>
 
     <script>
-        const SUBMIT_ORDER_URL = 'upload_and_notify.php';
+        const DATA_URL = 'all_prices.json';
         const WHATSAPP_NUMBER = '923006238233';
         
-        let pricingData = null;
-        const PRICING_DATA_URL = 'all_prices.json';
+        let printData = {};
+        let selections = { Size: '', ColorType: '', GSM: '' };
+        let selectedFile = null;
 
-        // Shipping Configuration
-        let currentShippingZone = 'Within City'; 
-
-        // --- Simplified Shipping Logic ---
-        function calculateShippingData() {
-            const deliveryType = document.querySelector('input[name="deliveryType"]:checked')?.value || 'SelfPickUp';
-            const city = document.getElementById('input-city').value.toLowerCase().trim();
-            
-            let shippingCost = 0;
-            let finalShippingNote = '';
-            let isPending = false; 
-
-            if (deliveryType === 'SelfPickUp') {
-                // Option 1: Free Instore
-                shippingCost = 0;
-                finalShippingNote = 'Free Instore Pickup (Jalalpur Jattan)';
-            } else {
-                // Home Delivery: Check city
-                // Check for local variations
-                if (city.includes('jalalpur') || city.includes('jattan') || city === 'jlp') {
-                    // Option 2: Local
-                    shippingCost = 100;
-                    finalShippingNote = `Local Delivery (Jalalpur Jattan)`;
-                } else if (city.length > 2) {
-                    // Option 3: Other City (TBD)
-                    shippingCost = 0; 
-                    isPending = true;
-                    finalShippingNote = `Courier charges will be added to final bill later`;
-                } else {
-                    // Default state when typing
-                    shippingCost = 0;
-                    finalShippingNote = 'Enter City to calculate delivery';
-                    isPending = true; // Treat as pending until typed
-                }
-            }
-
-            return { cost: shippingCost, note: finalShippingNote, isPending: isPending };
-        }
-
-        // --- UI Handling ---
-        function handleDeliveryChange() {
-            const deliveryType = document.querySelector('input[name="deliveryType"]:checked')?.value;
-            const cityContainer = document.getElementById('city-input-container');
-            
-            if (deliveryType === 'HomeDelivery') {
-                cityContainer.style.display = 'block';
-            } else {
-                cityContainer.style.display = 'none';
-                document.getElementById('input-city').value = ''; // Clear city if picking up
-            }
-            calculateEstimatedPrice(); // Re-calc price
-        }
-
-        function manualLocationCheck() {
-            calculateEstimatedPrice();
-        }
-
-        // --- Pricing Calculation ---
-        async function fetchPricingData() {
+        async function init() {
             try {
-                const response = await fetch(PRICING_DATA_URL); 
-                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-                const rawData = await response.json();
-                pricingData = rawData['B/W and Color Prints']; 
-                calculateEstimatedPrice(); 
-            } catch (error) {
-                console.error('Could not fetch pricing data:', error);
-                document.getElementById('totalPrice').innerHTML = '<span>Error loading prices!</span>';
-            }
-        }
-
-        function getTierPrice(gsmPricing, totalPages) {
-            let highestTierPrice = 0;
-            const tiers = Object.keys(gsmPricing).sort((a, b) => parseInt(a) - parseInt(b));
-            
-            if (tiers.length > 0) highestTierPrice = gsmPricing[tiers[tiers.length - 1]];
-
-            for (const range of tiers) {
-                const [min, max] = range.split('-').map(n => parseInt(n));
-                if (totalPages >= min && (isNaN(max) || totalPages <= max)) {
-                    return gsmPricing[range];
-                }
-            }
-            return highestTierPrice;
-        }
-
-        function calculateEstimatedPrice() {
-            if (!pricingData) {
-                document.getElementById('totalPrice').innerHTML = '<span>Loading...</span>';
-                return;
-            }
-
-            const size = document.querySelector('input[name="size"]:checked')?.value;
-            const paperGsm = document.querySelector('input[name="paperGsm"]:checked')?.value; 
-            const color = document.querySelector('input[name="color"]:checked')?.value;
-            const quantity = parseInt(document.getElementById('quantity').value);
-            
-            if (!size || !paperGsm || !color || quantity <= 0 || isNaN(quantity)) {
-                return;
-            }
-
-            const sizeKey = size;
-            const gsmKey = paperGsm;
-            const totalSheets = quantity;
-            const totalPages = totalSheets; 
-
-            // --- FIXED: Robust Color Key Detection ---
-            let colorKey = 'black_white';
-            if (color !== 'Black & White') {
-                // Check possible keys in the JSON for color
-                if (pricingData[sizeKey]?.['color']) colorKey = 'color';
-                else if (pricingData[sizeKey]?.['Color']) colorKey = 'Color';
-                else if (pricingData[sizeKey]?.['colour']) colorKey = 'colour';
-                else colorKey = 'color'; // Fallback to lowercase
-            }
-
-            let subtotalPrice = 0;
-            let pricePerUnit = 0;
-
-            try {
-                const gsmPricing = pricingData?.[sizeKey]?.[colorKey]?.[gsmKey];
+                const res = await fetch(DATA_URL);
+                const json = await res.json();
+                // Accessing the specific category from your JSON structure
+                printData = json["B/W and Color Prints"] || {};
                 
-                // Extra safety: If exact GSM is not found for color (e.g., 70g color doesn't exist), check if user selected color
-                if (!gsmPricing) {
-                    throw new Error(`Price not found for ${sizeKey} - ${colorKey} - ${gsmKey}`);
+                // Initialize Options
+                if(Object.keys(printData).length > 0) {
+                    renderOptions('Size', Object.keys(printData));
+                    updatePrice();
                 }
-
-                pricePerUnit = getTierPrice(gsmPricing, totalPages);
-                subtotalPrice = pricePerUnit * totalPages;
-            } catch (e) {
-                console.error("Pricing error:", e.message);
-                // If price not found (e.g. 70g Color not available), return early so UI shows 0.00 or handle error
-                // We will let the flow continue so it might show 0.00 which indicates to user something is wrong
-            }
-            
-            // --- SHIPPING MERGE ---
-            const shippingData = calculateShippingData();
-            const totalPrice = subtotalPrice + shippingData.cost;
-            
-            // --- FINAL DISPLAY ---
-            let priceOutput = '';
-            
-            if (shippingData.isPending) {
-                 priceOutput = `<span class="fw-bold">${Math.round(totalPrice).toLocaleString(undefined, { minimumFractionDigits: 2 })}</span>
-                                <span class="small text-warning d-block" style="font-size: 0.6em;">+ Delivery Charges (Added Later)</span>`;
-                 
-                 document.getElementById('shipping-cost-display').textContent = "TBD"; 
-                 document.getElementById('shipping-cost-display').classList.add('text-warning');
-            } else {
-                 priceOutput = `<span class="fw-bold">${Math.round(totalPrice).toLocaleString(undefined, { minimumFractionDigits: 2 })}</span>`;
-                 
-                 document.getElementById('shipping-cost-display').textContent = shippingData.cost === 0 ? "FREE" : `PKR ${shippingData.cost}`;
-                 document.getElementById('shipping-cost-display').classList.remove('text-warning');
-            }
-
-            priceOutput += `<p class="small text-white-75 mb-0 mt-1" style="font-weight: normal; font-size: 0.8em;">
-                         (Total Pages: ${totalPages} @ PKR ${pricePerUnit.toFixed(2)}/page)
-                        </p>`;
-
-            document.getElementById('totalPrice').innerHTML = priceOutput;
-            document.getElementById('shipping-note-display').textContent = shippingData.note;
+            } catch (e) { console.error("Data Load Error", e); }
         }
 
-        // --- ORDER SUBMISSION ---
-        async function handlePrintOrderSubmission(e) {
-            e.preventDefault();
-            calculateEstimatedPrice(); 
-
-            const submitButton = document.getElementById('submitButton');
-            submitButton.disabled = true;
-            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Submitting...';
+        function renderOptions(key, options) {
+            const container = document.getElementById(`options-${key}`);
+            if(!container) return;
             
-            // Get values
-            const totalText = document.getElementById('totalPrice').innerText;
-            const shippingText = document.getElementById('shipping-cost-display').textContent;
-            const fileInput = document.getElementById('documentFile');
-            const deliveryType = document.querySelector('input[name="deliveryType"]:checked')?.value;
-            const city = document.getElementById('input-city').value;
-
-            if (!fileInput.files.length) {
-                 showAlert('Please upload a file.', 'error');
-                 submitButton.disabled = false; return;
+            // Auto-select first option if none selected
+            if (!selections[key] && options.length > 0) selections[key] = options[0];
+            
+            container.innerHTML = options.map(opt => `
+                <label class="choice-card ${selections[key] === opt ? 'selected' : ''}" onclick="select('${key}', '${opt}')">
+                    <input type="radio" name="${key}" value="${opt}" ${selections[key] === opt ? 'checked' : ''}>
+                    ${opt.replace('_', ' ')}
+                </label>
+            `).join('');
+            
+            // Cascade Logic (Size -> Color -> GSM)
+            if (key === 'Size') {
+                const colors = Object.keys(printData[selections.Size] || {});
+                renderOptions('ColorType', colors);
+            } else if (key === 'ColorType') {
+                const gsms = Object.keys(printData[selections.Size][selections.ColorType] || {});
+                renderOptions('GSM', gsms);
             }
+        }
 
-            const orderId = 'PRINT-' + Date.now().toString().slice(-6);
-            const formData = new FormData(document.getElementById('printOrderForm'));
-            formData.append('order_id', orderId);
+        function select(key, val) {
+            selections[key] = val;
             
-            // Construct WhatsApp Message
-            let whatsappMessage = `*NEW DOCUMENT ORDER (WEB)*\n`;
-            whatsappMessage += `*Order ID:* ${orderId}\n`;
-            whatsappMessage += `*Delivery:* ${deliveryType === 'SelfPickUp' ? 'Self Pickup (JLP)' : 'Home Delivery (' + city + ')'}\n`;
+            // Reset downstream selections when upstream changes
+            if (key === 'Size') { selections.ColorType = ''; selections.GSM = ''; }
+            if (key === 'ColorType') { selections.GSM = ''; }
             
-            // Check TBD status
-            if (shippingText === 'TBD') {
-                 whatsappMessage += `*Total (Excl. Shipping):* ${totalText.split('+')[0]}\n`;
-                 whatsappMessage += `*Shipping:* Calculated Later (Courier)\n`;
-            } else {
-                 whatsappMessage += `*Total Price:* ${totalText.split('(')[0]}\n`; 
-                 whatsappMessage += `*Shipping:* ${shippingText}\n`;
-            }
+            renderOptions('Size', Object.keys(printData)); // Re-render to update UI classes
+            updatePrice();
+        }
 
-            whatsappMessage += `*File:* ${fileInput.files[0].name}\n`;
-            whatsappMessage += `\n*NOTE:* Please verify file and address.`;
+        function updatePrice() {
+            const qty = parseInt(document.getElementById('input-pages').value) || 1;
+            const bindingSelect = document.getElementById('input-binding');
+            const bindingCost = parseInt(bindingSelect.options[bindingSelect.selectedIndex].getAttribute('data-price')) || 0;
             
-            // Submit & Redirect
-            showAlert('Uploading file...', 'info');
-            try {
-                const response = await fetch(SUBMIT_ORDER_URL, { method: 'POST', body: formData });
-                window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMessage)}`, '_blank');
-                
-                if (response.ok) {
-                    showAlert('Order Submitted! Check WhatsApp.', 'success');
-                    document.getElementById('printOrderForm').reset();
-                    handleDeliveryChange(); // Reset UI
-                } else {
-                    showAlert('File upload failed. Please send file via WhatsApp.', 'error');
+            document.getElementById('qty-display').textContent = qty;
+            document.getElementById('binding-cost-display').textContent = `PKR ${bindingCost}`;
+            
+            if (!selections.Size || !selections.ColorType || !selections.GSM) return;
+            
+            // Fetch rate from tiers logic (1-100, 101-500, etc.)
+            const tiers = printData[selections.Size][selections.ColorType][selections.GSM];
+            let rate = 0;
+            
+            Object.keys(tiers).forEach(range => {
+                const [min, max] = range.split('-').map(Number);
+                // Handle "501-10000" or similar ranges
+                if (qty >= min && (isNaN(max) || qty <= max)) {
+                    rate = tiers[range];
                 }
-            } catch (error) {
-                console.error('Network Error', error);
-                window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMessage)}`, '_blank');
-                showAlert('Network error. Confirm on WhatsApp.', 'warning');
-            } finally {
-                submitButton.disabled = false;
-                submitButton.innerHTML = '<i class="fas fa-envelope me-2"></i> Place Order & Upload';
-            }
-        }
+            });
 
-        // --- Helpers ---
-        function showAlert(message, type) {
-            const alert = document.createElement('div');
-            alert.className = `alert alert-${type === 'error' ? 'danger' : type} position-fixed`;
-            alert.style.top = '20px'; alert.style.right = '20px'; alert.style.zIndex = '9999';
-            alert.innerHTML = message;
-            document.body.appendChild(alert);
-            setTimeout(() => alert.remove(), 4000);
+            document.getElementById('rate-display').textContent = `PKR ${rate}`;
+            const total = (rate * qty) + bindingCost;
+            document.getElementById('total-display').textContent = `PKR ${total.toLocaleString()}`;
         }
+        
+        // File Upload Handling
+        const dropZone = document.getElementById('drop-zone');
+        const fileInput = document.getElementById('file-upload');
 
-        // --- Init ---
-        document.addEventListener('DOMContentLoaded', async () => {
-            document.querySelectorAll('input').forEach(i => i.addEventListener('change', calculateEstimatedPrice));
-            document.getElementById('quantity').addEventListener('input', calculateEstimatedPrice);
-            document.getElementById('spinner').classList.remove('show');
-            
-            await fetchPricingData();
-            handleDeliveryChange(); // Set initial state
+        dropZone.addEventListener('click', () => fileInput.click());
+        fileInput.addEventListener('change', (e) => handleFile(e.target.files[0]));
+        
+        dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('dragover'); });
+        dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+        dropZone.addEventListener('drop', (e) => { 
+            e.preventDefault(); 
+            dropZone.classList.remove('dragover'); 
+            handleFile(e.dataTransfer.files[0]); 
         });
+
+        function handleFile(file) {
+            if(file) {
+                selectedFile = file;
+                document.getElementById('file-name').textContent = `Selected: ${file.name}`;
+            }
+        }
+
+        function handleOrderSubmission() {
+            const qty = document.getElementById('input-pages').value;
+            const binding = document.getElementById('input-binding').value;
+            const total = document.getElementById('total-display').textContent;
+            
+            let msg = `*NEW PRINT ORDER*\n`;
+            msg += `*Specs:* ${selections.Size} | ${selections.ColorType} | ${selections.GSM}\n`;
+            msg += `*Binding:* ${binding}\n`;
+            msg += `*Pages:* ${qty}\n`;
+            msg += `*Est. Cost:* ${total}\n`;
+            msg += `*File:* ${selectedFile ? 'Sending separately...' : 'No file selected'}`;
+            
+            window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
+        function addToCart() {
+            if (typeof Cart === 'undefined') { alert("Cart Loading..."); return; }
+            
+            const qty = parseInt(document.getElementById('input-pages').value) || 1;
+            const price = parseFloat(document.getElementById('total-display').textContent.replace('PKR ', '').replace(',', ''));
+            const binding = document.getElementById('input-binding').value;
+
+            Cart.addItem({
+                id: Date.now(),
+                productName: `Doc Print (${selections.Size}, ${selections.ColorType})`,
+                quantity: qty,
+                basePrice: price,
+                finalItemPrice: price,
+                options: { ...selections, Binding: binding },
+                imageFile: 'printer' // Generic icon
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', init);
     </script>
-    </div>
 </body>
 </html>

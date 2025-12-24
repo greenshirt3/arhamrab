@@ -1,0 +1,42 @@
+{
+    "yousaf": {
+        "company": "Yousaf Steel & Aluminium Works",
+        "name": "Muhammad Luqman",
+        "designation": "Proprietor",
+        "phone": "923076005676",
+        "whatsapp": "923076005676",
+        "email": "",
+        "address": "Near Dehind Station, Tanda Road, Jalalpur Jattan",
+        "map_link": "https://maps.app.goo.gl/example",
+        "website": "",
+        "color": "#182C61", 
+        "logo": "../img/logo2.webp",
+        "cover": "../img/banners/office.webp",
+        "about": "Stainless Steel Argon Welding Specialist. We deal in 12mm Glass Work, Aluminium Windows, Doors, and Steel Grills.",
+        "services": [
+            "Argon Welding",
+            "Steel Stairs",
+            "Aluminium Windows",
+            "12mm Glass"
+        ],
+        "social": {
+            "facebook": "#",
+            "youtube": "https://youtube.com/@MsAluminium" 
+        }
+    },
+    "saif": {
+        "company": "Saif General Store",
+        "name": "Saif Ullah",
+        "designation": "Owner & CEO",
+        "phone": "923006238233",
+        "whatsapp": "923006238233",
+        "email": "saif@example.com",
+        "address": "Main Bazaar, Jalalpur Jattan",
+        "color": "#f28b00",
+        "logo": "../img/logo2.webp",
+        "cover": "../img/banners/productmobile.webp",
+        "about": "Premium quality groceries and imported items.",
+        "services": ["Groceries", "Dairy", "Delivery"],
+        "social": { "facebook": "#", "instagram": "#" }
+    }
+}

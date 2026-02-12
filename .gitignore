@@ -1,0 +1,8 @@
+# Ignore XAMPP/Windows specific files
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Ignore sensitive config files (if any)
+config.php
+.env

@@ -1,0 +1,59 @@
+{
+    "settings": {
+        "title": "Winter Gala Portfolio",
+        "client": "Pakistan Army & Govt of Gilgit-Baltistan",
+        "year": "2025",
+        "location": "Rattu, Gilgit Baltistan",
+        "contact_phone": "+92 300 6238233"
+    },
+    "hero": {
+        "title": "FORGING LEGENDS",
+        "highlight": "IN THE SNOW",
+        "subtitle": "Official Branding Partner for the National Snow Sports Festival. Where endurance meets excellence.",
+        "bg_image": "https://arhamprinters.pk/img/rattu/rattu4.webp"
+    },
+    "organizers": [
+        {
+            "name": "FCNA",
+            "role": "Strategic Command",
+            "logo": "https://arhamprinters.pk/img/rattu/fcnalogo.webp"
+        },
+        {
+            "name": "80 Bde",
+            "role": "Host Admin",
+            "logo": "https://arhamprinters.pk/img/rattu/80bde.webp"
+        },
+        {
+            "name": "Tiger Force",
+            "role": "Security",
+            "logo": "https://arhamprinters.pk/img/rattu/tigerlogo.webp"
+        }
+    ],
+    "gallery": [
+        {
+            "title": "Grand Arena",
+            "desc": "100ft Impact Backdrop",
+            "image": "https://arhamprinters.pk/img/rattu/rattu1.webp"
+        },
+        {
+            "title": "Alpine Track",
+            "desc": "High-Altitude Branding",
+            "image": "https://arhamprinters.pk/img/rattu/rattu2.webp"
+        },
+        {
+            "title": "Victory Gates",
+            "desc": "3D Arch Structures",
+            "image": "https://arhamprinters.pk/img/rattu/rattu5.webp"
+        },
+        {
+            "title": "Media Zone",
+            "desc": "Broadcast Backdrops",
+            "image": "https://arhamprinters.pk/img/rattu/rattu6.webp"
+        }
+    ],
+    "stats": [
+        { "label": "Sq.ft Branding", "value": "9,000+" },
+        { "label": "Installations", "value": "500+" },
+        { "label": "Altitude (ft)", "value": "9,500" }
+    ]
+}

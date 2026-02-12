@@ -1,0 +1,50 @@
+[
+    {
+        "id": 101,
+        "name": "Panadol Extra",
+        "batch_no": "B-991",
+        "stock_qty": 499,
+        "unit_price": 20,
+        "expiry_date": "2026-12-30"
+    },
+    {
+        "id": 102,
+        "name": "Augmentin 625mg",
+        "batch_no": "AG-22",
+        "stock_qty": 100,
+        "unit_price": 450,
+        "expiry_date": "2025-08-15"
+    },
+    {
+        "id": 103,
+        "name": "Disprin (Soluble)",
+        "batch_no": "DS-11",
+        "stock_qty": 1000,
+        "unit_price": 5,
+        "expiry_date": "2027-01-01"
+    },
+    {
+        "id": 104,
+        "name": "Brufen 400mg",
+        "batch_no": "BR-55",
+        "stock_qty": 8,
+        "unit_price": 15,
+        "expiry_date": "2025-05-20"
+    },
+    {
+        "id": 105,
+        "name": "Insulin Humulin",
+        "batch_no": "INS-01",
+        "stock_qty": 50,
+        "unit_price": 1200,
+        "expiry_date": "2025-11-30"
+    },
+    {
+        "id": 106,
+        "name": "Cough Syrup (Hydryllin)",
+        "batch_no": "SY-88",
+        "stock_qty": 200,
+        "unit_price": 120,
+        "expiry_date": "2026-06-10"
+    }
+]

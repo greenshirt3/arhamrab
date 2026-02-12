@@ -1,0 +1,65 @@
+{
+    "config": {
+        "paper_color": "#FFFFFF",
+        "gold_color": "#000000",
+        "text_dark": "#000000",
+        "ticker": "ARHAM PRINTERS — PREMIUM 3D INVITATIONS — WEDDING CARDS — MARKETING MATERIALS — CONTACT FOR BOOKINGS"
+    },
+    "contacts": {
+        "arham_wa": "923006238233",
+        "reception_wa": "923153959811"
+    },
+    "card_content": {
+        "front": {
+            "bismillah": { "text": "Bismillah Hir Rahman Nir Rahim", "y": 200, "s": 30 },
+            "hosts": { "text": "MRS. MUHAMMAD RAZAQ (LATE)", "y": 350, "s": 35 },
+            "invite_line": { "text": "Solicit your gracious presence on the wedding ceremony of her beloved Son", "y": 420, "s": 25 },
+            
+            "groom": { "text": "ALI", "y": 650, "s": 120 },
+            "groom_last": { "text": "RAZA", "y": 780, "s": 120 },
+            
+            "ampersand": { "text": "", "y": 850, "s": 0 },
+            
+            "bride": { "text": "", "y": 980, "s": 0 },
+            
+            "save_date": { "text": "JANUARY 23, 2026", "y": 1220, "s": 40 }
+        },
+        "left": {
+            "rsvp_title": { "text": "R.S.V.P", "y": 300, "s": 50 },
+            "rsvp_names": [
+                { "text": "Mr. Haseeb Ali", "y": 380, "s": 30 },
+                { "text": "Mr. Dilawar Raza", "y": 420, "s": 30 },
+                { "text": "Mr. Habib Ali", "y": 460, "s": 30 },
+                { "text": "Mr. Abu Bakar", "y": 500, "s": 30 },
+                { "text": "Mr. Naseeb Ali", "y": 540, "s": 30 }
+            ],
+            "wishes_title": { "text": "With Best Compliments", "y": 750, "s": 50 },
+            "wishes_names": [
+                { "text": "All Family Members", "y": 830, "s": 30 },
+                { "text": "Cousins & Friends", "y": 880, "s": 30 }
+            ]
+        },
+        "right": {
+            "events": [
+                {
+                    "title": "MEHNDI", "y": 200,
+                    "date": "Thursday, 22 Jan 2026",
+                    "detail": "Rasim-e-Hina: 07:00 PM | Dinner: 08:00 PM",
+                    "venue": "Home Sweet Home, Qadir Colony"
+                },
+                {
+                    "title": "BARAT", "y": 550,
+                    "date": "Friday, 23 Jan 2026",
+                    "detail": "Sehra Bandi: 11:00 AM | Departure: 12:00 PM",
+                    "venue": "Dua Marquee, Gujrat Road"
+                },
+                {
+                    "title": "WALIMA", "y": 900,
+                    "date": "Saturday, 24 Jan 2026",
+                    "detail": "Reception: 02:00 PM | Lunch: 02:30 PM",
+                    "venue": "Dua Marquee, Gujrat Road"
+                }
+            ]
+        }
+    }
+}

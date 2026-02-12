@@ -1,0 +1,50 @@
+[
+    {
+        "id": 1,
+        "username": "admin",
+        "password": "$2y$10$256onX4cHmFJ1v\/8ghgk1O74wx\/KXoo0ba40HOOtt\/lMutUUuFLri",
+        "role": "admin",
+        "name": "System Administrator",
+        "dept": "Management"
+    },
+    {
+        "id": 2,
+        "username": "doc1",
+        "password": "$2y$10$Lu.9i0.bW1RtvnEZenaJ.eq2KBUPrawrq.MpqjXAgFOOmTjKtOcOq",
+        "role": "doctor",
+        "name": "Ali Raza",
+        "dept": "Cardiology"
+    },
+    {
+        "id": 3,
+        "username": "doc2",
+        "password": "$2y$10$diPORdOiq.fAWKdnRrp5Ne8AFJynMJYA.qHvgJxJvyWWfQ9gkqSHm",
+        "role": "doctor",
+        "name": "Sara Khan",
+        "dept": "Pediatrics"
+    },
+    {
+        "id": 4,
+        "username": "recep",
+        "password": "$2y$10$Pjy3VjIaHUPVQ0YNVFqBcupyZ667Cg18eBXcQM.Ln\/9g2W\/29QPwe",
+        "role": "reception",
+        "name": "Front Desk",
+        "dept": "OPD"
+    },
+    {
+        "id": 5,
+        "username": "pharm",
+        "password": "$2y$10$S5dMMN9WWs2hvicXQANIneuDr3NJcVITij1VxZUAlJwLeszhmKfeG",
+        "role": "pharmacy",
+        "name": "Chief Pharmacist",
+        "dept": "Pharmacy"
+    },
+    {
+        "id": 6,
+        "username": "lab",
+        "password": "$2y$10$TwlM7loTTW40PcxCagB9huDFrLTBmNIfjYoql6JG8tBuO0aTLbeRC",
+        "role": "lab",
+        "name": "Lab Technician",
+        "dept": "Pathology"
+    }
+]

@@ -1,0 +1,34 @@
+[
+    {
+        "id": "OPD-25-501",
+        "patient_id": "PAT-25-101",
+        "doctor_id": 2,
+        "department": "Cardiology",
+        "status": "completed",
+        "visit_date": "2025-12-29 01:57:36"
+    },
+    {
+        "id": "OPD-25-502",
+        "patient_id": "PAT-25-102",
+        "doctor_id": 3,
+        "department": "Pediatrics",
+        "status": "waiting",
+        "visit_date": "2025-12-29 01:57:36"
+    },
+    {
+        "id": "OPD-25-7079",
+        "patient_id": "PAT-25-103",
+        "doctor_id": "2",
+        "department": "OPD",
+        "status": "completed",
+        "visit_date": "2025-12-29 02:49:15"
+    },
+    {
+        "id": "OPD-25-2492",
+        "patient_id": "PAT-25-2256",
+        "doctor_id": "2",
+        "department": "OPD",
+        "status": "completed",
+        "visit_date": "2025-12-29 02:51:04"
+    }
+]

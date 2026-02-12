@@ -1,0 +1,1 @@
+<?php require __DIR__ . '/../api/bootstrap.php'; try { $pdo = \Lib\DB::pdo(); echo "DB OK"; } catch (Throwable $e) { echo "DB ERROR: ".$e->getMessage(); } ?>

@@ -1,0 +1,213 @@
+{
+    "settings": {
+        "name": "Arham Printers",
+        "tagline": "We Print Your Legacy",
+        "phone": "+92 300 6238233",
+        "whatsapp": "923006238233",
+        "email": "info@arhamprinters.pk",
+        "address": "Tanda Road, Jalalpur Jattan, Pakistan",
+        "currency": "PKR"
+    },
+    "hero": {
+        "headline": "PRINTING BEYOND <br><span class='text-gradient'>IMAGINATION</span>",
+        "sub": "From luxury business cards to industrial packaging. We define quality in Jalalpur Jattan.",
+        "image": "https://images.unsplash.com/photo-1562654501-a0ccc0fc3fb1?auto=format&fit=crop&w=800&q=80",
+        "stats": [
+            { "num": "10K+", "label": "Orders" },
+            { "num": "500+", "label": "Corporate Clients" },
+            { "num": "4.9", "label": "Rating" }
+        ]
+    },
+    "categories": [
+        { "id": "business", "name": "Business Essentials", "icon": "fa-briefcase" },
+        { "id": "marketing", "name": "Marketing & Flex", "icon": "fa-bullhorn" },
+        { "id": "packaging", "name": "Packaging & Boxes", "icon": "fa-box-open" },
+        { "id": "gifts", "name": "Gifts & Merch", "icon": "fa-gift" },
+        { "id": "wedding", "name": "Wedding & Events", "icon": "fa-envelope-open-text" }
+    ],
+    "products": [
+        {
+            "name": "Visiting Cards",
+            "category": "business",
+            "price": "1,500",
+            "image": "https://arhamprinters.pk/img/products/vcard.webp",
+            "desc": "Standard high-quality business cards.",
+            "variants": ["Single Side", "Double Side"]
+        },
+        {
+            "name": "Luxury Cards",
+            "category": "business",
+            "price": "3,500",
+            "image": "https://arhamprinters.pk/img/products/matcards.webp",
+            "desc": "Premium cards with special finishes.",
+            "variants": ["Matte (Plain)", "Matte (Round)", "Spot UV", "Thick Die Cut"]
+        },
+        {
+            "name": "Letterheads",
+            "category": "business",
+            "price": "4,500",
+            "image": "https://arhamprinters.pk/img/products/letterpad.webp",
+            "desc": "Official company letterheads and pads.",
+            "variants": ["A4 (100gms 4-Color)", "A4 (80gms 1-Color)", "Letterpad Binding"]
+        },
+        {
+            "name": "Bill Books",
+            "category": "business",
+            "price": "550",
+            "image": "https://arhamprinters.pk/img/products/billbooks.webp",
+            "desc": "Customized invoice and receipt books.",
+            "variants": ["5.75x9 (Single Color)", "A4 (4 Colors)", "Carbonless Duplicate"]
+        },
+        {
+            "name": "Envelopes",
+            "category": "business",
+            "price": "2,500",
+            "image": "https://arhamprinters.pk/img/products/envelops.webp",
+            "desc": "Professional office envelopes.",
+            "variants": ["9x4 Official (4 Color)", "A4 Catalog (Single Color)"]
+        },
+        {
+            "name": "ID Cards",
+            "category": "business",
+            "price": "350",
+            "image": "https://arhamprinters.pk/img/products/pvc.webp",
+            "desc": "Durable PVC employee identification cards.",
+            "variants": ["PVC Card Only", "Card + Lanyard"]
+        },
+        {
+            "name": "Rubber Stamps",
+            "category": "business",
+            "price": "850",
+            "image": "https://arhamprinters.pk/img/products/stamps.webp",
+            "desc": "Self-inking and manual rubber stamps.",
+            "variants": ["Rectangular Self-Ink", "Round Self-Ink", "Date Stamp Manual"]
+        },
+        {
+            "name": "Flex Banners",
+            "category": "marketing",
+            "price": "50/sq.ft",
+            "image": "https://arhamprinters.pk/img/products/star.webp",
+            "desc": "Outdoor advertising banners and signs.",
+            "variants": ["Star Media (Glossy)", "China Media (Matte)", "Backlit"]
+        },
+        {
+            "name": "Flyers (Ishtihar)",
+            "category": "marketing",
+            "price": "6,000",
+            "image": "https://arhamprinters.pk/img/products/ishtihar.webp",
+            "desc": "Bulk promotional flyers for distribution.",
+            "variants": ["A5 Half Page (1000 Qty)", "A4 Full Page (1000 Qty)"]
+        },
+        {
+            "name": "Brochures",
+            "category": "marketing",
+            "price": "Check Price",
+            "image": "https://arhamprinters.pk/img/products/pamphlet.webp",
+            "desc": "Folded brochures for product details.",
+            "variants": ["Trifold Glossy"]
+        },
+        {
+            "name": "Stickers",
+            "category": "marketing",
+            "price": "120/sq.ft",
+            "image": "https://arhamprinters.pk/img/products/stickers.webp",
+            "desc": "Adhesive vinyl branding.",
+            "variants": ["Vinyl (Pasting)", "One Way Vision"]
+        },
+        {
+            "name": "Standees",
+            "category": "marketing",
+            "price": "1,200",
+            "image": "https://arhamprinters.pk/img/products/placeholder.png",
+            "desc": "Portable display stands for events.",
+            "variants": ["X-Stand (2x5 ft)", "Roll-up (2.5x6 ft)"]
+        },
+        {
+            "name": "Mugs",
+            "category": "gifts",
+            "price": "500",
+            "image": "https://arhamprinters.pk/img/products/mugs.webp",
+            "desc": "Personalized ceramic mugs.",
+            "variants": ["White Mug", "Magic Mug (Color Changing)"]
+        },
+        {
+            "name": "T-Shirts",
+            "category": "gifts",
+            "price": "850",
+            "image": "https://arhamprinters.pk/img/products/shirt.webp",
+            "desc": "Custom printed apparel.",
+            "variants": ["Sublimation (Polyester)", "DTF (Cotton)"]
+        },
+        {
+            "name": "Caps",
+            "category": "gifts",
+            "price": "450",
+            "image": "https://arhamprinters.pk/img/products/caps.webp",
+            "desc": "Branded caps and hats.",
+            "variants": ["Embroidery", "Printing"]
+        },
+        {
+            "name": "Keychains",
+            "category": "gifts",
+            "price": "350",
+            "image": "https://arhamprinters.pk/img/products/keychains.webp",
+            "desc": "Customized keychains.",
+            "variants": ["Metal", "Acrylic"]
+        },
+        {
+            "name": "Photo Frames",
+            "category": "gifts",
+            "price": "Check Price",
+            "image": "https://arhamprinters.pk/img/products/frames.webp",
+            "desc": "Elegant frames for memories.",
+            "variants": ["A4 Wooden", "7x5 PVC"]
+        },
+        {
+            "name": "Awards & Shields",
+            "category": "gifts",
+            "price": "1,500",
+            "image": "https://arhamprinters.pk/img/products/placeholder.png",
+            "desc": "Corporate awards and shields.",
+            "variants": ["Wooden Shield", "Crystal Shield"]
+        },
+        {
+            "name": "Wallpapers",
+            "category": "gifts",
+            "price": "80/sq.ft",
+            "image": "https://arhamprinters.pk/img/products/wallpapers.webp",
+            "desc": "3D wall art and customized wallpapers.",
+            "variants": ["3D Wall Art"]
+        },
+        {
+            "name": "Printed Wedding Cards",
+            "category": "wedding",
+            "price": "Starts 30",
+            "image": "https://arhamprinters.pk/img/wedding/placeholder.webp",
+            "desc": "Physical invitation cards.",
+            "variants": ["Economy", "Premium", "Royal"]
+        },
+        {
+            "name": "Digital Wedding Invite",
+            "category": "wedding",
+            "price": "Check Price",
+            "image": "https://arhamprinters.pk/img/wedding/placeholder.webp",
+            "desc": "Video or image invites for WhatsApp.",
+            "variants": ["WhatsApp Image", "WhatsApp Video"]
+        },
+        {
+            "name": "Custom Pizza Boxes",
+            "category": "packaging",
+            "price": "35",
+            "image": "https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?w=500",
+            "desc": "Food grade E-flute boxes.",
+            "variants": ["7 Inch", "10 Inch", "13 Inch"]
+        }
+    ],
+    "portfolio": [
+        "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=500",
+        "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?w=500",
+        "https://images.unsplash.com/photo-1626785774573-4b799312c95d?w=500",
+        "https://images.unsplash.com/photo-1563986768427-1c591cd66eb0?w=500",
+        "https://images.unsplash.com/photo-1607190074257-dd4b76e270f9?w=500"
+    ]
+}

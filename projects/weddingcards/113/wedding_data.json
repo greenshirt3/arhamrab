@@ -1,0 +1,60 @@
+{
+    "config": {
+        "bismillah": "Bismillah Hir Rahman Nir Rahim",
+        "host_parents": "Mr. & Mrs. Mirza Munir Hussain",
+        "invitation_intro": "Solicit your blessing & cordially invite your gracious presence on the occasion of the",
+        "event_type": "Wedding Ceremony",
+        "relation_text": "of their Beloved Daughter",
+        "groom_name": "Rabia Shehzadi",
+        "bride_name": "", 
+        "bg_music": "https://arhamprinters.pk/audios/wedding.mp3"
+    },
+    "lists": {
+        "rsvp_people": [
+            "Ali Raza",
+            "Saad Raza",
+            "Yasir Raza",
+            "Manzar Ali",
+            "Muhammad Zaviyar"
+        ],
+        "well_wishers": [
+            "All Family Members",
+            "Cousins & Friends"
+        ]
+    },
+    "events": [
+        {
+            "name": "Mehndi",
+            "date": "Saturday, 14 Feb 2026",
+            "icon": "fa-hand-sparkles",
+            "venue_name": "Sweet Home",
+            "address": "Faisal Colony, Jalalpur Jattan",
+            "map_link": "https://maps.app.goo.gl/H74TFufpoYoSJA6h9",
+            "times": [
+                {"label": "Rasm-e-Hina", "time": "07:00 PM"},
+                {"label": "Dinner", "time": "08:00 PM"}
+            ]
+        },
+        {
+            "name": "Baraat",
+            "date": "Sunday, 15 Feb 2026",
+            "icon": "fa-heart",
+            "venue_name": "Al Mayda Marquee",
+            "address": "Khokha Stop, Kharian Road",
+            "map_link": "https://maps.app.goo.gl/t7MzpJbDHrzSp5us6",
+            "times": [
+                {"label": "Baraat Arrival", "time": "02:00 PM"},
+                {"label": "Nikah", "time": "02:30 PM"},
+                {"label": "Lunch", "time": "03:00 PM"},
+                {"label": "Rukhsti", "time": "05:00 PM"}
+            ]
+        }
+    ],
+    "contacts": {
+        "phone": "03080006184",
+        "whatsapp": "923080006184"
+    },
+    "footer": {
+        "ticker_text": "Contact Mirza Munir at 0308-0006184,  for  Printing contact Arham Printers - Your Partner in Printing & Web Solutions | Contact: 0300-6238233 | Jalalpur Jattan"
+    }
+}

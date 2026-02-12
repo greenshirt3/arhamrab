@@ -1,0 +1,199 @@
+{
+  "meta": {
+    "title": "The Ancestral Helix",
+    "rootCouple": "Muhammad Hussain & Fatima Bibi",
+    "totalMembers": 50
+  },
+  "members": [
+    {
+      "id": "root_nana",
+      "name": "Muhammad Hussain",
+      "role": "Grand Father",
+      "gen": 0,
+      "familyGroup": "root",
+      "image": "uploads/nana.webp",
+      "parentId": null,
+      "desc": "The root of our family tree."
+    },
+    {
+      "id": "root_nani",
+      "name": "Fatima Bibi",
+      "role": "Grand Mother",
+      "gen": 0,
+      "familyGroup": "root",
+      "image": "uploads/nani.webp",
+      "parentId": null,
+      "desc": "The heart of our family."
+    },
+    {
+      "id": "mom_p1",
+      "name": "Seema Bibi (Late)",
+      "role": "Beloved Daughter",
+      "gen": 1,
+      "familyGroup": "purple_branch",
+      "image": "uploads/mother.webp",
+      "parentId": "root_nani",
+      "desc": "The only sister."
+    },
+    {
+      "id": "mom_c1",
+      "name": "Saif Ullah (Me)",
+      "role": "Son",
+      "gen": 2,
+      "familyGroup": "purple_branch",
+      "image": "uploads/saif.webp",
+      "parentId": "mom_p1"
+    },
+    {
+      "id": "mom_c2",
+      "name": "Azmat Ullah",
+      "role": "Sibling",
+      "gen": 2,
+      "familyGroup": "purple_branch",
+      "image": "uploads/azmat_webp",
+      "parentId": "mom_p1"
+    },
+    {
+      "id": "m1_p1",
+      "name": "Bashir Hussain",
+      "role": "Eldest Mamon",
+      "gen": 1,
+      "familyGroup": "blue_branch",
+      "image": "uploads/mamon1.jpg",
+      "parentId": "root_nana"
+    },
+    {
+      "id": "m1_w1",
+      "name": "Sakina Bibi (Late)",
+      "role": "Wife",
+      "gen": 1,
+      "familyGroup": "blue_branch",
+      "image": "uploads/mami1.jpg",
+      "parentId": null,
+      "spouseId": "m1_p1"
+    },
+    { "id": "m1_c1", "name": "M1 Child 1", "gen": 2, "familyGroup": "blue_branch", "parentId": "m1_p1", "image": "uploads/m1_c1.jpg" },
+    { "id": "m1_c2", "name": "M1 Child 2", "gen": 2, "familyGroup": "blue_branch", "parentId": "m1_p1", "image": "uploads/m1_c2.jpg" },
+    { "id": "m1_c3", "name": "M1 Child 3", "gen": 2, "familyGroup": "blue_branch", "parentId": "m1_p1", "image": "uploads/m1_c3.jpg" },
+    { "id": "m1_c4", "name": "M1 Child 4", "gen": 2, "familyGroup": "blue_branch", "parentId": "m1_p1", "image": "uploads/m1_c4.jpg" },
+    { "id": "m1_gc1", "name": "M1 Grandchild A", "gen": 3, "familyGroup": "blue_branch", "parentId": "m1_c1", "image": "uploads/m1_gc1.jpg", "desc": "Child of M1 Child 1" },
+    { "id": "m1_gc2", "name": "M1 Grandchild B", "gen": 3, "familyGroup": "blue_branch", "parentId": "m1_c1", "image": "uploads/m1_gc2.jpg", "desc": "Child of M1 Child 1" },
+    {
+      "id": "m2_p1",
+      "name": "Mamon 2 Name",
+      "role": "Mamon",
+      "gen": 1,
+      "familyGroup": "green_branch",
+      "image": "uploads/mamon2.jpg",
+      "parentId": "root_nana"
+    },
+    {
+      "id": "m2_w1",
+      "name": "Mami 2 Name",
+      "role": "Wife",
+      "gen": 1,
+      "familyGroup": "green_branch",
+      "image": "uploads/mami2.jpg",
+      "parentId": null,
+      "spouseId": "m2_p1"
+    },
+    { "id": "m2_c1", "name": "M2 Child 1", "gen": 2, "familyGroup": "green_branch", "parentId": "m2_p1", "image": "uploads/m2_c1.jpg" },
+    { "id": "m2_c2", "name": "M2 Child 2", "gen": 2, "familyGroup": "green_branch", "parentId": "m2_p1", "image": "uploads/m2_c2.jpg" },
+    { "id": "m2_c3", "name": "M2 Child 3", "gen": 2, "familyGroup": "green_branch", "parentId": "m2_p1", "image": "uploads/m2_c3.jpg" },
+    { "id": "m2_c4", "name": "M2 Child 4", "gen": 2, "familyGroup": "green_branch", "parentId": "m2_p1", "image": "uploads/m2_c4.jpg" },
+    { "id": "m2_c5", "name": "M2 Child 5", "gen": 2, "familyGroup": "green_branch", "parentId": "m2_p1", "image": "uploads/m2_c5.jpg" },
+    {
+      "id": "m3_p1",
+      "name": "Mamon 3 Name",
+      "role": "Mamon",
+      "gen": 1,
+      "familyGroup": "red_branch",
+      "image": "uploads/mamon3.jpg",
+      "parentId": "root_nana"
+    },
+    {
+      "id": "m3_w1",
+      "name": "Mami 3 Name",
+      "role": "Wife",
+      "gen": 1,
+      "familyGroup": "red_branch",
+      "image": "uploads/mami3.jpg",
+      "parentId": null,
+      "spouseId": "m3_p1"
+    },
+    { "id": "m3_c1", "name": "M3 Child 1", "gen": 2, "familyGroup": "red_branch", "parentId": "m3_p1", "image": "uploads/m3_c1.jpg" },
+    { "id": "m3_c2", "name": "M3 Child 2", "gen": 2, "familyGroup": "red_branch", "parentId": "m3_p1", "image": "uploads/m3_c2.jpg" },
+    { "id": "m3_c3", "name": "M3 Child 3", "gen": 2, "familyGroup": "red_branch", "parentId": "m3_p1", "image": "uploads/m3_c3.jpg" },
+    {
+      "id": "m4_p1",
+      "name": "Mamon 4 Name",
+      "role": "Mamon",
+      "gen": 1,
+      "familyGroup": "orange_branch",
+      "image": "uploads/mamon4.jpg",
+      "parentId": "root_nana"
+    },
+    {
+      "id": "m4_w1",
+      "name": "Mami 4 Name",
+      "role": "Wife",
+      "gen": 1,
+      "familyGroup": "orange_branch",
+      "image": "uploads/mami4.jpg",
+      "parentId": null,
+      "spouseId": "m4_p1"
+    },
+    { "id": "m4_c1", "name": "M4 Child 1", "gen": 2, "familyGroup": "orange_branch", "parentId": "m4_p1", "image": "uploads/m4_c1.jpg" },
+    { "id": "m4_c2", "name": "M4 Child 2", "gen": 2, "familyGroup": "orange_branch", "parentId": "m4_p1", "image": "uploads/m4_c2.jpg" },
+    { "id": "m4_c3", "name": "M4 Child 3", "gen": 2, "familyGroup": "orange_branch", "parentId": "m4_p1", "image": "uploads/m4_c3.jpg" },
+    { "id": "m4_c4", "name": "M4 Child 4", "gen": 2, "familyGroup": "orange_branch", "parentId": "m4_p1", "image": "uploads/m4_c4.jpg" },
+    { "id": "m4_gc1", "name": "M4 Grandchild A", "gen": 3, "familyGroup": "orange_branch", "parentId": "m4_c1", "image": "uploads/m4_gc1.jpg", "desc": "Child of M4 Child 1" },
+    {
+      "id": "m5_p1",
+      "name": "Mamon 5 Name",
+      "role": "Mamon",
+      "gen": 1,
+      "familyGroup": "cyan_branch",
+      "image": "uploads/mamon5.jpg",
+      "parentId": "root_nana"
+    },
+    {
+      "id": "m5_w1",
+      "name": "Mami 5 Name",
+      "role": "Wife",
+      "gen": 1,
+      "familyGroup": "cyan_branch",
+      "image": "uploads/mami5.jpg",
+      "parentId": null,
+      "spouseId": "m5_p1"
+    },
+    { "id": "m5_c1", "name": "M5 Child 1", "gen": 2, "familyGroup": "cyan_branch", "parentId": "m5_p1", "image": "uploads/m5_c1.jpg" },
+    { "id": "m5_c2", "name": "M5 Child 2", "gen": 2, "familyGroup": "cyan_branch", "parentId": "m5_p1", "image": "uploads/m5_c2.jpg" },
+    { "id": "m5_c3", "name": "M5 Child 3", "gen": 2, "familyGroup": "cyan_branch", "parentId": "m5_p1", "image": "uploads/m5_c3.jpg" },
+    { "id": "m5_c4", "name": "M5 Child 4", "gen": 2, "familyGroup": "cyan_branch", "parentId": "m5_p1", "image": "uploads/m5_c4.jpg" },
+    { "id": "m5_c5", "name": "M5 Child 5", "gen": 2, "familyGroup": "cyan_branch", "parentId": "m5_p1", "image": "uploads/m5_c5.jpg" },
+    { "id": "m5_c6", "name": "M5 Child 6", "gen": 2, "familyGroup": "cyan_branch", "parentId": "m5_p1", "image": "uploads/m5_c6.jpg" },
+    {
+      "id": "m6_p1",
+      "name": "Mamon 6 Name",
+      "role": "Youngest Mamon",
+      "gen": 1,
+      "familyGroup": "pink_branch",
+      "image": "uploads/mamon6.jpg",
+      "parentId": "root_nana"
+    },
+    {
+      "id": "m6_w1",
+      "name": "Mami 6 Name",
+      "role": "Wife",
+      "gen": 1,
+      "familyGroup": "pink_branch",
+      "image": "uploads/mami6.jpg",
+      "parentId": null,
+      "spouseId": "m6_p1"
+    },
+    { "id": "m6_c1", "name": "M6 Child 1", "gen": 2, "familyGroup": "pink_branch", "parentId": "m6_p1", "image": "uploads/m6_c1.jpg" },
+    { "id": "m6_c2", "name": "M6 Child 2", "gen": 2, "familyGroup": "pink_branch", "parentId": "m6_p1", "image": "uploads/m6_c2.jpg" },
+    { "id": "m6_c3", "name": "M6 Child 3", "gen": 2, "familyGroup": "pink_branch", "parentId": "m6_p1", "image": "uploads/m6_c3.jpg" }
+  ]
+}

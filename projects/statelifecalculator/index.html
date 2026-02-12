@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>State Life Premium Calculator | Arham Printers</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="description" content="Calculate State Life Insurance Premium and Maturity. Covers all Tables (01-81), Child Education, and Joint Life.">
+    <link rel="canonical" href="https://statelifecalculator.arhamprinters.pk/">
+
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/all.min.css" rel="stylesheet">
+    <link href="lib/animate.min.css" rel="stylesheet">
+    <link href="agency.css" rel="stylesheet">
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "ur8auaqqg4");
+    </script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K2QLNQZ4X3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-K2QLNQZ4X3');
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "PrintingService",
+      "name": "Arham Printers",
+      "image": "https://arhamprinters.pk/img/logo2.webp",
+      "description": "Premium printing services in Jalalpur Jattan. Business cards, wedding cards, flex printing, and advertising.",
+      "telephone": "+923006238233",
+      "url": "https://arhamprinters.pk",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Near Domela Chowk",
+        "addressLocality": "Jalalpur Jattan",
+        "postalCode": "50780",
+        "addressCountry": "PK"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 32.6482613,
+        "longitude": 74.213114
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"],
+          "opens": "09:00",
+          "closes": "21:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Saturday"],
+          "opens": "09:30",
+          "closes": "20:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Sunday"],
+          "opens": "09:30",
+          "closes": "20:30"
+        }
+      ],
+      "sameAs": [
+        "https://www.facebook.com/arhamprinters.pk",
+        "https://wa.me/923006238233"
+      ],
+      "priceRange": "PKR"
+    }
+    </script>
+
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        .ur { font-family: 'Noto Naskh Arabic', serif; font-weight: 700; color: var(--brand-cyan); margin-left: 8px; font-size: 1rem; line-height: 1.6; }
+        
+        .hero-mini {
+            padding-top: 160px; padding-bottom: 80px;
+            background: linear-gradient(135deg, #0f172a 0%, #06b6d4 100%);
+            position: relative;
+        }
+
+        .calc-card {
+            background: #ffffff; border-radius: 15px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.1);
+            padding: 40px; margin-top: -60px;
+            position: relative; z-index: 10;
+            border-top: 5px solid var(--brand-cyan);
+        }
+
+        .form-label { font-weight: 600; color: #1e293b; font-size: 0.95rem; display: flex; align-items: center; justify-content: space-between; }
+        .form-control, .form-select { padding: 12px; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 0.95rem; }
+        .form-control:focus, .form-select:focus { border-color: var(--brand-cyan); box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.15); }
+
+        .result-panel { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 25px; margin-top: 30px; display: none; }
+        .result-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px dashed #cbd5e1; }
+        .res-label { font-weight: 600; color: #475569; font-size: 0.9rem; }
+        .res-val { font-weight: 800; color: #0f172a; font-size: 1.1rem; }
+        
+        .total-box { background: var(--brand-blue); color: white; padding: 20px; text-align: center; border-radius: 10px; margin-top: 20px; }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a href="https://arhamprinters.pk" class="navbar-brand"><h2 class="m-0">Arham<span style="color: var(--brand-cyan);">Printers</span></h2></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"><span class="fas fa-bars text-dark"></span></button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto">
+                    <a href="https://arhamprinters.pk" class="nav-item nav-link">Home</a>
+                    <a href="#" class="nav-item nav-link active">Calculator</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero-header hero-mini">
+        <div class="container text-center">
+            <h4 class="text-white-50 fw-bold animate__animated animate__fadeInDown">COMPLETE AGENT TOOLKIT</h4>
+            <h1 class="text-white fw-bold animate__animated animate__fadeInUp">All Policy Calculator</h1>
+            <p class="lead text-white-50 animate__animated animate__fadeInUp">Designed by Arham Printers</p>
+        </div>
+    </div>
+
+    <section class="section pb-5" style="background: #f1f5f9;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="calc-card animate__animated animate__fadeInUp">
+                        
+                        <form id="slCalc" onsubmit="calculate(event)">
+                            
+                            <div class="mb-4">
+                                <label class="form-label"><span>Select Policy</span><span class="ur">پالیسی منتخب کریں</span></label>
+                                <select id="policy" class="form-select" onchange="checkPolicyType()" required>
+                                    <option value="" disabled selected>-- Select Policy Table --</option>
+                                    
+                                    <optgroup label="Endowment Plans (Most Popular)">
+                                        <option value="03">Endowment (Table-03) - انڈومنٹ</option>
+                                        <option value="74">Sada Bahar Plan (Table-74) - سدا بہار</option>
+                                        <option value="05">Anticipated Endowment (Table-05) - اینٹیسیپیٹڈ</option>
+                                        <option value="36">Shad Abad Plan (Table-36) - شاد آباد</option>
+                                        <option value="04">Progressive Premium (Table-04) - پروگریسو</option>
+                                    </optgroup>
+
+                                    <optgroup label="Child Education & Marriage">
+                                        <option value="CE_NF">Child Education (Profit & No FIB) - بچوں کی تعلیم</option>
+                                        <option value="CE_F">Child Education (Profit & FIB) - بچوں کی تعلیم معہ ایف آئی بی</option>
+                                        <option value="07">Child Protection (Table-07) - چائلڈ پروٹیکشن</option>
+                                        <option value="12">Family Pension Plan (Table-12) - فیملی پنشن</option>
+                                    </optgroup>
+
+                                    <optgroup label="Whole Life Plans">
+                                        <option value="01">Whole Life (Table-01) - ہول لائف</option>
+                                        <option value="02">Whole Life Limited Payment (Table-02)</option>
+                                    </optgroup>
+
+                                    <optgroup label="Joint & Special Plans">
+                                        <option value="19">Jeevan Saathi Plan (Table-19) - جیون ساتھی</option>
+                                        <option value="06">Joint Life Endowment (Table-06) - جوائنٹ لائف</option>
+                                        <option value="78">Muhafiz Plus (Table-78) - محافظ پلس</option>
+                                        <option value="81">Golden Endowment (Table-81) - گولڈن</option>
+                                    </optgroup>
+
+                                    <optgroup label="Investment & Other">
+                                        <option value="14">Big Deal Plan (Table-14) - بگ ڈیل</option>
+                                        <option value="17">Optional Maturity Endowment (Table-17)</option>
+                                        <option value="18">Rural Life Insurance (Table-18) - دیہی انشورنس</option>
+                                        <option value="09">Endowment Assurance Single Premium (Table-09)</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label"><span>Age</span><span class="ur">عمر</span></label>
+                                    <select id="age" class="form-select" required></select>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label"><span>Term</span><span class="ur">مدت</span></label>
+                                    <input type="number" id="term" class="form-control" placeholder="20" min="5" max="50" required>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label"><span>Sum Assured (Rs)</span><span class="ur">زر ضمانت</span></label>
+                                    <input type="number" id="sum" class="form-control" placeholder="Min 50000" min="50000" step="1000" required>
+                                    <div id="minSumHint" class="form-text text-muted" style="font-size:0.8rem;">Standard Minimum: Rs. 50,000</div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label"><span>Gender</span><span class="ur">جنس</span></label>
+                                    <select id="gender" class="form-select">
+                                        <option value="M">Male</option>
+                                        <option value="F">Female</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mb-4" id="modeContainer">
+                                <label class="form-label"><span>Payment Mode</span><span class="ur">طریقہ کار</span></label>
+                                <select id="mode" class="form-select">
+                                    <option value="1">Annually (Yearly) - سالانہ</option>
+                                    <option value="0.52">Half Yearly - چھ ماہ بعد</option>
+                                    <option value="0.27">Quarterly - سہ ماہی</option>
+                                    <option value="0.09">Monthly - ماہانہ</option>
+                                </select>
+                            </div>
+
+                            <button type="submit" class="hero-btn w-100 border-0">Calculate Premium</button>
+                        </form>
+
+                        <div id="resultPanel" class="result-panel">
+                            <h5 class="fw-bold mb-3 border-bottom pb-2">Result Summary <span class="ur float-end text-dark">خلاصہ</span></h5>
+                            
+                            <div class="result-row">
+                                <span class="res-label">Base Premium (Yearly)</span>
+                                <span class="res-val" id="resBase">Rs. 0</span>
+                            </div>
+                            <div class="result-row" id="modeRow">
+                                <span class="res-label">Mode Premium</span>
+                                <span class="res-val text-primary" id="resMode">Rs. 0</span>
+                            </div>
+                            
+                            <div class="result-row mt-3">
+                                <span class="res-label">Sum Assured</span>
+                                <span class="res-val" id="resSum">Rs. 0</span>
+                            </div>
+                            <div class="result-row">
+                                <span class="res-label">Estimated Bonus</span>
+                                <span class="res-val text-success" id="resBonus">Rs. 0</span>
+                            </div>
+                            
+                            <div class="total-box">
+                                <div class="small opacity-75 text-uppercase">Est. Maturity Value / کل منافع</div>
+                                <h3 id="resTotal" class="text-white">Rs. 0</h3>
+                            </div>
+                            
+                            <div class="text-center mt-3">
+                                <button class="btn btn-sm btn-outline-dark rounded-pill" onclick="window.print()">Print Illustration</button>
+                                <button class="btn btn-sm btn-success rounded-pill ms-2" onclick="shareWhatsapp()">Share WhatsApp</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-4 col-md-6">
+                    <a href="index.html" class="footer-logo">Arham Printers</a>
+                    <p class="mb-4">Your #1 source for premium printing & advertising in Jalalpur Jattan.</p>
+                    <div class="mb-4">
+                        <h6 class="text-white mb-2" style="font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Opening Hours</h6>
+                        <p class="mb-1 text-white-50"><i class="fas fa-clock me-2 text-info"></i> Sat - Thu: 09:00 AM - 08:00 PM</p>
+                        <p class="text-danger"><i class="fas fa-times-circle me-2"></i> Friday: Closed</p>
+                    </div>
+                    <div class="d-flex gap-3">
+                        <a href="https://www.facebook.com/arhamprinters.pk"><i class="fab fa-facebook-f fa-lg"></i></a>
+                        <a href="#"><i class="fab fa-instagram fa-lg"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp fa-lg"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <h5>Shop</h5>
+                    <a href="index.html#catalog">All Products</a>
+                    <a href="index.html#catalog">Business Cards</a>
+                    <a href="index.html#catalog">Marketing</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5>Support</h5>
+                    <a href="shipping_policy.html">Shipping Policy</a>
+                    <a href="return_policy.html">Return Policy</a>
+                    <a href="#" onclick="openGeneralContact()">Help Center</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5>Contact Us</h5>
+                    <ul class="list-unstyled mt-3">
+                        <li class="mb-3 d-flex align-items-center">
+                            <a href="https://maps.app.goo.gl/r7peyma84JdVSecPA" target="_blank" class="me-3 text-decoration-none">
+                                <div class="bg-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                    <i class="fas fa-map-marker-alt text-danger"></i>
+                                </div>
+                            </a>
+                            <span class="text-white-50">Tanda Road, Jalalpur Jattan.</span>
+                        </li>
+                        <li class="mb-3 d-flex align-items-center">
+                            <a href="tel:+923006238233" class="me-3 text-decoration-none">
+                                <div class="bg-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                    <i class="fas fa-phone-alt text-success"></i>
+                                </div>
+                            </a>
+                            <span class="text-white-50">+92 300 6238233</span>
+                        </li>
+                        <li class="d-flex align-items-center">
+                            <a href="mailto:info@arhamprinters.pk" class="me-3 text-decoration-none">
+                                <div class="bg-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                    <i class="fas fa-envelope text-primary"></i>
+                                </div>
+                            </a>
+                            <span class="text-white-50">info@arhamprinters.pk</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="m-0">© 2025 Arham Printers. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script>
+        const ageSel = document.getElementById('age');
+        for(let i=1; i<=65; i++) {
+            let opt = document.createElement('option');
+            opt.value = i; opt.innerText = i;
+            if(i===30) opt.selected = true;
+            ageSel.appendChild(opt);
+        }
+
+        // Variable to track current minimum
+        let currentMinSum = 50000;
+
+        function checkPolicyType() {
+            const policy = document.getElementById('policy').value;
+            const modeContainer = document.getElementById('modeContainer');
+            const sumInput = document.getElementById('sum');
+            const hint = document.getElementById('minSumHint');
+
+            // 1. Determine Min Sum based on Table
+            if(policy === "18") { // Rural Life
+                currentMinSum = 10000;
+            } else if(policy === "81") { // Golden
+                currentMinSum = 15000;
+            } else if(policy === "09") { // Single Premium
+                currentMinSum = 25000;
+            } else {
+                currentMinSum = 50000; // Standard Default
+            }
+
+            // 2. Update Input Attributes
+            sumInput.min = currentMinSum;
+            sumInput.placeholder = "Min " + currentMinSum;
+            hint.innerText = "Minimum for this plan: Rs. " + currentMinSum.toLocaleString();
+
+            // 3. Handle Mode Visibility
+            if(policy === "09") { 
+                modeContainer.style.display = "none";
+            } else {
+                modeContainer.style.display = "block";
+            }
+        }
+
+        function calculate(e) {
+            e.preventDefault();
+            
+            const policy = document.getElementById('policy').value;
+            const age = parseInt(document.getElementById('age').value);
+            const term = parseInt(document.getElementById('term').value);
+            const sum = parseFloat(document.getElementById('sum').value);
+            const modeVal = (policy === "09") ? 1 : parseFloat(document.getElementById('mode').value);
+
+            if(!policy) { alert("Please select a policy."); return; }
+            if(!sum) { alert("Please enter Sum Assured."); return; }
+            
+            // Validation against dynamic minimum
+            if(sum < currentMinSum) {
+                alert("Minimum Sum Assured for this plan is Rs. " + currentMinSum);
+                return;
+            }
+
+            let baseRate = 45; 
+            switch(policy) {
+                case "03": baseRate = 48; break;
+                case "CE_NF": baseRate = 48; break;
+                case "CE_F": baseRate = 55; break;
+                case "36": baseRate = 49; break;
+                case "19": baseRate = 54; break;
+                case "06": baseRate = 54; break;
+                case "04": baseRate = 50; break;
+                case "74": baseRate = 58; break;
+                case "05": baseRate = 65; break;
+                case "01": baseRate = 28; break;
+                case "02": baseRate = 35; break;
+                case "07": baseRate = 45; break;
+                case "09": baseRate = 650; break;
+                case "81": baseRate = 48; break;
+                case "18": baseRate = 40; break;
+                case "14": baseRate = 50; break;
+                default: baseRate = 45;
+            }
+
+            let ageLoad = (age > 20) ? (age - 20) * 1.5 : 0;
+            let termFactor = (term < 20) ? 1.1 : 1; 
+
+            if(policy === "09") { ageLoad = 0; termFactor = 1; }
+
+            let finalRate = (baseRate + ageLoad) * termFactor;
+            let basicPremium = (finalRate * sum) / 1000;
+            let modePremium = basicPremium * modeVal;
+
+            // Bonus Logic
+            let bonusRate = 0;
+            if (["03", "36", "19", "06", "07", "78", "14", "17", "81", "12", "04", "CE_NF", "CE_F"].includes(policy)) {
+                if(term >= 20) bonusRate = 43;
+                else if(term >= 15) bonusRate = 29;
+                else bonusRate = 17;
+            } else if (policy === "74") {
+                if(term >= 20) bonusRate = 38;
+                else if(term >= 15) bonusRate = 26;
+                else bonusRate = 20;
+            } else if (policy === "05") {
+                if(term >= 20) bonusRate = 29;
+                else if(term >= 15) bonusRate = 21;
+                else bonusRate = 16;
+            } else if (["01", "02"].includes(policy)) {
+                bonusRate = 51;
+            } else if (policy === "09") {
+                bonusRate = 43;
+            } else { bonusRate = 40; }
+
+            let totalBonus = (bonusRate * sum / 1000) * term;
+            let totalMaturity = sum + totalBonus;
+
+            document.getElementById('resultPanel').style.display = 'block';
+            document.getElementById('resBase').innerText = formatCurrency(basicPremium);
+            
+            if(policy === "09") {
+                document.getElementById('modeRow').style.display = 'none';
+                document.getElementById('resBase').innerText = formatCurrency(basicPremium) + " (One Time)";
+            } else {
+                document.getElementById('modeRow').style.display = 'flex';
+                document.getElementById('resMode').innerText = formatCurrency(modePremium);
+            }
+
+            document.getElementById('resSum').innerText = formatCurrency(sum);
+            document.getElementById('resBonus').innerText = formatCurrency(totalBonus);
+            document.getElementById('resTotal').innerText = formatCurrency(totalMaturity);
+        }
+
+        function formatCurrency(num) {
+            return "Rs. " + Math.round(num).toLocaleString('en-US');
+        }
+
+        function shareWhatsapp() {
+            let plan = document.getElementById('policy').options[document.getElementById('policy').selectedIndex].text;
+            let val = document.getElementById('resTotal').innerText;
+            let msg = `*State Life Calculation*\nPlan: ${plan}\nEst. Maturity: ${val}\n\nVia Arham Printers`;
+            window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+{
+    "theme": {
+        "bg_color": "#F9F5F0",
+        "primary_color": "#4A2C40", 
+        "accent_color": "#D4AF37",
+        "font_primary": "Great Vibes",
+        "font_secondary": "Cinzel"
+    },
+    "cover": {
+        "monogram": "L & J",
+        "title": "INVITATION",
+        "subtitle": "Thank you for coming",
+        "date": "12.10 / Sunday"
+    },
+    "inside_right": {
+        "bismillah": "In the name of Allah",
+        "invite_text": "Together with their families",
+        "groom": "Labeeb",
+        "bride": "Javeria",
+        "message": "We invite you to share in our joy",
+        "venue": "Grand Palace Hotel",
+        "time": "Reception to follow at 7:00 PM"
+    }
+}

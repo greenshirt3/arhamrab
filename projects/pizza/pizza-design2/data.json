@@ -1,0 +1,617 @@
+{
+    "urbanslice": {
+        "settings": {
+            "shop_name": "Urban Slice",
+            "contact_number": "03211122334",
+            "whatsapp_number": "923211122334",
+            "address": "Tech District, Cyber Avenue",
+            "currency_symbol": "Rs.",
+            "delivery_fee": 150,
+            "free_delivery_over": 4000,
+            "theme_colors": {
+                "primary": "#00f3ff",
+                "secondary": "#ff00ff",
+                "dark": "#050505",
+                "light": "#e0e0e0",
+                "accent": "#7000ff"
+            },
+            "social_media_handle": "UrbanSlicePK"
+        },
+        "hero_banner": {
+            "headline": "Urban Slice",
+            "subheadline": "Future of Pizza is Here",
+            "imageFile": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=1200&q=80"
+        },
+        "categories": {
+            "Kids & Saver Deals": [
+                {
+                    "id": "kd1",
+                    "name": "Kids Deal 1",
+                    "description": "6 pcs Nuggets, 1 Reg Fries, 1 Slice Juice",
+                    "base_price": 499,
+                    "imageFile": "https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=800&q=80",
+                    "is_deal": true
+                },
+                {
+                    "id": "kd2",
+                    "name": "Kids Deal 2",
+                    "description": "1 Classic Burger, 6 Nuggets, 1 Slice Juice",
+                    "base_price": 549,
+                    "imageFile": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80",
+                    "is_deal": true
+                },
+                {
+                    "id": "kd3",
+                    "name": "Kids Deal 3",
+                    "description": "1 Small Pizza, 1 Reg Fries, 1 Reg Drink",
+                    "base_price": 749,
+                    "imageFile": "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80",
+                    "is_deal": true
+                },
+                {
+                    "id": "sd1",
+                    "name": "Saver Deal 1",
+                    "description": "4 Classic Burgers, 10 Nuggets, 1 Litre Drink",
+                    "base_price": 1749,
+                    "imageFile": "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?auto=format&fit=crop&w=800&q=80",
+                    "is_deal": true
+                },
+                {
+                    "id": "sd2",
+                    "name": "Saver Deal 2",
+                    "description": "5 Zinger Burgers, 1 Large Fries, 1 Litre Drink",
+                    "base_price": 2299,
+                    "imageFile": "https://images.unsplash.com/photo-1615297928064-24977384d0f4?auto=format&fit=crop&w=800&q=80",
+                    "is_deal": true
+                },
+                {
+                    "id": "sd3",
+                    "name": "Saver Deal 3",
+                    "description": "2 Zinger Burgers, 2 Patty Burgers, 1 Large Fries, 1 Litre Drink",
+                    "base_price": 1649,
+                    "imageFile": "https://images.unsplash.com/photo-1551782450-a2132b4ba21d?auto=format&fit=crop&w=800&q=80",
+                    "is_deal": true
+                }
+            ],
+            "Classic Pizza": [
+                {
+                    "id": "cp1",
+                    "name": "Chicken Tikka Pizza",
+                    "description": "Tendered chicken tikka, pizza sauce, cheese, onion.",
+                    "base_price": 549,
+                    "imageFile": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80",
+                    "variants": [
+                        { "name": "Small", "price_adjustment": 0 },
+                        { "name": "Medium", "price_adjustment": 550 },
+                        { "name": "Large", "price_adjustment": 1050 },
+                        { "name": "Family", "price_adjustment": 1350 }
+                    ]
+                },
+                {
+                    "id": "cp2",
+                    "name": "Chicken Fajita Pizza",
+                    "description": "Spicy Chicken fajita, pizza sauce, cheese, onion, capsicum.",
+                    "base_price": 549,
+                    "imageFile": "https://images.unsplash.com/photo-1593560708920-63984dc36f3c?auto=format&fit=crop&w=800&q=80",
+                    "variants": [
+                        { "name": "Small", "price_adjustment": 0 },
+                        { "name": "Medium", "price_adjustment": 550 },
+                        { "name": "Large", "price_adjustment": 1050 },
+                        { "name": "Family", "price_adjustment": 1350 }
+                    ]
+                },
+                {
+                    "id": "cp3",
+                    "name": "Super Supreme Pizza",
+                    "description": "Tendered supreme chicken, sausages, pizza sauce, cheese, olives.",
+                    "base_price": 549,
+                    "imageFile": "https://images.unsplash.com/photo-1600028068383-ea11a7a101f3?auto=format&fit=crop&w=800&q=80",
+                    "variants": [
+                        { "name": "Small", "price_adjustment": 0 },
+                        { "name": "Medium", "price_adjustment": 550 },
+                        { "name": "Large", "price_adjustment": 1050 },
+                        { "name": "Family", "price_adjustment": 1350 }
+                    ]
+                },
+                {
+                    "id": "cp4",
+                    "name": "Cheese Margarita",
+                    "description": "Classic Italian delight featuring rich tomato sauce and creamy cheese.",
+                    "base_price": 549,
+                    "imageFile": "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=800&q=80",
+                    "variants": [
+                        { "name": "Small", "price_adjustment": 0 },
+                        { "name": "Medium", "price_adjustment": 550 },
+                        { "name": "Large", "price_adjustment": 1050 },
+                        { "name": "Family", "price_adjustment": 1350 }
+                    ]
+                },
+                {
+                    "id": "cp5",
+                    "name": "Vege Love",
+                    "description": "Pizza sauce, cheese, onions, tomatoes, capsicum, sweet corn.",
+                    "base_price": 549,
+                    "imageFile": "https://images.unsplash.com/photo-1585238342024-78d387f4a707?auto=format&fit=crop&w=800&q=80",
+                    "variants": [
+                        { "name": "Small", "price_adjustment": 0 },
+                        { "name": "Medium", "price_adjustment": 550 },
+                        { "name": "Large", "price_adjustment": 1050 },
+                        { "name": "Family", "price_adjustment": 1350 }
+                    ]
+                }
+            ],
+            "Premium Pizza": [
+                {
+                    "id": "pp1",
+                    "name": "Bon Fire Pizza",
+                    "description": "Tendered spicy chicken, cheese, pizza sauce, onion, capsicum, jalapenos.",
+                    "base_price": 649,
+                    "imageFile": "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=800&q=80",
+                    "variants": [
+                        { "name": "Small", "price_adjustment": 0 },
+                        { "name": "Medium", "price_adjustment": 550 },
+                        { "name": "Large", "price_adjustment": 1050 },
+                        { "name": "Family", "price_adjustment": 1350 }
+                    ]
+                },
+                {
+                    "id": "pp2",
+                    "name": "Malai Boti Pizza",
+                    "description": "Malai Boti chicken cooked in rich creamy sauce and cheese.",
+                    "base_price": 649,
+                    "imageFile": "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80",
+                    "variants": [
+                        { "name": "Small", "price_adjustment": 0 },
+                        { "name": "Medium", "price_adjustment": 550 },
+                        { "name": "Large", "price_adjustment": 1050 },
+                        { "name": "Family", "price_adjustment": 1350 }
+                    ]
+                },
+                {
+                    "id": "pp3",
+                    "name": "Afghani Pizza",
+                    "description": "Afghani chicken, pizza sauce, cheese, onion, capsicum.",
+                    "base_price": 649,
+                    "imageFile": "https://images.unsplash.com/photo-1593504049359-74330189a345?auto=format&fit=crop&w=800&q=80",
+                    "variants": [
+                        { "name": "Small", "price_adjustment": 0 },
+                        { "name": "Medium", "price_adjustment": 550 },
+                        { "name": "Large", "price_adjustment": 1050 },
+                        { "name": "Family", "price_adjustment": 1350 }
+                    ]
+                },
+                {
+                    "id": "pp4",
+                    "name": "Pepproni Pizza",
+                    "description": "Classic favorite with spicy pepperoni slices and mozzarella.",
+                    "base_price": 649,
+                    "imageFile": "https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=800&q=80",
+                    "variants": [
+                        { "name": "Small", "price_adjustment": 0 },
+                        { "name": "Medium", "price_adjustment": 550 },
+                        { "name": "Large", "price_adjustment": 1050 },
+                        { "name": "Family", "price_adjustment": 1350 }
+                    ]
+                },
+                {
+                    "id": "pp5",
+                    "name": "Chicken Behari Kebab",
+                    "description": "Kebab favourite topped with juicy chicken kebabs.",
+                    "base_price": 649,
+                    "imageFile": "https://images.unsplash.com/photo-1593560708920-63984dc36f3c?auto=format&fit=crop&w=800&q=80",
+                    "variants": [
+                        { "name": "Small", "price_adjustment": 0 },
+                        { "name": "Medium", "price_adjustment": 550 },
+                        { "name": "Large", "price_adjustment": 1050 },
+                        { "name": "Family", "price_adjustment": 1350 }
+                    ]
+                }
+            ],
+            "Signature & Stuffed": [
+                {
+                    "id": "sig1",
+                    "name": "Crown Crust Pizza",
+                    "description": "A royal treat, crispy crown shaped crust loaded with royal chicken.",
+                    "base_price": 1249,
+                    "imageFile": "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80",
+                    "variants": [
+                        { "name": "Medium", "price_adjustment": 0 },
+                        { "name": "Large", "price_adjustment": 650 },
+                        { "name": "Family", "price_adjustment": 950 }
+                    ]
+                },
+                {
+                    "id": "sig2",
+                    "name": "Cheese Crust Pizza",
+                    "description": "Crispy crust infused with melted cheese topped with chicken.",
+                    "base_price": 1299,
+                    "imageFile": "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=800&q=80",
+                    "variants": [
+                        { "name": "Medium", "price_adjustment": 0 },
+                        { "name": "Large", "price_adjustment": 600 },
+                        { "name": "Family", "price_adjustment": 1050 }
+                    ]
+                },
+                {
+                    "id": "sig3",
+                    "name": "Chicken Stuff Crust",
+                    "description": "Crispy crust stuffed with juicy chicken.",
+                    "base_price": 1249,
+                    "imageFile": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80",
+                    "variants": [
+                        { "name": "Medium", "price_adjustment": 0 },
+                        { "name": "Large", "price_adjustment": 650 },
+                        { "name": "Family", "price_adjustment": 950 }
+                    ]
+                },
+                {
+                    "id": "sig4",
+                    "name": "Kebab Crust Pizza",
+                    "description": "Twist featuring a crispy crust wrapped around juicy kebab.",
+                    "base_price": 1299,
+                    "imageFile": "https://images.unsplash.com/photo-1593504049359-74330189a345?auto=format&fit=crop&w=800&q=80",
+                    "variants": [
+                        { "name": "Medium", "price_adjustment": 0 },
+                        { "name": "Large", "price_adjustment": 600 },
+                        { "name": "Family", "price_adjustment": 1050 }
+                    ]
+                },
+                {
+                    "id": "sig5",
+                    "name": "Crusti Doner Pizza",
+                    "description": "Turkish-inspired delight topped with tender chicken thigh.",
+                    "base_price": 1249,
+                    "imageFile": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80",
+                    "variants": [
+                        { "name": "Medium", "price_adjustment": 0 },
+                        { "name": "Large", "price_adjustment": 550 },
+                        { "name": "Family", "price_adjustment": 1000 }
+                    ]
+                },
+                {
+                    "id": "sig6",
+                    "name": "Thin Crust Pizza",
+                    "description": "A crispy and delicate featuring a thin layer of crust.",
+                    "base_price": 999,
+                    "imageFile": "https://images.unsplash.com/photo-1590947132387-155cc02f3212?auto=format&fit=crop&w=800&q=80",
+                    "variants": [
+                        { "name": "Medium", "price_adjustment": 0 },
+                        { "name": "Large", "price_adjustment": 500 }
+                    ]
+                }
+            ],
+            "Burgers": [
+                {
+                    "id": "b1",
+                    "name": "Classic Burger",
+                    "description": "Crispy chicken patty topped with crispy lettuce.",
+                    "base_price": 299,
+                    "imageFile": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "b2",
+                    "name": "Zinger Burger",
+                    "description": "Juicy thigh fillet topped with lettuce and zinger sauce.",
+                    "base_price": 399,
+                    "imageFile": "https://images.unsplash.com/photo-1615297928064-24977384d0f4?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "b3",
+                    "name": "Hungry Jackson",
+                    "description": "Chicken thigh topped with sauce and cheese slice.",
+                    "base_price": 499,
+                    "imageFile": "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "b4",
+                    "name": "Grill Thrill",
+                    "description": "Grilled chicken fillet topped with cheese slices.",
+                    "base_price": 549,
+                    "imageFile": "https://images.unsplash.com/photo-1551782450-a2132b4ba21d?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "b5",
+                    "name": "Colby Jack Burger",
+                    "description": "Thigh fillet with melted cheese, lettuce, onion.",
+                    "base_price": 649,
+                    "imageFile": "https://images.unsplash.com/photo-1605789538467-f715d58e03f9?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "b6",
+                    "name": "Meat The Cheese",
+                    "description": "Tender thigh fillet in a rich and creamy blend of melted cheese.",
+                    "base_price": 649,
+                    "imageFile": "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "b7",
+                    "name": "Beef Bliss Burger",
+                    "description": "Tender beef patty topped with melted cheese, jalapeno.",
+                    "base_price": 699,
+                    "imageFile": "https://images.unsplash.com/photo-1553979459-d2229ba7433b?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "b8",
+                    "name": "Swiss Mushroom",
+                    "description": "Two beef patties topped with melted cheese, mushrooms.",
+                    "base_price": 749,
+                    "imageFile": "https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "b9",
+                    "name": "Jumbo Fillet Burger",
+                    "description": "Large tender chicken fillet topped with cheese slice.",
+                    "base_price": 749,
+                    "imageFile": "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=800&q=80"
+                }
+            ],
+            "Wraps & Twisters": [
+                {
+                    "id": "wr1",
+                    "name": "Arabic Grill Wrap",
+                    "base_price": 499,
+                    "imageFile": "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "wr2",
+                    "name": "Crusti Crispy Wrap",
+                    "base_price": 549,
+                    "imageFile": "https://images.unsplash.com/photo-1529006557810-274bc9b2fc49?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "wr3",
+                    "name": "Crispy Twister",
+                    "base_price": 449,
+                    "imageFile": "https://images.unsplash.com/photo-1561651881-d212d23c520c?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "wr4",
+                    "name": "Creamy Twister",
+                    "base_price": 399,
+                    "imageFile": "https://images.unsplash.com/photo-1633321769407-af3f2fdb4d54?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "wr5",
+                    "name": "Smokey Grill Twister",
+                    "base_price": 449,
+                    "imageFile": "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "wr6",
+                    "name": "Chicken Shawarma",
+                    "base_price": 249,
+                    "imageFile": "https://images.unsplash.com/photo-1633321769407-af3f2fdb4d54?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "wr7",
+                    "name": "Zinger Shawarma",
+                    "base_price": 399,
+                    "imageFile": "https://images.unsplash.com/photo-1561651881-d212d23c520c?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "wr8",
+                    "name": "Crusti Special Wrap",
+                    "base_price": 599,
+                    "imageFile": "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=800&q=80"
+                }
+            ],
+            "Appetizers & Sides": [
+                {
+                    "id": "ap1",
+                    "name": "Crusti Bites (10 Pcs)",
+                    "base_price": 549,
+                    "imageFile": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80",
+                    "variants": [
+                        { "name": "10 Pcs", "price_adjustment": 0 },
+                        { "name": "20 Pcs", "price_adjustment": 450 }
+                    ]
+                },
+                {
+                    "id": "ap2",
+                    "name": "Honey Wings (6 Pcs)",
+                    "base_price": 449,
+                    "imageFile": "https://images.unsplash.com/photo-1608039755401-742074f0548d?auto=format&fit=crop&w=800&q=80",
+                    "variants": [
+                        { "name": "6 Pcs", "price_adjustment": 0 },
+                        { "name": "12 Pcs", "price_adjustment": 350 }
+                    ]
+                },
+                {
+                    "id": "ap3",
+                    "name": "Crispy Wings (6 Pcs)",
+                    "base_price": 349,
+                    "imageFile": "https://images.unsplash.com/photo-1527477396000-64bc61086c98?auto=format&fit=crop&w=800&q=80",
+                    "variants": [
+                        { "name": "6 Pcs", "price_adjustment": 0 },
+                        { "name": "12 Pcs", "price_adjustment": 350 }
+                    ]
+                },
+                {
+                    "id": "ap4",
+                    "name": "BBQ Smoky Wings",
+                    "base_price": 449,
+                    "imageFile": "https://images.unsplash.com/photo-1527477396000-64bc61086c98?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "ap5",
+                    "name": "Dynamite Wings",
+                    "base_price": 449,
+                    "imageFile": "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "ap6",
+                    "name": "Chicken Nuggets",
+                    "base_price": 299,
+                    "imageFile": "https://images.unsplash.com/photo-1567620832903-9fc6debc209f?auto=format&fit=crop&w=800&q=80",
+                    "variants": [
+                        { "name": "6 Pcs", "price_adjustment": 0 },
+                        { "name": "12 Pcs", "price_adjustment": 300 }
+                    ]
+                },
+                {
+                    "id": "ap7",
+                    "name": "Cheese Stick (4 Pcs)",
+                    "base_price": 549,
+                    "imageFile": "https://images.unsplash.com/photo-1531749668029-2db88e4276c7?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "ap8",
+                    "name": "Crusti Platter",
+                    "description": "4 Pcs Spin Roll, 5 Pcs Wings, 1 Fries",
+                    "base_price": 999,
+                    "imageFile": "https://images.unsplash.com/photo-1561758033-d8f6961655f4?auto=format&fit=crop&w=800&q=80"
+                }
+            ],
+            "Fries, Pasta & Sandwiches": [
+                {
+                    "id": "fp1",
+                    "name": "Regular Fries",
+                    "base_price": 199,
+                    "imageFile": "https://images.unsplash.com/photo-1630384060421-a431e4cad2e7?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "fp2",
+                    "name": "Large Fries",
+                    "base_price": 299,
+                    "imageFile": "https://images.unsplash.com/photo-1585109649139-36680186c5d1?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "fp3",
+                    "name": "Pizza Loaded Fries",
+                    "base_price": 649,
+                    "imageFile": "https://images.unsplash.com/photo-1586190848861-99c8a3fb7ea5?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "fp4",
+                    "name": "Crispy Chicken Loaded Fries",
+                    "base_price": 699,
+                    "imageFile": "https://images.unsplash.com/photo-1605789538467-f715d58e03f9?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "fp5",
+                    "name": "Saucy Cheesy Fries",
+                    "base_price": 549,
+                    "imageFile": "https://images.unsplash.com/photo-1576107232684-1279f390859f?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "fp6",
+                    "name": "Flaming Pasta",
+                    "base_price": 649,
+                    "imageFile": "https://images.unsplash.com/photo-1563379926898-05f4575a45d8?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "fp7",
+                    "name": "Lasagna Pasta",
+                    "base_price": 749,
+                    "imageFile": "https://images.unsplash.com/photo-1612874742237-6526221588e3?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "fp8",
+                    "name": "Grilled Sandwich",
+                    "base_price": 549,
+                    "imageFile": "https://images.unsplash.com/photo-1559847844-5315695dadae?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "fp9",
+                    "name": "Mexican Sandwich",
+                    "base_price": 649,
+                    "imageFile": "https://images.unsplash.com/photo-1553909489-cd47e3b4430f?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "fp10",
+                    "name": "American Club Sandwich",
+                    "base_price": 599,
+                    "imageFile": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=800&q=80"
+                }
+            ],
+            "Family & Double Deals": [
+                {
+                    "id": "fd1",
+                    "name": "Family Deal 1",
+                    "description": "1 Family Pizza, 10 Hot Wings, 2 Zinger Burgers, 1 Large Fries, 1.5L Drink",
+                    "base_price": 3599,
+                    "imageFile": "https://images.unsplash.com/photo-1544982503-9f984c14501a?auto=format&fit=crop&w=800&q=80",
+                    "is_deal": true
+                },
+                {
+                    "id": "fd2",
+                    "name": "Family Deal 2",
+                    "description": "8 Zinger Burgers, 2 Large Fries, 1.5L Drink",
+                    "base_price": 3799,
+                    "imageFile": "https://images.unsplash.com/photo-1615297928064-24977384d0f4?auto=format&fit=crop&w=800&q=80",
+                    "is_deal": true
+                },
+                {
+                    "id": "fd3",
+                    "name": "Family Deal 3",
+                    "description": "2 Large Pizzas, 5 Classic Burgers, 10 Nuggets, 1 Large Fries, 1.5L Drink",
+                    "base_price": 5499,
+                    "imageFile": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80",
+                    "is_deal": true
+                },
+                {
+                    "id": "dkm1",
+                    "name": "Double Ka Maza 1",
+                    "description": "2 Classic Small Pizza",
+                    "base_price": 999,
+                    "imageFile": "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80",
+                    "is_deal": true
+                },
+                {
+                    "id": "dkm2",
+                    "name": "Double Ka Maza 2",
+                    "description": "2 Classic Medium Pizza",
+                    "base_price": 1999,
+                    "imageFile": "https://images.unsplash.com/photo-1593560708920-63984dc36f3c?auto=format&fit=crop&w=800&q=80",
+                    "is_deal": true
+                },
+                {
+                    "id": "dkm3",
+                    "name": "Double Ka Maza 3",
+                    "description": "2 Classic Large Pizza",
+                    "base_price": 2999,
+                    "imageFile": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80",
+                    "is_deal": true
+                }
+            ],
+            "Desserts & Drinks": [
+                {
+                    "id": "ds1",
+                    "name": "Chocolate Brownie",
+                    "base_price": 299,
+                    "imageFile": "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "ds2",
+                    "name": "Molten Lava Cake",
+                    "base_price": 399,
+                    "imageFile": "https://images.unsplash.com/photo-1624353365286-3f8d62daad51?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "ds3",
+                    "name": "Nutella Pizza",
+                    "base_price": 649,
+                    "imageFile": "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "dr1",
+                    "name": "Regular Drink",
+                    "base_price": 100,
+                    "imageFile": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "dr2",
+                    "name": "500 ml Drink",
+                    "base_price": 130,
+                    "imageFile": "https://images.unsplash.com/photo-1581006852262-e4307cf6283a?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "dr3",
+                    "name": "1.5 Litre Drink",
+                    "base_price": 230,
+                    "imageFile": "https://images.unsplash.com/photo-1625772299848-391b6a87d7b3?auto=format&fit=crop&w=800&q=80"
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,42 @@
+[
+    {
+        "id": "visiting_card",
+        "name": "Visiting Card (Standard)",
+        "width": 3.5,
+        "height": 2.0,
+        "depth": 0.02,
+        "radius": 0.05,
+        "camZ": 5.0,
+        "finish_type": "matte"
+    },
+    {
+        "id": "visiting_card_sq",
+        "name": "Square Card (2.5x2.5)",
+        "width": 2.5,
+        "height": 2.5,
+        "depth": 0.02,
+        "radius": 0.05,
+        "camZ": 5.5,
+        "finish_type": "matte"
+    },
+    {
+        "id": "letterhead",
+        "name": "A4 Letterhead",
+        "width": 8.27,
+        "height": 11.69,
+        "depth": 0.01,
+        "radius": 0.0,
+        "camZ": 14.0,
+        "finish_type": "matte"
+    },
+    {
+        "id": "flyer_a5",
+        "name": "Flyer (A5)",
+        "width": 5.8,
+        "height": 8.3,
+        "depth": 0.01,
+        "radius": 0.0,
+        "camZ": 10.0,
+        "finish_type": "gloss"
+    }
+]

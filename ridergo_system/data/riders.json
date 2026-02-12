@@ -1,0 +1,29 @@
+[
+    {
+        "id": "R01",
+        "pin": "1234",
+        "name": "Ali Hassan",
+        "phone": "03001112222",
+        "status": "active",
+        "cash_in_hand": 1500,
+        "lat": 32.641862317033279,
+        "lng": 74.215977434803847,
+        "last_seen": 1768563500
+    },
+    {
+        "id": "R02",
+        "pin": "1234",
+        "name": "Bilal Ahmed",
+        "phone": "03003334444",
+        "status": "busy",
+        "cash_in_hand": 5200
+    },
+    {
+        "id": "R03",
+        "pin": "1234",
+        "name": "Usman Khan",
+        "phone": "03005556666",
+        "status": "active",
+        "cash_in_hand": 0
+    }
+]

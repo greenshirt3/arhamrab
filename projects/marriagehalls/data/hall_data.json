@@ -1,0 +1,32 @@
+{
+    "packages": [
+        {
+            "id": "silver",
+            "name": "Silver Economy",
+            "price": 1450,
+            "desc": "Perfect for Mehndi, Nikkah, or intimate gatherings.",
+            "dishes": ["Chicken Qorma", "Chicken Biryani", "Fresh Salad", "Roghni Naan", "Raita", "Kheer (Thooti)"]
+        },
+        {
+            "id": "gold",
+            "name": "Gold Royal",
+            "price": 1950,
+            "desc": "Our signature Barat menu with premium service.",
+            "dishes": ["Mutton Qorma", "Chicken Steam Roast", "Egg Fried Rice", "Naan Basket", "Russian Salad", "Gajrela / Trifle", "Green Tea"]
+        },
+        {
+            "id": "platinum",
+            "name": "Platinum Executive",
+            "price": 2800,
+            "desc": "The ultimate luxury dining experience for VIPs.",
+            "dishes": ["Mutton Kunna", "Grilled Fish OR BBQ Platter", "Navratan Pulao", "Palak Paneer", "Hot & Sour Soup", "Gulab Jamun", "Ice Cream", "Coffee"]
+        }
+    ],
+    "addons": [
+        { "id": "decor_prem", "name": "Imported Fresh Flower Decor", "price": 85000, "type": "fixed", "icon": "fa-seedling" },
+        { "id": "dj", "name": "DJ Sound System & Lighting", "price": 25000, "type": "fixed", "icon": "fa-music" },
+        { "id": "ac", "name": "AC / Heating Charges", "price": 150, "type": "per_head", "icon": "fa-snowflake" },
+        { "id": "drone", "name": "Drone & Cinematic Video", "price": 45000, "type": "fixed", "icon": "fa-camera" },
+        { "id": "segregation", "name": "Segregation Walls (Pardah)", "price": 10000, "type": "fixed", "icon": "fa-users" }
+    ]
+}

@@ -1,0 +1,56 @@
+{
+    "settings": {
+        "app_name": "Raza Graphics",
+        "tagline": "Visual Artistry & Production",
+        "phone": "+923001234567",
+        "whatsapp": "923001234567",
+        "address": "Main Bazaar, Jalalpur Jattan",
+        "bismillah": "﷽"
+    },
+    "hero": {
+        "title": "CAPTURING THE SOUL OF THE MOMENT",
+        "subtitle": "Where Cinematic Excellence Meets Traditional Artistry",
+        "bg_image": "https://images.unsplash.com/photo-1519817650390-64a93db51149?q=80&w=1920&auto=format&fit=crop"
+    },
+    "services": [
+        {
+            "id": 1,
+            "title": "Cinematic Wedding",
+            "desc": "Halal event coverage with separate female staff availability.",
+            "icon": "fa-video",
+            "image": "https://images.unsplash.com/photo-1511285560982-1351cdeb9821?w=600&q=80"
+        },
+        {
+            "id": 2,
+            "title": "Islamic Calligraphy",
+            "desc": "Custom digital art and large format printing for mosques & homes.",
+            "icon": "fa-pen-nib",
+            "image": "https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?w=600&q=80"
+        },
+        {
+            "id": 3,
+            "title": "Commercial Ads",
+            "desc": "High-energy reels and TVCs to boost your business growth.",
+            "icon": "fa-bullhorn",
+            "image": "https://images.unsplash.com/photo-1533750516457-a7f992034fec?w=600&q=80"
+        },
+        {
+            "id": 4,
+            "title": "Flex & 3D Signage",
+            "desc": "Premium outdoor branding with modern LED integration.",
+            "icon": "fa-print",
+            "image": "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=600&q=80"
+        }
+    ],
+    "portfolio": [
+        { "title": "Royal Wedding", "cat": "Video", "img": "https://images.unsplash.com/photo-1606800052052-a08af7148866?w=600" },
+        { "title": "Corporate Expo", "cat": "Branding", "img": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600" },
+        { "title": "Nikah Ceremony", "cat": "Photo", "img": "https://images.unsplash.com/photo-1623944890595-405502a29737?w=600" },
+        { "title": "Masjid Branding", "cat": "Print", "img": "https://images.unsplash.com/photo-1564121211835-e88c852648ab?w=600" }
+    ],
+    "pricing": [
+        { "plan": "Nikkah Basic", "price": "35,000", "features": ["1 Day Coverage", "1 Photographer", "Digital Album"] },
+        { "plan": "Royal Wedding", "price": "85,000", "features": ["3 Days Coverage", "Drone + Cinematic", "Heavy Photobook"] },
+        { "plan": "Business Pack", "price": "15,000", "features": ["Logo Design", "1000 Cards", "Shop Board Skin"] }
+    ]
+}

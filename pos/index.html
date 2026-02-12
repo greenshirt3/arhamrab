@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arham POS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --primary: #2c3e50; --accent: #27ae60; --bg: #f4f6f7; }
+        body { font-family: sans-serif; margin: 0; background: var(--bg); }
+        .container { max-width: 1000px; margin: auto; padding: 20px; }
+        .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        input, select, button { width: 100%; padding: 12px; margin: 5px 0; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
+        button { background: var(--primary); color: white; border: none; font-weight: bold; cursor: pointer; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+        
+        /* Stats */
+        .stat-box { text-align: center; padding: 15px; border-radius: 5px; color: white; }
+        .stat-sales { background: #3498db; }
+        .stat-cash { background: #27ae60; }
+        .stat-home { background: #e74c3c; }
+
+        /* Login Overlay */
+        #login-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--primary); display: flex; align-items: center; justify-content: center; z-index: 1000; }
+        
+        /* Print Styles */
+        @media print {
+            body * { visibility: hidden; }
+            #printable-area, #printable-area * { visibility: visible; }
+            #printable-area { position: absolute; left: 0; top: 0; width: 100%; }
+            .no-print { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="login-screen">
+        <div class="card" style="width: 300px; text-align: center;">
+            <h2>Arham Printers</h2>
+            <input type="password" id="pinInput" placeholder="Enter PIN (2733)" style="font-size: 20px; text-align: center;">
+            <button onclick="login()">LOGIN</button>
+        </div>
+    </div>
+
+    <div class="container" id="app" style="display: none;">
+        
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h2><i class="fa-solid fa-print"></i> Arham ERP</h2>
+            <div>
+                <button onclick="expenseModal()" style="background:#e74c3c; width:auto;">🏠 Expense</button>
+                <button onclick="location.reload()" style="background:#7f8c8d; width:auto;">🔄</button>
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="stat-box stat-sales">
+                <div style="font-size:0.8em;">Today Sales</div>
+                <div id="d-sales" style="font-size:1.5em; font-weight:bold;">0</div>
+            </div>
+            <div class="stat-box stat-cash">
+                <div style="font-size:0.8em;">Cash Drawer</div>
+                <div id="d-cash" style="font-size:1.5em; font-weight:bold;">0</div>
+            </div>
+            <div class="stat-box stat-home">
+                <div style="font-size:0.8em;">Home Expense</div>
+                <div id="d-home" style="font-size:1.5em; font-weight:bold;">0</div>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top: 20px;">
+            <h3>New Invoice</h3>
+            
+            <input type="text" id="custName" placeholder="Customer Name (or Search)" list="custOptions">
+            <datalist id="custOptions"></datalist>
+
+            <div style="background:#ecf0f1; padding:10px; border-radius:5px; margin-bottom:10px;">
+                <strong>📐 Flex/Banner</strong>
+                <div style="display:flex; gap:5px;">
+                    <input type="number" id="flexW" placeholder="W (ft)">
+                    <input type="number" id="flexH" placeholder="H (ft)">
+                    <select id="flexType"></select>
+                </div>
+                <button onclick="addFlex()" style="background:#2980b9;">+ Add Flex</button>
+            </div>
+
+            <div style="display:flex; gap:5px;">
+                <select id="itemList"></select>
+                <input type="number" id="itemQty" value="1" style="width:70px;">
+            </div>
+            <button onclick="addItem()" style="background:#2c3e50;">+ Add Manual Item</button>
+
+            <table style="width:100%; margin-top:10px; border-collapse: collapse;">
+                <thead style="background:#eee;"><tr><th>Item</th><th style="text-align:right;">Price</th><th></th></tr></thead>
+                <tbody id="cartBody"></tbody>
+            </table>
+
+            <hr>
+            <div style="display:flex; justify-content:space-between; font-size:1.2em; font-weight:bold;">
+                <span>Total:</span>
+                <span id="grandTotal">0</span>
+            </div>
+            <input type="number" id="payAmount" placeholder="Paid Amount (Advance)" style="font-size:1.2em;">
+            
+            <button onclick="saveInvoice()" style="padding:15px; font-size:1.1em; background:var(--accent);">
+                <i class="fa-solid fa-save"></i> SAVE & PRINT
+            </button>
+        </div>
+
+    </div>
+
+    <div id="receipt-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:2000; justify-content:center; align-items:center;">
+        <div style="background:white; padding:20px; width:350px; text-align:center;">
+            <div id="printable-area" style="text-align:center; font-family: monospace;">
+                <h2>ARHAM PRINTERS</h2>
+                <p>Jalalpur Jattan<br>0300-XXXXXXX</p>
+                <hr>
+                <div style="text-align:left;">
+                    Inv #: <span id="r-id"></span><br>
+                    Date: <span id="r-date"></span><br>
+                    Cust: <span id="r-cust"></span>
+                </div>
+                <hr>
+                <table style="width:100%; text-align:left; font-size:0.9em;">
+                    <thead><tr><th>Item</th><th style="text-align:right;">Amt</th></tr></thead>
+                    <tbody id="r-items"></tbody>
+                </table>
+                <hr>
+                <div style="text-align:right; font-weight:bold;">
+                    Total: <span id="r-total"></span><br>
+                    Paid: <span id="r-paid"></span><br>
+                    Balance: <span id="r-bal"></span>
+                </div>
+                <hr>
+                <p>Thank you!</p>
+            </div>
+            <div class="no-print">
+                <button onclick="window.print()">🖨️ Print</button>
+                <button onclick="shareWhatsapp()" style="background:#25D366;">📱 WhatsApp</button>
+                <button onclick="location.reload()" style="background:#e74c3c;">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let cart = [];
+        let itemsDB = [];
+        let currentInv = null; // Stores saved invoice for WhatsApp
+
+        // --- LOGIN ---
+        async function login() {
+            const pin = document.getElementById('pinInput').value;
+            // Use 'action=login' with POST
+            const res = await fetch('api.php?action=login', {
+                method: 'POST',
+                body: JSON.stringify({ pin: pin })
+            });
+            const data = await res.json();
+            
+            if(data.status === 'success') {
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('app').style.display = 'block';
+                init();
+            } else {
+                alert("Wrong PIN!");
+            }
+        }
+
+        async function init() {
+            // Load Items
+            const iRes = await fetch('api.php?action=items');
+            itemsDB = await iRes.json();
+            
+            const flexSel = document.getElementById('flexType');
+            const itemSel = document.getElementById('itemList');
+            
+            // Populate Dropdowns
+            itemsDB.forEach(i => {
+                if(i.type === 'Flex') {
+                    flexSel.innerHTML += `<option value="${i.price}">${i.name} (${i.price}/ft)</option>`;
+                } else {
+                    itemSel.innerHTML += `<option value="${i.id}" data-price="${i.price}">${i.name}</option>`;
+                }
+            });
+
+            // Load Contacts
+            const cRes = await fetch('api.php?action=contacts');
+            const contacts = await cRes.json();
+            const dl = document.getElementById('custOptions');
+            contacts.forEach(c => dl.innerHTML += `<option value="${c.name}">`);
+
+            // Load Dashboard
+            const dRes = await fetch('api.php?action=dashboard');
+            const dash = await dRes.json();
+            document.getElementById('d-sales').innerText = dash.sales_today;
+            document.getElementById('d-cash').innerText = dash.cash_hand;
+            document.getElementById('d-home').innerText = dash.home_expense;
+        }
+
+        // --- CALCULATOR ---
+        function addFlex() {
+            const w = document.getElementById('flexW').value;
+            const h = document.getElementById('flexH').value;
+            const sel = document.getElementById('flexType');
+            
+            if(!w || !h) return alert("Enter W and H");
+            
+            const rate = sel.value;
+            const name = sel.options[sel.selectedIndex].text.split('(')[0];
+            const sqft = w * h;
+            const price = sqft * rate;
+            
+            cart.push({ desc: `${name} ${w}x${h} (${sqft} sqft)`, price: price, is_flex: true, sqft: sqft });
+            renderCart();
+        }
+
+        function addItem() {
+            const sel = document.getElementById('itemList');
+            const qty = document.getElementById('itemQty').value;
+            if(!sel.value) return;
+            
+            const name = sel.options[sel.selectedIndex].text;
+            const unitPrice = sel.options[sel.selectedIndex].dataset.price;
+            
+            cart.push({ desc: name, qty: qty, price: unitPrice * qty, is_flex: false });
+            renderCart();
+        }
+
+        function renderCart() {
+            const tbody = document.getElementById('cartBody');
+            tbody.innerHTML = '';
+            let total = 0;
+            cart.forEach((item, i) => {
+                total += parseFloat(item.price);
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${item.desc}</td>
+                        <td style="text-align:right;">${item.price}</td>
+                        <td><i class="fa-solid fa-trash" onclick="cart.splice(${i},1);renderCart()" style="color:red;"></i></td>
+                    </tr>`;
+            });
+            document.getElementById('grandTotal').innerText = total;
+            document.getElementById('payAmount').value = total;
+        }
+
+        // --- SAVE & PRINT ---
+        async function saveInvoice() {
+            if(cart.length === 0) return alert("Cart is empty");
+            
+            const cust = document.getElementById('custName').value || "Walk-in";
+            const total = document.getElementById('grandTotal').innerText;
+            const paid = document.getElementById('payAmount').value;
+            
+            const payload = {
+                customer: cust,
+                total: total,
+                paid: paid,
+                items: cart
+            };
+
+            const res = await fetch('api.php?action=save_invoice', {
+                method: 'POST',
+                body: JSON.stringify(payload)
+            });
+            
+            const data = await res.json();
+            if(data.status === 'success') {
+                showReceipt(data.id, cust, total, paid, cart);
+            } else {
+                alert("Error: " + data.error);
+            }
+        }
+
+        function showReceipt(id, cust, total, paid, items) {
+            document.getElementById('receipt-modal').style.display = 'flex';
+            document.getElementById('r-id').innerText = id;
+            document.getElementById('r-date').innerText = new Date().toLocaleDateString();
+            document.getElementById('r-cust').innerText = cust;
+            
+            const tbody = document.getElementById('r-items');
+            tbody.innerHTML = '';
+            items.forEach(i => {
+                tbody.innerHTML += `<tr><td>${i.desc}</td><td style="text-align:right;">${i.price}</td></tr>`;
+            });
+            
+            document.getElementById('r-total').innerText = total;
+            document.getElementById('r-paid').innerText = paid;
+            document.getElementById('r-bal').innerText = total - paid;
+            
+            // Save for WhatsApp share
+            currentInv = { id, cust, total, paid, balance: total - paid };
+        }
+
+        function shareWhatsapp() {
+            if(!currentInv) return;
+            const text = `*ARHAM PRINTERS*%0a*Invoice #${currentInv.id}*%0aCustomer: ${currentInv.cust}%0a------------------%0aTotal: ${currentInv.total}%0aPaid: ${currentInv.paid}%0aBalance: ${currentInv.balance}%0a------------------%0aThank you!`;
+            // If customer name is phone number, use it. Otherwise open generic share.
+            // Assuming user might enter phone in name field for simplicity
+            let phone = ""; 
+            if(!isNaN(currentInv.cust)) phone = currentInv.cust;
+            
+            window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
+        }
+        
+        // --- EXPENSE ---
+        function expenseModal() {
+            const type = prompt("Type 'Home' or 'Shop'", "Home");
+            if(!type) return;
+            const amt = prompt("Amount?");
+            const reason = prompt("Reason?");
+            
+            fetch('api.php?action=save_expense', {
+                method: 'POST',
+                body: JSON.stringify({type, amount: amt, reason})
+            }).then(() => {
+                alert("Saved");
+                init(); // Refresh dashboard
+            });
+        }
+    </script>
+</body>
+</html>

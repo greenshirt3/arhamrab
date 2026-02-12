@@ -1,0 +1,213 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Arham News Studio — Ultimate Pro Editor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Google Fonts: Roboto + Noto Nastaliq Urdu (reliable Nastaliq) -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="main-layout">
+  <!-- ===== MONITOR ===== -->
+  <section class="monitor-section">
+    <div class="canvas-wrapper">
+      <!-- Hidden video elements; the canvas is the program monitor -->
+      <video id="mainVideo" class="hidden" playsinline autoplay muted></video>
+      <video id="pipVideo"  class="hidden" playsinline autoplay muted></video>
+
+      <canvas id="broadcastCanvas" width="1280" height="720"></canvas>
+      <div id="recBadge">● REC <span id="recTimer">00:00</span></div>
+    </div>
+
+    <div class="action-bar">
+      <button id="btnRec"  class="btn-big btn-rec">START RECORDING</button>
+      <button id="btnStop" class="btn-big" disabled>STOP</button>
+      <button id="btnMP4"  class="btn-big btn-blue" disabled>EXPORT MP4</button>
+    </div>
+  </section>
+
+  <!-- ===== CONTROLS ===== -->
+  <section class="controls-section">
+    <header class="panel-header">
+      <span>STUDIO CONTROLS</span>
+      <small>Mobile + Desktop • Touch‑friendly</small>
+    </header>
+
+    <!-- VIDEO SOURCES -->
+    <div class="control-group">
+      <label>🎥 Main Video Source</label>
+      <div class="row">
+        <button id="btnMainCam" class="btn-blue">Use Camera</button>
+        <input id="inMainFile" type="file" accept="video/*" class="btn-gray" />
+      </div>
+      <small>Tip: Use your device camera or load a local video file as the main source.</small>
+    </div>
+
+    <!-- PICTURE-IN-PICTURE -->
+    <div class="control-group">
+      <label>🧩 Picture‑in‑Picture (PiP)</label>
+      <div class="row">
+        <label class="switch">
+          <input id="pipEnable" type="checkbox" />
+          <span class="slider"></span>
+        </label>
+        <span>Enable PiP</span>
+      </div>
+
+      <div id="pipControls" class="stack" style="display:none">
+        <div class="row">
+          <button id="btnPipCam" class="btn-blue">PiP Camera</button>
+          <input id="inPipFile" type="file" accept="video/*" class="btn-gray" />
+        </div>
+        <div class="row">
+          <label class="grow">PiP Size
+            <input id="pipSize" type="range" min="0.15" max="0.5" step="0.01" value="0.25" />
+          </label>
+          <label class="grow">PiP Position
+            <select id="pipPos">
+              <option value="br">Bottom‑Right</option>
+              <option value="bl">Bottom‑Left</option>
+              <option value="tr">Top‑Right</option>
+              <option value="tl">Top‑Left</option>
+            </select>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- LOGO -->
+    <div class="control-group">
+      <label>🖼️ Channel Logo</label>
+      <div class="row">
+        <input id="logoIn" type="file" accept="image/*" />
+        <label class="grow">Position
+          <select id="logoPos">
+            <option value="tr">Top‑Right</option>
+            <option value="tl">Top‑Left</option>
+            <option value="br">Bottom‑Right</option>
+            <option value="bl">Bottom‑Left</option>
+          </select>
+        </label>
+        <label class="grow">Size
+          <input id="logoSize" type="range" min="60" max="180" step="5" value="110" />
+        </label>
+      </div>
+    </div>
+
+    <!-- THEMES -->
+    <div class="control-group">
+      <label>🎨 Theme Pack</label>
+      <div class="row">
+        <select id="themePack" class="grow">
+          <option value="bbc">BBC</option>
+          <option value="cnn">CNN</option>
+          <option value="geo">Geo</option>
+          <option value="ary">ARY</option>
+          <option value="custom">Custom</option>
+        </select>
+        <label class="grow">Accent Color
+          <input id="inColor" type="color" value="#dd0000" />
+        </label>
+      </div>
+      <small>Select a preset or use Custom and pick your own color.</small>
+    </div>
+
+    <!-- TOP TICKER -->
+    <div class="control-group">
+      <label>🟡 Top Ticker</label>
+      <div class="row wrap">
+        <input id="topText" type="text" placeholder="Add top ticker item…" class="grow" />
+        <button id="btnAddTop" class="btn-gray">Add</button>
+      </div>
+      <div class="row">
+        <label class="grow">Speed
+          <input id="topSpeed" type="range" min="0.5" max="8" step="0.1" value="2.5" />
+        </label>
+      </div>
+      <ul id="topList" class="list"></ul>
+    </div>
+
+    <!-- BOTTOM TICKER (URDU) -->
+    <div class="control-group">
+      <label>🔴 Bottom Ticker (Urdu)</label>
+      <div class="row wrap">
+        <input id="bottomText" type="text" placeholder="نیچے چلنے والی خبر شامل کریں…" class="grow urdu" />
+        <button id="btnAddBottom" class="btn-gray">Add</button>
+      </div>
+      <div class="row">
+        <label class="grow">Speed
+          <input id="bottomSpeed" type="range" min="0.5" max="10" step="0.1" value="3" />
+        </label>
+      </div>
+      <ul id="bottomList" class="list"></ul>
+    </div>
+
+    <!-- LOWER THIRD / HEADLINE -->
+    <div class="control-group">
+      <label>🏷️ Lower Third / Headline</label>
+      <div class="stack">
+        <input id="slugIn" type="text" placeholder="Slug (BREAKING / EXCLUSIVE / UPDATE)" />
+        <input id="headlineIn" class="urdu" type="text" placeholder="ہیڈ لائن (اردو)" />
+      </div>
+      <div class="row">
+        <button id="btnShowLT" class="btn-blue">Show Lower‑Third</button>
+        <button id="btnHideLT" class="btn-red">Hide</button>
+        <button id="btnBreak"  class="btn-orange">NORMAL MODE</button>
+      </div>
+    </div>
+
+    <!-- AUDIO MIXER -->
+    <div class="control-group">
+      <label>🔊 Audio Mixer (Recorded)</label>
+      <div class="stack">
+        <div class="row">
+          <label class="grow">Mic Volume
+            <input id="micVol" type="range" min="0" max="1" step="0.01" value="1" />
+          </label>
+          <label class="grow">Music Volume
+            <input id="musicVol" type="range" min="0" max="1" step="0.01" value="0.3" />
+          </label>
+        </div>
+        <div class="row">
+          <input id="bgFile" type="file" accept="audio/*" class="btn-gray" />
+          <button id="btnMusic" class="btn-blue">MUSIC: OFF</button>
+          <button id="btnSfx" class="btn-gray">Play SFX</button>
+        </div>
+      </div>
+      <small>Music and mic are mixed into the recording using WebAudio.</small>
+    </div>
+
+    <!-- PRESETS -->
+    <div class="control-group">
+      <label>💾 Presets</label>
+      <div class="row">
+        <input id="presetName" type="text" placeholder="Preset name…" class="grow" />
+        <button id="btnSavePreset" class="btn-blue">Save</button>
+      </div>
+      <div class="row">
+        <select id="presetList" class="grow"></select>
+        <button id="btnLoadPreset" class="btn-gray">Load</button>
+        <button id="btnDeletePreset" class="btn-red">Delete</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- AUDIO ELEMENTS -->
+<audio id="audioBg" preload="auto" src="assets/music.mp3"></audio>
+<audio id="audioSfx" preload="auto" src="assets/sfx.mp3"></audio>
+
+<!-- ffmpeg.wasm (Option 1 — your chosen CDN) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ffmpeg/0.12.15/umd/ffmpeg.min.js" integrity="sha512-6q5trJIob1waudLGNd6mA2PS6wNO75CbA40OHJYE2NXVLWVLgEQ0UpngXWRKYyC4HjpewC9E5qnmIqBjcAUYag==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- App logic (defer to ensure DOM is ready before script runs) -->
+<script src="script.js" defer></script>
+</body>
+</html>

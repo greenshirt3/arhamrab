@@ -1,0 +1,101 @@
+{
+    "identity": {
+        "name": "Grand Imperial Hall",
+        "tagline": "Jalalpur Jattan's Premier Wedding Venue",
+        "description": "Experience royalty in every detail. We blend traditional Pakistani hospitality with modern luxury to create unforgettable memories for your special day.",
+        "logo_text": "GI",
+        "currency": "Rs."
+    },
+    "contact": {
+        "phone": "+92 300 1234567",
+        "whatsapp": "923001234567",
+        "address": "GT Road, Near City Campus, Jalalpur Jattan, Pakistan",
+        "map_embed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3372.433547802484!2d74.2040!3d32.6384!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzLCsDM4JzE4LjIiTiA3NMKwMTInMTQuNCJF!5e0!3m2!1sen!2s!4v1600000000000!5m2!1sen!2s",
+        "email": "bookings@grandimperial.pk"
+    },
+    "theme": {
+        "primary": "#0f172a",
+        "secondary": "#D4AF37",
+        "accent": "#f8fafc",
+        "text_dark": "#1e293b",
+        "text_light": "#ffffff"
+    },
+    "media": {
+        "hero_bg": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?q=80&w=1920"
+    },
+    "stats": [
+        { "label": "Weddings Hosted", "value": "1,500+" },
+        { "label": "Guest Capacity", "value": "1,000" },
+        { "label": "Years of Service", "value": "12" },
+        { "label": "Customer Rating", "value": "4.9/5" }
+    ],
+    "gallery": [
+        "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=800",
+        "https://images.unsplash.com/photo-1519225421980-715cb0202128?q=80&w=800",
+        "https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=800",
+        "https://images.unsplash.com/photo-1520854221256-17451cc330e7?q=80&w=800",
+        "https://images.unsplash.com/photo-1522673607200-1645062cd958?q=80&w=800",
+        "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=800"
+    ],
+    "packages": [
+        {
+            "id": "silver",
+            "name": "Silver (Mehndi/Nikkah)",
+            "price": 1450,
+            "desc": "An elegant menu perfect for afternoon events.",
+            "items": [
+                "Chicken Qorma / Karahi",
+                "Chicken Biryani",
+                "Roghni Naan",
+                "Fresh Salad Bar",
+                "Mint Raita",
+                "Kheer (Thooti)",
+                "Mineral Water"
+            ]
+        },
+        {
+            "id": "gold",
+            "name": "Gold (Barat Special)",
+            "price": 1950,
+            "desc": "Our signature dinner menu with premium service.",
+            "items": [
+                "Mutton Qorma",
+                "Chicken Steam Roast",
+                "Egg Fried Rice",
+                "Assorted Naan Basket",
+                "Russian Salad",
+                "Gajrela or Trifle",
+                "Green Tea"
+            ]
+        },
+        {
+            "id": "platinum",
+            "name": "Royal (Walima Executive)",
+            "price": 2800,
+            "desc": "The ultimate luxury dining experience for VIP guests.",
+            "items": [
+                "Mutton Kunna / Handi",
+                "Grilled Fish OR BBQ Platter",
+                "Navratan Pulao",
+                "Palak Paneer",
+                "Hot & Sour Soup",
+                "Gulab Jamun",
+                "Ice Cream",
+                "Cappuccino"
+            ]
+        }
+    ],
+    "addons": [
+        { "name": "Imported Fresh Flower Decor", "price": 85000, "type": "fixed", "icon": "fa-seedling" },
+        { "name": "DJ Sound System & Lights", "price": 25000, "type": "fixed", "icon": "fa-music" },
+        { "name": "AC / Heating Charges", "price": 250, "type": "per_head", "icon": "fa-snowflake" },
+        { "name": "Drone Coverage & Photography", "price": 45000, "type": "fixed", "icon": "fa-camera" },
+        { "name": "Segregation Walls (Pardah)", "price": 10000, "type": "fixed", "icon": "fa-dungeon" }
+    ],
+    "faqs": [
+        { "q": "What is the booking advance?", "a": "We require a 25% non-refundable advance payment to block your date." },
+        { "q": "Is the generator backup included?", "a": "Yes, our packages include full industrial generator backup with zero downtime." },
+        { "q": "Do you offer food tasting?", "a": "Yes, we offer food tasting for up to 4 people for confirmed bookings." },
+        { "q": "What is your cancellation policy?", "a": "Cancellations made 30 days prior are eligible for a partial refund or date adjustment." }
+    ]
+}

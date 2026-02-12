@@ -1,0 +1,44 @@
+[
+   {
+    "id": "lovebitespizza",
+    "subdomain": "lovebitespizza",
+    "password": "123",
+    "name": "Love Bites Pizza",
+    "tagline": "Adding TASTE to Your Life",
+    "phone": "923006364395",
+    "lat": "32.64010",
+    "lng": "74.20520",
+    "logo": "https://cdn-icons-png.flaticon.com/512/3132/3132693.png",
+    "banner": "https://images.unsplash.com/photo-1513104890138-7c749659a591",
+    "theme_color": "#E31837",
+    "type": "food"
+},
+    {
+        "id": "test",
+        "subdomain": "test",
+        "password": "123",
+        "name": "Test Shop",
+        "tagline": "The Famous Shami",
+        "phone": "923001234567",
+        "lat": "32.63550",
+        "lng": "74.20110",
+        "logo": "https://cdn-icons-png.flaticon.com/512/3075/3075977.png",
+        "banner": "https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=1000",
+        "theme_color": "#FFC107",
+        "type": "food"
+    },
+    {
+        "id": "sadiq",
+        "subdomain": "sadiqfabrics",
+        "password": "123",
+        "name": "Sadiq Fabrics",
+        "tagline": "Premium Winter Collection",
+        "phone": "923007654321",
+        "lat": "32.63900",
+        "lng": "74.20400",
+        "logo": "https://cdn-icons-png.flaticon.com/512/3322/3322056.png",
+        "banner": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=1000",
+        "theme_color": "#3F51B5",
+        "type": "retail"
+    }
+]

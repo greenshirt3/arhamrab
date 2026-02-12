@@ -1,0 +1,5 @@
+# Block direct access to the data file
+<Files "data.json">
+    Order Allow,Deny
+    Deny from all
+</Files>

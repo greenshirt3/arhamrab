@@ -1,0 +1,732 @@
+{
+  "rooms": [
+    {
+      "name": "Room 1",
+      "w": 15, "h": 10, "d": 15,
+      "lighting": { "color": "#ffeeb1", "intensity": 2.8 },
+      "surfaces": {
+        "front": { "tex": "uploads/1/wall.webp", "col": "#ffffff" },
+        "back":  { "tex": "uploads/1/back.webp", "col": "#ffffff" },
+        "left":  { "tex": "uploads/1/wall.webp", "col": "#ffffff" },
+        "right": { "tex": "uploads/1/wall.webp", "col": "#ffffff" },
+        "ceil":  { "tex": "uploads/1/roof.webp", "col": "#ffffff" },
+        "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+      },
+      "fixtures": []
+    },
+    {
+      "name": "Room 2",
+      "w": 15, "h": 10, "d": 15,
+      "lighting": { "color": "#fff5d6", "intensity": 2.5 },
+      "surfaces": {
+        "front": { "tex": "uploads/2/wall.webp", "col": "#ffffff" },
+        "back":  { "tex": "uploads/2/back.webp", "col": "#ffffff" },
+        "left":  { "tex": "uploads/2/wall.webp", "col": "#ffffff" },
+        "right": { "tex": "uploads/2/wall.webp", "col": "#ffffff" },
+        "ceil":  { "tex": "uploads/2/roof.webp", "col": "#ffffff" },
+        "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+      },
+      "fixtures": []
+    },
+    {
+      "name": "Room 3",
+      "w": 15, "h": 10, "d": 15,
+      "lighting": { "color": "#ffffff", "intensity": 2.5 },
+      "surfaces": {
+        "front": { "tex": "uploads/3/wall.webp", "col": "#ffffff" },
+        "back":  { "tex": "uploads/3/back.webp", "col": "#ffffff" },
+        "left":  { "tex": "uploads/3/wall.webp", "col": "#ffffff" },
+        "right": { "tex": "uploads/3/wall.webp", "col": "#ffffff" },
+        "ceil":  { "tex": "uploads/3/roof.webp", "col": "#ffffff" },
+        "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+      },
+      "fixtures": []
+    },
+    {
+      "name": "Room 4",
+      "w": 15, "h": 10, "d": 15,
+      "lighting": { "color": "#fff5d6", "intensity": 2.5 },
+      "surfaces": {
+        "front": { "tex": "uploads/4/wall.webp", "col": "#ffffff" },
+        "back":  { "tex": "uploads/4/back.webp", "col": "#ffffff" },
+        "left":  { "tex": "uploads/4/wall.webp", "col": "#ffffff" },
+        "right": { "tex": "uploads/4/wall.webp", "col": "#ffffff" },
+        "ceil":  { "tex": "uploads/4/roof.webp", "col": "#ffffff" },
+        "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+      },
+      "fixtures": []
+    },
+    {
+      "name": "Room 5",
+      "w": 15, "h": 10, "d": 15,
+      "lighting": { "color": "#fff5d6", "intensity": 2.5 },
+      "surfaces": {
+        "front": { "tex": "uploads/5/wall.webp", "col": "#ffffff" },
+        "back":  { "tex": "uploads/5/back.webp", "col": "#ffffff" },
+        "left":  { "tex": "uploads/5/wall.webp", "col": "#ffffff" },
+        "right": { "tex": "uploads/5/wall.webp", "col": "#ffffff" },
+        "ceil":  { "tex": "uploads/5/roof.webp", "col": "#ffffff" },
+        "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+      },
+      "fixtures": []
+    },
+    {
+      "name": "Room 6",
+      "w": 15, "h": 10, "d": 15,
+      "lighting": { "color": "#fff5d6", "intensity": 2.5 },
+      "surfaces": {
+        "front": { "tex": "uploads/6/wall.webp", "col": "#ffffff" },
+        "back":  { "tex": "uploads/6/back.webp", "col": "#ffffff" },
+        "left":  { "tex": "uploads/6/wall.webp", "col": "#ffffff" },
+        "right": { "tex": "uploads/6/wall.webp", "col": "#ffffff" },
+        "ceil":  { "tex": "uploads/6/roof.webp", "col": "#ffffff" },
+        "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+      },
+      "fixtures": []
+    },
+    {
+      "name": "Room 7",
+      "w": 15, "h": 10, "d": 15,
+      "lighting": { "color": "#fff5d6", "intensity": 2.5 },
+      "surfaces": {
+        "front": { "tex": "uploads/7/wall.webp", "col": "#ffffff" },
+        "back":  { "tex": "uploads/7/back.webp", "col": "#ffffff" },
+        "left":  { "tex": "uploads/7/wall.webp", "col": "#ffffff" },
+        "right": { "tex": "uploads/7/wall.webp", "col": "#ffffff" },
+        "ceil":  { "tex": "uploads/7/roof.webp", "col": "#ffffff" },
+        "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+      },
+      "fixtures": []
+    },
+    {
+      "name": "Room 8",
+      "w": 15, "h": 10, "d": 15,
+      "lighting": { "color": "#fff5d6", "intensity": 2.5 },
+      "surfaces": {
+        "front": { "tex": "uploads/8/wall.webp", "col": "#ffffff" },
+        "back":  { "tex": "uploads/8/back.webp", "col": "#ffffff" },
+        "left":  { "tex": "uploads/8/wall.webp", "col": "#ffffff" },
+        "right": { "tex": "uploads/8/wall.webp", "col": "#ffffff" },
+        "ceil":  { "tex": "uploads/8/roof.webp", "col": "#ffffff" },
+        "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+      },
+      "fixtures": []
+    },
+    {
+      "name": "Room 9",
+      "w": 15, "h": 10, "d": 15,
+      "lighting": { "color": "#fff5d6", "intensity": 2.5 },
+      "surfaces": {
+        "front": { "tex": "uploads/9/wall.webp", "col": "#ffffff" },
+        "back":  { "tex": "uploads/9/back.webp", "col": "#ffffff" },
+        "left":  { "tex": "uploads/9/wall.webp", "col": "#ffffff" },
+        "right": { "tex": "uploads/9/wall.webp", "col": "#ffffff" },
+        "ceil":  { "tex": "uploads/9/roof.webp", "col": "#ffffff" },
+        "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+      },
+      "fixtures": []
+    },
+    {
+      "name": "Room 10",
+      "w": 15, "h": 10, "d": 15,
+      "lighting": { "color": "#fff5d6", "intensity": 2.5 },
+      "surfaces": {
+        "front": { "tex": "uploads/10/wall.webp", "col": "#ffffff" },
+        "back":  { "tex": "uploads/10/back.webp", "col": "#ffffff" },
+        "left":  { "tex": "uploads/10/wall.webp", "col": "#ffffff" },
+        "right": { "tex": "uploads/10/wall.webp", "col": "#ffffff" },
+        "ceil":  { "tex": "uploads/10/roof.webp", "col": "#ffffff" },
+        "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+      },
+      "fixtures": []
+    },
+    {
+      "name": "Room 11",
+      "w": 15, "h": 10, "d": 15,
+      "lighting": { "color": "#fff5d6", "intensity": 2.5 },
+      "surfaces": {
+        "front": { "tex": "uploads/11/wall.webp", "col": "#ffffff" },
+        "back":  { "tex": "uploads/11/back.webp", "col": "#ffffff" },
+        "left":  { "tex": "uploads/11/wall.webp", "col": "#ffffff" },
+        "right": { "tex": "uploads/11/wall.webp", "col": "#ffffff" },
+        "ceil":  { "tex": "uploads/11/roof.webp", "col": "#ffffff" },
+        "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+      },
+      "fixtures": []
+    },
+    {
+      "name": "Room 12",
+      "w": 15, "h": 10, "d": 15,
+      "lighting": { "color": "#fff5d6", "intensity": 2.5 },
+      "surfaces": {
+        "front": { "tex": "uploads/12/wall.webp", "col": "#ffffff" },
+        "back":  { "tex": "uploads/12/back.webp", "col": "#ffffff" },
+        "left":  { "tex": "uploads/12/wall.webp", "col": "#ffffff" },
+        "right": { "tex": "uploads/12/wall.webp", "col": "#ffffff" },
+        "ceil":  { "tex": "uploads/12/roof.webp", "col": "#ffffff" },
+        "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+      },
+      "fixtures": []
+    },
+    {
+      "name": "Room 13",
+      "w": 15, "h": 10, "d": 15,
+      "lighting": { "color": "#fff5d6", "intensity": 2.5 },
+      "surfaces": {
+        "front": { "tex": "uploads/13/wall.webp", "col": "#ffffff" },
+        "back":  { "tex": "uploads/13/back.webp", "col": "#ffffff" },
+        "left":  { "tex": "uploads/13/wall.webp", "col": "#ffffff" },
+        "right": { "tex": "uploads/13/wall.webp", "col": "#ffffff" },
+        "ceil":  { "tex": "uploads/13/roof.webp", "col": "#ffffff" },
+        "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+      },
+      "fixtures": []
+    },
+    {
+      "name": "Room 14",
+      "w": 15, "h": 10, "d": 15,
+      "lighting": { "color": "#fff5d6", "intensity": 2.5 },
+      "surfaces": {
+        "front": { "tex": "uploads/14/wall.webp", "col": "#ffffff" },
+        "back":  { "tex": "uploads/14/back.webp", "col": "#ffffff" },
+        "left":  { "tex": "uploads/14/wall.webp", "col": "#ffffff" },
+        "right": { "tex": "uploads/14/wall.webp", "col": "#ffffff" },
+        "ceil":  { "tex": "uploads/14/roof.webp", "col": "#ffffff" },
+        "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+      },
+      "fixtures": []
+    },
+    {
+      "name": "Room 15",
+      "w": 15, "h": 10, "d": 15,
+      "lighting": { "color": "#fff5d6", "intensity": 2.5 },
+      "surfaces": {
+        "front": { "tex": "uploads/15/wall.webp", "col": "#ffffff" },
+        "back":  { "tex": "uploads/15/back.webp", "col": "#ffffff" },
+        "left":  { "tex": "uploads/15/wall.webp", "col": "#ffffff" },
+        "right": { "tex": "uploads/15/wall.webp", "col": "#ffffff" },
+        "ceil":  { "tex": "uploads/15/roof.webp", "col": "#ffffff" },
+        "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+      },
+      "fixtures": []
+    },
+    {
+      "name": "Room 16",
+      "w": 15, "h": 10, "d": 15,
+      "lighting": { "color": "#fff5d6", "intensity": 2.5 },
+      "surfaces": {
+        "front": { "tex": "uploads/16/wall.webp", "col": "#ffffff" },
+        "back":  { "tex": "uploads/16/back.webp", "col": "#ffffff" },
+        "left":  { "tex": "uploads/16/wall.webp", "col": "#ffffff" },
+        "right": { "tex": "uploads/16/wall.webp", "col": "#ffffff" },
+        "ceil":  { "tex": "uploads/16/roof.webp", "col": "#ffffff" },
+        "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+      },
+      "fixtures": []
+    },
+    {
+      "name": "Room 17",
+      "w": 15, "h": 10, "d": 15,
+      "lighting": { "color": "#fff5d6", "intensity": 2.5 },
+      "surfaces": {
+        "front": { "tex": "uploads/17/wall.webp", "col": "#ffffff" },
+        "back":  { "tex": "uploads/17/back.webp", "col": "#ffffff" },
+        "left":  { "tex": "uploads/17/wall.webp", "col": "#ffffff" },
+        "right": { "tex": "uploads/17/wall.webp", "col": "#ffffff" },
+        "ceil":  { "tex": "uploads/17/roof.webp", "col": "#ffffff" },
+        "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+      },
+      "fixtures": []
+    },
+    {
+      "name": "Room 18",
+      "w": 15, "h": 10, "d": 15,
+      "lighting": { "color": "#fff5d6", "intensity": 2.5 },
+      "surfaces": {
+        "front": { "tex": "uploads/18/wall.webp", "col": "#ffffff" },
+        "back":  { "tex": "uploads/18/back.webp", "col": "#ffffff" },
+        "left":  { "tex": "uploads/18/wall.webp", "col": "#ffffff" },
+        "right": { "tex": "uploads/18/wall.webp", "col": "#ffffff" },
+        "ceil":  { "tex": "uploads/18/roof.webp", "col": "#ffffff" },
+        "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+      },
+      "fixtures": []
+    },
+    {
+      "name": "Room 19",
+      "w": 15, "h": 10, "d": 15,
+      "lighting": { "color": "#fff5d6", "intensity": 2.5 },
+      "surfaces": {
+        "front": { "tex": "uploads/19/wall.webp", "col": "#ffffff" },
+        "back":  { "tex": "uploads/19/back.webp", "col": "#ffffff" },
+        "left":  { "tex": "uploads/19/wall.webp", "col": "#ffffff" },
+        "right": { "tex": "uploads/19/wall.webp", "col": "#ffffff" },
+        "ceil":  { "tex": "uploads/19/roof.webp", "col": "#ffffff" },
+        "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+      },
+      "fixtures": []
+    },
+    {
+      "name": "Room 20",
+      "w": 15, "h": 10, "d": 15,
+      "lighting": { "color": "#fff5d6", "intensity": 2.5 },
+      "surfaces": {
+        "front": { "tex": "uploads/20/wall.webp", "col": "#ffffff" },
+        "back":  { "tex": "uploads/20/back.webp", "col": "#ffffff" },
+        "left":  { "tex": "uploads/20/wall.webp", "col": "#ffffff" },
+        "right": { "tex": "uploads/20/wall.webp", "col": "#ffffff" },
+        "ceil":  { "tex": "uploads/20/roof.webp", "col": "#ffffff" },
+        "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+      },
+      "fixtures": []
+    },
+    {
+      "name": "Room 21",
+      "w": 15, "h": 10, "d": 15,
+      "lighting": { "color": "#fff5d6", "intensity": 2.5 },
+      "surfaces": {
+        "front": { "tex": "uploads/21/wall.webp", "col": "#ffffff" },
+        "back":  { "tex": "uploads/21/back.webp", "col": "#ffffff" },
+        "left":  { "tex": "uploads/21/wall.webp", "col": "#ffffff" },
+        "right": { "tex": "uploads/21/wall.webp", "col": "#ffffff" },
+        "ceil":  { "tex": "uploads/21/roof.webp", "col": "#ffffff" },
+        "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+      },
+      "fixtures": []
+    },
+    {
+      "name": "Room 22",
+      "w": 15, "h": 10, "d": 15,
+      "lighting": { "color": "#fff5d6", "intensity": 2.5 },
+      "surfaces": {
+        "front": { "tex": "uploads/22/wall.webp", "col": "#ffffff" },
+        "back":  { "tex": "uploads/22/back.webp", "col": "#ffffff" },
+        "left":  { "tex": "uploads/22/wall.webp", "col": "#ffffff" },
+        "right": { "tex": "uploads/22/wall.webp", "col": "#ffffff" },
+        "ceil":  { "tex": "uploads/22/roof.webp", "col": "#ffffff" },
+        "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+      },
+      "fixtures": []
+    },
+    {
+      "name": "Room 23",
+      "w": 15, "h": 10, "d": 15,
+      "lighting": { "color": "#fff5d6", "intensity": 2.5 },
+      "surfaces": {
+        "front": { "tex": "uploads/23/wall.webp", "col": "#ffffff" },
+        "back":  { "tex": "uploads/23/back.webp", "col": "#ffffff" },
+        "left":  { "tex": "uploads/23/wall.webp", "col": "#ffffff" },
+        "right": { "tex": "uploads/23/wall.webp", "col": "#ffffff" },
+        "ceil":  { "tex": "uploads/23/roof.webp", "col": "#ffffff" },
+        "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+      },
+      "fixtures": []
+    },
+    {
+      "name": "Room 24",
+      "w": 15, "h": 10, "d": 15,
+      "lighting": { "color": "#fff5d6", "intensity": 2.5 },
+      "surfaces": {
+        "front": { "tex": "uploads/24/wall.webp", "col": "#ffffff" },
+        "back":  { "tex": "uploads/24/back.webp", "col": "#ffffff" },
+        "left":  { "tex": "uploads/24/wall.webp", "col": "#ffffff" },
+        "right": { "tex": "uploads/24/wall.webp", "col": "#ffffff" },
+        "ceil":  { "tex": "uploads/24/roof.webp", "col": "#ffffff" },
+        "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+      },
+      "fixtures": []
+    },
+    {
+      "name": "Room 25",
+      "w": 15, "h": 10, "d": 15,
+      "lighting": { "color": "#fff5d6", "intensity": 2.5 },
+      "surfaces": {
+        "front": { "tex": "uploads/25/wall.webp", "col": "#ffffff" },
+        "back":  { "tex": "uploads/25/back.webp", "col": "#ffffff" },
+        "left":  { "tex": "uploads/25/wall.webp", "col": "#ffffff" },
+        "right": { "tex": "uploads/25/wall.webp", "col": "#ffffff" },
+        "ceil":  { "tex": "uploads/25/roof.webp", "col": "#ffffff" },
+        "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+      },
+      "fixtures": []
+    },
+    {
+      "name": "Room 26",
+      "w": 15, "h": 10, "d": 15,
+      "lighting": { "color": "#fff5d6", "intensity": 2.5 },
+      "surfaces": {
+        "front": { "tex": "uploads/26/wall.webp", "col": "#ffffff" },
+        "back":  { "tex": "uploads/26/back.webp", "col": "#ffffff" },
+        "left":  { "tex": "uploads/26/wall.webp", "col": "#ffffff" },
+        "right": { "tex": "uploads/26/wall.webp", "col": "#ffffff" },
+        "ceil":  { "tex": "uploads/26/roof.webp", "col": "#ffffff" },
+        "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+      },
+      "fixtures": []
+    },
+    {
+      "name": "Room 27",
+      "w": 15, "h": 10, "d": 15,
+      "lighting": { "color": "#fff5d6", "intensity": 2.5 },
+      "surfaces": {
+        "front": { "tex": "uploads/27/wall.webp", "col": "#ffffff" },
+        "back":  { "tex": "uploads/27/back.webp", "col": "#ffffff" },
+        "left":  { "tex": "uploads/27/wall.webp", "col": "#ffffff" },
+        "right": { "tex": "uploads/27/wall.webp", "col": "#ffffff" },
+        "ceil":  { "tex": "uploads/27/roof.webp", "col": "#ffffff" },
+        "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+      },
+      "fixtures": []
+    },
+    {
+      "name": "Room 28",
+      "w": 15, "h": 10, "d": 15,
+      "lighting": { "color": "#fff5d6", "intensity": 2.5 },
+      "surfaces": {
+        "front": { "tex": "uploads/28/wall.webp", "col": "#ffffff" },
+        "back":  { "tex": "uploads/28/back.webp", "col": "#ffffff" },
+        "left":  { "tex": "uploads/28/wall.webp", "col": "#ffffff" },
+        "right": { "tex": "uploads/28/wall.webp", "col": "#ffffff" },
+        "ceil":  { "tex": "uploads/28/roof.webp", "col": "#ffffff" },
+        "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+      },
+      "fixtures": []
+    },
+    {
+      "name": "Room 29",
+      "w": 15, "h": 10, "d": 15,
+      "lighting": { "color": "#fff5d6", "intensity": 2.5 },
+      "surfaces": {
+        "front": { "tex": "uploads/29/wall.webp", "col": "#ffffff" },
+        "back":  { "tex": "uploads/29/back.webp", "col": "#ffffff" },
+        "left":  { "tex": "uploads/29/wall.webp", "col": "#ffffff" },
+        "right": { "tex": "uploads/29/wall.webp", "col": "#ffffff" },
+        "ceil":  { "tex": "uploads/29/roof.webp", "col": "#ffffff" },
+        "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+      },
+      "fixtures": []
+    },
+    {
+      "name": "Room 30",
+      "w": 15, "h": 10, "d": 15,
+      "lighting": { "color": "#fff5d6", "intensity": 2.5 },
+      "surfaces": {
+        "front": { "tex": "uploads/30/wall.webp", "col": "#ffffff" },
+        "back":  { "tex": "uploads/30/back.webp", "col": "#ffffff" },
+        "left":  { "tex": "uploads/30/wall.webp", "col": "#ffffff" },
+        "right": { "tex": "uploads/30/wall.webp", "col": "#ffffff" },
+        "ceil":  { "tex": "uploads/30/roof.webp", "col": "#ffffff" },
+        "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+      },
+      "fixtures": []
+    },
+    {
+      "name": "Room 31",
+      "w": 15, "h": 10, "d": 15,
+      "lighting": { "color": "#fff5d6", "intensity": 2.5 },
+      "surfaces": {
+        "front": { "tex": "uploads/31/wall.webp", "col": "#ffffff" },
+        "back":  { "tex": "uploads/31/back.webp", "col": "#ffffff" },
+        "left":  { "tex": "uploads/31/wall.webp", "col": "#ffffff" },
+        "right": { "tex": "uploads/31/wall.webp", "col": "#ffffff" },
+        "ceil":  { "tex": "uploads/31/roof.webp", "col": "#ffffff" },
+        "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+      },
+      "fixtures": []
+    },
+    {
+      "name": "Room 32",
+      "w": 15, "h": 10, "d": 15,
+      "lighting": { "color": "#fff5d6", "intensity": 2.5 },
+      "surfaces": {
+        "front": { "tex": "uploads/32/wall.webp", "col": "#ffffff" },
+        "back":  { "tex": "uploads/32/back.webp", "col": "#ffffff" },
+        "left":  { "tex": "uploads/32/wall.webp", "col": "#ffffff" },
+        "right": { "tex": "uploads/32/wall.webp", "col": "#ffffff" },
+        "ceil":  { "tex": "uploads/32/roof.webp", "col": "#ffffff" },
+        "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+      },
+      "fixtures": []
+    },
+    {
+    "name": "Room 33",
+    "w": 15, "h": 10, "d": 15,
+    "lighting": { "color": "#fff5d6", "intensity": 2.5 },
+    "surfaces": {
+      "front": { "tex": "uploads/33/wall.webp", "col": "#ffffff" },
+      "back":  { "tex": "uploads/33/back.webp", "col": "#ffffff" },
+      "left":  { "tex": "uploads/33/wall.webp", "col": "#ffffff" },
+      "right": { "tex": "uploads/33/wall.webp", "col": "#ffffff" },
+      "ceil":  { "tex": "uploads/33/roof.webp", "col": "#ffffff" },
+      "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+    },
+    "fixtures": []
+  },
+  {
+    "name": "Room 34",
+    "w": 15, "h": 10, "d": 15,
+    "lighting": { "color": "#fff5d6", "intensity": 2.5 },
+    "surfaces": {
+      "front": { "tex": "uploads/34/wall.webp", "col": "#ffffff" },
+      "back":  { "tex": "uploads/34/back.webp", "col": "#ffffff" },
+      "left":  { "tex": "uploads/34/wall.webp", "col": "#ffffff" },
+      "right": { "tex": "uploads/34/wall.webp", "col": "#ffffff" },
+      "ceil":  { "tex": "uploads/34/roof.webp", "col": "#ffffff" },
+      "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+    },
+    "fixtures": []
+  },
+  {
+    "name": "Room 35",
+    "w": 15, "h": 10, "d": 15,
+    "lighting": { "color": "#fff5d6", "intensity": 2.5 },
+    "surfaces": {
+      "front": { "tex": "uploads/35/wall.webp", "col": "#ffffff" },
+      "back":  { "tex": "uploads/35/back.webp", "col": "#ffffff" },
+      "left":  { "tex": "uploads/35/wall.webp", "col": "#ffffff" },
+      "right": { "tex": "uploads/35/wall.webp", "col": "#ffffff" },
+      "ceil":  { "tex": "uploads/35/roof.webp", "col": "#ffffff" },
+      "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+    },
+    "fixtures": []
+  },
+  {
+    "name": "Room 36",
+    "w": 15, "h": 10, "d": 15,
+    "lighting": { "color": "#fff5d6", "intensity": 2.5 },
+    "surfaces": {
+      "front": { "tex": "uploads/36/wall.webp", "col": "#ffffff" },
+      "back":  { "tex": "uploads/36/back.webp", "col": "#ffffff" },
+      "left":  { "tex": "uploads/36/wall.webp", "col": "#ffffff" },
+      "right": { "tex": "uploads/36/wall.webp", "col": "#ffffff" },
+      "ceil":  { "tex": "uploads/36/roof.webp", "col": "#ffffff" },
+      "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+    },
+    "fixtures": []
+  },
+  {
+    "name": "Room 37",
+    "w": 15, "h": 10, "d": 15,
+    "lighting": { "color": "#fff5d6", "intensity": 2.5 },
+    "surfaces": {
+      "front": { "tex": "uploads/37/wall.webp", "col": "#ffffff" },
+      "back":  { "tex": "uploads/37/back.webp", "col": "#ffffff" },
+      "left":  { "tex": "uploads/37/wall.webp", "col": "#ffffff" },
+      "right": { "tex": "uploads/37/wall.webp", "col": "#ffffff" },
+      "ceil":  { "tex": "uploads/37/roof.webp", "col": "#ffffff" },
+      "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+    },
+    "fixtures": []
+  },
+  {
+    "name": "Room 38",
+    "w": 15, "h": 10, "d": 15,
+    "lighting": { "color": "#fff5d6", "intensity": 2.5 },
+    "surfaces": {
+      "front": { "tex": "uploads/38/wall.webp", "col": "#ffffff" },
+      "back":  { "tex": "uploads/38/back.webp", "col": "#ffffff" },
+      "left":  { "tex": "uploads/38/wall.webp", "col": "#ffffff" },
+      "right": { "tex": "uploads/38/wall.webp", "col": "#ffffff" },
+      "ceil":  { "tex": "uploads/38/roof.webp", "col": "#ffffff" },
+      "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+    },
+    "fixtures": []
+  },
+  {
+    "name": "Room 39",
+    "w": 15, "h": 10, "d": 15,
+    "lighting": { "color": "#fff5d6", "intensity": 2.5 },
+    "surfaces": {
+      "front": { "tex": "uploads/39/wall.webp", "col": "#ffffff" },
+      "back":  { "tex": "uploads/39/back.webp", "col": "#ffffff" },
+      "left":  { "tex": "uploads/39/wall.webp", "col": "#ffffff" },
+      "right": { "tex": "uploads/39/wall.webp", "col": "#ffffff" },
+      "ceil":  { "tex": "uploads/39/roof.webp", "col": "#ffffff" },
+      "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+    },
+    "fixtures": []
+  },
+  {
+    "name": "Room 40",
+    "w": 15, "h": 10, "d": 15,
+    "lighting": { "color": "#fff5d6", "intensity": 2.5 },
+    "surfaces": {
+      "front": { "tex": "uploads/40/wall.webp", "col": "#ffffff" },
+      "back":  { "tex": "uploads/40/back.webp", "col": "#ffffff" },
+      "left":  { "tex": "uploads/40/wall.webp", "col": "#ffffff" },
+      "right": { "tex": "uploads/40/wall.webp", "col": "#ffffff" },
+      "ceil":  { "tex": "uploads/40/roof.webp", "col": "#ffffff" },
+      "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+    },
+    "fixtures": []
+  },
+  {
+    "name": "Room 41",
+    "w": 15, "h": 10, "d": 15,
+    "lighting": { "color": "#fff5d6", "intensity": 2.5 },
+    "surfaces": {
+      "front": { "tex": "uploads/41/wall.webp", "col": "#ffffff" },
+      "back":  { "tex": "uploads/41/back.webp", "col": "#ffffff" },
+      "left":  { "tex": "uploads/41/wall.webp", "col": "#ffffff" },
+      "right": { "tex": "uploads/41/wall.webp", "col": "#ffffff" },
+      "ceil":  { "tex": "uploads/41/roof.webp", "col": "#ffffff" },
+      "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+    },
+    "fixtures": []
+  },
+  {
+    "name": "Room 42",
+    "w": 15, "h": 10, "d": 15,
+    "lighting": { "color": "#fff5d6", "intensity": 2.5 },
+    "surfaces": {
+      "front": { "tex": "uploads/42/wall.webp", "col": "#ffffff" },
+      "back":  { "tex": "uploads/42/back.webp", "col": "#ffffff" },
+      "left":  { "tex": "uploads/42/wall.webp", "col": "#ffffff" },
+      "right": { "tex": "uploads/42/wall.webp", "col": "#ffffff" },
+      "ceil":  { "tex": "uploads/42/roof.webp", "col": "#ffffff" },
+      "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+    },
+    "fixtures": []
+  },
+  {
+    "name": "Room 43",
+    "w": 15, "h": 10, "d": 15,
+    "lighting": { "color": "#fff5d6", "intensity": 2.5 },
+    "surfaces": {
+      "front": { "tex": "uploads/43/wall.webp", "col": "#ffffff" },
+      "back":  { "tex": "uploads/43/back.webp", "col": "#ffffff" },
+      "left":  { "tex": "uploads/43/wall.webp", "col": "#ffffff" },
+      "right": { "tex": "uploads/43/wall.webp", "col": "#ffffff" },
+      "ceil":  { "tex": "uploads/43/roof.webp", "col": "#ffffff" },
+      "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+    },
+    "fixtures": []
+  },
+  {
+    "name": "Room 44",
+    "w": 15, "h": 10, "d": 15,
+    "lighting": { "color": "#fff5d6", "intensity": 2.5 },
+    "surfaces": {
+      "front": { "tex": "uploads/44/wall.webp", "col": "#ffffff" },
+      "back":  { "tex": "uploads/44/back.webp", "col": "#ffffff" },
+      "left":  { "tex": "uploads/44/wall.webp", "col": "#ffffff" },
+      "right": { "tex": "uploads/44/wall.webp", "col": "#ffffff" },
+      "ceil":  { "tex": "uploads/44/roof.webp", "col": "#ffffff" },
+      "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+    },
+    "fixtures": []
+  },
+  {
+    "name": "Room 45",
+    "w": 15, "h": 10, "d": 15,
+    "lighting": { "color": "#fff5d6", "intensity": 2.5 },
+    "surfaces": {
+      "front": { "tex": "uploads/45/wall.webp", "col": "#ffffff" },
+      "back":  { "tex": "uploads/45/back.webp", "col": "#ffffff" },
+      "left":  { "tex": "uploads/45/wall.webp", "col": "#ffffff" },
+      "right": { "tex": "uploads/45/wall.webp", "col": "#ffffff" },
+      "ceil":  { "tex": "uploads/45/roof.webp", "col": "#ffffff" },
+      "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+    },
+    "fixtures": []
+  },
+  {
+    "name": "Room 46",
+    "w": 15, "h": 10, "d": 15,
+    "lighting": { "color": "#fff5d6", "intensity": 2.5 },
+    "surfaces": {
+      "front": { "tex": "uploads/46/wall.webp", "col": "#ffffff" },
+      "back":  { "tex": "uploads/46/back.webp", "col": "#ffffff" },
+      "left":  { "tex": "uploads/46/wall.webp", "col": "#ffffff" },
+      "right": { "tex": "uploads/46/wall.webp", "col": "#ffffff" },
+      "ceil":  { "tex": "uploads/46/roof.webp", "col": "#ffffff" },
+      "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+    },
+    "fixtures": []
+  },
+  {
+    "name": "Room 47",
+    "w": 15, "h": 10, "d": 15,
+    "lighting": { "color": "#fff5d6", "intensity": 2.5 },
+    "surfaces": {
+      "front": { "tex": "uploads/47/wall.webp", "col": "#ffffff" },
+      "back":  { "tex": "uploads/47/back.webp", "col": "#ffffff" },
+      "left":  { "tex": "uploads/47/wall.webp", "col": "#ffffff" },
+      "right": { "tex": "uploads/47/wall.webp", "col": "#ffffff" },
+      "ceil":  { "tex": "uploads/47/roof.webp", "col": "#ffffff" },
+      "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+    },
+    "fixtures": []
+  },
+  {
+    "name": "Room 48",
+    "w": 15, "h": 10, "d": 15,
+    "lighting": { "color": "#fff5d6", "intensity": 2.5 },
+    "surfaces": {
+      "front": { "tex": "uploads/48/wall.webp", "col": "#ffffff" },
+      "back":  { "tex": "uploads/48/back.webp", "col": "#ffffff" },
+      "left":  { "tex": "uploads/48/wall.webp", "col": "#ffffff" },
+      "right": { "tex": "uploads/48/wall.webp", "col": "#ffffff" },
+      "ceil":  { "tex": "uploads/48/roof.webp", "col": "#ffffff" },
+      "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+    },
+    "fixtures": []
+  },
+  {
+    "name": "Room 49",
+    "w": 15, "h": 10, "d": 15,
+    "lighting": { "color": "#fff5d6", "intensity": 2.5 },
+    "surfaces": {
+      "front": { "tex": "uploads/49/wall.webp", "col": "#ffffff" },
+      "back":  { "tex": "uploads/49/back.webp", "col": "#ffffff" },
+      "left":  { "tex": "uploads/49/wall.webp", "col": "#ffffff" },
+      "right": { "tex": "uploads/49/wall.webp", "col": "#ffffff" },
+      "ceil":  { "tex": "uploads/49/roof.webp", "col": "#ffffff" },
+      "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+    },
+    "fixtures": []
+  },
+  {
+    "name": "Room 50",
+    "w": 15, "h": 10, "d": 15,
+    "lighting": { "color": "#fff5d6", "intensity": 2.5 },
+    "surfaces": {
+      "front": { "tex": "uploads/50/wall.webp", "col": "#ffffff" },
+      "back":  { "tex": "uploads/50/back.webp", "col": "#ffffff" },
+      "left":  { "tex": "uploads/50/wall.webp", "col": "#ffffff" },
+      "right": { "tex": "uploads/50/wall.webp", "col": "#ffffff" },
+      "ceil":  { "tex": "uploads/50/roof.webp", "col": "#ffffff" },
+      "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+    },
+    "fixtures": []
+  },
+  {
+    "name": "Room 51",
+    "w": 15, "h": 10, "d": 15,
+    "lighting": { "color": "#fff5d6", "intensity": 2.5 },
+    "surfaces": {
+      "front": { "tex": "uploads/51/wall.webp", "col": "#ffffff" },
+      "back":  { "tex": "uploads/51/back.webp", "col": "#ffffff" },
+      "left":  { "tex": "uploads/51/wall.webp", "col": "#ffffff" },
+      "right": { "tex": "uploads/51/wall.webp", "col": "#ffffff" },
+      "ceil":  { "tex": "uploads/51/roof.webp", "col": "#ffffff" },
+      "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+    },
+    "fixtures": []
+  },
+  {
+    "name": "Room 52",
+    "w": 15, "h": 10, "d": 15,
+    "lighting": { "color": "#fff5d6", "intensity": 2.5 },
+    "surfaces": {
+      "front": { "tex": "uploads/52/wall.webp", "col": "#ffffff" },
+      "back":  { "tex": "uploads/52/back.webp", "col": "#ffffff" },
+      "left":  { "tex": "uploads/52/wall.webp", "col": "#ffffff" },
+      "right": { "tex": "uploads/52/wall.webp", "col": "#ffffff" },
+      "ceil":  { "tex": "uploads/52/roof.webp", "col": "#ffffff" },
+      "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+    },
+    "fixtures": []
+  }
+  ]
+}

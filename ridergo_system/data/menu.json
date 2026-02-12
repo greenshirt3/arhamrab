@@ -1,0 +1,5 @@
+[
+    { "id": 101, "shop_id": 1, "name": "Zinger Burger", "price": 450, "desc": "Crispy fillet with cheese" },
+    { "id": 102, "shop_id": 1, "name": "Large Pizza", "price": 1200, "desc": "Fajita flavor" },
+    { "id": 201, "shop_id": 2, "name": "Chicken Biryani", "price": 350, "desc": "Double piece" }
+]

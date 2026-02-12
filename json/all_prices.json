@@ -1,0 +1,99 @@
+{
+    "Business Essentials": {
+        "Visiting Cards": [
+            { "variant_3": "Single Side", "imageFile": "img/arhamdata/arhamproducts/vcard.webp" },
+            { "variant_3": "Double Side", "imageFile": "img/arhamdata/arhamproducts/vcard.webp" }
+        ],
+        "Luxury Cards": [
+            { "finish": "Matte (Plain)", "variant_3": "Single Side", "imageFile": "img/arhamdata/arhamproducts/matcards.webp" },
+            { "finish": "Matte (Round)", "variant_3": "Double Side", "imageFile": "img/arhamdata/arhamproducts/matcards.webp" },
+            { "finish": "Spot UV", "variant_3": "Premium", "imageFile": "img/arhamdata/arhamproducts/uvcard.webp" },
+            { "finish": "Thick Die Cut", "variant_3": "Luxury", "imageFile": "img/arhamdata/arhamproducts/thickcard.webp" }
+        ],
+        "Letterheads": [
+            { "variant_1": "A4", "variant_3": "100gms (4 Color)", "imageFile": "img/arhamdata/arhamproducts/letterpad.webp" },
+            { "variant_1": "A4", "variant_3": "80gms (1 Color)", "imageFile": "img/arhamdata/arhamproducts/letterpad.webp" },
+            { "variant_1": "Letterpad Binding", "variant_3": "100 Sheets", "imageFile": "img/arhamdata/arhamproducts/letterpad.webp" }
+        ],
+        "Bill Books": [
+            { "variant_1": "5.75x9", "single_side": "Single Color", "imageFile": "img/arhamdata/arhamproducts/billbooks.webp" },
+            { "variant_1": "A4", "single_side": "4 Colors", "imageFile": "img/arhamdata/arhamproducts/billbooks.webp" },
+            { "variant_1": "Carbonless", "single_side": "Duplicate", "imageFile": "img/arhamdata/arhamproducts/carbonless.webp" }
+        ],
+        "Envelopes": [
+            { "variant_1": "9x4 (Official)", "single_side": "4 Colors", "imageFile": "img/arhamdata/arhamproducts/envelops.webp" },
+            { "variant_1": "A4 (Catalog)", "single_side": "Single Color", "imageFile": "img/arhamdata/arhamproducts/envelops.webp" }
+        ],
+        "ID Cards": [
+            { "variant_3": "PVC Card Only", "imageFile": "img/arhamdata/arhamproducts/pvc.webp" },
+            { "variant_3": "Card + Lanyard", "imageFile": "img/arhamdata/arhamproducts/pvc.webp" }
+        ],
+        "Rubber Stamps": [
+            { "shape": "Rectangular", "variant_3": "Self Inking", "imageFile": "img/arhamdata/arhamproducts/stamps.webp" },
+            { "shape": "Round", "variant_3": "Self Inking", "imageFile": "img/arhamdata/arhamproducts/stamps.webp" },
+            { "shape": "Date Stamp", "variant_3": "Manual", "imageFile": "img/arhamdata/arhamproducts/stamps.webp" }
+        ]
+    },
+
+    "Marketing Materials": {
+        "Flex Banners": [
+            { "variant_3": "Star Media (Glossy)", "imageFile": "img/arhamdata/arhamproducts/star.webp" },
+            { "variant_3": "China Media (Matte)", "imageFile": "img/arhamdata/arhamproducts/china.webp" },
+            { "variant_3": "Backlit (Board Skin)", "imageFile": "img/arhamdata/arhamproducts/backlit.webp" }
+        ],
+        "Flyers (Ishtihar)": [
+            { "variant_1": "A5 (Half Page)", "single_side": "1000 Qty", "imageFile": "img/arhamdata/arhamproducts/ishtihar.webp" },
+            { "variant_1": "A4 (Full Page)", "single_side": "1000 Qty", "imageFile": "img/arhamdata/arhamproducts/ishtihar.webp" }
+        ],
+        "Brochures": [
+            { "variant_1": "Trifold", "single_side": "Glossy Paper", "imageFile": "img/arhamdata/arhamproducts/pamphlet.webp" }
+        ],
+        "Stickers": [
+            { "variant_3": "Vinyl (Pasting)", "imageFile": "img/arhamdata/arhamproducts/stickers.webp" },
+            { "variant_3": "One Way Vision (Glass)", "imageFile": "img/arhamdata/arhamproducts/stickers.webp" }
+        ],
+        "Standees": [
+            { "variant_3": "X-Stand (2x5 ft)", "imageFile": "img/arhamdata/arhamproducts/placeholder.png" },
+            { "variant_3": "Roll-up (2.5x6 ft)", "imageFile": "img/arhamdata/arhamproducts/placeholder.png" }
+        ]
+    },
+
+    "Gifts & Custom": {
+        "Mugs": [
+            { "shape": "White Mug", "variant_3": "Sublimation", "imageFile": "img/arhamdata/arhamproducts/mugs.webp" },
+            { "shape": "Magic Mug", "variant_3": "Color Changing", "imageFile": "img/arhamdata/arhamproducts/mugs.webp" }
+        ],
+        "T-Shirts": [
+            { "variant_3": "Sublimation (Polyester)", "imageFile": "img/arhamdata/arhamproducts/shirt.webp" },
+            { "variant_3": "DTF (Cotton)", "imageFile": "img/arhamdata/arhamproducts/cottonshirt.webp" }
+        ],
+        "Caps": [
+            { "variant_3": "Embroidery", "imageFile": "img/arhamdata/arhamproducts/caps.webp" },
+            { "variant_3": "Printing", "imageFile": "img/arhamdata/arhamproducts/caps.webp" }
+        ],
+        "Keychains": [
+            { "variant_3": "Metal", "imageFile": "img/arhamdata/arhamproducts/keychains.webp" },
+            { "variant_3": "Acrylic", "imageFile": "img/arhamdata/arhamproducts/keychains.webp" }
+        ],
+        "Photo Frames": [
+            { "variant_3": "A4 Wooden", "imageFile": "img/arhamdata/arhamproducts/frames.webp" },
+            { "variant_3": "7x5 PVC", "imageFile": "img/arhamdata/arhamproducts/frames.webp" }
+        ],
+        "Awards": [
+            { "variant_3": "Wooden Shield", "imageFile": "img/arhamdata/arhamproducts/placeholder.png" },
+            { "variant_3": "Crystal Shield", "imageFile": "img/arhamdata/arhamproducts/placeholder.png" }
+        ],
+        "Wallpapers": [
+            { "variant_3": "3D Wall Art", "imageFile": "img/arhamdata/arhamproducts/wallpapers.webp" }
+        ]
+    },
+
+    "Wedding & Events": {
+        "Printed Wedding Cards": [ 
+            { "variant_3": "Request Physical Samples & Prices", "imageFile": "img/wedding/placeholder.webp" } 
+        ],
+        "Digital Wedding Invite": [ 
+            { "variant_3": "WhatsApp Video/Image", "imageFile": "img/wedding/placeholder.webp" } 
+        ]
+    }
+}

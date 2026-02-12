@@ -1,0 +1,11 @@
+[
+    { "shop_id": "fames", "cat": "Pizza", "name": "Chicken Fajita (L)", "price": 1200, "img": "https://images.unsplash.com/photo-1513104890138-7c749659a591" },
+    { "shop_id": "fames", "cat": "Pizza", "name": "Creamy Tikka (M)", "price": 850, "img": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38" },
+    { "shop_id": "fames", "cat": "Burgers", "name": "Zinger Burger", "price": 450, "img": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd" },
+    
+    { "shop_id": "chand", "cat": "Special", "name": "Anda Shami", "price": 150, "img": "https://images.unsplash.com/photo-1550547660-d9450f859349" },
+    { "shop_id": "chand", "cat": "Special", "name": "Chicken Burger", "price": 250, "img": "https://images.unsplash.com/photo-1571091718767-18b5b1457add" },
+    
+    { "shop_id": "sadiq", "cat": "Winter", "name": "Karandi Suit", "price": 2500, "img": "https://images.unsplash.com/photo-1596704017254-9b121068fb31" },
+    { "shop_id": "sadiq", "cat": "Summer", "name": "Wash n Wear", "price": 1800, "img": "https://images.unsplash.com/photo-1617120792027-d64e1d46d034" }
+]

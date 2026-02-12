@@ -1,0 +1,71 @@
+{
+    "settings": {
+        "name": "Surriya Saddique Hospital",
+        "tagline": "World Class Medical Services",
+        "phone": "+923084089598",
+        "whatsapp_clean": "923084089598",
+        "email": "contact@website.com",
+        "address": "Tanda Road Jalalpur Jattan",
+        "map_link": "https://maps.app.goo.gl/PPViAL4euWzo4G5X8",
+        "currency": "PKR",
+        "emergency_text": "Emergency 24/7",
+        "emergency_number": "+923084089598"
+    },
+    "theme": {
+        "primary_color": "#13C5DD",
+        "secondary_color": "#1D2A4D",
+        "font_family": "'Poppins', sans-serif"
+    },
+    "social_links": {
+        "facebook": "https://facebook.com",
+        "twitter": "https://twitter.com",
+        "youtube": "https://youtube.com",
+        "linkedin": "https://linkedin.com"
+    },
+    "hero_section": {
+        "image": "https://images.unsplash.com/photo-1538108149393-fbbd81895907?auto=format&fit=crop&w=1920&q=80",
+        "title": "Best Healthcare Solution In J.P.J",
+        "subtitle": "Welcome to Surriya Saddique Hospital",
+        "description": "We provide world-class facilities including 24/7 Emergency, Ultrasound, E.C.G, Laboratory, X-Ray, and Operation Theater."
+    },
+    "stats": [
+        { "label": "Qualified Doctors", "icon": "fa-user-md" },
+        { "label": "Emergency Services", "icon": "fa-procedures" },
+        { "label": "Accurate Testing", "icon": "fa-microscope" },
+        { "label": "Operation Theater", "icon": "fa-briefcase-medical" }
+    ],
+    "services": [
+        {
+            "title": "Emergency Care",
+            "icon": "fa-heartbeat",
+            "description": "24/7 dedicated trauma center with rapid response team handling critical cases."
+        },
+        {
+            "title": "Operation & Surgery",
+            "icon": "fa-procedures",
+            "description": "State-of-the-art modular OTs for complex surgeries with high success rates."
+        },
+        {
+            "title": "Outdoor Checkup",
+            "icon": "fa-stethoscope",
+            "description": "Specialist Child Specialist and Gynecologist available from 9 AM to 9 PM for regular checkups."
+        },
+        {
+            "title": "Diagnostics",
+            "icon": "fa-dna",
+            "description": "Advanced laboratory and imaging services for precise diagnosis."
+        }
+    ],
+    "doctors": [
+        {
+            "name": "Dr. Irfan Ali Mirza",
+            "specialty": "M.B.B.S, RMP, DCHP Child Specialist,Registrar General Hospital Lahore",
+            "image": "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=600&q=80"
+        },
+        {
+            "name": "Dr. Nabila Irfan",
+            "specialty": "M.B.B.S, RMP Gynecologist",
+            "image": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=600&q=80"
+        }
+    ]
+}

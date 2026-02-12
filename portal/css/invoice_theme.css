@@ -1,0 +1,109 @@
+/* css/invoice_theme.css */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Poppins:wght@400;500;600&display=swap');
+
+:root {
+    --brand-cyan: #00E5FF; /* Extracted from your Index */
+    --brand-dark: #1a1a1a;
+    --brand-grey: #f4f7f6;
+    --text-main: #212529;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--brand-grey);
+    color: var(--text-main);
+    -webkit-print-color-adjust: exact !important;
+}
+
+/* THE INVOICE SHEET */
+.invoice-paper {
+    background: #fff;
+    max-width: 850px;
+    margin: 40px auto;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* HEADER STYLE (Matches your Website Hero) */
+.inv-header {
+    background: var(--brand-dark);
+    padding: 40px;
+    color: #fff;
+    border-bottom: 5px solid var(--brand-cyan);
+}
+
+.brand-logo {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 32px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #fff;
+    margin: 0;
+}
+.brand-logo span { color: var(--brand-cyan); }
+
+.inv-meta {
+    text-align: right;
+}
+.inv-number {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--brand-cyan);
+}
+
+/* TABLE STYLING */
+.table-modern {
+    width: 100%;
+    margin-top: 30px;
+    border-collapse: collapse;
+}
+.table-modern th {
+    background-color: #f8f9fa;
+    color: #666;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 12px;
+    padding: 15px;
+    border-bottom: 2px solid var(--brand-cyan);
+}
+.table-modern td {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    vertical-align: middle;
+}
+.table-modern tr:last-child td { border-bottom: none; }
+
+/* TOTALS SECTION */
+.totals-area {
+    background-color: #fcfcfc;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+.total-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    font-size: 14px;
+}
+.grand-total {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    color: var(--brand-dark);
+    border-top: 2px solid #ddd;
+    padding-top: 10px;
+    margin-top: 5px;
+}
+
+/* PRINT OPTIMIZATION */
+@media print {
+    body { background: #fff; padding: 0; margin: 0; }
+    .invoice-paper { box-shadow: none; margin: 0; max-width: 100%; width: 100%; }
+    .no-print { display: none !important; }
+    .btn { display: none !important; }
+}

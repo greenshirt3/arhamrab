@@ -1,0 +1,67 @@
+Folder PATH listing
+Volume serial number is 044B-8ABE
+C:.
+¦   about.php
+¦   auth_check.php
+¦   check_reports.php
+¦   config.php
+¦   contact.php
+¦   database.sql
+¦   departments.php
+¦   functions.php
+¦   index.php
+¦   logout.php
+¦   setup.php
+¦   structure.txt
+¦   
++---api
+¦       search.php
+¦       
++---assets
+¦       smart-search.js
+¦       style.css
+¦       
++---data
+¦       inventory.json
+¦       lab_queue.json
+¦       patients.json
+¦       prescriptions.json
+¦       users.json
+¦       visits.json
+¦       
++---doctor
+¦       dashboard.php
+¦       examine.php
+¦       login.php
+¦       patient_history.php
+¦       
++---includes
+¦       footer.php
+¦       header.php
+¦       
++---lab
+¦       dashboard.php
+¦       perform_test.php
+¦       print_report.php
+¦       radiology.php
+¦       
++---patient
+¦       book.php
+¦       dashboard.php
+¦       login.php
+¦       my_records.php
+¦       view_rx.php
+¦       
++---pharmacy
+¦       dashboard.php
+¦       inventory.php
+¦       pos.php
+¦       print_invoice.php
+¦       
++---reception
+        appointments.php
+        billing.php
+        dashboard.php
+        print_card.php
+        registration.php
+        

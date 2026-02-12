@@ -1,0 +1,305 @@
+{
+    "wedding-ali-raza": {
+        "type": "wedding",
+        "host_parents": "Mrs. Muhammad Razaq (Late)",
+        "relation": "Son",
+        "groom_bride_name": "Mr. Ali Raza",
+        "rsvp": [
+            "Mr. Haseeb Ali",
+            "Mr. Dilawar Raza",
+            "Mr. Habib Ali",
+            "Mr. Abu Bakar",
+            "Mr. Naseeb Ali"
+        ],
+        "well_wishers": [
+            "All Family Members",
+            "Cousins & Friends"
+        ],
+        "events": [
+            {
+                "name": "Mehndi",
+                "date": "Thursday, 22 Jan 2026",
+                "venue": "Home Sweet Home",
+                "address": "Qadir Colony, Jalalpur Jattan",
+                "map_link": "https://maps.app.goo.gl/Gt5LLNBKATUcJaXc8",
+                "times": [
+                    {"label": "Rasim-e-Hina", "time": "07:00 PM"},
+                    {"label": "Dinner", "time": "08:00 PM"}
+                ]
+            },
+            {
+                "name": "Barat",
+                "date": "Friday, 23 Jan 2026",
+                "venue": "Dua Marquee",
+                "address": "Gujrat Road, Jalalpur Jattan",
+                "map_link": "https://maps.app.goo.gl/nZdRnGCAuP4BjxeZ9",
+                "times": [
+                    {"label": "Sehra Bandi", "time": "11:00 AM"},
+                    {"label": "Departure", "time": "12:00 PM"}
+                ]
+            },
+            {
+                "name": "Walima",
+                "date": "Saturday, 24 Jan 2026",
+                "venue": "Dua Marquee",
+                "address": "Gujrat Road, Jalalpur Jattan",
+                "map_link": "https://maps.app.goo.gl/nZdRnGCAuP4BjxeZ9",
+                "times": [
+                    {"label": "Reception", "time": "02:00 PM"},
+                    {"label": "Lunch", "time": "02:30 PM"}
+                ]
+            }
+        ],
+        "contact_phone": "923153959811",
+        "contact_whatsapp": "923153959811",
+        "color": "#d4af37"
+    },
+    "umar-tech": {
+        "type": "store",
+        "company": "Umar Mobile Accessories Store",
+        "name": "Atiq Ahmed",
+        "phone": "923441682431",
+        "whatsapp": "923441682431",
+        "address": "Mobile Market, Jalalpur Jattan",
+        "logo": "https://cdn-icons-png.flaticon.com/512/865/865053.png",
+        "cover": "https://img.freepik.com/free-photo/technology-composition-with-cyber-monday-sales_23-2148659806.jpg",
+        "currency": "Rs.",
+        "products": [
+            {
+                "name": "20W Fast Charger",
+                "price": 2500,
+                "category": "Power",
+                "image": "https://img.freepik.com/free-photo/white-usb-charger-adapter_1101-338.jpg"
+            },
+            {
+                "name": "AirPods Pro (Copy)",
+                "price": 3500,
+                "category": "Audio",
+                "image": "https://img.freepik.com/free-photo/white-wireless-earbuds-charging-case_1101-297.jpg"
+            },
+            {
+                "name": "Transparent Case 14 PM",
+                "price": 500,
+                "category": "Cases",
+                "image": "https://img.freepik.com/free-psd/transparent-phone-case-mockup_1332-13220.jpg"
+            },
+            {
+                "name": "Data Cable Type-C",
+                "price": 800,
+                "category": "Cables",
+                "image": "https://img.freepik.com/free-photo/usb-cable-type-c_1101-421.jpg"
+            }
+        ],
+        "theme": { "primary": "#2f3542" }
+    },
+    "chandburger": {
+        "type": "food",
+        "company": "Chand Food Point",
+        "name": "Zeeshan Nazar",
+        "designation": "Best Taste in Town",
+        "phone": "923065926800",
+        "whatsapp": "923065926800",
+        "address": "Tanda road, Jalalpur Jattan",
+        "map_link": "https://maps.app.goo.gl/qWKZps98vrwDTUc98",
+        "website": "",
+        "color": "#e67e22",
+        "cover": "https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=1000",
+        "logo": "/img/chandlogo.webp",
+        "about": "Famous for our Zinger Burgers, Special Chai, and Chilled Drinks.",
+        "services": ["Dine-In", "Takeaway", "Tea Stall"],
+        "promos": ["Free Home Delivery", "Special Dodh Pati Available", "Special Zinger Burger and Zinger Shawarma"],
+        "menu": [
+            {"name": "Shami Anda Burger", "price": 170, "img": "https://arhamprinters.pk/img/shamiandaburger.webp"},
+            {"name": "Shawarma (Small)", "price": 150, "img": "https://arhamprinters.pk/img/shawarma.webp"},
+            {"name": "Shawarma (Large)", "price": 200, "img": "https://arhamprinters.pk/img/shawarma.webp"},
+            {"name": "Chicken Burger", "price": 200, "img": "https://arhamprinters.pk/img/chickenburger.webp"},
+            {"name": "Chicken Shami Burger", "price": 250, "img": "https://arhamprinters.pk/img/chickenshamiburger.webp"},
+            {"name": "Zinger Burger", "price": 350, "img": "https://arhamprinters.pk/img/zingerburger.webp"},
+            {"name": "Zinger Shawarma", "price": 350, "img": "https://arhamprinters.pk/img/zingershawarma.webp"},
+            {"name": "Sting (Regular)", "price": 80, "img": "https://arhamprinters.pk/img/stingregular.webp"},
+            {"name": "Sting (500ml)", "price": 130, "img": "https://arhamprinters.pk/img/sting500.webp"},
+            {"name": "Special Dodh Pati", "price": 80, "img": "https://arhamprinters.pk/img/dodhpati.webp"}
+        ],
+        "social": { "facebook": "#" }
+    },
+    "karachibiryani": {
+        "type": "food",
+        "company": "Karachi Naseeb Biryani",
+        "name": "Owner Name",
+        "designation": "Best Taste in Town",
+        "phone": "923006238233",
+        "whatsapp": "923006238233",
+        "address": "Tanda road, Jalalpur Jattan",
+        "map_link": "https://maps.app.goo.gl/qWKZps98vrwDTUc98",
+        "website": "",
+        "color": "#e67e22",
+        "cover": "https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=1000",
+        "logo": "/img/chandlogo.webp",
+        "about": "Special and tasty biryani in Jalalpur Jattan.",
+        "services": ["Dine-In", "Takeaway", "Free Delivery"],
+        "promos": ["Free Home Delivery", "Special and tasty Biryani in town", "Free drink with biryani"],
+        "menu": [
+            {"name": "Biryani Half Plate", "price": 170, "img": "https://arhamprinters.pk/img/biryani.webp"},
+            {"name": "Biryani Plate", "price": 200, "img": "https://arhamprinters.pk/img/biryani.webp"},
+            {"name": "Shawarma (Small)", "price": 150, "img": "https://arhamprinters.pk/img/shawarma.webp"},
+            {"name": "Shawarma (Large)", "price": 200, "img": "https://arhamprinters.pk/img/shawarma.webp"},
+            {"name": "Chicken Burger", "price": 200, "img": "https://arhamprinters.pk/img/chickenburger.webp"},
+            {"name": "Chicken Shami Burger", "price": 250, "img": "https://arhamprinters.pk/img/chickenshamiburger.webp"},
+            {"name": "Zinger Burger", "price": 350, "img": "https://arhamprinters.pk/img/zingerburger.webp"},
+            {"name": "Zinger Shawarma", "price": 350, "img": "https://arhamprinters.pk/img/zingershawarma.webp"},
+            {"name": "Sting (Regular)", "price": 80, "img": "https://arhamprinters.pk/img/stingregular.webp"},
+            {"name": "Sting (500ml)", "price": 130, "img": "https://arhamprinters.pk/img/sting500.webp"},
+            {"name": "Special Dodh Pati", "price": 80, "img": "https://arhamprinters.pk/img/dodhpati.webp"}
+        ],
+        "social": { "facebook": "#" }
+    },
+    "kph": {
+        "type": "food",
+        "company": "Kashi Pizza House",
+        "name": "Owner Name",
+        "designation": "Best Taste in Town",
+        "phone": "923000190018",
+        "whatsapp": "923000190018",
+        "address": "Circular road, Jalalpur Jattan",
+        "map_link": "https://maps.app.goo.gl/5XTxaJxUbHDaHVHh7",
+        "website": "",
+        "color": "#e67e22",
+        "cover": "https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=1000",
+        "logo": "https://arhamprinters.pk/img/kphlogo.webp",
+        "about": "Adding Taste to your Life",
+        "services": ["Dine-In", "Takeaway", "Free Delivery"],
+        "promos": ["Free Home Delivery", "Special and tasty Pizza in town", "Pizza Deals"],
+        "menu": [
+            {"name":"Classic Pizza (Small)", "price":650, "img":"https://arhamprinters.pk/img/kphpizza.webp"},
+            {"name":"Classic Pizza (Medium)", "price":1050, "img":"https://arhamprinters.pk/img/kphpizza.webp"},
+            {"name":"Classic Pizza (Large)", "price":1500, "img":"https://arhamprinters.pk/img/kphpizza.webp"},
+            {"name":"Classic Pizza (Family)","price":2000, "img":"https://arhamprinters.pk/img/kphpizza.webp"},
+            {"name":"Signature Pizza (Small)", "price":700, "img":"https://arhamprinters.pk/img/kphpizza.webp"},
+            {"name":"Signature Pizza (Medium)", "price":1150, "img":"https://arhamprinters.pk/img/kphpizza.webp"},
+            {"name":"Signature Pizza (Large)", "price":1900, "img":"https://arhamprinters.pk/img/kphpizza.webp"},
+            {"name":"Signature Pizza (Family)", "price":2200, "img":"https://arhamprinters.pk/img/kphpizza.webp"},
+            {"name":"KPH Signature Burger", "price":460, "img":"https://arhamprinters.pk/img/kphburger.webp"},
+            {"name":"Fillet Burger", "price":340, "img":"https://arhamprinters.pk/img/kphburger.webp"},
+            {"name":"Chicken Burger", "price":360, "img":"https://arhamprinters.pk/img/kphburger.webp"},
+            {"name":"Chappli Kabab Burger", "price":450, "img":"https://arhamprinters.pk/img/kphburger.webp"},
+            {"name":"Pizza Burger", "price":450, "img":"https://arhamprinters.pk/img/kphburger.webp"},
+            {"name":"Grill Burger", "price":430, "img":"https://arhamprinters.pk/img/kphburger.webp"},
+            {"name":"Mighty Burger", "price":460, "img":"https://arhamprinters.pk/img/kphburger.webp"},
+            {"name":"Special Beef Burger", "price":450, "img":"https://arhamprinters.pk/img/kphburger.webp"},
+            {"name":"Click Burger", "price":360, "img":"https://arhamprinters.pk/img/kphburger.webp"},
+            {"name":"Tower Burger", "price":600, "img":"https://arhamprinters.pk/img/kphburger.webp"},
+            {"name":"Molten Lava Burger", "price":600, "img":"https://arhamprinters.pk/img/kphburger.webp"},
+            {"name":"Zinger Burger", "price":500, "img":"https://arhamprinters.pk/img/kphburger.webp"}
+        ],
+        "social": { "facebook": "#" }
+    },
+    "sadiqfabrics": {
+        "type": "business",
+        "company": "Sadiq Fabrics",
+        "name": "Shahzad Sadiq",
+        "designation": "Proprietor",
+        "phone": "03167185897",
+        "whatsapp": "923167185897",
+        "email": "",
+        "address": "Tanda Road, Jalalpur Jattan",
+        "map_link": "https://maps.app.goo.gl/HL4afGtNJGFgRR7E7",
+        "website": "",
+        "color": "#182C61",
+        "cover": "img/sadiqfabrics.webp",
+        "logo": "img/sadiqfabrics.webp",
+        "profile_pic": "img/sadiqfabrics.webp",
+        "about": "Five Star Foam Distributor.",
+        "services": [
+            "Sofa Cloth",
+            "Curtains",
+            "Mattress",
+            "Kitchen & Office window blindes",
+            "Sofa Repairing"
+        ],
+        "social": {
+            "youtube": ""
+        }
+    },
+    "husnain-electrician": {
+        "type": "doctor",
+        "company": "Husnain Electrician and Solar Technician",
+        "cover": "https://arhamprinters.pk/img/husnaincover.webp",
+        "name": "Husnain Munir",
+        "designation": "Electrician and Solar Technician",
+        "phone": "923061470049",
+        "whatsapp": "923061470049",
+        "address": "Jalalpur Jattan, Gujrat",
+        "map_link": "https://maps.app.goo.gl/ZYRzJBTUVN5UNFo9A",
+        "logo": "https://arhamprinters.pk/img/husnain.webp",
+        "profile_pic": "https://arhamprinters.pk/img/husnain.webp",
+        "about": "Motivated Electrical Technician with hands-on training in solar PV fundamentals and OSHA safety protocols. Eager to apply technical skills in system assembly and wiring to support renewable energy projects and optimize system performance.",
+        "timings": "24/7",
+        "services": [
+            "Solar Installation",
+            "Electric Wiring",
+            "Registerd Technician"
+        ],
+        "theme": {
+            "primary": "#009432", 
+            "text": "#1e272e",
+            "background": "#f1fdf3"
+        },
+        "social": { "facebook": "#" }
+    },
+    "alhassan-dawakhana": {
+        "type": "doctor",
+        "company": "Al-Hassan Dawakhana & Pansar Store",
+        "cover": "https://arhamprinters.pk/img/drbhuttacover.webp",
+        "name": "Hakeem & Dr. Haji Imtiaz Ahmed Bhutta",
+        "designation": "F.T.J, D.H.M.S (Reg. Practitioner)",
+        "phone": "923006277598",
+        "whatsapp": "923006277598",
+        "address": "Jalalpur Jattan road, Khokha Stop, Ranewal Syedan",
+        "map_link": "https://maps.app.goo.gl/ZYRzJBTUVN5UNFo9A",
+        "logo": "https://arhamprinters.pk/img/drbhuttalogo.webp",
+        "profile_pic": "https://arhamprinters.pk/img/drbhuttasb.webp",
+        "about": "Experienced Hakeem and Homeopathic Doctor specializing in herbal and homeopathic treatments. Registered with Punjab Healthcare Commission (PHC: 52522).",
+        "timings": "Daily: 9AM - 1PM & 3PM - 7PM | Friday: 9AM - 12PM",
+        "services": [
+            "Unani Medicine (Tibb)",
+            "Homeopathic Treatment",
+            "Piles Treatment (Bawaseer)",
+            "Respiratory Care (Asthma/Breath)",
+            "Seasonal Flu & Catarrh",
+            "Herbal Pansar Store"
+        ],
+        "theme": {
+            "primary": "#009432", 
+            "text": "#1e272e",
+            "background": "#f1fdf3"
+        },
+        "social": { "facebook": "#" }
+    },
+    "rksalon": {
+        "type": "business",
+        "company": "R.K Beauty Salon",
+        "name": "R.K",
+        "designation": "Beautician",
+        "phone": "03279518975",
+        "whatsapp": "923279518975",
+        "email": "",
+        "address": "Al Manzoor Market, Tanda Road, Jalalpur Jattan",
+        "map_link": "https://maps.app.goo.gl/dAtN3sDXqbQY5att6",
+        "website": "",
+        "color": "#8854d0",
+        "cover": "img/rkcover.webp",
+        "logo": "img/rklogo.webp",
+        "profile_pic": "img/rkimg.webp",
+        "about": "Beauty in Every Strand. Specializing in cutting-edge styles and bespoke skincare for a refined look.",
+        "services": [
+            "Facial",
+            "Party Makeup",
+            "Hair Styling",
+            "Bridal Makeup"
+        ],
+        "social": {
+            "facebook": "#",
+            "youtube": "#"
+        }
+    }
+}

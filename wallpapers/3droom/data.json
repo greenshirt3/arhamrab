@@ -1,0 +1,18 @@
+{
+  "rooms": [
+    {
+      "name": "Room 1",
+      "w": 18, "h": 11, "d": 13,
+      "lighting": { "color": "#ffeeb1", "intensity": 2.8 },
+      "surfaces": {
+        "front": { "tex": "uploads/1/front.webp", "col": "#ffffff" },
+        "back":  { "tex": "uploads/1/back.webp", "col": "#ffffff" },
+        "left":  { "tex": "uploads/1/wall.webp", "col": "#ffffff" },
+        "right": { "tex": "uploads/1/wall1.webp", "col": "#ffffff" },
+        "ceil":  { "tex": "uploads/1/roof.webp", "col": "#ffffff" },
+        "floor": { "tex": "uploads/floor.webp", "col": "#ffffff" }
+      },
+      "fixtures": []
+    }
+  ]
+}

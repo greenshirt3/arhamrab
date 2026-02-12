@@ -1,0 +1,57 @@
+[
+    {
+        "id": "RX-25-7220",
+        "visit_id": "OPD-25-501",
+        "patient_id": "PAT-25-101",
+        "doctor_name": "Ali Raza",
+        "date": "2025-12-29 02:13:48",
+        "vitals": {
+            "bp": "",
+            "temp": "",
+            "weight": ""
+        },
+        "diagnosis": "",
+        "medicines": [],
+        "lab_requests": []
+    },
+    {
+        "id": "RX-25-2225",
+        "visit_id": "OPD-25-2492",
+        "patient_id": "PAT-25-2256",
+        "doctor_name": "Ali Raza",
+        "date": "2025-12-29 02:52:07",
+        "vitals": {
+            "bp": "",
+            "temp": "",
+            "weight": ""
+        },
+        "diagnosis": "dd",
+        "medicines": [
+            {
+                "name": "Panadol Extra",
+                "dose": "",
+                "dur": ""
+            }
+        ],
+        "lab_requests": []
+    },
+    {
+        "id": "RX-25-2590",
+        "visit_id": "OPD-25-7079",
+        "patient_id": "PAT-25-103",
+        "doctor_name": "Ali Raza",
+        "date": "2025-12-29 02:52:35",
+        "vitals": {
+            "bp": "",
+            "temp": "",
+            "weight": ""
+        },
+        "diagnosis": "",
+        "medicines": [],
+        "lab_requests": [
+            "CBC",
+            "LFT",
+            "X-RAY"
+        ]
+    }
+]

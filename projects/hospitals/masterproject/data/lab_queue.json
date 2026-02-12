@@ -1,0 +1,49 @@
+[
+    {
+        "id": "LAB-25-6407",
+        "visit_id": "OPD-25-7079",
+        "patient_name": "Baby Ayesha",
+        "test_name": "CBC",
+        "status": "completed",
+        "timestamp": "2025-12-29 02:52:35",
+        "technician": "Lab Technician",
+        "completed_at": "2025-12-29 02:55:10",
+        "results": [
+            {
+                "param": "Hemoglobin",
+                "value": "14",
+                "unit": "",
+                "range": "13.0 - 17.0"
+            },
+            {
+                "param": "WBC Count",
+                "value": "5000",
+                "unit": "\/cmm",
+                "range": "4,000 - 11,000"
+            },
+            {
+                "param": "Platelets",
+                "value": "200000",
+                "unit": "\/cmm",
+                "range": "150,000 - 450,000"
+            }
+        ],
+        "comments": "Results correlate clinically."
+    },
+    {
+        "id": "LAB-25-1355",
+        "visit_id": "OPD-25-7079",
+        "patient_name": "Baby Ayesha",
+        "test_name": "LFT",
+        "status": "pending",
+        "timestamp": "2025-12-29 02:52:35"
+    },
+    {
+        "id": "LAB-25-7000",
+        "visit_id": "OPD-25-7079",
+        "patient_name": "Baby Ayesha",
+        "test_name": "X-RAY",
+        "status": "pending",
+        "timestamp": "2025-12-29 02:52:35"
+    }
+]

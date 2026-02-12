@@ -1,0 +1,50 @@
+{
+    "config": {
+        "bismillah": "﷽",
+        "bismillah_text": "In the name of Allah, the Most Beneficent, the Most Merciful",
+        "host_parents": "Ch. Sardar Khan Gujjar (Grand Father)<br>Mr. & Mrs. Chairman Ch. Shaukat Gujjar",
+        "invitation_intro": "With the divine blessings of Allah, we solicit your gracious presence to grace the wedding ceremony of our beloved",
+        "event_type": "Daughter",
+        "bride_name": "Beloved Daughter",
+        "bg_music": ""
+    },
+    "lists": {
+        "looking_forward": [
+            "Mr. & Mrs. Ch. Arshad Gujjar",
+            "Mr. & Mrs. Ch. Riasat Ali (SI Punjab Police)",
+            "Mr. & Mrs. Ch. Muhammad Ashraf",
+            "Mr. & Mrs. Ch. Munawar Hussain"
+        ],
+        "rsvp_people": [
+            "Mr. Ch. Ibrar Ul Haq (UK)",
+            "All Family Members & Relatives"
+        ]
+    },
+    "events": [
+        {
+            "name": "Barat Ceremony",
+            "date": "Sunday, 15th February, 2026",
+            "islamic_date": "In Sha Allah",
+            "icon": "fa-crown",
+            "venue_name": "ANMOL MARQUEE",
+            "address": "Tanda Road, Bhagowal Kalan",
+            "map_link": "https://maps.app.goo.gl/iZG8Rkxn8Kgdo35D6",
+            "times": [
+                {"label": "Arrival of Barat", "time": "02:00 p.m"},
+                {"label": "Nikah", "time": "02:30 p.m"},
+                {"label": "Lunch", "time": "03:00 p.m"},
+                {"label": "Rukhsati", "time": "05:00 p.m"}
+            ]
+        }
+    ],
+    "contacts": {
+        "phone_1": "923016280465",
+        "phone_2": "923024702571",
+        "home_address": "KOLIA BAHARSHAH, Near Bhagowal Kalan",
+        "home_map_link": "https://maps.app.goo.gl/8iv1eXWr8EEMJvDT7"
+    },
+    "footer": {
+        "top_ticker": "Shadi Mubarak! • Requesting prayers for the couple • From: Ch. Sardar Khan Gujjar Family",
+        "bottom_credit": "Designed & Developed by Arham Printers, Domela Chowk, Jalalpur Jattan 0300-6238233"
+    }
+}

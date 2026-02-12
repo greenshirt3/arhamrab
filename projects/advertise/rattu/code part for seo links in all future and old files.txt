@@ -1,0 +1,24 @@
+<?php
+// --- UNIVERSAL SMART SEO LOADER ---
+// 1. Compatibility: Map 'Pizza Shop' data to the universal '$data' variable
+if (isset($shop_data) && !isset($data)) { $data = $shop_data; }
+
+// 2. Auto-Locate: Find 'seo.php' in current, parent, or sub-folders
+$seo_paths = [
+    'seo.php',           // Root file
+    'seo/seo.php',       // Subfolder
+    '../seo.php',        // Parent folder
+    '../seo/seo.php',    // Parent's subfolder
+    '../../seo.php',     // Grandparent folder
+    '../../seo/seo.php'  // Grandparent's subfolder
+];
+
+foreach ($seo_paths as $path) {
+    // Use __DIR__ to look relative to the current file
+    if (file_exists(__DIR__ . '/' . $path)) {
+        include_once __DIR__ . '/' . $path;
+        break; // Stop looking once found
+    }
+}
+// ----------------------------------
+?>

@@ -1,0 +1,70 @@
+{
+    "config": {
+        "bismillah": "Bismillah Hir Rahman Nir Rahim",
+        "host_parents": "Mr. & Mrs. Muhammad Ali",
+        "invitation_intro": "With the divine blessings of Allah Almighty, we solicit your gracious presence to grace the auspicious occasion of the",
+        "event_type": "Wedding Ceremony",
+        "relation_text": "of thier beloved Son",
+        "groom_name": "Ahmed Ali",
+        "bride_name": "", 
+        "bg_music": "https://arhamprinters.pk/audios/wedding.mp3"
+    },
+    "lists": {
+        "rsvp_people": [
+            "Mr. Saif Ullah",
+            "Mr. Hadi Ali",
+            "Mr. Haseeb Ahmed",
+            "Mr. Abu Bakar",
+            "Mr. Akhtar Alu"
+        ],
+        "well_wishers": [
+            "All Family Members",
+            "Cousins & Friends"
+        ]
+    },
+    "events": [
+        {
+            "name": "Mehndi",
+            "date": "Thursday, 22 Jan 2026",
+            "icon": "fa-hand-sparkles",
+            "venue_name": "Home Sweet Home",
+            "address": "Qadir Colony, Jalalpur Jattan",
+            "map_link": "https://maps.app.goo.gl/Gt5LLNBKATUcJaXc8",
+            "times": [
+                {"label": "Rasim-e-Hina", "time": "07:00 PM"},
+                {"label": "Dinner", "time": "08:00 PM"}
+            ]
+        },
+        {
+            "name": "Barat",
+            "date": "Friday, 23 Jan 2026",
+            "icon": "fa-chess-king",
+            "venue_name": "Venue Name",
+            "address": "Gujrat Road, Jalalpur Jattan",
+            "map_link": "https://maps.app.goo.gl/nZdRnGCAuP4BjxeZ9",
+            "times": [
+                {"label": "Sehra Bandi", "time": "11:00 AM"},
+                {"label": "Departure", "time": "12:00 PM"}
+            ]
+        },
+        {
+            "name": "Walima",
+            "date": "Saturday, 24 Jan 2026",
+            "icon": "fa-utensils",
+            "venue_name": "Venue Name",
+            "address": "Gujrat Road, Jalalpur Jattan",
+            "map_link": "https://maps.app.goo.gl/nZdRnGCAuP4BjxeZ9",
+            "times": [
+                {"label": "Reception", "time": "02:00 PM"},
+                {"label": "Lunch", "time": "02:30 PM"}
+            ]
+        }
+    ],
+    "contacts": {
+        "phone": "923006238233",
+        "whatsapp": "923006238233"
+    },
+    "footer": {
+        "ticker_text": "Arham Printers - Your Partner in Printing & Web Solutions | Contact: 0300-6238233 | Jalalpur Jattan"
+    }
+}

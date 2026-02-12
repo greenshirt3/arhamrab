@@ -1,0 +1,27 @@
+# ----------------------------------------------------------------------
+# Arham Finance - Apache Configuration for RabHost
+# Location: backend/public/.htaccess
+# ----------------------------------------------------------------------
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Ensure RewriteBase is set to root for budjet.arhamprinters.pk
+    RewriteBase /
+
+    # Handle Authorization Header (Crucial for JWT/Bearer tokens on Shared Hosts)
+    # This prevents the server from stripping the Bearer token before it reaches PHP
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Skip rewriting for real files and directories (like uploads/favicon)
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Route everything else to index.php
+    RewriteRule ^ index.php [QSA,L]
+</IfModule>
+
+# Disable Directory Browsing for Security
+Options -Indexes

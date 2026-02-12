@@ -1,0 +1,77 @@
+{
+    "settings": {
+        "name": "Al-Hassan Dawakhana & Pansar Store",
+        "tagline": "Unani & Homeopathic Excellence",
+        "phone": "+923006277598",
+        "whatsapp_clean": "923006277598",
+        "email": "alhassan@arhamprinters.pk",
+        "address": "Khokha Stop, Ranewal Syedan, Jalalpur Jattan Road",
+        "map_link": "https://maps.app.goo.gl/ZYRzJBTUVN5UNFo9A",
+        "emergency_text": "Daily: 9AM - 1PM & 3PM - 7PM",
+        "currency": "PKR"
+    },
+    "theme": {
+        "primary": "#009432",
+        "secondary": "#1e272e",
+        "accent": "#d4af37",
+        "font_heading": "'Playfair Display', serif",
+        "font_body": "'Plus Jakarta Sans', sans-serif"
+    },
+    "hero": {
+        "image": "https://arhamprinters.pk/img/hospitals/drbhuttacover.webp",
+        "title": "Natural Healing & Care",
+        "subtitle": "Trusted Unani & Homeopathic Treatment",
+        "cta_text": "Book Consultation",
+        "cta_link": "#appointment"
+    },
+    "about": {
+        "title": "About The Clinic",
+        "description": "Led by Hakeem & Dr. Haji Imtiaz Ahmed Bhutta, we specialize in effective herbal and homeopathic treatments. We are a trusted name in the region, fully registered with the Punjab Healthcare Commission (PHC: 52522), ensuring safe and natural recovery.",
+        "stats": [
+            { "label": "Satisfied Patients", "value": "10k+", "icon": "fa-smile" },
+            { "label": "Years Experience", "value": "25+", "icon": "fa-user-md" },
+            { "label": "Natural Remedies", "value": "100%", "icon": "fa-leaf" },
+            { "label": "Reg. PHC", "value": "52522", "icon": "fa-certificate" }
+        ]
+    },
+    "services": [
+        {
+            "title": "Unani Medicine (Tibb)",
+            "icon": "fa-mortar-pestle",
+            "desc": "Traditional Eastern medicine utilizing herbal compounds for chronic ailments."
+        },
+        {
+            "title": "Homeopathic Care",
+            "icon": "fa-vial",
+            "desc": "Holistic treatment method using diluted substances to trigger the body's natural healing."
+        },
+        {
+            "title": "Piles (Bawaseer)",
+            "icon": "fa-procedures",
+            "desc": "Effective non-surgical herbal treatment for piles and fissures."
+        },
+        {
+            "title": "Respiratory Care",
+            "icon": "fa-lungs",
+            "desc": "Specialized care for Asthma, breathing difficulties, and chronic cough."
+        },
+        {
+            "title": "Flu & Catarrh",
+            "icon": "fa-head-side-cough",
+            "desc": "Rapid herbal relief for seasonal flu, nazla, and zukam without drowsiness."
+        },
+        {
+            "title": "Pansar Store",
+            "icon": "fa-seedling",
+            "desc": "Authentic, high-grade herbs, oils, and natural ingredients available in-store."
+        }
+    ],
+    "doctors": [
+        {
+            "name": "Dr. Haji Imtiaz Ahmed Bhutta",
+            "role": "Senior Hakeem & Homeopath",
+            "qual": "F.T.J, D.H.M.S (Reg. Practitioner)",
+            "image": "https://arhamprinters.pk/img/hospitals/drbhuttasb.webp"
+        }
+    ]
+}

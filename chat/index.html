@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Arham Connect</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <link rel="icon" href="data:,">
+    
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+
+    <div id="app-root">
+        
+        <div id="view-login" class="modal">
+            <div class="glass-card">
+                <div class="icon-circle">
+                    <span class="material-icons">lock</span>
+                </div>
+                <h2>Welcome</h2>
+                <p style="opacity: 0.6; margin-bottom: 20px;">Arham Private Network</p>
+                
+                <input type="text" id="inp-username" placeholder="Username">
+                <input type="password" id="inp-pin" placeholder="PIN Code">
+                
+                <button id="btn-enter" class="btn-primary">Connect</button>
+            </div>
+        </div>
+
+        <div id="view-admin" class="modal hidden">
+            <div class="glass-card" style="width: 90%; max-width: 400px;">
+                <div class="card-header">
+                    <h3>Admin Controls</h3>
+                    <button id="btn-close-admin" class="btn-close">✕</button>
+                </div>
+                
+                <div class="admin-form">
+                    <input type="text" id="new-name" placeholder="Name">
+                    <input type="text" id="new-pin" placeholder="PIN">
+                    <select id="new-role">
+                        <option value="member">Member</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                    <button id="btn-add-user" class="btn-small">Add</button>
+                </div>
+
+                <div id="list-users" class="user-list-box">
+                    </div>
+            </div>
+        </div>
+
+        <header id="view-header" class="hidden">
+            <div class="user-info">
+                <img id="img-avatar" src="" class="avatar">
+                <div>
+                    <h3>Arham Family</h3>
+                    <span class="status-dot">Online</span>
+                </div>
+            </div>
+            <button id="btn-open-admin" class="icon-btn hidden">
+                <span class="material-icons">settings</span>
+            </button>
+        </header>
+
+        <div id="view-chat" class="hidden"></div>
+
+        <div id="view-input" class="hidden">
+            <button class="icon-btn" onclick="document.getElementById('inp-file').click()">
+                <span class="material-icons">add_photo_alternate</span>
+            </button>
+            <input type="text" id="inp-msg" placeholder="Message...">
+            <button id="btn-send" class="send-btn">
+                <span class="material-icons">send</span>
+            </button>
+            <input type="file" id="inp-file" hidden>
+        </div>
+
+    </div>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,447 @@
+{
+    "lovebitespizza": {
+        "settings": {
+            "shop_name": "Love Bites Pizza",
+            "contact_number": "03006364395",
+            "whatsapp_number": "923006238233",
+            "address": "Shahbaz Pur Road, Jalalpur Jattan (JPJ)",
+            "currency_symbol": "Rs.",
+            "delivery_fee": 50,
+            "free_delivery_over": 3000,
+            "theme_colors": {
+                 "primary": "#E31837",
+                "secondary": "#FFC107",
+                "dark": "#1a1a1a",
+                "light": "#ffffff",
+                "accent": "#28a745"
+            },
+            "social_media_handle": "lovebites"
+        },
+        "hero_banner": {
+            "headline": "Love Bites Pizza",
+            "subheadline": "Adding TASTE to Your Life",
+            "imageFile": "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=1200&q=80"
+        },
+        "categories": {
+            "Exclusive Deals": [
+                {
+                    "id": "deal1",
+                    "name": "Deal 1",
+                    "description": "1 Large Pizza Half, Fries, 1 Drink",
+                    "imageFile": "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?auto=format&fit=crop&w=800&q=80",
+                    "base_price": 1850,
+                    "is_deal": true
+                },
+                {
+                    "id": "deal2",
+                    "name": "Deal 2",
+                    "description": "1 Medium Pizza, 1 Zinger Burger, 1 Drink 1.5Ltr",
+                    "imageFile": "https://images.unsplash.com/photo-1561758033-d8f6961655f4?auto=format&fit=crop&w=800&q=80",
+                    "base_price": 2100,
+                    "is_deal": true
+                },
+                {
+                    "id": "deal3",
+                    "name": "Deal 3",
+                    "description": "4 Zinger Burgers, 1 Drink 1.5Ltr",
+                    "imageFile": "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=800&q=80",
+                    "base_price": 1400,
+                    "is_deal": true
+                },
+                {
+                    "id": "deal4",
+                    "name": "Deal 4",
+                    "description": "1 Family Pizza, 3 Zinger Burgers, 1 Drink 1.5Ltr",
+                    "imageFile": "https://images.unsplash.com/photo-1544982503-9f984c14501a?auto=format&fit=crop&w=800&q=80",
+                    "base_price": 3000,
+                    "is_deal": true
+                },
+                {
+                    "id": "deal5",
+                    "name": "Deal 5",
+                    "description": "1 Medium Pizza, 10 Pcs Hot Wings, 1 Drink 1Ltr",
+                    "imageFile": "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=800&q=80",
+                    "base_price": 1600,
+                    "is_deal": true
+                },
+                {
+                    "id": "deal6",
+                    "name": "Deal 6",
+                    "description": "1 Zinger Burger, 1 Half Fries, 1 Regular Drink",
+                    "imageFile": "https://images.unsplash.com/photo-1596662951482-0c4ba74a6df6?auto=format&fit=crop&w=800&q=80",
+                    "base_price": 480,
+                    "is_deal": true
+                },
+                {
+                    "id": "deal7",
+                    "name": "Deal 7",
+                    "description": "1 Small Pizza, 5 Pcs Hot Shots, 1 Drink 1Ltr",
+                    "imageFile": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80",
+                    "base_price": 850,
+                    "is_deal": true
+                }
+            ],
+            "Classic Flavors Pizza": [
+                {
+                    "id": "cp1",
+                    "name": "Chicken Achari",
+                    "description": "Tangy pickle flavor with chicken.",
+                    "imageFile": "https://images.unsplash.com/photo-1593560708920-63984dc36f3c?auto=format&fit=crop&w=800&q=80",
+                    "base_price": 650,
+                    "variants": [
+                        { "name": "Small 8\"", "price_adjustment": 0 },
+                        { "name": "Medium 11\"", "price_adjustment": 400 },
+                        { "name": "Large 14\"", "price_adjustment": 1000 },
+                        { "name": "Family 16\"", "price_adjustment": 1350 }
+                    ]
+                },
+                {
+                    "id": "cp2",
+                    "name": "Veggie Lover",
+                    "description": "Loaded with fresh vegetables.",
+                    "imageFile": "https://images.unsplash.com/photo-1585238342024-78d387f4a707?auto=format&fit=crop&w=800&q=80",
+                    "base_price": 650,
+                    "variants": [
+                        { "name": "Small 8\"", "price_adjustment": 0 },
+                        { "name": "Medium 11\"", "price_adjustment": 400 },
+                        { "name": "Large 14\"", "price_adjustment": 1000 },
+                        { "name": "Family 16\"", "price_adjustment": 1350 }
+                    ]
+                },
+                {
+                    "id": "cp3",
+                    "name": "Creamy Pizza",
+                    "description": "Rich creamy sauce base.",
+                    "imageFile": "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80",
+                    "base_price": 650,
+                    "variants": [
+                        { "name": "Small 8\"", "price_adjustment": 0 },
+                        { "name": "Medium 11\"", "price_adjustment": 400 },
+                        { "name": "Large 14\"", "price_adjustment": 1000 },
+                        { "name": "Family 16\"", "price_adjustment": 1350 }
+                    ]
+                },
+                {
+                    "id": "cp4",
+                    "name": "Pepperoni Pizza",
+                    "description": "Classic pepperoni slices.",
+                    "imageFile": "https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=800&q=80",
+                    "base_price": 650,
+                    "variants": [
+                        { "name": "Small 8\"", "price_adjustment": 0 },
+                        { "name": "Medium 11\"", "price_adjustment": 400 },
+                        { "name": "Large 14\"", "price_adjustment": 1000 },
+                        { "name": "Family 16\"", "price_adjustment": 1350 }
+                    ]
+                },
+                {
+                    "id": "cp5",
+                    "name": "Chicken Tikka",
+                    "description": "Traditional Tikka spices.",
+                    "imageFile": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80",
+                    "base_price": 650,
+                    "variants": [
+                        { "name": "Small 8\"", "price_adjustment": 0 },
+                        { "name": "Medium 11\"", "price_adjustment": 400 },
+                        { "name": "Large 14\"", "price_adjustment": 1000 },
+                        { "name": "Family 16\"", "price_adjustment": 1350 }
+                    ]
+                },
+                {
+                    "id": "cp6",
+                    "name": "Chicken Fajita",
+                    "description": "Spicy Fajita chicken with onions and capsicum.",
+                    "imageFile": "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=800&q=80",
+                    "base_price": 650,
+                    "variants": [
+                        { "name": "Small 8\"", "price_adjustment": 0 },
+                        { "name": "Medium 11\"", "price_adjustment": 400 },
+                        { "name": "Large 14\"", "price_adjustment": 1000 },
+                        { "name": "Family 16\"", "price_adjustment": 1350 }
+                    ]
+                },
+                {
+                    "id": "cp7",
+                    "name": "Chicken Tandoori",
+                    "description": "Smoky Tandoori flavor.",
+                    "imageFile": "https://images.unsplash.com/photo-1600028068383-ea11a7a101f3?auto=format&fit=crop&w=800&q=80",
+                    "base_price": 650,
+                    "variants": [
+                        { "name": "Small 8\"", "price_adjustment": 0 },
+                        { "name": "Medium 11\"", "price_adjustment": 400 },
+                        { "name": "Large 14\"", "price_adjustment": 1000 },
+                        { "name": "Family 16\"", "price_adjustment": 1350 }
+                    ]
+                },
+                {
+                    "id": "cp8",
+                    "name": "Peri Peri Chicken",
+                    "description": "Spicy Peri Peri sauce.",
+                    "imageFile": "https://images.unsplash.com/photo-1594007654729-407eedc4be65?auto=format&fit=crop&w=800&q=80",
+                    "base_price": 650,
+                    "variants": [
+                        { "name": "Small 8\"", "price_adjustment": 0 },
+                        { "name": "Medium 11\"", "price_adjustment": 400 },
+                        { "name": "Large 14\"", "price_adjustment": 1000 },
+                        { "name": "Family 16\"", "price_adjustment": 1350 }
+                    ]
+                }
+            ],
+            "Signature Flavors Pizza": [
+                {
+                    "id": "sp1",
+                    "name": "Malai Boti",
+                    "description": "Creamy and mild Malai Boti chicken.",
+                    "imageFile": "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80",
+                    "base_price": 700,
+                    "variants": [
+                        { "name": "Small 8\"", "price_adjustment": 0 },
+                        { "name": "Medium 11\"", "price_adjustment": 450 },
+                        { "name": "Large 14\"", "price_adjustment": 1200 },
+                        { "name": "Family 16\"", "price_adjustment": 1500 }
+                    ]
+                },
+                {
+                    "id": "sp2",
+                    "name": "Kabab Crust",
+                    "description": "Crust stuffed with kabab.",
+                    "imageFile": "https://images.unsplash.com/photo-1593504049359-74330189a345?auto=format&fit=crop&w=800&q=80",
+                    "base_price": 700,
+                    "variants": [
+                        { "name": "Small 8\"", "price_adjustment": 0 },
+                        { "name": "Medium 11\"", "price_adjustment": 450 },
+                        { "name": "Large 14\"", "price_adjustment": 1200 },
+                        { "name": "Family 16\"", "price_adjustment": 1500 }
+                    ]
+                },
+                {
+                    "id": "sp3",
+                    "name": "Cheese Crust",
+                    "description": "Crust filled with liquid cheese.",
+                    "imageFile": "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=800&q=80",
+                    "base_price": 700,
+                    "variants": [
+                        { "name": "Small 8\"", "price_adjustment": 0 },
+                        { "name": "Medium 11\"", "price_adjustment": 450 },
+                        { "name": "Large 14\"", "price_adjustment": 1200 },
+                        { "name": "Family 16\"", "price_adjustment": 1500 }
+                    ]
+                },
+                {
+                    "id": "sp4",
+                    "name": "Special Kabab",
+                    "description": "Loaded with Seekh Kabab chunks.",
+                    "imageFile": "https://images.unsplash.com/photo-1600028068383-ea11a7a101f3?auto=format&fit=crop&w=800&q=80",
+                    "base_price": 700,
+                    "variants": [
+                        { "name": "Small 8\"", "price_adjustment": 0 },
+                        { "name": "Medium 11\"", "price_adjustment": 450 },
+                        { "name": "Large 14\"", "price_adjustment": 1200 },
+                        { "name": "Family 16\"", "price_adjustment": 1500 }
+                    ]
+                },
+                {
+                    "id": "sp5",
+                    "name": "Doner Pizza",
+                    "description": "Special Doner meat topping.",
+                    "imageFile": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80",
+                    "base_price": 700,
+                    "variants": [
+                        { "name": "Small 8\"", "price_adjustment": 0 },
+                        { "name": "Medium 11\"", "price_adjustment": 450 },
+                        { "name": "Large 14\"", "price_adjustment": 1200 },
+                        { "name": "Family 16\"", "price_adjustment": 1500 }
+                    ]
+                }
+            ],
+            "Burger Zone": [
+                {
+                    "id": "bz1",
+                    "name": "KPH Signature",
+                    "base_price": 440,
+                    "imageFile": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "bz2",
+                    "name": "Fillet Burger",
+                    "base_price": 340,
+                    "imageFile": "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "bz3",
+                    "name": "Chicken Burger",
+                    "base_price": 240,
+                    "imageFile": "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "bz4",
+                    "name": "Chappli Kabab Burger",
+                    "base_price": 260,
+                    "imageFile": "https://images.unsplash.com/photo-1619250906730-a9cb579e0000?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "bz5",
+                    "name": "Pizza Burger",
+                    "base_price": 360,
+                    "imageFile": "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "bz6",
+                    "name": "Grill Burger",
+                    "base_price": 310,
+                    "imageFile": "https://images.unsplash.com/photo-1551782450-a2132b4ba21d?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "bz7",
+                    "name": "Mighty Burger",
+                    "base_price": 460,
+                    "imageFile": "https://images.unsplash.com/photo-1596662951482-0c4ba74a6df6?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "bz8",
+                    "name": "Special Beef Burger",
+                    "base_price": 450,
+                    "imageFile": "https://images.unsplash.com/photo-1553979459-d2229ba7433b?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "bz9",
+                    "name": "Click Burger",
+                    "base_price": 400,
+                    "imageFile": "https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "bz10",
+                    "name": "Tower Burger",
+                    "base_price": 570,
+                    "imageFile": "https://images.unsplash.com/photo-1625813506062-0aeb1d7a0956?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "bz11",
+                    "name": "Molten Lava Burger",
+                    "base_price": 600,
+                    "imageFile": "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "bz12",
+                    "name": "Zinger Burger",
+                    "base_price": 340,
+                    "imageFile": "https://images.unsplash.com/photo-1615297928064-24977384d0f4?auto=format&fit=crop&w=800&q=80"
+                }
+            ],
+            "Rolls & Wraps": [
+                {
+                    "id": "rw1",
+                    "name": "Tortilla Wrap",
+                    "base_price": 450,
+                    "imageFile": "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "rw2",
+                    "name": "Grilled Wrap",
+                    "base_price": 400,
+                    "imageFile": "https://images.unsplash.com/photo-1529006557810-274bc9b2fc49?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "rw3",
+                    "name": "Chicken Shawarma",
+                    "base_price": 280,
+                    "imageFile": "https://images.unsplash.com/photo-1633321769407-af3f2fdb4d54?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "rw4",
+                    "name": "Zinger Shawarma",
+                    "base_price": 340,
+                    "imageFile": "https://images.unsplash.com/photo-1561651881-d212d23c520c?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "rw5",
+                    "name": "Kababish Shawarma",
+                    "base_price": 350,
+                    "imageFile": "https://images.unsplash.com/photo-1527477396000-64bc61086c98?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "rw6",
+                    "name": "Turkish Shawarma",
+                    "base_price": 380,
+                    "imageFile": "https://images.unsplash.com/photo-1633321769407-af3f2fdb4d54?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "rw7",
+                    "name": "Turkish Paratha",
+                    "base_price": 400,
+                    "imageFile": "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "rw8",
+                    "name": "Twister",
+                    "base_price": 370,
+                    "imageFile": "https://images.unsplash.com/photo-1561651881-d212d23c520c?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "rw9",
+                    "name": "Chicken Paratha Roll",
+                    "base_price": 300,
+                    "imageFile": "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?auto=format&fit=crop&w=800&q=80"
+                }
+            ],
+            "Fried Chicken & Sides": [
+                {
+                    "id": "sd1",
+                    "name": "Hot Wings (10 Pcs)",
+                    "base_price": 580,
+                    "imageFile": "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "sd2",
+                    "name": "Honey Wings (10 Pcs)",
+                    "base_price": 550,
+                    "imageFile": "https://images.unsplash.com/photo-1608039755401-742074f0548d?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "sd3",
+                    "name": "Hot Shot (10 Pcs)",
+                    "base_price": 500,
+                    "imageFile": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "sd4",
+                    "name": "Nuggets (10 Pcs)",
+                    "base_price": 500,
+                    "imageFile": "https://images.unsplash.com/photo-1567620832903-9fc6debc209f?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "sd5",
+                    "name": "Plain Fries",
+                    "base_price": 290,
+                    "imageFile": "https://images.unsplash.com/photo-1630384060421-a431e4cad2e7?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "sd6",
+                    "name": "Loaded Fries",
+                    "base_price": 450,
+                    "imageFile": "https://images.unsplash.com/photo-1586190848861-99c8a3fb7ea5?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "sd7",
+                    "name": "Pizza Fries",
+                    "base_price": 560,
+                    "imageFile": "https://images.unsplash.com/photo-1585109649139-36680186c5d1?auto=format&fit=crop&w=800&q=80"
+                }
+            ],
+            "Pasta": [
+                {
+                    "id": "pst1",
+                    "name": "Cheese Pasta",
+                    "base_price": 600,
+                    "imageFile": "https://images.unsplash.com/photo-1612874742237-6526221588e3?auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    "id": "pst2",
+                    "name": "Crunchy Pasta",
+                    "base_price": 600,
+                    "imageFile": "https://images.unsplash.com/photo-1563379926898-05f4575a45d8?auto=format&fit=crop&w=800&q=80"
+                }
+            ]
+        }
+    }
+}

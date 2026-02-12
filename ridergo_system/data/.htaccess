@@ -1,0 +1,3 @@
+# PROTECT DATABASE FILES
+Order Deny,Allow
+Deny from all

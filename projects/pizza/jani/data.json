@@ -1,0 +1,374 @@
+{
+    "janipizza": {
+        "settings": {
+            "shop_name": "Jani Pizza Hut",
+            "contact_number": "03120644942",
+            "whatsapp_number": "923120644942",
+            "address": "Pyara stop, Fatehpur road, Gujrat",
+            "currency_symbol": "Rs.",
+            "delivery_fee": 0,
+            "free_delivery_over": 2000,
+            "theme_colors": {
+                "primary": "#FFC107",
+                "secondary": "#212121",
+                "dark": "#1a1a1a",
+                "light": "#FFF8E1",
+                "accent": "#d32f2f"
+            }
+        },
+        "hero_banner": {
+            "headline": "Jani Pizza Hut",
+            "subheadline": "Traditional Flavours & Special Stuffed Crust",
+            "imageFile": "https://images.unsplash.com/photo-1590947132387-155cc02f3212?auto=format&fit=crop&w=1200&q=80"
+        },
+        "categories": {
+            "Special Deals": [
+                {
+                    "id": "deal1",
+                    "name": "Deal 1",
+                    "description": "1 Zinger Burger, Half Fries, Regular Drink",
+                    "base_price": 500,
+                    "imageFile": "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?auto=format&fit=crop&w=800&q=80",
+                    "variants": []
+                },
+                {
+                    "id": "deal2",
+                    "name": "Deal 2",
+                    "description": "2 Large Shawarma, 1 Liter Drink",
+                    "base_price": 500,
+                    "imageFile": "https://images.unsplash.com/photo-1551782450-a2132b4ba21d?auto=format&fit=crop&w=800&q=80",
+                    "variants": []
+                },
+                {
+                    "id": "deal3",
+                    "name": "Deal 3",
+                    "description": "2 Zinger Burgers, Large Fries, 1 Liter Drink",
+                    "base_price": 1000,
+                    "imageFile": "https://images.unsplash.com/photo-1551782450-a2132b4ba21d?auto=format&fit=crop&w=800&q=80",
+                    "variants": []
+                },
+                {
+                    "id": "deal4",
+                    "name": "Deal 4",
+                    "description": "4 Regular Burger, 1 Liter Drink",
+                    "base_price": 700,
+                    "imageFile": "https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?auto=format&fit=crop&w=800&q=80",
+                    "variants": []
+                },
+                {
+                    "id": "deal5",
+                    "name": "Deal 5",
+                    "description": "4 Zinger Shawarma, 6 Nuggets, 6 Wings, 1.5 Ltr Drink",
+                    "base_price": 1850,
+                    "imageFile": "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=800&q=80",
+                    "variants": []
+                },
+                {
+                    "id": "deal6",
+                    "name": "Deal 6",
+                    "description": "4 Zinger Cheese Burger, 1 Large Fries, 1.5 Ltr Drink",
+                    "base_price": 2100,
+                    "imageFile": "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?auto=format&fit=crop&w=800&q=80",
+                    "variants": []
+                },
+                {
+                    "id": "deal7",
+                    "name": "Deal 7",
+                    "description": "6 Regular Burger, 1.5 Liter Drink",
+                    "base_price": 1050,
+                    "imageFile": "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=800&q=80",
+                    "variants": []
+                },
+                {
+                    "id": "deal8",
+                    "name": "Deal 8",
+                    "description": "6 Zinger Burger, 15 Wings / Nuggets, 1.5 Liter Drink",
+                    "base_price": 2800,
+                    "imageFile": "https://images.unsplash.com/photo-1551782450-a2132b4ba21d?auto=format&fit=crop&w=800&q=80",
+                    "variants": []
+                },
+                {
+                    "id": "deal9",
+                    "name": "Deal 9",
+                    "description": "1 Small Pizza (Trad), 1 Regular Drink",
+                    "base_price": 600,
+                    "imageFile": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80",
+                    "variants": []
+                },
+                {
+                    "id": "deal10",
+                    "name": "Deal 10",
+                    "description": "2 Small Pizza (Sp), 1 Liter Drink",
+                    "base_price": 1200,
+                    "imageFile": "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80",
+                    "variants": []
+                },
+                {
+                    "id": "deal11",
+                    "name": "Deal 11",
+                    "description": "1 Medium Pizza (Sp), 10 Wings / Nuggets, 1 Liter Drink",
+                    "base_price": 1600,
+                    "imageFile": "https://images.unsplash.com/photo-1588315029754-2dd089d39a1a?auto=format&fit=crop&w=800&q=80",
+                    "variants": []
+                },
+                {
+                    "id": "deal12",
+                    "name": "Deal 12",
+                    "description": "1 Sp Stuffed Crust (L), 1 Large BBQ Fries, 1.5 Ltr Drink",
+                    "base_price": 2000,
+                    "imageFile": "https://images.unsplash.com/photo-1576458088443-04a19bb13da6?auto=format&fit=crop&w=800&q=80",
+                    "variants": []
+                },
+                {
+                    "id": "deal13",
+                    "name": "Deal 13",
+                    "description": "1 Large Pizza (Sp), 2 Zinger Burger, 2x 1.5 Ltr Drink",
+                    "base_price": 3500,
+                    "imageFile": "https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=800&q=80",
+                    "variants": []
+                },
+                {
+                    "id": "deal14",
+                    "name": "Deal 14",
+                    "description": "2 Large Pizza (Sp), 1 Large Loaded Fries, 15 Nuggets, Drink",
+                    "base_price": 4400,
+                    "imageFile": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80",
+                    "variants": []
+                },
+                {
+                    "id": "bday1",
+                    "name": "Birthday Deal 1",
+                    "description": "1 Pound Cake, 1 Large Pizza (Sp), 2 Zinger, Drink",
+                    "base_price": 4100,
+                    "imageFile": "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80",
+                    "variants": []
+                },
+                {
+                    "id": "bday2",
+                    "name": "Birthday Deal 2",
+                    "description": "2 Pound Cake, 2 Large Pizza, Drink",
+                    "base_price": 5100,
+                    "imageFile": "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?auto=format&fit=crop&w=800&q=80",
+                    "variants": []
+                }
+            ],
+            "Traditional Flavours": [
+                {
+                    "id": "trad1",
+                    "name": "Chicken Fajita",
+                    "description": "Traditional classic fajita.",
+                    "base_price": 550,
+                    "imageFile": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80",
+                    "variants": [
+                        { "name": "Small", "price_adjustment": 0 },
+                        { "name": "Medium", "price_adjustment": 1050 },
+                        { "name": "Large", "price_adjustment": 1400 }
+                    ]
+                },
+                {
+                    "id": "trad2",
+                    "name": "Chicken Tikka",
+                    "description": "Spicy chicken tikka chunks.",
+                    "base_price": 550,
+                    "imageFile": "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80",
+                    "variants": [
+                        { "name": "Small", "price_adjustment": 0 },
+                        { "name": "Medium", "price_adjustment": 1050 },
+                        { "name": "Large", "price_adjustment": 1400 }
+                    ]
+                },
+                {
+                    "id": "trad3",
+                    "name": "Cheese Lover",
+                    "description": "Loads of cheese.",
+                    "base_price": 550,
+                    "imageFile": "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=800&q=80",
+                    "variants": [
+                        { "name": "Small", "price_adjustment": 0 },
+                        { "name": "Medium", "price_adjustment": 1050 },
+                        { "name": "Large", "price_adjustment": 1400 }
+                    ]
+                },
+                {
+                    "id": "trad4",
+                    "name": "Veggi Lover",
+                    "description": "Onions, capsicum, mushrooms, tomatoes.",
+                    "base_price": 550,
+                    "imageFile": "https://images.unsplash.com/photo-1585238342024-78d387f4a707?auto=format&fit=crop&w=800&q=80",
+                    "variants": [
+                        { "name": "Small", "price_adjustment": 0 },
+                        { "name": "Medium", "price_adjustment": 1050 },
+                        { "name": "Large", "price_adjustment": 1400 }
+                    ]
+                },
+                {
+                    "id": "trad5",
+                    "name": "Hot & Spicy",
+                    "description": "Spicy chicken with green chilies.",
+                    "base_price": 550,
+                    "imageFile": "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?auto=format&fit=crop&w=800&q=80",
+                    "variants": [
+                        { "name": "Small", "price_adjustment": 0 },
+                        { "name": "Medium", "price_adjustment": 1050 },
+                        { "name": "Large", "price_adjustment": 1400 }
+                    ]
+                }
+            ],
+            "Somewhat Special": [
+                {
+                    "id": "spec1",
+                    "name": "Super Supreme",
+                    "description": "Loaded with everything.",
+                    "base_price": 600,
+                    "imageFile": "https://images.unsplash.com/photo-1600028068383-ea11a7a101f3?auto=format&fit=crop&w=800&q=80",
+                    "variants": [
+                        { "name": "Small", "price_adjustment": 0 },
+                        { "name": "Medium", "price_adjustment": 1150 },
+                        { "name": "Large", "price_adjustment": 1600 }
+                    ]
+                },
+                {
+                    "id": "spec2",
+                    "name": "JPH Special",
+                    "description": "Jani Pizza Hut Special.",
+                    "base_price": 600,
+                    "imageFile": "https://images.unsplash.com/photo-1590947132387-155cc02f3212?auto=format&fit=crop&w=800&q=80",
+                    "variants": [
+                        { "name": "Small", "price_adjustment": 0 },
+                        { "name": "Medium", "price_adjustment": 1150 },
+                        { "name": "Large", "price_adjustment": 1600 }
+                    ]
+                },
+                {
+                    "id": "spec3",
+                    "name": "BBQ Pizza",
+                    "description": "Smoke flavor BBQ chicken.",
+                    "base_price": 600,
+                    "imageFile": "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80",
+                    "variants": [
+                        { "name": "Small", "price_adjustment": 0 },
+                        { "name": "Medium", "price_adjustment": 1150 },
+                        { "name": "Large", "price_adjustment": 1600 }
+                    ]
+                },
+                {
+                    "id": "spec4",
+                    "name": "Seekh Kebab",
+                    "description": "Pizza with Seekh Kebab chunks.",
+                    "base_price": 600,
+                    "imageFile": "https://images.unsplash.com/photo-1593504049359-74330189a345?auto=format&fit=crop&w=800&q=80",
+                    "variants": [
+                        { "name": "Small", "price_adjustment": 0 },
+                        { "name": "Medium", "price_adjustment": 1150 },
+                        { "name": "Large", "price_adjustment": 1600 }
+                    ]
+                }
+            ],
+            "Special Stuffed Crust": [
+                {
+                    "id": "stuff1",
+                    "name": "Crown Crust",
+                    "description": "Royal crown crust stuffed with kebab.",
+                    "base_price": 1300,
+                    "imageFile": "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80",
+                    "variants": [
+                        { "name": "Medium", "price_adjustment": 0 },
+                        { "name": "Large", "price_adjustment": 1700 }
+                    ]
+                },
+                {
+                    "id": "stuff3",
+                    "name": "Kebab Stuffer",
+                    "description": "Crust stuffed with kebab.",
+                    "base_price": 1300,
+                    "imageFile": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80",
+                    "variants": [
+                        { "name": "Medium", "price_adjustment": 0 },
+                        { "name": "Large", "price_adjustment": 1700 }
+                    ]
+                },
+                {
+                    "id": "stuff4",
+                    "name": "Cheese Stuffer",
+                    "description": "Crust stuffed with cheese.",
+                    "base_price": 1300,
+                    "imageFile": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80",
+                    "variants": [
+                        { "name": "Medium", "price_adjustment": 0 },
+                        { "name": "Large", "price_adjustment": 1700 }
+                    ]
+                }
+            ],
+            "Burgers": [
+                { "id": "b1", "name": "Regular Burger", "base_price": 160, "imageFile": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80" },
+                { "id": "b2", "name": "Patty Burger", "base_price": 250, "imageFile": "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?auto=format&fit=crop&w=800&q=80" },
+                { "id": "b3", "name": "Zinger Burger", "base_price": 350, "imageFile": "https://images.unsplash.com/photo-1553979459-d2229ba7433b?auto=format&fit=crop&w=800&q=80" },
+                { "id": "b4", "name": "Zinger Cheese Burger", "base_price": 400, "imageFile": "https://images.unsplash.com/photo-1605789538467-f715d58e03f9?auto=format&fit=crop&w=800&q=80" },
+                { "id": "b5", "name": "Special Zinger Burger", "base_price": 480, "imageFile": "https://images.unsplash.com/photo-1553979459-d2229ba7433b?auto=format&fit=crop&w=800&q=80" },
+                { "id": "b6", "name": "Chapli Burger + NR", "base_price": 350, "imageFile": "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=800&q=80" },
+                { "id": "b7", "name": "Grill Burger + NR", "base_price": 500, "imageFile": "https://images.unsplash.com/photo-1551782450-a2132b4ba21d?auto=format&fit=crop&w=800&q=80" },
+                { "id": "b8", "name": "Fillet Burger + NR", "base_price": 550, "imageFile": "https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?auto=format&fit=crop&w=800&q=80" }
+            ],
+            "Shawarma": [
+                { "id": "sh1", "name": "Chicken Shawarma (Small)", "base_price": 150, "imageFile": "https://images.unsplash.com/photo-1633321769407-af3f2fdb4d54?auto=format&fit=crop&w=800&q=80" },
+                { "id": "sh2", "name": "Chicken Shawarma (Large)", "base_price": 200, "imageFile": "https://images.unsplash.com/photo-1633321769407-af3f2fdb4d54?auto=format&fit=crop&w=800&q=80" },
+                { "id": "sh3", "name": "Chicken Cheese Shawarma", "base_price": 300, "imageFile": "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=800&q=80" },
+                { "id": "sh4", "name": "Zinger Shawarma", "base_price": 300, "imageFile": "https://images.unsplash.com/photo-1561651881-d212d23c520c?auto=format&fit=crop&w=800&q=80" },
+                { "id": "sh5", "name": "Zinger Cheese Shawarma", "base_price": 370, "imageFile": "https://images.unsplash.com/photo-1529006557810-274bc9b2fc49?auto=format&fit=crop&w=800&q=80" }
+            ],
+            "Starters": [
+                { "id": "st1", "name": "Hot Wings (10 pcs)", "base_price": 500, "imageFile": "https://images.unsplash.com/photo-1527477396000-64bc61086c98?auto=format&fit=crop&w=800&q=80" },
+                { "id": "st2", "name": "Nuggets (10 pcs)", "base_price": 500, "imageFile": "https://images.unsplash.com/photo-1567620832903-9fc6debc209f?auto=format&fit=crop&w=800&q=80" },
+                { "id": "st3", "name": "Hot Wings (6 pcs)", "base_price": 350, "imageFile": "https://images.unsplash.com/photo-1527477396000-64bc61086c98?auto=format&fit=crop&w=800&q=80" },
+                { "id": "st4", "name": "Nuggets (6 pcs)", "base_price": 350, "imageFile": "https://images.unsplash.com/photo-1567620832903-9fc6debc209f?auto=format&fit=crop&w=800&q=80" },
+                { "id": "st5", "name": "Cheese Stuffer Stick", "base_price": 500, "imageFile": "https://images.unsplash.com/photo-1531749668029-2db88e4276c7?auto=format&fit=crop&w=800&q=80" },
+                { "id": "st6", "name": "Mexican Sandwich", "base_price": 600, "imageFile": "https://images.unsplash.com/photo-1559847844-5315695dadae?auto=format&fit=crop&w=800&q=80" }
+            ],
+            "Fries": [
+                {
+                    "id": "fr1",
+                    "name": "Simple Fries",
+                    "base_price": 180,
+                    "imageFile": "https://images.unsplash.com/photo-1630384060421-a431e4cad2e7?auto=format&fit=crop&w=800&q=80",
+                    "variants": [
+                        { "name": "Small", "price_adjustment": 0 },
+                        { "name": "Large", "price_adjustment": 250 }
+                    ]
+                },
+                {
+                    "id": "fr2",
+                    "name": "BBQ Fries",
+                    "base_price": 230,
+                    "imageFile": "https://images.unsplash.com/photo-1585109649139-36680186c5d1?auto=format&fit=crop&w=800&q=80",
+                    "variants": [
+                        { "name": "Small", "price_adjustment": 0 },
+                        { "name": "Large", "price_adjustment": 300 }
+                    ]
+                },
+                {
+                    "id": "fr3",
+                    "name": "Loaded Fries",
+                    "base_price": 450,
+                    "imageFile": "https://images.unsplash.com/photo-1586190848861-99c8a3fb7ea5?auto=format&fit=crop&w=800&q=80",
+                    "variants": [
+                        { "name": "Small", "price_adjustment": 0 },
+                        { "name": "Large", "price_adjustment": 550 }
+                    ]
+                }
+            ],
+            "Extra Topping": [
+                {
+                    "id": "top1",
+                    "name": "Extra Topping",
+                    "base_price": 70,
+                    "imageFile": "https://images.unsplash.com/photo-1518779578993-ec3579fee397?auto=format&fit=crop&w=800&q=80",
+                    "variants": [
+                        { "name": "Small", "price_adjustment": 0 },
+                        { "name": "Medium", "price_adjustment": 100 },
+                        { "name": "Large", "price_adjustment": 150 }
+                    ]
+                }
+            ]
+        }
+    }
+}

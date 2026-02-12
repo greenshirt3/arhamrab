@@ -1,0 +1,107 @@
+<?php
+include 'config.php';
+$id = $_GET['id'];
+$sql = "SELECT orders.*, services.name_en FROM orders JOIN services ON orders.service_id = services.id WHERE orders.id = $id";
+$order = $conn->query($sql)->fetch_assoc();
+$balance = $order['total_fee'] - $order['paid_amount'];
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Invoice #<?php echo $order['tracking_id']; ?></title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+        body { font-family: 'Inter', sans-serif; -webkit-print-color-adjust: exact; }
+        @media print { 
+            .no-print { display: none; } 
+            body { padding: 0; background: white; }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-8">
+
+    <div class="max-w-3xl mx-auto mb-6 text-right no-print">
+        <button onclick="window.print()" class="bg-blue-600 text-white px-6 py-2 rounded shadow hover:bg-blue-700">
+            <i class="fas fa-print mr-2"></i> Print Invoice
+        </button>
+        <a href="admin_orders.php" class="ml-4 text-gray-600 underline">Back</a>
+    </div>
+
+    <div class="max-w-3xl mx-auto bg-white p-12 shadow-lg rounded-lg border border-gray-200">
+        
+        <div class="flex justify-between items-start mb-12">
+            <div>
+                <h1 class="text-3xl font-bold text-gray-800 tracking-tight">INVOICE</h1>
+                <p class="text-gray-500 mt-1">Receipt #<?php echo $order['id']; ?></p>
+            </div>
+            <div class="text-right">
+                <h2 class="text-xl font-bold text-[#0F3D3E]">MIRZA JI PROPERTY</h2>
+                <p class="text-gray-500 text-sm">Opposite Faysal Bank, Benazir Chowk</p>
+                <p class="text-gray-500 text-sm">Jalalpur Jattan, Gujrat</p>
+                <p class="text-gray-500 text-sm">0300-7329510</p>
+            </div>
+        </div>
+
+        <div class="flex justify-between border-t border-b border-gray-100 py-8 mb-8">
+            <div>
+                <p class="text-xs font-bold text-gray-400 uppercase">Billed To</p>
+                <p class="font-bold text-lg text-gray-800"><?php echo $order['customer_name']; ?></p>
+                <p class="text-gray-500"><?php echo $order['phone']; ?></p>
+                <p class="text-gray-500">CNIC: <?php echo $order['cnic'] ? $order['cnic'] : 'N/A'; ?></p>
+            </div>
+            <div class="text-right">
+                <p class="text-xs font-bold text-gray-400 uppercase">Tracking ID</p>
+                <p class="font-bold text-xl text-[#0F3D3E]"><?php echo $order['tracking_id']; ?></p>
+                <p class="text-xs font-bold text-gray-400 uppercase mt-4">Date Issued</p>
+                <p class="text-gray-500"><?php echo date("F d, Y", strtotime($order['created_at'])); ?></p>
+            </div>
+        </div>
+
+        <table class="w-full mb-8">
+            <thead>
+                <tr class="bg-gray-50 text-left">
+                    <th class="p-4 text-xs font-bold text-gray-500 uppercase">Description</th>
+                    <th class="p-4 text-xs font-bold text-gray-500 uppercase text-right">Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="border-b border-gray-100">
+                    <td class="p-4">
+                        <p class="font-bold text-gray-800"><?php echo $order['name_en']; ?></p>
+                        <p class="text-sm text-gray-500">Govt Fees & Professional Charges</p>
+                    </td>
+                    <td class="p-4 text-right font-bold text-gray-800">
+                        Rs. <?php echo number_format($order['total_fee']); ?>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="flex justify-end mb-12">
+            <div class="w-64">
+                <div class="flex justify-between py-2">
+                    <span class="text-gray-500">Subtotal</span>
+                    <span class="font-bold text-gray-800">Rs. <?php echo number_format($order['total_fee']); ?></span>
+                </div>
+                <div class="flex justify-between py-2 border-b border-gray-200">
+                    <span class="text-gray-500">Paid Amount</span>
+                    <span class="text-green-600">- Rs. <?php echo number_format($order['paid_amount']); ?></span>
+                </div>
+                <div class="flex justify-between py-4">
+                    <span class="font-bold text-xl text-gray-800">Balance Due</span>
+                    <span class="font-bold text-xl <?php echo $balance > 0 ? 'text-red-600' : 'text-gray-800'; ?>">
+                        Rs. <?php echo number_format($balance); ?>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center text-gray-400 text-sm mt-12">
+            <p>Thank you for your business.</p>
+            <p class="mt-2 text-xs">Generated by Arham Printers Portal System.</p>
+        </div>
+
+    </div>
+</body>
+</html>

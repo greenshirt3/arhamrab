@@ -1,0 +1,42 @@
+[
+    {
+        "id": 101,
+        "name": "iPhone 15 Pro Max",
+        "brand": "Apple",
+        "price": 545000,
+        "stock": 5,
+        "image": "https:\/\/images.unsplash.com\/photo-1696446701796-da61225697cc?w=600",
+        "category": "Mobile",
+        "specs": "256GB | Titanium"
+    },
+    {
+        "id": 102,
+        "name": "Samsung S24 Ultra",
+        "brand": "Samsung",
+        "price": 420000,
+        "stock": 8,
+        "image": "https:\/\/images.unsplash.com\/photo-1707227137357-19d20c355886?w=600",
+        "category": "Mobile",
+        "specs": "12GB | AI Features"
+    },
+    {
+        "id": 103,
+        "name": "AirPods Pro 2",
+        "brand": "Apple",
+        "price": 68000,
+        "stock": 20,
+        "image": "https:\/\/images.unsplash.com\/photo-1600294037681-c80b4cb5b434?w=600",
+        "category": "Accessories",
+        "specs": "USB-C MagSafe"
+    },
+    {
+        "id": 104,
+        "name": "Pixel 8 Pro",
+        "brand": "Google",
+        "price": 280000,
+        "stock": 3,
+        "image": "https:\/\/images.unsplash.com\/photo-1696320092305-b0b230238e87?w=600",
+        "category": "Mobile",
+        "specs": "Obsidian | 128GB"
+    }
+]

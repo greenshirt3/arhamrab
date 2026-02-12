@@ -1,0 +1,30 @@
+{
+    "shop_info": {
+        "name": "Khizar Autos",
+        "tagline": "Expert Bike, Qingqi, Loader and Auto Rikshaw Tuning & Repair",
+        "owner": "Ustad Chand",
+        "phone": "923036016990",
+        "address": "Tanda Road, Jalalpur Jattan",
+        "map_link": "https://maps.app.goo.gl/hQZ1Sai91jSMhVW37",
+        "open_hours": "9:00 AM - 9:00 PM",
+        "is_open": true
+    },
+    "services": [
+        { "name": "70cc Tuning", "price": "Rs. 300", "icon": "fa-wrench" },
+        { "name": "125cc Tuning", "price": "Rs. 500", "icon": "fa-motorcycle" },
+        { "name": "Oil Change (Service)", "price": "Free", "note": "With Oil Purchase", "icon": "fa-oil-can" },
+        { "name": "Puncture", "price": "Rs. 100", "icon": "fa-circle-notch" },
+        { "name": "Carburetor Wash", "price": "Rs. 200", "icon": "fa-soap" },
+        { "name": "Engine Overhaul", "price": "Estimate", "note": "Depends on parts", "icon": "fa-cogs" }
+    ],
+    "products": [
+        { "name": "Atlas Honda Oil", "price": "Rs. 850" },
+        { "name": "Havoline Oil", "price": "Rs. 900" },
+        { "name": "Back Light (70cc)", "price": "Rs. 450" }
+    ],
+    "theme": {
+        "primary": "#FF0000", 
+        "dark": "#1a1a1a",
+        "text": "#ffffff"
+    }
+}

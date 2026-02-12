@@ -1,0 +1,1 @@
+<?php ini_set('display_errors','1'); error_reporting(E_ALL); require __DIR__ . '/../api/bootstrap.php'; $hc = new Controllers\HealthController(); echo json_encode($hc->ok()); ?>

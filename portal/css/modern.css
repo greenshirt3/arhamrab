@@ -1,0 +1,61 @@
+/* css/modern.css */
+:root {
+    --brand-dark: #212529;
+    --brand-cyan: #00E5FF;
+    --glass-bg: rgba(255, 255, 255, 0.95);
+    --glass-border: 1px solid rgba(255, 255, 255, 0.5);
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+body {
+    background-color: #f0f2f5;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: #333;
+}
+
+/* Glass Panel Effect */
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: var(--glass-border);
+    box-shadow: var(--shadow);
+    border-radius: 15px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    transition: transform 0.2s;
+}
+
+.glass-panel:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+}
+
+/* Hover Effects for Cards */
+.hover-effect {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.hover-effect:hover {
+    background: linear-gradient(135deg, #212529 0%, #000 100%);
+    transform: scale(1.03);
+}
+.hover-effect:hover h5, .hover-effect:hover i {
+    color: #00E5FF !important;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #212529;
+    border-color: #212529;
+}
+.btn-primary:hover {
+    background-color: #000;
+    border-color: #000;
+}
+.rounded-pill { border-radius: 50px !important; }
+
+/* Table Styling */
+.table-hover tbody tr:hover {
+    background-color: rgba(0, 229, 255, 0.05);
+}

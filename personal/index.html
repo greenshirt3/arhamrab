@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>The Arham Prism Sky</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- VIBRANT STYLING --- */
+        :root {
+            --primary: #00a8ff;
+            --bg: #87CEEB; /* Sky Blue */
+        }
+
+        body { 
+            margin: 0; overflow: hidden; background: linear-gradient(to bottom, #87CEEB, #f7f7f7);
+            font-family: 'Poppins', sans-serif; color: #333;
+        }
+
+        #canvas-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+
+        /* BRIGHT LOADING SCREEN */
+        #loader {
+            position: fixed; inset: 0; background: white; z-index: 9999;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            transition: opacity 1s ease;
+        }
+        .loader-text { 
+            font-weight: 900; font-size: 2rem; color: transparent; 
+            background: linear-gradient(45deg, #ff00cc, #3333ff, #00ccff);
+            -webkit-background-clip: text; background-clip: text;
+            animation: hueShift 3s infinite linear;
+        }
+
+        /* UI LAYER */
+        .ui-layer {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 10;
+            pointer-events: none; padding: 30px; box-sizing: border-box;
+            display: flex; flex-direction: column; justify-content: space-between;
+        }
+
+        .header h1 { 
+            font-weight: 900; letter-spacing: 2px; text-transform: uppercase; margin: 0; 
+            color: white; text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        /* BIO CARD */
+        #bio-card {
+            position: absolute; top: 50%; right: 5%; transform: translateY(-50%) translateX(50px);
+            width: 400px; padding: 30px;
+            background: rgba(255, 255, 255, 0.8); 
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            opacity: 0; transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            text-align: left;
+        }
+        #bio-card.active { opacity: 1; transform: translateY(-50%) translateX(0); }
+
+        .bio-role-badge {
+            display: inline-block; padding: 5px 15px; border-radius: 30px;
+            background: var(--primary); color: white; font-size: 0.8rem; font-weight: 700;
+            margin-bottom: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .bio-name { font-weight: 900; font-size: 3rem; margin: 0 0 10px 0; line-height: 1; color: #222; }
+        .bio-desc { font-size: 1rem; line-height: 1.6; color: #555; }
+
+        /* SCROLL HINT */
+        .scroll-hint {
+            position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+            color: white; font-weight: 700; text-transform: uppercase; letter-spacing: 2px;
+            animation: bounce 2s infinite; text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        @media (max-width: 768px) {
+            #bio-card { 
+                top: auto; bottom: 5%; right: 5%; left: 5%; 
+                width: auto; transform: translateY(50px);
+            }
+            #bio-card.active { transform: translateY(0); }
+            .bio-name { font-size: 2.2rem; }
+        }
+
+        @keyframes hueShift { 0% { filter: hue-rotate(0deg); } 100% { filter: hue-rotate(360deg); } }
+        @keyframes bounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(10px); } }
+    </style>
+</head>
+<body>
+
+    <div id="loader">
+        <div class="loader-text">ARHAM PRISM SKY</div>
+    </div>
+
+    <div class="ui-layer">
+        <div class="header"><h1>Family Universe</h1></div>
+        
+        <div id="bio-card">
+            <span class="bio-role-badge" id="ui-role">Role</span>
+            <h2 class="bio-name" id="ui-name">Name</h2>
+            <p class="bio-desc" id="ui-desc">Description.</p>
+        </div>
+
+        <div class="scroll-hint">Fly Down</div>
+    </div>
+
+    <div id="canvas-container"></div>
+
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+        import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+        import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+
+        // --- VIBRANT DATA ---
+        const FAMILY = [
+            { name: "Saif Ullah", role: "The Visionary", desc: "Founder of Arham Printers. Building the future with bold vision.", img: "assets/saif.jpg", color: 0x00f2ff }, // Cyan Neon
+            { name: "Khadija Bibi", role: "The Heart", desc: "The guiding light of compassion and unity.", img: "assets/khadija.jpg", color: 0xff00ff }, // Magenta Neon
+            { name: "Ayat Fatima", role: "Eldest Daughter", desc: "Brilliant intelligence setting the standard.", img: "assets/ayat.jpg", color: 0xffd700 }, // Gold Neon
+            { name: "Iman Fatima", role: "Creative Spirit", desc: "Vibrant energy and joy personified.", img: "assets/iman.jpg", color: 0x39ff14 }, // Lime Neon
+            { name: "Muhammad Arham", role: "The Legacy", desc: "The future moving forward.", img: "assets/arham.jpg", color: 0xff4500 } // Orange Neon
+        ];
+
+        const isMobile = window.innerWidth < 768;
+
+        // --- BRIGHT SCENE SETUP ---
+        const scene = new THREE.Scene();
+        // Sky gradient background
+        const vertexShader = `
+            varying vec3 vWorldPosition;
+            void main() {
+                vec4 worldPosition = modelMatrix * vec4( position, 1.0 );
+                vWorldPosition = worldPosition.xyz;
+                gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+            }`;
+        const fragmentShader = `
+            uniform vec3 topColor;
+            uniform vec3 bottomColor;
+            uniform float offset;
+            uniform float exponent;
+            varying vec3 vWorldPosition;
+            void main() {
+                float h = normalize( vWorldPosition + offset ).y;
+                gl_FragColor = vec4( mix( bottomColor, topColor, max( pow( max( h , 0.0), exponent ), 0.0 ) ), 1.0 );
+            }`;
+        const uniforms = {
+            topColor: { value: new THREE.Color(0x0077ff) },
+            bottomColor: { value: new THREE.Color(0xffffff) },
+            offset: { value: 33 },
+            exponent: { value: 0.6 }
+        };
+        const skyGeo = new THREE.SphereGeometry(500, 32, 15);
+        const skyMat = new THREE.ShaderMaterial({ vertexShader, fragmentShader, uniforms, side: THREE.BackSide });
+        scene.add(new THREE.Mesh(skyGeo, skyMat));
+
+        // Use fog to blend distant objects into the bright sky
+        scene.fog = new THREE.Fog(0xffffff, 40, 120);
+
+        const camera = new THREE.PerspectiveCamera(isMobile? 70 : 50, window.innerWidth/window.innerHeight, 0.1, 1000);
+        camera.position.set(0, 0, 30);
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 1.1;
+        document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+        // --- POST PROCESSING (Bright Bloom) ---
+        const composer = new EffectComposer(renderer);
+        composer.addPass(new RenderPass(scene, camera));
+        const bloom = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.5, 0.4, 0.85);
+        bloom.threshold = 0.7;
+        bloom.strength = 0.5; // Soft glow
+        bloom.radius = 0.8;
+        composer.addPass(bloom);
+
+        // --- BRIGHT LIGHTING ---
+        const ambient = new THREE.HemisphereLight(0xffffff, 0x444444, 1); // Sky/Ground light
+        scene.add(ambient);
+        const sunLight = new THREE.DirectionalLight(0xffffff, 2);
+        sunLight.position.set(50, 100, 50);
+        scene.add(sunLight);
+
+        // --- ASSETS & MATERIALS ---
+        const textureLoader = new THREE.TextureLoader();
+
+        // New Colorful Fallback
+        function createColorfulPlaceholder(name, colorHex) {
+            const c = document.createElement('canvas'); c.width=512; c.height=512;
+            const ctx = c.getContext('2d');
+            const grd = ctx.createLinearGradient(0,0,512,512);
+            grd.addColorStop(0, '#' + colorHex.toString(16));
+            grd.addColorStop(1, '#00d2ff');
+            ctx.fillStyle = grd; ctx.fillRect(0,0,512,512);
+            ctx.fillStyle = 'white'; ctx.font = 'bold 120px Poppins';
+            ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+            ctx.fillText(name.charAt(0), 256, 256);
+            const tex = new THREE.CanvasTexture(c);
+            tex.colorSpace = THREE.SRGBColorSpace;
+            return tex;
+        }
+
+        // The Prism Material (Refractive Glass)
+        const prismMatBase = new THREE.MeshPhysicalMaterial({
+            color: 0xffffff, transmission: 1, opacity: 1, metalness: 0, roughness: 0,
+            ior: 1.6, thickness: 3, envMapIntensity: 2,
+            dispersion: 0.5 // This causes the rainbow effect
+        });
+
+        const objects = [];
+        const Z_SPACING = 30;
+
+        FAMILY.forEach((member, i) => {
+            const z = -(i * Z_SPACING);
+            const x = (Math.random() - 0.5) * 10; // Random scatter
+            const y = (Math.random() - 0.5) * 10;
+
+            const group = new THREE.Group();
+            group.position.set(x, y, z);
+
+            // 1. The Geometric Prism Holder
+            // Use a complex shape for more refraction facets
+            const geom = new THREE.IcosahedronGeometry(5, 0); 
+            const prism = new THREE.Mesh(geom, prismMatBase);
+            group.add(prism);
+
+            // 2. The Photo Inside
+            const photoGeo = new THREE.PlaneGeometry(6, 6);
+            const photoMat = new THREE.MeshBasicMaterial({ side: THREE.DoubleSide });
+            
+            textureLoader.load(member.img, 
+                (tex) => { tex.colorSpace = THREE.SRGBColorSpace; photoMat.map = tex; photoMat.needsUpdate =true; },
+                undefined,
+                () => { photoMat.map = createColorfulPlaceholder(member.name, member.color); photoMat.needsUpdate=true;}
+            );
+            const photo = new THREE.Mesh(photoGeo, photoMat);
+            group.add(photo);
+
+            // 3. Colorful Aura Light
+            const light = new THREE.PointLight(member.color, 5, 20);
+            group.add(light);
+
+            scene.add(group);
+            objects.push({ group, prism, photo, data: member, zPos: z });
+        });
+
+        // --- FLOATING CLOUDS (Low Poly) ---
+        const cloudGeo = new THREE.DodecahedronGeometry(1,0);
+        const cloudMat = new THREE.MeshLambertMaterial({ color: 0xffffff, transparent: true, opacity: 0.8 });
+        for(let i=0; i<100; i++) {
+            const cloud = new THREE.Mesh(cloudGeo, cloudMat);
+            cloud.position.set((Math.random()-0.5)*200, (Math.random()-0.5)*100, (Math.random()-0.5)*300 - 50);
+            cloud.scale.setScalar(Math.random() * 5 + 2);
+            scene.add(cloud);
+        }
+
+        // --- FLYING MECHANICS ---
+        let scrollPos = 0;
+        let targetScrollPos = 0;
+        let activeIndex = -1;
+
+        window.addEventListener('wheel', (e) => {
+            targetScrollPos += e.deltaY * 0.05;
+            // Limit flight path
+            targetScrollPos = Math.max(0, Math.min((FAMILY.length - 0.5) * Z_SPACING, targetScrollPos));
+        });
+
+        let touchY = 0;
+        window.addEventListener('touchstart', e => touchY = e.touches[0].clientY, {passive:false});
+        window.addEventListener('touchmove', e => {
+            const delta = (touchY - e.touches[0].clientY) * 0.2;
+            targetScrollPos += delta;
+            targetScrollPos = Math.max(0, Math.min((FAMILY.length - 0.5) * Z_SPACING, targetScrollPos));
+            touchY = e.touches[0].clientY;
+        }, {passive:false});
+
+
+        // --- ANIMATION ---
+        const clock = new THREE.Clock();
+
+        function animate() {
+            const time = clock.getElapsedTime();
+
+            // Smooth Fly
+            scrollPos += (targetScrollPos - scrollPos) * 0.05;
+            camera.position.z = 30 - scrollPos;
+
+            // Gentle camera float
+            camera.position.x = Math.sin(time * 0.5) * 2;
+            camera.position.y = Math.cos(time * 0.5) * 2;
+
+            let closestIndex = -1;
+            let minDistance = Infinity;
+
+            objects.forEach((obj, i) => {
+                // Rotate Prisms
+                obj.prism.rotation.x = time * 0.3 + i;
+                obj.prism.rotation.y = time * 0.5 + i;
+
+                // Photo always faces camera
+                obj.photo.lookAt(camera.position);
+
+                // Distance check for UI activation
+                // Calculate distance along Z axis relative to camera
+                const distToCam = Math.abs(obj.group.position.z - camera.position.z);
+
+                if (distToCam < minDistance) {
+                    minDistance = distToCam;
+                    closestIndex = i;
+                }
+
+                // Scale effect based on proximity
+                let scale = 1;
+                if (distToCam < 10) {
+                    scale = 1 + (1.5 * (1 - distToCam/10));
+                    obj.prism.material.dispersion = 0.8; // More rainbows when close
+                } else {
+                     obj.prism.material.dispersion = 0.2;
+                }
+                obj.group.scale.setScalar(scale);
+            });
+
+            if (minDistance < 15 && activeIndex !== closestIndex) {
+                updateUI(FAMILY[closestIndex]);
+                activeIndex = closestIndex;
+            }
+
+            composer.render();
+            requestAnimationFrame(animate);
+        }
+
+        function updateUI(data) {
+            const card = document.getElementById('bio-card');
+            card.classList.remove('active');
+            card.style.borderColor = '#' + data.color.toString(16);
+            setTimeout(() => {
+                document.getElementById('ui-role').innerText = data.role;
+                document.getElementById('ui-role').style.background = '#' + data.color.toString(16);
+                document.getElementById('ui-name').innerText = data.name;
+                document.getElementById('ui-desc').innerText = data.desc;
+                card.classList.add('active');
+            }, 600);
+        }
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            composer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        setTimeout(() => {
+            document.getElementById('loader').style.opacity = 0;
+            setTimeout(() => document.getElementById('loader').style.display = 'none', 1000);
+            animate();
+        }, 1000);
+
+    </script>
+</body>
+</html>

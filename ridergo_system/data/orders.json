@@ -1,0 +1,31 @@
+[
+    {
+        "id": 30355,
+        "shop_id": "lovebitespizza",
+        "shop_name": "Love Bites Pizza",
+        "customer_name": "Saif Ullah (03006238233)",
+        "items": [
+            {
+                "uid": "deal2",
+                "name": "Deal 2",
+                "var": null,
+                "price": 2100,
+                "img": "https:\/\/images.unsplash.com\/photo-1561758033-d8f6961655f4?auto=format&fit=crop&w=800&q=80",
+                "qty": 1
+            },
+            {
+                "uid": "deal4",
+                "name": "Deal 4",
+                "var": null,
+                "price": 3000,
+                "img": "https:\/\/images.unsplash.com\/photo-1544982503-9f984c14501a?auto=format&fit=crop&w=800&q=80",
+                "qty": 1
+            }
+        ],
+        "total": 5150,
+        "note": "Qadir Colony, Jalal Pur Jattan",
+        "status": "Delivered",
+        "timestamp": "2026-01-16 11:05:53",
+        "rider_id": "R01"
+    }
+]

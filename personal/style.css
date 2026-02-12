@@ -1,0 +1,96 @@
+:root {
+    --gold: #D4AF37;
+    --dark: #050505;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    overflow: hidden; /* We handle scroll via JS */
+    background-color: var(--dark);
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+}
+
+#webgl {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    outline: none;
+}
+
+/* LOADING SCREEN */
+#loader {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: #000;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 1s ease-out;
+}
+
+.loader-content { text-align: center; }
+
+h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 3rem;
+    color: var(--gold);
+    letter-spacing: 10px;
+    margin-bottom: 20px;
+}
+
+.bar-container {
+    width: 200px;
+    height: 2px;
+    background: #222;
+    margin: 0 auto 15px auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.bar {
+    width: 100%;
+    height: 100%;
+    background: var(--gold);
+    transform: translateX(-100%);
+    animation: load 2s ease-in-out forwards;
+}
+
+@keyframes load {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(0%); }
+}
+
+/* SCROLL INDICATOR */
+.scroll-indicator {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    opacity: 0;
+    animation: fadeIn 2s 2.5s forwards;
+}
+
+.scroll-indicator span {
+    writing-mode: vertical-rl;
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,0.5);
+}
+
+.scroll-indicator .line {
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+}
+
+@keyframes fadeIn { to { opacity: 1; } }

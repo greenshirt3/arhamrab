@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>The Ancestral Helix</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/",
+            "@tweenjs/tween.js": "https://unpkg.com/@tweenjs/tween.js@23.1.1/dist/tween.esm.js"
+        }
+    }
+    </script>
+
+    <style>
+        body { margin: 0; overflow: hidden; background: #000; font-family: 'Rajdhani', sans-serif; }
+        #canvas-container { width: 100vw; height: 100vh; position: fixed; top: 0; left: 0; z-index: 1; }
+
+        /* UI Overlay */
+        .ui-layer { position: fixed; z-index: 10; width: 100%; height: 100%; pointer-events: none; }
+        
+        /* Header */
+        .header { position: absolute; top: 20px; left: 30px; pointer-events: auto; }
+        h1 { color: #fff; margin: 0; font-family: 'Orbitron', sans-serif; text-transform: uppercase; letter-spacing: 4px; font-size: 1.5rem; text-shadow: 0 0 10px #00d4ff; }
+        .subtitle { color: #888; font-size: 0.9rem; letter-spacing: 2px; }
+
+        /* Search Bar */
+        .search-container { position: absolute; top: 20px; right: 30px; pointer-events: auto; display: flex; gap: 10px; }
+        input { background: rgba(0,0,0,0.5); border: 1px solid #333; color: #fff; padding: 10px 20px; border-radius: 30px; font-family: 'Rajdhani', sans-serif; width: 200px; transition: 0.3s; backdrop-filter: blur(5px); }
+        input:focus { border-color: #00d4ff; outline: none; box-shadow: 0 0 15px rgba(0, 212, 255, 0.3); width: 250px; }
+        .btn { background: rgba(0, 212, 255, 0.1); border: 1px solid #00d4ff; color: #00d4ff; padding: 0 20px; border-radius: 30px; cursor: pointer; transition: 0.3s; font-family: 'Orbitron', sans-serif; font-size: 0.8rem; }
+        .btn:hover { background: #00d4ff; color: #000; box-shadow: 0 0 20px #00d4ff; }
+
+        /* Controls */
+        .controls { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; gap: 20px; pointer-events: auto; }
+        .control-btn { background: rgba(0,0,0,0.6); border: 1px solid #444; color: #fff; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; cursor: pointer; transition: 0.3s; backdrop-filter: blur(5px); }
+        .control-btn:hover { border-color: #fff; transform: scale(1.1); }
+        .control-btn.active { border-color: #00d4ff; color: #00d4ff; box-shadow: 0 0 15px rgba(0,212,255,0.5); }
+
+        /* Info Card (Popup) */
+        #info-card {
+            position: absolute; bottom: 30px; right: 30px; width: 300px; 
+            background: rgba(10, 10, 15, 0.9); border-left: 4px solid #00d4ff;
+            padding: 20px; display: none; pointer-events: auto;
+            backdrop-filter: blur(10px); box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            animation: slideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        @keyframes slideIn { from { transform: translateX(50px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        
+        #card-img { width: 100%; height: 200px; object-fit: cover; border-radius: 4px; margin-bottom: 15px; border: 1px solid #333; }
+        #card-name { color: #fff; font-family: 'Orbitron', sans-serif; font-size: 1.2rem; margin: 0 0 5px 0; }
+        #card-role { color: #00d4ff; font-size: 0.9rem; font-weight: bold; margin-bottom: 10px; display: block; text-transform: uppercase; }
+        #card-desc { color: #aaa; font-size: 0.9rem; line-height: 1.4; }
+        .close-card { position: absolute; top: 10px; right: 10px; color: #666; cursor: pointer; }
+
+        /* Loading */
+        #loader { position: fixed; inset: 0; background: #000; z-index: 100; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 1s; }
+        .spinner { width: 50px; height: 50px; border: 3px solid rgba(0,212,255,0.3); border-top-color: #00d4ff; border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 20px; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .loading-text { color: #00d4ff; font-family: 'Orbitron', sans-serif; letter-spacing: 2px; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+
+    <div id="loader">
+        <div class="spinner"></div>
+        <div class="loading-text">INITIALIZING HELIX...</div>
+    </div>
+
+    <div id="canvas-container"></div>
+
+    <div class="ui-layer">
+        <div class="header">
+            <h1>Ancestral Helix</h1>
+            <div class="subtitle">PRESERVING THE LEGACY</div>
+        </div>
+
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Find Family Member..." oninput="handleSearch(this.value)">
+            <button class="btn" onclick="startAutoTour()" id="tour-btn"><i class="fas fa-play"></i> AUTO TOUR</button>
+        </div>
+
+        <div id="info-card">
+            <i class="fas fa-times close-card" onclick="closeCard()"></i>
+            <img id="card-img" src="" alt="">
+            <h2 id="card-name">Name</h2>
+            <span id="card-role">Role</span>
+            <p id="card-desc">Description goes here...</p>
+        </div>
+
+        <div class="controls">
+            <div class="control-btn" onclick="resetView()" title="Reset View"><i class="fas fa-compress-arrows-alt"></i></div>
+            <div class="control-btn" onclick="toggleRotation()" id="rot-btn" title="Toggle Rotation"><i class="fas fa-sync-alt"></i></div>
+        </div>
+    </div>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+        import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+        import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+        import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+        import * as TWEEN from '@tweenjs/tween.js';
+
+        // --- CONFIGURATION ---
+        const HELIX_RADIUS = 15;
+        const HELIX_HEIGHT_STEP = 8; // Height difference per generation
+        const MEMBER_SPACING_ANGLE = 0.5; // Radian spacing between members
+        const COLORS = {
+            root: 0xffd700,          // Gold (Nana/Nani)
+            purple_branch: 0x9b59b6, // Mother's Family
+            blue_branch: 0x00d4ff,   // Mamon 1
+            green_branch: 0x00ff88,  // Mamon 2
+            red_branch: 0xff4444,    // Mamon 3
+            orange_branch: 0xffaa00, // Mamon 4
+            cyan_branch: 0x00ffff,   // Mamon 5
+            pink_branch: 0xff0066,   // Mamon 6
+            default: 0xffffff
+        };
+
+        // --- STATE ---
+        let membersData = [];
+        let memberMeshMap = {}; // ID -> Mesh
+        let connections = []; // Line objects
+        let isAutoRotating = true;
+        let isTouring = false;
+
+        // --- THREE.JS VARS ---
+        let scene, camera, renderer, composer, controls;
+        const raycaster = new THREE.Raycaster();
+        const mouse = new THREE.Vector2();
+
+        // --- INIT ---
+        init();
+
+        function init() {
+            // 1. Scene
+            scene = new THREE.Scene();
+            scene.fog = new THREE.FogExp2(0x000000, 0.015);
+
+            // 2. Camera
+            camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.set(40, 20, 40);
+
+            // 3. Renderer
+            const canvas = document.getElementById('canvas-container');
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5)); // Optimization
+            renderer.toneMapping = THREE.ReinhardToneMapping;
+            canvas.appendChild(renderer.domElement);
+
+            // 4. Post Processing (BLOOM)
+            const renderScene = new RenderPass(scene, camera);
+            const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.5, 0.4, 0.85);
+            bloomPass.threshold = 0;
+            bloomPass.strength = 1.2; // GLOW STRENGTH
+            bloomPass.radius = 0.5;
+            
+            composer = new EffectComposer(renderer);
+            composer.addPass(renderScene);
+            composer.addPass(bloomPass);
+
+            // 5. Controls
+            controls = new OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.autoRotate = true;
+            controls.autoRotateSpeed = 0.5;
+            controls.maxDistance = 100;
+            controls.minDistance = 5;
+
+            // 6. Lights
+            const ambient = new THREE.AmbientLight(0xffffff, 0.1);
+            scene.add(ambient);
+            const pointLight = new THREE.PointLight(0xffffff, 1, 100);
+            pointLight.position.set(0, 20, 0);
+            scene.add(pointLight);
+
+            // 7. Background Stars
+            addStars();
+
+            // 8. Events
+            window.addEventListener('resize', onResize);
+            window.addEventListener('click', onClick);
+            
+            // 9. Load Data
+            fetch('family_data.json')
+                .then(r => r.json())
+                .then(data => {
+                    membersData = data.members;
+                    buildHelix(data.members);
+                    document.getElementById('loader').style.opacity = 0;
+                    setTimeout(() => document.getElementById('loader').style.display = 'none', 1000);
+                })
+                .catch(err => console.error("JSON Error:", err));
+
+            animate();
+        }
+
+        // --- BUILDER ---
+        function buildHelix(members) {
+            const textureLoader = new THREE.TextureLoader();
+            const geometry = new THREE.PlaneGeometry(4, 5); // Portrait ratio
+
+            // Group by Generation to calculate angles
+            const genGroups = {};
+            members.forEach(m => {
+                if(!genGroups[m.gen]) genGroups[m.gen] = [];
+                genGroups[m.gen].push(m);
+            });
+
+            // Iterate and place
+            Object.keys(genGroups).forEach(gen => {
+                const list = genGroups[gen];
+                const yPos = gen * HELIX_HEIGHT_STEP; // Vertical Level
+                
+                list.forEach((member, index) => {
+                    // Helix Angle calculation
+                    const angle = (index * (360 / list.length)) * (Math.PI / 180) + (gen * 0.5); 
+                    
+                    const x = Math.cos(angle) * HELIX_RADIUS;
+                    const z = Math.sin(angle) * HELIX_RADIUS;
+
+                    // COLOR THEME
+                    const colorHex = COLORS[member.familyGroup] || COLORS.default;
+                    const color = new THREE.Color(colorHex);
+
+                    // FRAME (Glowing Border)
+                    const frameGeo = new THREE.BoxGeometry(4.2, 5.2, 0.2);
+                    const frameMat = new THREE.MeshBasicMaterial({ color: color }); 
+                    const frame = new THREE.Mesh(frameGeo, frameMat);
+                    frame.position.set(x, yPos, z);
+                    frame.lookAt(0, yPos, 0); // Face center
+                    frame.userData = { id: member.id, isMember: true };
+                    scene.add(frame);
+
+                    // PHOTO
+                    textureLoader.load(member.image || 'https://via.placeholder.com/400x500/000000/ffffff?text=No+Img', (tex) => {
+                        const mat = new THREE.MeshBasicMaterial({ map: tex });
+                        const mesh = new THREE.Mesh(geometry, mat);
+                        mesh.position.z = 0.15; // Slightly in front of frame
+                        frame.add(mesh);
+                    });
+
+                    // Store ref
+                    memberMeshMap[member.id] = frame;
+
+                    // NAME TEXT (Simple sprite)
+                    addLabel(member.name, x, yPos - 3.5, z);
+                });
+            });
+
+            // DRAW CONNECTIONS (The Golden Thread)
+            // We do this after all meshes exist
+            setTimeout(drawConnections, 500);
+        }
+
+        function drawConnections() {
+            const material = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.1 });
+            
+            membersData.forEach(member => {
+                if(member.parentId && memberMeshMap[member.parentId] && memberMeshMap[member.id]) {
+                    const parentPos = memberMeshMap[member.parentId].position;
+                    const childPos = memberMeshMap[member.id].position;
+
+                    const geometry = new THREE.BufferGeometry().setFromPoints([childPos, parentPos]);
+                    const line = new THREE.Line(geometry, material);
+                    line.userData = { parent: member.parentId, child: member.id };
+                    scene.add(line);
+                    connections.push(line);
+                }
+            });
+        }
+
+        function addLabel(text, x, y, z) {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = 512; canvas.height = 128;
+            ctx.fillStyle = "rgba(0,0,0,0)";
+            ctx.fillRect(0,0,512,128);
+            ctx.font = "bold 40px Arial";
+            ctx.fillStyle = "white";
+            ctx.textAlign = "center";
+            ctx.fillText(text, 256, 80);
+            
+            const tex = new THREE.CanvasTexture(canvas);
+            const spriteMat = new THREE.SpriteMaterial({ map: tex, transparent: true });
+            const sprite = new THREE.Sprite(spriteMat);
+            sprite.position.set(x, y, z);
+            sprite.scale.set(6, 1.5, 1);
+            scene.add(sprite);
+        }
+
+        function addStars() {
+            const geo = new THREE.BufferGeometry();
+            const vertices = [];
+            for(let i=0; i<2000; i++) {
+                vertices.push((Math.random()-0.5)*200, (Math.random()-0.5)*200, (Math.random()-0.5)*200);
+            }
+            geo.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+            const mat = new THREE.PointsMaterial({color:0xffffff, size:0.2});
+            const stars = new THREE.Points(geo, mat);
+            scene.add(stars);
+        }
+
+        // --- INTERACTION ---
+        function onClick(event) {
+            if(event.target.closest('.ui-layer') && !event.target.classList.contains('ui-layer')) return; // Ignore clicks on UI buttons
+
+            mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+            mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+            raycaster.setFromCamera(mouse, camera);
+
+            const intersects = raycaster.intersectObjects(scene.children, true);
+            
+            if(intersects.length > 0) {
+                // Find parent frame
+                let obj = intersects[0].object;
+                while(obj.parent && !obj.userData.isMember) {
+                    obj = obj.parent;
+                }
+
+                if(obj.userData.isMember) {
+                    selectMember(obj.userData.id);
+                }
+            }
+        }
+
+        function selectMember(id) {
+            const member = membersData.find(m => m.id === id);
+            const mesh = memberMeshMap[id];
+            if(!member || !mesh) return;
+
+            // 1. Highlight Connections
+            connections.forEach(line => {
+                if(line.userData.parent === id || line.userData.child === id) {
+                    line.material.opacity = 1; 
+                    line.material.color.set(0xffd700); // Gold
+                } else {
+                    line.material.opacity = 0.05;
+                    line.material.color.set(0xffffff);
+                }
+            });
+
+            // 2. Fly Camera
+            const targetPos = mesh.position.clone().add(mesh.position.clone().normalize().multiplyScalar(10)); // 10 units in front
+            targetPos.y += 2; // Slightly above
+
+            new TWEEN.Tween(camera.position).to(targetPos, 1500).easing(TWEEN.Easing.Cubic.Out).start();
+            new TWEEN.Tween(controls.target).to(mesh.position, 1500).easing(TWEEN.Easing.Cubic.Out).start();
+
+            // 3. Show Info Card
+            showCard(member);
+            
+            // 4. Stop Rotation
+            controls.autoRotate = false;
+            document.getElementById('rot-btn').classList.remove('active');
+        }
+
+        function showCard(member) {
+            const card = document.getElementById('info-card');
+            document.getElementById('card-img').src = member.image || 'https://via.placeholder.com/400x500';
+            document.getElementById('card-name').innerText = member.name;
+            document.getElementById('card-role').innerText = member.role;
+            document.getElementById('card-desc').innerText = member.desc || "No description available.";
+            card.style.display = 'block';
+        }
+
+        window.closeCard = () => {
+            document.getElementById('info-card').style.display = 'none';
+            // Reset connections lines
+            connections.forEach(line => line.material.opacity = 0.1);
+        };
+
+        // --- GLOBAL FUNCTIONS ---
+        window.handleSearch = (val) => {
+            if(!val) return;
+            const match = membersData.find(m => m.name.toLowerCase().includes(val.toLowerCase()));
+            if(match) selectMember(match.id);
+        };
+
+        window.toggleRotation = () => {
+            controls.autoRotate = !controls.autoRotate;
+            document.getElementById('rot-btn').classList.toggle('active');
+        };
+
+        window.resetView = () => {
+            new TWEEN.Tween(camera.position).to({x:40, y:20, z:40}, 1500).start();
+            new TWEEN.Tween(controls.target).to({x:0, y:0, z:0}, 1500).start();
+            controls.autoRotate = true;
+            closeCard();
+        };
+
+        window.startAutoTour = () => {
+            if(isTouring) return;
+            isTouring = true;
+            controls.autoRotate = false;
+            const btn = document.getElementById('tour-btn');
+            btn.innerHTML = "<i class='fas fa-stop'></i> STOP TOUR";
+            btn.onclick = stopTour;
+
+            let idx = 0;
+            const nextStop = () => {
+                if(!isTouring) return;
+                if(idx >= membersData.length) idx = 0;
+                selectMember(membersData[idx].id);
+                idx++;
+                setTimeout(nextStop, 4000); // 4 seconds per person
+            };
+            nextStop();
+        };
+
+        function stopTour() {
+            isTouring = false;
+            const btn = document.getElementById('tour-btn');
+            btn.innerHTML = "<i class='fas fa-play'></i> AUTO TOUR";
+            btn.onclick = window.startAutoTour;
+            resetView();
+        }
+
+        function onResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            composer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            TWEEN.update();
+            controls.update();
+            composer.render(); // Use composer for Bloom
+        }
+    </script>
+</body>
+</html>

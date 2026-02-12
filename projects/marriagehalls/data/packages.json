@@ -1,0 +1,44 @@
+[
+    {
+        "id": "silver",
+        "name": "Silver Package (Barat/Mehndi)",
+        "price_per_head": 1200,
+        "items": [
+            "Chicken Qorma / Karahi",
+            "Chicken Biryani",
+            "Fresh Salad & Raita",
+            "Roghni Naan",
+            "Kheer or Firni",
+            "Mineral Water"
+        ],
+        "features": ["Standard Decor", "Generator Backup"]
+    },
+    {
+        "id": "gold",
+        "name": "Gold Package (Walima Special)",
+        "price_per_head": 1650,
+        "items": [
+            "Mutton Qorma",
+            "Chicken Steam Roast",
+            "Vegetable Rice / Pulao",
+            "Assorted Naan (Garlic/Kalwanji)",
+            "Gajrela or Fruit Trifle",
+            "Cold Drinks & Water"
+        ],
+        "features": ["Imported Flower Decor", "DJ Sound System", "VIP Sofa Seating"]
+    },
+    {
+        "id": "platinum",
+        "name": "Royal Platinum (Executive)",
+        "price_per_head": 2200,
+        "items": [
+            "Mutton Kunna / Handi",
+            "Grilled Fish / BBQ Platter",
+            "Kashmiri Chai",
+            "Soup (Seasonal)",
+            "Gulab Jamun & Ice Cream",
+            "Full Salad Bar"
+        ],
+        "features": ["Red Carpet Entry", "Fog & Lighting Entry", "Drone Coverage", "Valet Parking"]
+    }
+]

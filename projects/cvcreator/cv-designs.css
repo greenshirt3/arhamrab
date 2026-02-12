@@ -1,0 +1,180 @@
+/* GLOBAL CV RESET */
+.cv-page {
+    width: 210mm;
+    min-height: 297mm;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    line-height: 1.5;
+}
+
+.cv-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* --- DESIGN 1: CLASSIC BLUE (Side Bar Left) --- */
+.design-1 {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    grid-template-rows: auto 1fr;
+}
+.design-1 .cv-header {
+    grid-column: 1 / -1;
+    background: #2c3e50;
+    color: white;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+}
+.design-1 .cv-photo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 20px;
+    border: 3px solid white;
+}
+.design-1 .cv-col-side {
+    background: #ecf0f1;
+    padding: 20px;
+}
+.design-1 .cv-col-main {
+    padding: 20px;
+}
+.design-1 .section-title {
+    border-bottom: 2px solid #2c3e50;
+    color: #2c3e50;
+    text-transform: uppercase;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+/* --- DESIGN 2: MODERN MINIMAL (Top Header) --- */
+.design-2 {
+    padding: 40px;
+}
+.design-2 .cv-header {
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    display: block;
+}
+.design-2 .cv-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin: 0 auto 15px;
+    overflow: hidden;
+}
+.design-2 .cv-body {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 30px;
+}
+.design-2 .section-title {
+    color: #e74c3c;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+/* --- DESIGN 3: DARK SIDEBAR (Left) --- */
+.design-3 {
+    display: grid;
+    grid-template-columns: 35% 65%;
+    height: 100%;
+}
+.design-3 .cv-header {
+    display: none; /* In this design, photo is in side col */
+}
+/* We use a hack here: move header items to side via Grid or Absolute? 
+   Simpler: Just restyle the flow for Design 3 assuming HTML order */
+.design-3 .cv-body {
+    display: contents; /* Flattens the div to use grid parent */
+}
+.design-3 .cv-col-side {
+    background: #1a1a1a;
+    color: white;
+    padding: 30px;
+    grid-column: 1;
+    grid-row: 1 / -1;
+    min-height: 297mm;
+}
+.design-3 .cv-col-main {
+    padding: 40px;
+    grid-column: 2;
+}
+/* Re-inject header info for Design 3 specifically using position */
+.design-3 .cv-header {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: 35%; /* Same as col-side */
+    top: 0; left: 0;
+    padding: 30px;
+    box-sizing: border-box;
+    background: transparent;
+    z-index: 2;
+}
+.design-3 .cv-photo {
+    width: 150px; height: 150px; border-radius: 0; margin-bottom: 20px;
+}
+.design-3 .name { color: white; margin: 0; }
+.design-3 .job-title { color: #888; }
+.design-3 .section-title {
+    color: #e67e22;
+    border-bottom: 1px dashed #e67e22;
+}
+
+/* --- DESIGN 4: CORPORATE (Green accent) --- */
+.design-4 { padding: 30px; border-top: 20px solid #27ae60; }
+.design-4 .cv-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;}
+.design-4 .name { color: #27ae60; font-size: 36px; }
+.design-4 .cv-body { display: flex; flex-direction: row-reverse; gap: 20px;}
+.design-4 .cv-col-side { width: 30%; font-size: 0.9em; background: #f9f9f9; padding: 15px;}
+.design-4 .cv-col-main { width: 70%; }
+
+/* --- DESIGN 5: CREATIVE (Header Image BG) --- */
+.design-5 .cv-header {
+    background: #8e44ad;
+    color: white;
+    padding: 40px;
+    text-align: right;
+    position: relative;
+    overflow: hidden;
+}
+.design-5 .cv-photo {
+    position: absolute;
+    top: 20px; left: 20px;
+    width: 140px; height: 140px;
+    border: 5px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+}
+.design-5 .cv-body { display: grid; grid-template-columns: 200px 1fr; gap: 0; }
+.design-5 .cv-col-side { border-right: 1px solid #ddd; padding: 20px; text-align: right;}
+.design-5 .cv-col-main { padding: 20px; }
+
+/* --- DESIGN 6: ACADEMIC (Serif) --- */
+.design-6 { font-family: 'Times New Roman', serif; padding: 50px; }
+.design-6 .cv-header { text-align: center; border-bottom: 2px solid black; margin-bottom: 20px; padding-bottom: 10px;}
+.design-6 .cv-photo { display: none; } /* Academic CV usually no photo */
+.design-6 .cv-body { display: block; }
+.design-6 .cv-col-side, .design-6 .cv-col-main { width: 100%; }
+.design-6 .section-title { background: #eee; padding: 5px; font-weight: bold; text-transform: uppercase;}
+
+/* --- DESIGN 7: GRID BOXES --- */
+.design-7 { padding: 20px; background: #f4f4f4; }
+.design-7 .cv-header { background: white; padding: 20px; margin-bottom: 10px; border-radius: 8px;}
+.design-7 .cv-body { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.design-7 .cv-col-side { grid-column: 1; background: white; padding: 20px; border-radius: 8px;}
+.design-7 .cv-col-main { grid-column: 2; background: white; padding: 20px; border-radius: 8px;}
+.design-7 .cv-section { margin-bottom: 20px; }
+
+/* --- DESIGN 8: ELEGANT (Gold/Black) --- */
+.design-8 { border: 10px solid #000; padding: 30px; height: 100%; box-sizing: border-box;}
+.design-8 .cv-header { text-align: center; margin-bottom: 40px;}
+.design-8 .name { font-family: 'Georgia', serif; font-size: 40px; letter-spacing: 2px;}
+.design-8 .cv-body { column-count: 2; column-gap: 40px; column-rule: 1px solid #ccc; }
+.design-8 .section-title { color: #d4af37; border-bottom: 1px solid #d4af37; display: inline-block; margin-bottom: 15px;}

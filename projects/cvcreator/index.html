@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arham Printers - CV Creator</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="cv-designs.css">
+</head>
+<body>
+
+<div id="app" class="app-container">
+
+    <div class="sidebar no-print">
+        <div class="sidebar-header">
+            <h2><i class="fa-solid fa-print"></i> CV Creator</h2>
+            <div v-if="isAdmin" class="admin-badge">Admin Unlocked</div>
+        </div>
+
+        <div v-if="!isAdmin" class="login-overlay">
+            <div class="login-box">
+                <i class="fa-solid fa-lock"></i>
+                <h3>Admin Access</h3>
+                <p>Enter password to edit CVs</p>
+                <input type="password" v-model="passwordInput" placeholder="Password" @keyup.enter="checkPassword">
+                <button @click="checkPassword">Unlock</button>
+                <p v-if="loginError" class="error-msg">Wrong Password!</p>
+            </div>
+        </div>
+
+        <div class="input-scroll-area" :class="{ 'blurred': !isAdmin }">
+            
+            <div class="tools-panel">
+                <button class="btn-tool" @click="saveClientData"><i class="fa-solid fa-download"></i> Save Data</button>
+                <button class="btn-tool" onclick="document.getElementById('fileUpload').click()"><i class="fa-solid fa-upload"></i> Load Data</button>
+                <input type="file" id="fileUpload" @change="loadClientData" hidden>
+                <button class="btn-tool btn-reset" @click="resetData"><i class="fa-solid fa-rotate-right"></i> Reset</button>
+            </div>
+
+            <div class="form-section">
+                <h3>Select Design ({{ currentDesign }})</h3>
+                <div class="design-grid">
+                    <div v-for="n in 8" :key="n" 
+                         class="design-thumb" 
+                         :class="{ active: currentDesign === 'design-' + n }"
+                         @click="currentDesign = 'design-' + n">
+                        {{ n }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Personal Info</h3>
+                <input type="text" v-model="cv.name" placeholder="Full Name">
+                <input type="text" v-model="cv.title" placeholder="Job Title (e.g. Graphic Designer)">
+                <input type="text" v-model="cv.phone" placeholder="Phone Number">
+                <input type="email" v-model="cv.email" placeholder="Email Address">
+                <input type="text" v-model="cv.address" placeholder="Address">
+                <textarea v-model="cv.summary" placeholder="Professional Summary" rows="3"></textarea>
+                
+                <label class="photo-upload">
+                    <span>Upload Photo</span>
+                    <input type="file" @change="handlePhotoUpload">
+                </label>
+            </div>
+
+            <div class="form-section">
+                <h3>Experience <button class="btn-mini" @click="addItem('experience')">+</button></h3>
+                <div v-for="(job, index) in cv.experience" :key="index" class="dynamic-item">
+                    <input type="text" v-model="job.position" placeholder="Position">
+                    <input type="text" v-model="job.company" placeholder="Company">
+                    <div class="row">
+                        <input type="text" v-model="job.start" placeholder="Start Year">
+                        <input type="text" v-model="job.end" placeholder="End Year">
+                    </div>
+                    <textarea v-model="job.desc" placeholder="Job Description"></textarea>
+                    <button class="btn-del" @click="removeItem('experience', index)"><i class="fa-solid fa-trash"></i></button>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Education <button class="btn-mini" @click="addItem('education')">+</button></h3>
+                <div v-for="(edu, index) in cv.education" :key="index" class="dynamic-item">
+                    <input type="text" v-model="edu.degree" placeholder="Degree/Certificate">
+                    <input type="text" v-model="edu.school" placeholder="School/University">
+                    <input type="text" v-model="edu.year" placeholder="Year">
+                    <button class="btn-del" @click="removeItem('education', index)"><i class="fa-solid fa-trash"></i></button>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Skills (Comma Separated)</h3>
+                <textarea v-model="cv.skillsString" @input="parseSkills" placeholder="HTML, CSS, CorelDRAW, Printing"></textarea>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="main-preview">
+        <div class="toolbar no-print">
+            <span>Viewing: <strong>{{ currentDesign }}</strong></span>
+            <button class="btn-print" @click="printCV"><i class="fa-solid fa-file-pdf"></i> Download PDF / Print</button>
+        </div>
+
+        <div class="a4-page-wrapper">
+            <div class="cv-page" :class="currentDesign">
+                
+                <div class="cv-header">
+                    <div class="cv-photo" v-if="cv.photo">
+                        <img :src="cv.photo" alt="Profile">
+                    </div>
+                    <div class="cv-name-box">
+                        <h1 class="name">{{ cv.name }}</h1>
+                        <p class="job-title">{{ cv.title }}</p>
+                    </div>
+                    <div class="cv-contact">
+                        <div v-if="cv.phone"><i class="fa-solid fa-phone"></i> {{ cv.phone }}</div>
+                        <div v-if="cv.email"><i class="fa-solid fa-envelope"></i> {{ cv.email }}</div>
+                        <div v-if="cv.address"><i class="fa-solid fa-location-dot"></i> {{ cv.address }}</div>
+                    </div>
+                </div>
+
+                <div class="cv-body">
+                    
+                    <div class="cv-col-side">
+                        <div class="cv-section" v-if="cv.skills.length > 0">
+                            <h3 class="section-title">Skills</h3>
+                            <ul class="skills-list">
+                                <li v-for="skill in cv.skills">{{ skill }}</li>
+                            </ul>
+                        </div>
+
+                        <div class="cv-section" v-if="cv.education.length > 0">
+                            <h3 class="section-title">Education</h3>
+                            <div v-for="edu in cv.education" class="edu-item">
+                                <div class="edu-degree">{{ edu.degree }}</div>
+                                <div class="edu-school">{{ edu.school }}</div>
+                                <div class="edu-year">{{ edu.year }}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cv-col-main">
+                        <div class="cv-section" v-if="cv.summary">
+                            <h3 class="section-title">Profile</h3>
+                            <p class="summary-text">{{ cv.summary }}</p>
+                        </div>
+
+                        <div class="cv-section" v-if="cv.experience.length > 0">
+                            <h3 class="section-title">Experience</h3>
+                            <div v-for="job in cv.experience" class="job-item">
+                                <div class="job-header">
+                                    <span class="job-pos">{{ job.position }}</span>
+                                    <span class="job-time">{{ job.start }} - {{ job.end }}</span>
+                                </div>
+                                <div class="job-company">{{ job.company }}</div>
+                                <p class="job-desc">{{ job.desc }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cv-footer">
+                    </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

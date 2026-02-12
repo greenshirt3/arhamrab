@@ -1,0 +1,107 @@
+/* --- ARHAM PRINTERS: FULL AGENCY THEME --- */
+:root {
+    --brand-orange: #f28b00;
+    --brand-dark: #121212;
+    --brand-gray: #f9f9f9;
+    --text-color: #333;
+    --card-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+body { font-family: 'Open Sans', sans-serif; background-color: #fff; color: var(--text-color); overflow-x: hidden; }
+h1, h2, h3, h4, h5, h6 { font-family: 'Roboto', sans-serif; font-weight: 700; color: var(--brand-dark); }
+
+/* NAVBAR */
+.navbar {
+    background: rgba(255, 255, 255, 0.98) !important;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    padding: 15px 0;
+}
+.nav-link { font-weight: 700; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; color: #444 !important; transition: 0.3s; }
+.nav-link:hover, .nav-link.active { color: var(--brand-orange) !important; }
+
+/* HERO SECTION */
+.hero-header {
+    background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(20,20,20,0.8) 100%), url('../img/hero-bg.jpg');
+    background-size: cover; background-position: center; background-attachment: fixed;
+    min-height: 85vh; display: flex; align-items: center; text-align: center; color: white;
+    position: relative;
+}
+.hero-title { font-size: 3.5rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; }
+.hero-subtitle { font-size: 1.2rem; color: rgba(255,255,255,0.7); margin-bottom: 40px; letter-spacing: 1px; }
+
+/* DIGITAL SERVICES */
+.digital-section { background: #000; color: white; padding: 100px 0; }
+.digital-card {
+    background: #111; border: 1px solid #222; border-radius: 15px; padding: 40px 30px;
+    transition: 0.4s; height: 100%;
+}
+.digital-card:hover { transform: translateY(-10px); border-color: var(--brand-orange); }
+.digital-icon { font-size: 3rem; color: var(--brand-orange); margin-bottom: 20px; }
+
+/* PRODUCT SHOWCASE */
+.catalog-section { background: var(--brand-gray); padding: 80px 0; }
+
+.category-tabs { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 50px; }
+.tab-btn {
+    background: white; border: 1px solid #ddd; padding: 10px 25px; border-radius: 50px;
+    font-weight: 600; color: #555; transition: 0.3s; cursor: pointer;
+}
+.tab-btn:hover, .tab-btn.active { 
+    background: var(--brand-orange); border-color: var(--brand-orange); color: white; 
+    box-shadow: 0 5px 15px rgba(242, 139, 0, 0.3);
+}
+
+/* Product Card - Fixed Heights */
+.product-card {
+    background: white; border-radius: 15px; overflow: hidden; border: none;
+    box-shadow: var(--card-shadow); transition: 0.3s; height: 100%;
+    display: flex; flex-direction: column;
+}
+.product-card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0,0,0,0.15); }
+
+.prod-img-wrap {
+    height: 220px !important; overflow: hidden; position: relative; background: #fff;
+    display: flex; align-items: center; justify-content: center;
+}
+.prod-img { width: 100% !important; height: 100% !important; object-fit: cover !important; transition: 0.5s; }
+.product-card:hover .prod-img { transform: scale(1.05); }
+
+.prod-details { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
+.prod-title { font-weight: 700; font-size: 1rem; margin-bottom: 15px; color: var(--brand-dark); }
+
+/* Dropdown */
+.prod-select {
+    width: 100%; padding: 10px; border: 1px solid #eee; border-radius: 8px;
+    background-color: #f9f9f9; font-size: 0.85rem; color: #555; margin-bottom: 15px;
+    cursor: pointer; outline: none;
+}
+.btn-inquiry {
+    width: 100%; background: #222; color: white; border: none; padding: 10px;
+    border-radius: 50px; font-weight: 600; font-size: 0.85rem; margin-top: auto;
+    transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.btn-inquiry:hover { background: var(--brand-orange); }
+
+/* INQUIRY BAR */
+.inquiry-bar {
+    position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(150px);
+    background: #111; color: white; padding: 15px 30px; border-radius: 100px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5); z-index: 9999;
+    display: flex; align-items: center; gap: 20px; width: 90%; max-width: 400px;
+    transition: 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+.inquiry-bar.visible { transform: translateX(-50%) translateY(0); }
+.inquiry-badge { background: var(--brand-orange); color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+.btn-whatsapp-float { background: #25D366; color: white; border: none; padding: 8px 20px; border-radius: 30px; font-weight: 700; text-decoration: none; margin-left: auto; }
+
+/* FOOTER */
+.footer-premium {
+    background-color: #050505; color: #999; padding: 80px 0 0;
+    border-top: 4px solid var(--brand-orange); font-size: 0.9rem; margin-top: 50px;
+}
+.footer-brand h2 { color: white; font-size: 2rem; margin-bottom: 20px; }
+.footer-title { color: white; font-size: 1.1rem; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; }
+.footer-link { display: block; color: #777; margin-bottom: 12px; text-decoration: none; transition: 0.3s; }
+.footer-link:hover { color: var(--brand-orange); padding-left: 5px; }
+.footer-bottom { background: #000; padding: 25px 0; margin-top: 60px; border-top: 1px solid #1a1a1a; }

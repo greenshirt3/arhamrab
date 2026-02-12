@@ -1,0 +1,171 @@
+/* --- ARHAM PRINTERS: PROFESSIONAL EXTERNAL THEME --- */
+:root {
+    --brand-blue: #0f172a;   /* Deep Royal Blue */
+    --brand-cyan: #06b6d4;   /* Vibrant Cyan */
+    --light-bg: #f8fafc;
+    --text-dark: #334155;
+}
+
+body { font-family: 'Poppins', sans-serif; background-color: var(--light-bg); color: var(--text-dark); overflow-x: hidden; }
+h1, h2, h3, h4, h5 { font-family: 'Montserrat', sans-serif; font-weight: 800; color: var(--brand-blue); }
+
+/* 1. NAVBAR (High Z-Index) */
+.navbar {
+    background: rgba(255, 255, 255, 0.98) !important;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    padding: 15px 0;
+    z-index: 9999; /* Keeps menu on top */
+}
+.nav-link { 
+    font-weight: 700; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.5px; color: var(--brand-blue) !important; 
+    transition: 0.3s; margin: 0 10px;
+}
+.nav-link:hover, .nav-link.active { color: var(--brand-cyan) !important; }
+
+/* 2. HERO SECTION (NO IMAGE - PURE CSS) */
+.hero-header {
+    position: relative;
+    width: 100%;
+    min-height: 85vh;
+    
+    /* Pure CSS Background - No 404s */
+    background: radial-gradient(circle at 100% 0%, #06b6d4 0%, #0f172a 50%, #020617 100%);
+    
+    /* --- FIX: PUSH CONTENT DOWN --- */
+    padding-top: 240px; 
+    padding-bottom: 100px;
+    
+    display: flex; 
+    align-items: flex-start; /* Aligns to top, pushed by padding */
+    justify-content: center; 
+    text-align: center;
+    color: white;
+}
+
+.hero-title {
+    font-size: clamp(2.5rem, 6vw, 5rem); 
+    line-height: 1.1; margin-bottom: 25px; color: white;
+    text-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+.hero-subtitle {
+    font-size: 1.2rem; color: #cbd5e1; margin-bottom: 30px; letter-spacing: 3px;
+    border-bottom: 2px solid var(--brand-cyan); display: inline-block; padding-bottom: 5px;
+}
+.hero-btn {
+    background: var(--brand-cyan); border: none; padding: 15px 50px;
+    border-radius: 50px; font-weight: 700; color: white; text-transform: uppercase; 
+    box-shadow: 0 10px 25px rgba(6, 182, 212, 0.4); text-decoration: none; 
+    display: inline-block; transition: all 0.3s ease; cursor: pointer;
+}
+.hero-btn:hover { transform: translateY(-5px); background: white; color: var(--brand-blue); }
+
+/* 3. DIGITAL SERVICES */
+.digital-section { background: white; padding: 100px 0; }
+.digital-card {
+    background: var(--light-bg); border: 1px solid #e2e8f0;
+    border-radius: 16px; padding: 40px 30px; height: 100%; transition: 0.4s;
+    text-align: center;
+}
+.digital-card:hover { transform: translateY(-10px); border-color: var(--brand-cyan); box-shadow: 0 15px 40px rgba(6,182,212,0.15); }
+.digital-icon { font-size: 3rem; color: var(--brand-cyan); margin-bottom: 20px; }
+
+/* 4. PRODUCT CARDS */
+.catalog-section { padding: 80px 0; background: #f1f5f9; }
+
+.product-card {
+    background: white; 
+    border-radius: 15px; 
+    overflow: hidden; 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05); 
+    transition: 0.3s;
+    height: 100%; display: flex; flex-direction: column;
+}
+.product-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(6,182,212,0.2); }
+
+/* Header: Blue, Square Corners */
+.card-header-blue {
+    background: var(--brand-blue); 
+    color: white; 
+    padding: 12px;
+    text-align: center; 
+    font-size: 0.9rem; 
+    font-weight: 700; 
+    text-transform: uppercase;
+    border-radius: 0; 
+}
+
+/* Image: 5:4 Ratio */
+.prod-img-wrap {
+    width: 100%; aspect-ratio: 5 / 4; 
+    background: white; display: flex; align-items: center; justify-content: center;
+    overflow: hidden; border-bottom: 1px solid #f1f5f9;
+}
+.prod-img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+.product-card:hover .prod-img { transform: scale(1.1); }
+
+/* Footer Area */
+.card-footer-area {
+    padding: 15px;
+    margin-top: auto;
+    background: white;
+    text-align: center;
+}
+
+/* Button: Cyan, Round Corners */
+.btn-view-details {
+    width: 100%;
+    background: var(--brand-cyan);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50px; /* ROUND */
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    transition: 0.3s;
+    box-shadow: 0 4px 10px rgba(6,182,212,0.3);
+}
+.btn-view-details:hover { background: var(--brand-blue); color: white; }
+
+/* 5. PRODUCT MODAL (Fixed Size) */
+.modal-content { border-radius: 20px; overflow: hidden; border: none; }
+.modal-header { background: var(--brand-blue); color: white; }
+.btn-close { filter: invert(1); }
+
+.detail-img {
+    width: 100%;
+    max-height: 300px;
+    object-fit: contain; 
+    background: #f8fafc;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #e2e8f0;
+}
+
+.payment-note { background: #fff7ed; color: #c2410c; padding: 12px; border-radius: 8px; font-size: 0.85rem; margin-bottom: 15px; border-left: 4px solid #f97316; }
+.shipping-msg { background: #ecfeff; color: #0e7490; padding: 12px; border-radius: 8px; font-size: 0.85rem; margin-top: 10px; border-left: 4px solid var(--brand-cyan); }
+
+/* 6. FOOTER */
+.footer { 
+    background: var(--brand-blue); 
+    color: #94a3b8; 
+    padding: 80px 0 0; 
+    border-top: 5px solid var(--brand-cyan);
+}
+.footer-logo { font-size: 2.2rem; font-weight: 900; color: white; margin-bottom: 20px; display: block; }
+.footer h5 { color: white; margin-bottom: 20px; font-size: 1.1rem; letter-spacing: 1px; }
+.footer a { color: #94a3b8; text-decoration: none; display: block; margin-bottom: 12px; transition: 0.3s; }
+.footer a:hover { color: var(--brand-cyan); padding-left: 5px; } 
+.footer-bottom { background: #020617; padding: 25px 0; margin-top: 60px; border-top: 1px solid #1e293b; text-align: center; }
+
+/* 7. WHATSAPP & TABS */
+.whatsapp-float {
+    position: fixed; bottom: 30px; right: 30px; background: #25D366; color: white;
+    padding: 12px 25px; border-radius: 50px; font-weight: 700; z-index: 9999;
+    box-shadow: 0 10px 30px rgba(37,211,102,0.3); text-decoration: none; display: flex; align-items: center; gap: 8px;
+}
+.whatsapp-float:hover { transform: scale(1.05); color: white; }
+
+.tab-btn { background: white; border: 1px solid #cbd5e1; padding: 10px 30px; border-radius: 30px; margin: 5px; font-weight: 600; color: #64748b; transition: 0.3s; }
+.tab-btn.active, .tab-btn:hover { background: var(--brand-cyan); color: white; border-color: var(--brand-cyan); }

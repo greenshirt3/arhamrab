@@ -1,0 +1,55 @@
+{
+    "settings": {
+        "name": "Boxify FS Packaging",
+        "tagline": "Where Designs Meets Expectations",
+        "phone": "+92 301 6229665",
+        "whatsapp": "923016229665",
+        "email": "boxes@arhamprinters.pk",
+        "address": "Domela Chowk, Jalalpur Jattan",
+        "logo_text": "BOXIFY",
+        "logo_accent": "FS"
+    },
+    "hero": {
+        "title": "WE PACKAGE YOUR BRAND",
+        "subtitle": "Premium Custom Boxes for Pizza, Sweets, and Retail. High-quality Offset Printing & Die-Cutting.",
+        "bg_image": "https://images.unsplash.com/photo-1605647540924-852290f6b0d5?auto=format&fit=crop&w=1920&q=80"
+    },
+    "categories": [
+        {
+            "title": "Food Packaging",
+            "icon": "fa-pizza-slice",
+            "desc": "Food-grade pizza boxes, burger shells, and fries scoops.",
+            "image": "https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?auto=format&fit=crop&w=600&q=80"
+        },
+        {
+            "title": "Sweet & Mithai",
+            "icon": "fa-gift",
+            "desc": "Luxury rigid boxes with gold foiling for sweets and bakers.",
+            "image": "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=600&q=80"
+        },
+        {
+            "title": "Corrugated Cartons",
+            "icon": "fa-box-open",
+            "desc": "Heavy-duty shipping cartons (3-ply, 5-ply) for logistics.",
+            "image": "https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?auto=format&fit=crop&w=600&q=80"
+        },
+        {
+            "title": "Apparel & Retail",
+            "icon": "fa-tshirt",
+            "desc": "Stylish tuck-end boxes for shirts, garments, and perfumes.",
+            "image": "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=600&q=80"
+        }
+    ],
+    "products": [
+        { "name": "7-Inch Pizza Box", "mat": "E-Flute", "img": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500" },
+        { "name": "1KG Mix Mithai Box", "mat": "350gsm Card", "img": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=500" },
+        { "name": "Burger Box", "mat": "Bleach Card", "img": "https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=500" },
+        { "name": "Perfume Rigid Box", "mat": "Hard Board", "img": "https://images.unsplash.com/photo-1595535373192-fc04375b9672?w=500" }
+    ],
+    "process": [
+        { "step": "01", "title": "Die Line Design", "desc": "We create the structure blueprint." },
+        { "step": "02", "title": "Offset Printing", "desc": "High quality 4-color printing." },
+        { "step": "03", "title": "Lamination & Foil", "desc": "Matte, Gloss, or Gold finishing." },
+        { "step": "04", "title": "Die Cutting", "desc": "Precision cutting and pasting." }
+    ]
+}

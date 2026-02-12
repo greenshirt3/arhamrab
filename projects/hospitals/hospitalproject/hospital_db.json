@@ -1,0 +1,48 @@
+{
+    "settings": {
+        "name": "City International Hospital",
+        "tagline": "Healing with Compassion & Technology",
+        "phone": "+92 300 1234567",
+        "emergency": "1122",
+        "email": "info@cityhospital.pk",
+        "address": "Main Medical Road, Jalalpur Jattan, Pakistan",
+        "map_link": "https://maps.google.com",
+        "currency": "PKR"
+    },
+    "departments": [
+        { "id": "cardio", "name": "Cardiology", "icon": "fa-heartbeat", "desc": "Heart care & Surgery" },
+        { "id": "neuro", "name": "Neurology", "icon": "fa-brain", "desc": "Brain & Spine" },
+        { "id": "ortho", "name": "Orthopedics", "icon": "fa-bone", "desc": "Bones & Joints" },
+        { "id": "gynae", "name": "Gynecology", "icon": "fa-baby-carriage", "desc": "Women's Health" },
+        { "id": "derma", "name": "Dermatology", "icon": "fa-allergies", "desc": "Skin Care" },
+        { "id": "peds", "name": "Pediatrics", "icon": "fa-child", "desc": "Child Care" }
+    ],
+    "doctors": [
+        { "id": "d1", "name": "Dr. Sarah Khan", "dept": "cardio", "qual": "FCPS (Cardio), MBBS", "fee": 2500, "img": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400" },
+        { "id": "d2", "name": "Dr. Ali Raza", "dept": "neuro", "qual": "MD (USA), FCPS", "fee": 3000, "img": "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400" },
+        { "id": "d3", "name": "Dr. Ayesha Malik", "dept": "gynae", "qual": "MBBS, FCPS", "fee": 2000, "img": "https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=400" },
+        { "id": "d4", "name": "Dr. Kamran Ahmed", "dept": "ortho", "qual": "MS (Ortho), MBBS", "fee": 2200, "img": "https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=400" }
+    ],
+    "lab_reports": {
+        "LAB-101": {
+            "patient_name": "Saif Ullah",
+            "age": "34",
+            "test_name": "Complete Blood Count (CBC)",
+            "date": "2025-12-26",
+            "status": "Finalized",
+            "results": [
+                { "param": "Hemoglobin", "value": "14.5", "unit": "g/dL", "range": "13.0 - 17.0" },
+                { "param": "WBC Count", "value": "8,500", "unit": "/cmm", "range": "4,000 - 11,000" },
+                { "param": "Platelets", "value": "250,000", "unit": "/cmm", "range": "150,000 - 450,000" }
+            ]
+        },
+        "LAB-102": {
+            "patient_name": "M. Arham",
+            "age": "12",
+            "test_name": "Liver Function Test (LFT)",
+            "date": "2025-12-27",
+            "status": "Pending",
+            "results": []
+        }
+    }
+}

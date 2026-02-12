@@ -1,0 +1,105 @@
+/* ROOT VARIABLES - MEDICAL THEME */
+:root {
+    --primary: #0ea5e9;       /* Sky Blue */
+    --primary-dark: #0284c7;  /* Deep Blue */
+    --secondary: #334155;     /* Slate */
+    --accent: #10b981;        /* Emerald Green (Success) */
+    --danger: #ef4444;        /* Red */
+    --glass: rgba(255, 255, 255, 0.9);
+    --glass-border: rgba(255, 255, 255, 0.5);
+    --shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1);
+}
+
+body {
+    background-color: #f1f5f9;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: #1e293b;
+    overflow-x: hidden;
+}
+
+/* GLASSMORPHISM CARD */
+.glass-panel {
+    background: var(--glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow);
+    border-radius: 16px;
+}
+
+/* 3D HOVER EFFECT FOR CARDS */
+.hover-3d {
+    transition: all 0.3s ease;
+    transform-style: preserve-3d;
+}
+.hover-3d:hover {
+    transform: translateY(-5px) scale(1.01);
+    box-shadow: 0 20px 40px -5px rgba(14, 165, 233, 0.15);
+}
+
+/* SIDEBAR NAVIGATION */
+.sidebar {
+    background: #0f172a;
+    color: white;
+    min-height: 100vh;
+}
+.sidebar .nav-link {
+    color: #94a3b8;
+    padding: 12px 20px;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    transition: 0.2s;
+}
+.sidebar .nav-link:hover, .sidebar .nav-link.active {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 0 15px rgba(14, 165, 233, 0.4);
+}
+
+/* PROFESSIONAL FORM INPUTS */
+.form-control, .form-select {
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 12px;
+    transition: 0.2s;
+}
+.form-control:focus, .form-select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.1);
+}
+
+/* SMART SEARCH DROPDOWN (NEW) */
+.search-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #ddd;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    z-index: 9999;
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.search-item {
+    padding: 10px 15px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.search-item:hover {
+    background-color: #f0f9ff;
+    color: #0284c7;
+}
+
+/* PRINT STYLES */
+@media print {
+    .no-print { display: none !important; }
+    body { background: white; }
+    .glass-panel { box-shadow: none; border: none; }
+    .container { max-width: 100%; width: 100%; padding: 0; margin: 0; }
+}

@@ -1,0 +1,85 @@
+{
+    "settings": {
+        "shop_name": "Cheezious Pizza Hub",
+        "contact_number": "923001234567",
+        "whatsapp_number": "923001234567",
+        "address": "Main Boulevard, Jalalpur Jattan",
+        "currency_symbol": "PKR",
+        "delivery_fee": 150,
+        "free_delivery_over": 3000,
+        "theme_colors": {
+            "primary": "#FF5722",
+            "secondary": "#FFA726",
+            "dark": "#212121",
+            "light": "#f8f9fa",
+            "accent": "#ffc107"
+        }
+    },
+    "hero_banner": {
+        "headline": "World's Best Cheesy Pizza",
+        "subheadline": "Hot, Fresh, and Delivered Fast to Your Doorstep!",
+        "imageFile": "img/hero_pizza.jpg"
+    },
+    "categories": {
+        "Deals & Combos": [
+            {
+                "id": "d1",
+                "name": "Family Feast Box",
+                "description": "2 Large Pizzas, 1 Garlic Bread, 1.5L Drink",
+                "imageFile": "img/deals/familybox.jpg",
+                "base_price": 3500,
+                "is_deal": true,
+                "discount_label": "Save 20%"
+            }
+        ],
+        "Supreme Pizzas": [
+            {
+                "id": "p1",
+                "name": "Chicken Fajita",
+                "description": "Spicy chicken, onions, capsicum, and lots of cheese.",
+                "imageFile": "img/pizza/fajita.jpg",
+                "base_price": 1200,
+                "variants": [
+                    {"name": "Small (8-inch)", "price_adjustment": -400},
+                    {"name": "Medium (10-inch)", "price_adjustment": 0},
+                    {"name": "Large (13-inch)", "price_adjustment": 800},
+                    {"name": "XXL Party", "price_adjustment": 1500}
+                ]
+            },
+            {
+                "id": "p2",
+                "name": "Cheesy Lover",
+                "description": "Loaded with triple layer of mozzarella and cheddar.",
+                "imageFile": "img/pizza/cheese.jpg",
+                "base_price": 1300,
+                "variants": [
+                    {"name": "Small", "price_adjustment": -450},
+                    {"name": "Medium", "price_adjustment": 0},
+                    {"name": "Large", "price_adjustment": 850}
+                ]
+            }
+        ],
+        "Gourmet Burgers": [
+            {
+                "id": "b1",
+                "name": "The Zinger Crunch",
+                "description": "Crispy fried chicken fillet with special sauce.",
+                "imageFile": "img/burger/zinger.jpg",
+                "base_price": 650,
+                "variants": [
+                    {"name": "Single Patty", "price_adjustment": 0},
+                    {"name": "Double Decker", "price_adjustment": 350}
+                ]
+            }
+        ],
+        "Sides & Drinks": [
+             {
+                "id": "s1",
+                "name": "Hot Wings (6 pcs)",
+                "description": "Spicy baked wings.",
+                "imageFile": "img/sides/wings.jpg",
+                "base_price": 500
+            }
+        ]
+    }
+}

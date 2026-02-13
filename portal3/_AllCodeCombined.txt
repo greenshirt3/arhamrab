@@ -1,0 +1,2924 @@
+
+==============================================================================
+FILE PATH: D:\websiteproject\versions\portal3\admin_settings.php
+==============================================================================
+
+<?php 
+require 'includes/header.php'; 
+
+// SECURITY: ADMIN ONLY
+if ($_SESSION['role'] !== 'admin') { die("ACCESS DENIED"); }
+
+$msg = "";
+
+// HANDLE ACTIONS
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    
+    // 1. UPDATE SETTINGS
+    if (isset($_POST['action']) && $_POST['action'] == 'update_settings') {
+        
+        // Helper to save settings safely
+        function save($pdo, $k, $v) {
+            // Check if key exists
+            $check = $pdo->prepare("SELECT id FROM system_settings WHERE setting_key = ?");
+            $check->execute([$k]);
+            
+            if($check->rowCount() > 0) {
+                $stmt = $pdo->prepare("UPDATE system_settings SET setting_value = ? WHERE setting_key = ?");
+                $stmt->execute([$v, $k]);
+            } else {
+                $stmt = $pdo->prepare("INSERT INTO system_settings (setting_key, setting_value) VALUES (?, ?)");
+                $stmt->execute([$k, $v]);
+            }
+        }
+
+        // Save Standard Settings
+        save($pdo, 'status_color', $_POST['status_color']);
+        
+        // Save Urdu Settings (The DB is now UTF8mb4 so this will work)
+        save($pdo, 'status_text', $_POST['status_text']); 
+        save($pdo, 'announcement', $_POST['announcement']); 
+        
+        // Save Time Settings
+        save($pdo, 'shop_open_time', $_POST['shop_open_time']);
+        save($pdo, 'shop_close_time', $_POST['shop_close_time']);
+        save($pdo, 'enable_auto_hours', isset($_POST['enable_auto_hours']) ? '1' : '0');
+        
+        // Save Limits
+        save($pdo, 'daily_token_limit', $_POST['daily_token_limit']);
+        save($pdo, 'service_speed_mins', $_POST['service_speed_mins']);
+        
+        // Save Features
+        save($pdo, 'break_mode', isset($_POST['break_mode']) ? '1' : '0');
+        save($pdo, 'require_phone', isset($_POST['require_phone']) ? '1' : '0');
+
+        $msg = "<div class='alert alert-success shadow-sm rounded-3 fw-bold'>Settings Updated Successfully!</div>";
+    }
+
+    // 2. RESET QUEUE (Danger Zone)
+    if (isset($_POST['action']) && $_POST['action'] == 'reset_queue') {
+        $pdo->exec("DELETE FROM queue_tokens WHERE DATE(issued_at) = CURDATE()");
+        $msg = "<div class='alert alert-danger shadow-sm rounded-3 fw-bold'>Queue has been reset for today.</div>";
+    }
+}
+
+// FETCH CURRENT SETTINGS
+$s = [];
+$rows = $pdo->query("SELECT * FROM system_settings")->fetchAll();
+foreach($rows as $r) $s[$r['setting_key']] = $r['setting_value'];
+?>
+
+<link rel="stylesheet" href="css/modern.css">
+
+<style>
+    /* FIX: font-display: swap added to prevent slow network warning */
+    @font-face {
+        font-family: 'Jameel Noori Nastaleeq';
+        src: url('Jameel Noori Nastaleeq.ttf') format('truetype');
+        font-display: swap; 
+    }
+    .urdu-input {
+        font-family: 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif;
+        direction: rtl;
+        font-size: 1.3rem;
+        line-height: 2;
+        text-align: right;
+    }
+    .card-header-custom { background: linear-gradient(135deg, #212529, #343a40); color: white; }
+</style>
+
+<div class="row justify-content-center">
+    <div class="col-lg-9">
+        <?php if($msg) echo $msg; ?>
+
+        <form method="POST" accept-charset="UTF-8">
+            <input type="hidden" name="action" value="update_settings">
+
+            <div class="glass-panel mb-4 p-0">
+                <div class="card-header-custom p-3"><h5 class="mb-0 text-white"><i class="fas fa-power-off me-2"></i> System Status</h5></div>
+                <div class="p-4">
+                    <div class="row g-2">
+                        <div class="col-md-4">
+                            <input type="radio" class="btn-check" name="status_color" id="success" value="success" <?php echo ($s['status_color']=='success')?'checked':''; ?>>
+                            <label class="btn btn-outline-success w-100 fw-bold py-3 rounded-3" for="success">🟢 ONLINE</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="radio" class="btn-check" name="status_color" id="warning" value="warning" <?php echo ($s['status_color']=='warning')?'checked':''; ?>>
+                            <label class="btn btn-outline-warning w-100 fw-bold py-3 rounded-3" for="warning">⚠️ RUSH</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="radio" class="btn-check" name="status_color" id="danger" value="danger" <?php echo ($s['status_color']=='danger')?'checked':''; ?>>
+                            <label class="btn btn-outline-danger w-100 fw-bold py-3 rounded-3" for="danger">🔴 OFFLINE</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-panel mb-4 p-0">
+                <div class="card-header-custom p-3"><h5 class="mb-0 text-white"><i class="fas fa-bullhorn me-2"></i> Announcements (Urdu)</h5></div>
+                <div class="p-4 bg-light">
+                    <div class="mb-3 text-center">
+                        <button type="button" class="btn btn-sm btn-outline-dark rounded-pill me-1" onclick="setUrdu('خوش آمدید', 'خوش آمدید! ٹوکن بکنگ جاری ہے۔')">🟢 Online</button>
+                        <button type="button" class="btn btn-sm btn-outline-dark rounded-pill me-1" onclick="setUrdu('وقفہ', 'نماز اور کھانے کا وقفہ ہے۔')">🕌 Break</button>
+                        <button type="button" class="btn btn-sm btn-outline-dark rounded-pill me-1" onclick="setUrdu('سسٹم بند ہے', 'دکان کا وقت ختم ہو چکا ہے۔ کل تشریف لائیں۔')">🔴 Closed</button>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="fw-bold text-secondary">Main Heading (Hero Text)</label>
+                        <input type="text" name="status_text" id="statusField" class="form-control urdu-input border-primary" value="<?php echo htmlspecialchars($s['status_text']); ?>">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="fw-bold text-secondary">Ticker Text (Top Bar)</label>
+                        <textarea name="announcement" id="tickerField" class="form-control urdu-input border-primary" rows="2"><?php echo htmlspecialchars($s['announcement']); ?></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4 mb-4">
+                <div class="col-md-6">
+                    <div class="glass-panel h-100 p-4">
+                        <h6 class="fw-bold border-bottom pb-2 mb-3">Shop Timings</h6>
+                        
+                        <div class="form-check form-switch mb-3">
+                            <input class="form-check-input" type="checkbox" name="enable_auto_hours" id="autoHours" <?php echo ($s['enable_auto_hours']=='1')?'checked':''; ?>>
+                            <label class="form-check-label fw-bold" for="autoHours">Auto Open/Close</label>
+                        </div>
+                        
+                        <div class="input-group mb-2">
+                            <span class="input-group-text bg-light">Open</span>
+                            <input type="time" name="shop_open_time" class="form-control" value="<?php echo $s['shop_open_time']; ?>">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light">Close</span>
+                            <input type="time" name="shop_close_time" class="form-control" value="<?php echo $s['shop_close_time']; ?>">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="glass-panel h-100 p-4">
+                        <h6 class="fw-bold border-bottom pb-2 mb-3">Queue Limits</h6>
+                        
+                        <label class="fw-bold small text-muted">Daily Tokens Limit</label>
+                        <input type="number" name="daily_token_limit" class="form-control mb-2" value="<?php echo $s['daily_token_limit']; ?>">
+                        
+                        <label class="fw-bold small text-muted">Avg Speed (Min/Person)</label>
+                        <input type="number" name="service_speed_mins" class="form-control" value="<?php echo $s['service_speed_mins']; ?>">
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-panel mb-5 p-4">
+                <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+                    <div class="d-flex gap-4">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" name="break_mode" id="breakMode" <?php echo ($s['break_mode']=='1')?'checked':''; ?>>
+                            <label class="form-check-label fw-bold text-warning" for="breakMode">Lunch Break</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" name="require_phone" id="reqPhone" <?php echo ($s['require_phone']=='1')?'checked':''; ?>>
+                            <label class="form-check-label fw-bold" for="reqPhone">Require Phone</label>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-lg rounded-pill px-5 fw-bold shadow hover-effect">
+                        <i class="fas fa-save me-2"></i> Save Changes
+                    </button>
+                </div>
+            </div>
+
+        </form>
+
+        <div class="card border-danger border-1 shadow-sm rounded-4 mb-5">
+            <div class="card-header bg-danger text-white fw-bold">
+                <i class="fas fa-trash"></i> Danger Zone
+            </div>
+            <div class="card-body d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 class="fw-bold text-danger mb-0">Reset Queue</h6>
+                    <small class="text-muted">Delete all tokens for today (Start from 01)</small>
+                </div>
+                <form method="POST" onsubmit="return confirm('This will delete all tokens for today. Are you sure?');">
+                    <input type="hidden" name="action" value="reset_queue">
+                    <button type="submit" class="btn btn-outline-danger fw-bold">Reset Now</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+function setUrdu(title, ticker) {
+    document.getElementById('statusField').value = title;
+    document.getElementById('tickerField').value = ticker;
+}
+</script>
+
+<?php include 'includes/footer.php'; ?> 
+ 
+
+==============================================================================
+FILE PATH: D:\websiteproject\versions\portal3\admin_users.php
+==============================================================================
+
+<?php 
+require 'includes/header.php'; 
+
+// --- SECURITY CHECK ---
+if ($_SESSION['role'] !== 'admin') {
+    echo "<div class='alert alert-danger text-center mt-5'>⛔ ACCESS DENIED: Only Admins can manage users.</div>";
+    include 'includes/footer.php';
+    exit();
+}
+// ----------------------
+
+$msg = "";
+
+// HANDLE ACTIONS
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Delete User
+    if (isset($_POST['delete_id'])) {
+        $pdo->prepare("DELETE FROM users WHERE id=?")->execute([$_POST['delete_id']]);
+        $msg = "User deleted successfully.";
+    } 
+    // Add/Update User
+    else {
+        $name = $_POST['full_name'];
+        $user = $_POST['username'];
+        $pass = $_POST['password'];
+        $role = $_POST['role'];
+
+        if (!empty($pass)) {
+            // New Password/User
+            $hash = password_hash($pass, PASSWORD_BCRYPT);
+            $stmt = $pdo->prepare("INSERT INTO users (full_name, username, password, role) VALUES (?, ?, ?, ?) 
+                                   ON DUPLICATE KEY UPDATE full_name=?, password=?, role=?");
+            $stmt->execute([$name, $user, $hash, $role, $name, $hash, $role]);
+        } else {
+            // Update Details Only
+            $stmt = $pdo->prepare("UPDATE users SET full_name=?, role=? WHERE username=?");
+            $stmt->execute([$name, $role, $user]);
+        }
+        $msg = "User saved successfully!";
+    }
+}
+?>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white"><i class="fas fa-user-plus"></i> Add / Edit User</div>
+            <div class="card-body">
+                <?php if($msg): ?><div class="alert alert-success"><?php echo $msg; ?></div><?php endif; ?>
+                
+                <form method="post">
+                    <div class="mb-3">
+                        <label>Full Name</label>
+                        <input type="text" name="full_name" class="form-control" required placeholder="e.g. Khadija Bibi">
+                    </div>
+                    <div class="mb-3">
+                        <label>Username</label>
+                        <input type="text" name="username" class="form-control" required placeholder="e.g. khadija">
+                    </div>
+                    <div class="mb-3">
+                        <label>Password</label>
+                        <input type="password" name="password" class="form-control" placeholder="Only if changing">
+                    </div>
+                    <div class="mb-3">
+                        <label>Role</label>
+                        <select name="role" class="form-select">
+                            <option value="staff">Staff (Limited)</option>
+                            <option value="admin">Admin (Full Access)</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-success w-100">Save User</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        <div class="card shadow">
+            <div class="card-header bg-dark text-white">Current Users</div>
+            <table class="table table-striped mb-0">
+                <thead><tr><th>Name</th><th>Username</th><th>Role</th><th>Action</th></tr></thead>
+                <tbody>
+                    <?php
+                    $users = $pdo->query("SELECT * FROM users")->fetchAll();
+                    foreach($users as $u) {
+                        $badge = ($u['role'] == 'admin') ? 'bg-danger' : 'bg-info';
+                        echo "<tr>
+                            <td>{$u['full_name']}</td>
+                            <td>{$u['username']}</td>
+                            <td><span class='badge $badge'>" . strtoupper($u['role']) . "</span></td>
+                            <td>
+                                <form method='post' onsubmit='return confirm(\"Delete?\");' style='display:inline'>
+                                    <input type='hidden' name='delete_id' value='{$u['id']}'>
+                                    <button class='btn btn-sm btn-outline-danger'><i class='fas fa-trash'></i></button>
+                                </form>
+                            </td>
+                        </tr>";
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<?php include 'includes/footer.php'; ?>
+ 
+ 
+
+==============================================================================
+FILE PATH: D:\websiteproject\versions\portal3\api_search.php
+==============================================================================
+
+<?php
+require 'includes/config.php';
+
+if (!isset($_SESSION['user_id'])) { header("HTTP/1.1 403 Forbidden"); exit; }
+
+$term = $_GET['term'] ?? '';
+$type = $_GET['type'] ?? 'all'; 
+$results = [];
+$clean_term = str_replace(['-', ' '], '', $term);
+
+// =========================================================
+// 1. ADMIN AUDIT SEARCH (History)
+// Used by: night_mode.php (Admin only)
+// =========================================================
+if ($type == 'bill_history') {
+    if ($clean_term !== '') {
+        $stmt = $pdo->prepare("SELECT * FROM bill_queue WHERE consumer_number LIKE ? OR consumer_name LIKE ? ORDER BY id DESC LIMIT 50");
+        $stmt->execute(["%$clean_term%", "%$clean_term%"]);
+    } else {
+        $stmt = $pdo->query("SELECT * FROM bill_queue ORDER BY id DESC LIMIT 50");
+    }
+
+    while($row = $stmt->fetch()) {
+        $status_icon = ($row['status'] == 'paid') ? '✅' : '⏳';
+        $results[] = [
+            'label' => "$status_icon " . $row['consumer_name'] . " (" . $row['consumer_number'] . ") - Rs." . $row['amount'],
+            'value' => $row['consumer_number'],
+            'data'  => $row
+        ];
+    }
+    echo json_encode($results);
+    exit;
+}
+
+// =========================================================
+// 2. STAFF BILL ENTRY (Auto-Show Dropdown)
+// Used by: bills.php
+// =========================================================
+if ($type == 'consumer_suggest') {
+    if ($clean_term !== '') {
+        $stmt = $pdo->prepare("SELECT * FROM saved_consumers WHERE consumer_number LIKE ? ORDER BY consumer_number ASC LIMIT 50");
+        $stmt->execute(["%$clean_term%"]);
+    } else {
+        $stmt = $pdo->query("SELECT * FROM saved_consumers ORDER BY consumer_number ASC LIMIT 100");
+    }
+    while($row = $stmt->fetch()) {
+        $results[] = [
+            'label' => $row['consumer_number'] . " - " . $row['consumer_name'],
+            'value' => $row['consumer_number'],
+            'data'  => ['name' => $row['consumer_name'], 'type' => $row['bill_type']]
+        ];
+    }
+    echo json_encode($results);
+    exit;
+}
+
+// =========================================================
+// 3. SCANNER CHECK (Single Result)
+// =========================================================
+if ($type == 'consumer') {
+    if(strlen($clean_term) > 5) {
+        $stmt = $pdo->prepare("SELECT * FROM saved_consumers WHERE consumer_number LIKE ? LIMIT 1");
+        $stmt->execute(["%$clean_term%"]);
+        $row = $stmt->fetch();
+        
+        if ($row) {
+            echo json_encode(['status' => 'found', 'name' => $row['consumer_name'], 'type' => $row['bill_type']]);
+        } else {
+            echo json_encode(['status' => 'new']);
+        }
+        exit;
+    }
+}
+
+// =========================================================
+// 4. TOKEN / CNIC SEARCH
+// =========================================================
+if ($type == 'token' || $type == 'all' || strpos($term, '-') !== false) {
+    $stmt = $pdo->prepare("SELECT token_number, cnic, name FROM queue_tokens WHERE token_number LIKE ? AND DATE(issued_at) = CURDATE() LIMIT 5");
+    $stmt->execute(["%$term%"]);
+    while($row = $stmt->fetch()) {
+        $results[] = [
+            'label' => "🎫 Token #" . $row['token_number'],
+            'value' => $row['token_number'],
+            'data'  => ['token'=>$row['token_number'], 'cnic'=>$row['cnic'], 'name'=>$row['name'], 'phone'=>'']
+        ];
+    }
+}
+if ($type == 'cnic' || $type == 'all' || is_numeric($clean_term)) {
+    $stmt = $pdo->prepare("SELECT * FROM beneficiaries WHERE REPLACE(cnic, '-', '') LIKE ? LIMIT 5");
+    $stmt->execute(["%$clean_term%"]);
+    while($row = $stmt->fetch()) {
+        $results[] = [
+            'label' => "👤 " . $row['cnic'] . " (" . $row['name'] . ")",
+            'value' => $row['cnic'],
+            'data'  => ['token'=>'', 'cnic'=>$row['cnic'], 'name'=>$row['name'], 'phone'=>$row['phone']]
+        ];
+    }
+}
+
+header('Content-Type: application/json');
+echo json_encode($results);
+?> 
+ 
+
+==============================================================================
+FILE PATH: D:\websiteproject\versions\portal3\beneficiaries.php
+==============================================================================
+
+<?php 
+require 'includes/header.php'; 
+requireAuth();
+
+// Handle Search
+$search = $_GET['search'] ?? '';
+$sql = "SELECT b.*, 
+        (SELECT COUNT(*) FROM transactions t WHERE t.beneficiary_id = b.id AND t.status='success') as txn_count,
+        (SELECT SUM(amount) FROM transactions t WHERE t.beneficiary_id = b.id AND t.status='success') as total_received
+        FROM beneficiaries b 
+        WHERE b.name LIKE ? OR b.cnic LIKE ? OR b.phone LIKE ?
+        ORDER BY b.id DESC LIMIT 50";
+$stmt = $pdo->prepare($sql);
+$stmt->execute(["%$search%", "%$search%", "%$search%"]);
+$rows = $stmt->fetchAll();
+?>
+
+<link rel="stylesheet" href="css/modern.css">
+
+<div class="row mb-4 align-items-center">
+    <div class="col-md-6">
+        <h3 class="fw-bold text-primary"><i class="fas fa-users me-2"></i> Beneficiary Database</h3>
+    </div>
+    <div class="col-md-6">
+        <form class="glass-panel p-2 d-flex">
+            <input type="text" id="global_search" name="search" class="form-control border-0 bg-transparent" placeholder="Search by CNIC, Name, or Phone..." value="<?php echo htmlspecialchars($search); ?>">
+            <button type="submit" class="btn btn-primary rounded-pill px-4"><i class="fas fa-search"></i></button>
+        </form>
+    </div>
+</div>
+
+<div class="glass-panel p-0 overflow-hidden">
+    <div class="table-responsive">
+        <table class="table table-hover mb-0 align-middle">
+            <thead class="bg-light text-secondary small text-uppercase">
+                <tr>
+                    <th class="ps-4">Beneficiary Info</th>
+                    <th>CNIC Number</th>
+                    <th>History</th>
+                    <th>Total Payout</th>
+                    <th class="text-end pe-4">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if(count($rows) > 0): ?>
+                    <?php foreach($rows as $r): ?>
+                    <tr>
+                        <td class="ps-4">
+                            <div class="d-flex align-items-center">
+                                <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px; font-weight: bold;">
+                                    <?php echo strtoupper(substr($r['name'], 0, 1)); ?>
+                                </div>
+                                <div>
+                                    <div class="fw-bold text-dark"><?php echo $r['name']; ?></div>
+                                    <div class="small text-muted"><?php echo $r['phone'] ?: 'No Phone'; ?></div>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="badge bg-light text-dark border"><?php echo $r['cnic']; ?></span></td>
+                        <td><span class="badge bg-info text-dark"><?php echo $r['txn_count']; ?> Visits</span></td>
+                        <td class="text-success fw-bold">Rs. <?php echo number_format($r['total_received']); ?></td>
+                        <td class="text-end pe-4">
+                            <a href="payout.php?cnic=<?php echo $r['cnic']; ?>" class="btn btn-sm btn-outline-primary rounded-pill px-3 fw-bold">
+                                Pay Now <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <tr><td colspan="5" class="text-center p-5 text-muted">No beneficiaries found. Try a different search.</td></tr>
+                <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+$(document).ready(function() {
+    $("#global_search").autocomplete({
+        source: "api_search.php?type=all",
+        minLength: 2,
+        select: function(event, ui) {
+            $("#global_search").val(ui.item.value);
+            $("form").submit(); 
+        }
+    });
+});
+</script>
+
+<?php include 'includes/footer.php'; ?> 
+ 
+
+==============================================================================
+FILE PATH: D:\websiteproject\versions\portal3\bills.php
+==============================================================================
+
+<?php 
+require 'includes/header.php'; 
+
+// HANDLE SAVE
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $type = $_POST['bill_type'];
+    $num  = preg_replace('/[^0-9]/', '', $_POST['consumer_number']); 
+    $name = $_POST['consumer_name'];
+    $amt  = $_POST['amount'];
+    
+    // Save Memory
+    $mem = $pdo->prepare("INSERT INTO saved_consumers (consumer_number, consumer_name, bill_type) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE consumer_name = ?, bill_type = ?");
+    $mem->execute([$num, $name, $type, $name, $type]);
+
+    // Add to Queue
+    $check = $pdo->prepare("SELECT id FROM bill_queue WHERE consumer_number = ? AND DATE(created_at) = CURDATE()");
+    $check->execute([$num]);
+    
+    if(!$check->fetch()) {
+        $stmt = $pdo->prepare("INSERT INTO bill_queue (bill_type, consumer_number, consumer_name, amount) VALUES (?, ?, ?, ?)");
+        $stmt->execute([$type, $num, $name, $amt]);
+        // VISUAL SUCCESS
+        echo "<script>
+            document.addEventListener('DOMContentLoaded', function() {
+                showSuccessOverlay();
+            });
+        </script>";
+    } else {
+        echo "<div class='alert alert-warning text-center fw-bold'>⚠️ Bill already scanned today!</div>";
+    }
+}
+?>
+
+<link rel="stylesheet" href="css/modern.css">
+<script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+<script src='https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js'></script>
+
+<style>
+    /* HUD SCANNER DESIGN */
+    .scanner-hud {
+        background: #000;
+        border-radius: 12px;
+        border: 2px solid #333;
+        position: relative;
+        overflow: hidden;
+        min-height: 320px;
+        box-shadow: inset 0 0 50px rgba(0,0,0,0.8);
+    }
+    .hud-line {
+        position: absolute; width: 100%; height: 2px; background: #00E5FF;
+        top: 50%; left: 0; box-shadow: 0 0 15px #00E5FF;
+        z-index: 10;
+    }
+    .hud-corner {
+        position: absolute; width: 30px; height: 30px; border: 4px solid var(--brand-cyan);
+        z-index: 5;
+    }
+    .tl { top: 10px; left: 10px; border-right: 0; border-bottom: 0; }
+    .tr { top: 10px; right: 10px; border-left: 0; border-bottom: 0; }
+    .bl { bottom: 10px; left: 10px; border-right: 0; border-top: 0; }
+    .br { bottom: 10px; right: 10px; border-left: 0; border-top: 0; }
+
+    /* Mode Buttons */
+    .mode-btn { 
+        background: #1a1a1a; border: 1px solid #333; color: #888; 
+        transition: 0.2s; font-size: 12px; font-weight: bold; letter-spacing: 1px;
+    }
+    .mode-btn:hover { background: #333; color: #fff; }
+    .mode-btn.active { 
+        background: var(--brand-cyan); color: #000; border-color: var(--brand-cyan); 
+        box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+    }
+
+    /* Success Animation */
+    #success-overlay {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0, 255, 136, 0.9);
+        z-index: 9999; display: none;
+        align-items: center; justify-content: center;
+        flex-direction: column;
+    }
+    
+    /* DROPDOWN STYLING - BIG & SCROLLABLE */
+    .ui-autocomplete {
+        max-height: 300px; /* Allow long lists */
+        overflow-y: auto; overflow-x: hidden;
+        background: #fff; border-radius: 12px; 
+        box-shadow: 0 15px 40px rgba(0,0,0,0.3); border: 1px solid #ddd;
+        padding: 0; font-family: 'Segoe UI', sans-serif;
+        z-index: 1055 !important;
+    }
+    .ui-menu-item .ui-menu-item-wrapper {
+        padding: 12px 15px; 
+        border-bottom: 1px solid #f0f0f0; 
+        font-weight: 600; font-size: 16px; color: #333;
+    }
+    .ui-menu-item:last-child .ui-menu-item-wrapper { border-bottom: none; }
+    .ui-menu-item .ui-menu-item-wrapper:hover,
+    .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
+        background: var(--brand-cyan); color: #000; 
+        border: none; margin: 0;
+    }
+</style>
+
+<div id="success-overlay">
+    <i class="fas fa-check-circle fa-5x text-white mb-3 animate__animated animate__zoomIn"></i>
+    <h1 class="text-white fw-bold animate__animated animate__fadeInUp">SAVED</h1>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="glass-panel p-0 overflow-hidden border-0">
+            <div class="bg-dark p-3 d-flex justify-content-between align-items-center">
+                <h5 class="text-white m-0 fw-bold"><i class="fas fa-satellite-dish me-2 text-primary"></i> ENTRY TERMINAL</h5>
+                <span class="badge bg-secondary">STAFF MODE</span>
+            </div>
+
+            <div class="p-4">
+                <div class="btn-group w-100 mb-4 shadow-sm" role="group">
+                    <button onclick="setMode('qr')" class="btn mode-btn active" id="btn-qr">QR CODE</button>
+                    <button onclick="setMode('bar')" class="btn mode-btn" id="btn-bar">BARCODE</button>
+                    <button onclick="setMode('text')" class="btn mode-btn" id="btn-text">AI TEXT</button>
+                </div>
+
+                <div id="scanner-container" style="display:none;">
+                    <div class="scanner-hud mb-3">
+                        <div class="hud-corner tl"></div><div class="hud-corner tr"></div>
+                        <div class="hud-corner bl"></div><div class="hud-corner br"></div>
+                        <div class="hud-line"></div>
+                        
+                        <div id="reader"></div>
+                        <video id="videoElement" style="display:none; width:100%; height:100%; object-fit:cover;" autoplay playsinline></video>
+                    </div>
+
+                    <button id="capture-btn" class="btn btn-warning w-100 fw-bold py-3 mb-2 shadow" style="display:none;" onclick="captureText()">
+                        <i class="fas fa-camera"></i> CAPTURE IMAGE
+                    </button>
+                    <button onclick="stopAll()" class="btn btn-outline-danger w-100 btn-sm">CANCEL SCAN</button>
+                </div>
+
+                <div id="start-area" class="mb-4">
+                    <button onclick="startSelectedMode()" class="btn btn-dark w-100 py-4 rounded-3 shadow border-2 border-secondary hover-effect">
+                        <i class="fas fa-power-off fa-2x mb-2 d-block text-primary"></i>
+                        <span class="fw-bold ls-1">ACTIVATE SCANNER</span>
+                    </button>
+                </div>
+
+                <form method="POST" id="billForm">
+                    <div class="form-floating mb-2">
+                        <input type="text" name="consumer_number" id="cnum" class="form-control fw-bold fs-4 text-primary bg-light" placeholder="Ref ID" required autocomplete="off">
+                        <label>CONSUMER ID (Click for List)</label>
+                    </div>
+                    <div class="form-floating mb-2">
+                        <input type="text" name="consumer_name" id="cname" class="form-control fw-bold bg-light" placeholder="Name" required>
+                        <label>NAME</label>
+                    </div>
+                    <div class="row g-2 mb-3">
+                        <div class="col-6">
+                            <div class="form-floating">
+                                <select name="bill_type" id="btype" class="form-select fw-bold bg-light">
+                                    <option value="Electricity">⚡ Elec</option>
+                                    <option value="Gas">🔥 Gas</option>
+                                    <option value="Water">💧 Water</option>
+                                    <option value="Internet">🌐 Net</option>
+                                </select>
+                                <label>TYPE</label>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-floating">
+                                <input type="number" name="amount" id="camount" class="form-control fw-bold text-success bg-light" placeholder="0">
+                                <label>AMOUNT</label>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success w-100 py-3 fw-bold rounded-pill shadow">
+                        CONFIRM ENTRY <i class="fas fa-check ms-2"></i>
+                    </button>
+                </form>
+                
+                <canvas id="processCanvas" style="display:none;"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+let currentMode = 'qr';
+let html5QrCode = null;
+let streamRef = null;
+
+$(document).ready(function() {
+    // --- SMART AUTOCOMPLETE ---
+    $("#cnum").autocomplete({
+        source: function(request, response) {
+            $.getJSON("api_search.php", {
+                type: 'consumer_suggest',
+                term: request.term // Send text, or empty string
+            }, response);
+        },
+        minLength: 0, // IMPORTANT: Allows triggering with 0 characters
+        select: function(event, ui) {
+            $('#cname').val(ui.item.data.name).css('background-color', '#d1e7dd');
+            $('#btype').val(ui.item.data.type);
+            $('#camount').focus();
+        }
+    }).focus(function() {
+        // Trigger search immediately when box is clicked
+        $(this).autocomplete("search", $(this).val());
+    });
+});
+
+function showSuccessOverlay() {
+    $('#success-overlay').css('display', 'flex');
+    $('#success-overlay').fadeIn(100).delay(800).fadeOut(200, function() {
+        window.location.href = 'bills.php';
+    });
+}
+
+function setMode(mode) {
+    stopAll();
+    currentMode = mode;
+    $('.mode-btn').removeClass('active');
+    $('#btn-' + mode).addClass('active');
+}
+
+function startSelectedMode() {
+    $('#start-area').hide();
+    $('#scanner-container').slideDown();
+    if(currentMode === 'text') { startCameraForText(); } else { startCodeScanner(); }
+}
+
+function stopAll() {
+    if(html5QrCode) { html5QrCode.stop().then(() => { html5QrCode.clear(); }); html5QrCode = null; }
+    if(streamRef) { streamRef.getTracks().forEach(track => track.stop()); streamRef = null; }
+    $('#videoElement').hide();
+    $('#reader').show();
+    $('#capture-btn').hide();
+    $('#scanner-container').hide();
+    $('#start-area').show();
+}
+
+function startCodeScanner() {
+    html5QrCode = new Html5Qrcode("reader");
+    let formats = (currentMode === 'qr') ? [Html5QrcodeSupportedFormats.QR_CODE] : [Html5QrcodeSupportedFormats.CODE_128, Html5QrcodeSupportedFormats.CODE_39, Html5QrcodeSupportedFormats.EAN_13];
+    html5QrCode.start({ facingMode: "environment" }, { fps: 10, qrbox: { width: 250, height: 150 }, formatsToSupport: formats }, (decodedText) => {
+        let clean = decodedText.replace(/[^0-9]/g, '');
+        if(clean.length > 5) {
+            fillData(clean);
+            stopAll();
+        }
+    });
+}
+
+function startCameraForText() {
+    $('#reader').hide(); $('#videoElement').show(); $('#capture-btn').show();
+    navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } }).then(stream => {
+        document.getElementById('videoElement').srcObject = stream;
+        streamRef = stream;
+    });
+}
+
+function captureText() {
+    const video = document.getElementById('videoElement');
+    const canvas = document.getElementById('processCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = video.videoWidth; canvas.height = video.videoHeight;
+    ctx.drawImage(video, 0, 0);
+    
+    // Binarization for better OCR
+    let imgData = ctx.getImageData(0,0, canvas.width, canvas.height);
+    let d = imgData.data;
+    for (let i = 0; i < d.length; i += 4) {
+        let avg = (d[i] + d[i+1] + d[i+2]) / 3;
+        let color = avg > 80 ? 255 : 0; 
+        d[i] = d[i+1] = d[i+2] = color;
+    }
+    ctx.putImageData(imgData, 0, 0);
+    
+    Tesseract.recognize(canvas, 'eng').then(({ data: { text } }) => {
+        const numMatch = text.match(/\d{10,20}/);
+        if (numMatch) { fillData(numMatch[0]); stopAll(); } 
+        else { alert("Text unclear. Try again."); }
+    });
+}
+
+function fillData(num) {
+    $('#cnum').val(num);
+    if(num.length === 14) $('#btype').val('Electricity');
+    if(num.length === 11) $('#btype').val('Gas');
+    
+    // Trigger autocomplete logic manually to fill name if known
+    $.getJSON("api_search.php?type=consumer&term=" + num, function(data) {
+        if(data.status === 'found') {
+            $('#cname').val(data.name).css('background-color', '#d1e7dd'); 
+            $('#btype').val(data.type);
+        }
+    });
+}
+</script>
+
+<?php include 'includes/footer.php'; ?> 
+ 
+
+==============================================================================
+FILE PATH: D:\websiteproject\versions\portal3\dashboard.php
+==============================================================================
+
+<?php 
+require 'includes/header.php'; 
+require_once 'includes/intelligence.php'; 
+
+// --- DATA FETCHING ---
+$today = date('Y-m-d');
+$waiting_count = $pdo->query("SELECT COUNT(*) FROM queue_tokens WHERE status='waiting'")->fetchColumn() ?: 0;
+$served_count = $pdo->query("SELECT COUNT(*) FROM queue_tokens WHERE status='served' AND DATE(served_at) = '$today'")->fetchColumn() ?: 0;
+
+// --- AI ENGINE ---
+// Initialize Intelligence
+$predicted_wait = $AI->predictWaitTime($waiting_count);
+$forecast = $AI->forecastDemand();
+
+// --- FINANCIALS (Admin Only) ---
+$total_profit = 0;
+$total_disbursed = 0;
+if($_SESSION['role'] == 'admin') {
+    $total_disbursed = $pdo->query("SELECT SUM(amount) FROM transactions WHERE DATE(created_at) = '$today' AND status='success'")->fetchColumn() ?: 0;
+    $total_profit = $pdo->query("SELECT SUM(income) FROM transactions WHERE DATE(created_at) = '$today' AND status='success'")->fetchColumn() ?: 0;
+}
+
+// --- QUEUE LOGIC ---
+$serving_now = $pdo->query("SELECT t.*, b.phone FROM queue_tokens t LEFT JOIN beneficiaries b ON t.cnic = b.cnic WHERE t.status='served' AND DATE(t.served_at) = '$today' ORDER BY t.served_at DESC LIMIT 1")->fetch();
+$next_in_line = $pdo->query("SELECT t.*, b.phone FROM queue_tokens t LEFT JOIN beneficiaries b ON t.cnic = b.cnic WHERE t.status='waiting' ORDER BY t.id ASC LIMIT 1")->fetch();
+
+// Handle Call Next
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['call_next_id'])) {
+    $pdo->prepare("UPDATE queue_tokens SET status='served', served_at=NOW() WHERE id=?")->execute([$_POST['call_next_id']]);
+    if(function_exists('logActivity')) { logActivity($pdo, "Call Token", "Called token ID: " . $_POST['call_next_id']); }
+    echo "<script>window.location.href='dashboard.php';</script>";
+    exit();
+}
+?>
+
+<div class="row g-4 mb-4">
+    <div class="col-md-4">
+        <div class="glass-panel p-4 h-100 text-center position-relative">
+            <span class="position-absolute top-0 end-0 m-3 ai-badge"><i class="fas fa-bolt"></i> AI Live</span>
+            <h6 class="text-uppercase opacity-75 small fw-bold">Waiting Line</h6>
+            <h1 class="display-3 fw-bold my-2"><?php echo $waiting_count; ?></h1>
+            <p class="mb-0 text-muted small"><i class="fas fa-clock text-warning"></i> AI Est. Wait: <strong><?php echo $predicted_wait; ?> mins</strong></p>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="glass-panel p-4 h-100 text-center" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+            <h6 class="text-uppercase opacity-75 small fw-bold">Daily Forecast</h6>
+            <h2 class="display-4 fw-bold my-2"><?php echo $forecast; ?></h2>
+            <p class="mb-0 small text-white-50">Expected beneficiaries today based on history.</p>
+        </div>
+    </div>
+
+    <?php if($_SESSION['role'] == 'admin'): ?>
+    <div class="col-md-4">
+        <div class="glass-panel p-4 h-100 text-center border-success" style="border-bottom: 4px solid #00E5FF;">
+            <h6 class="text-uppercase text-success fw-bold small">Net Profit (Live)</h6>
+            <h1 class="display-4 fw-bold text-success my-2">Rs. <?php echo number_format($total_profit); ?></h1>
+            <div class="d-flex justify-content-between small text-muted mt-3">
+                <span>Disbursed:</span>
+                <span class="text-dark fw-bold">Rs. <?php echo number_format($total_disbursed); ?></span>
+            </div>
+        </div>
+    </div>
+    <?php endif; ?>
+</div>
+
+<div class="row g-4 mb-4">
+    <div class="col-lg-6">
+        <div class="glass-panel p-4 h-100 text-center">
+            <h6 class="text-uppercase opacity-50 mb-3">Counter Status</h6>
+            <?php if($serving_now): ?>
+                <h1 class="display-1 fw-bold text-primary mb-0" style="text-shadow: 0 0 20px rgba(0,229,255,0.3);"><?php echo $serving_now['token_number']; ?></h1>
+                <div class="fs-4 text-muted mb-4"><?php echo $serving_now['name'] ?: 'Guest'; ?></div>
+                <button onclick="speakUrdu('<?php echo $serving_now['token_number']; ?>')" class="btn btn-primary rounded-pill px-5 fw-bold shadow-lg">
+                    <i class="fas fa-bullhorn me-2"></i> Announce Token
+                </button>
+            <?php else: ?>
+                <h2 class="opacity-50 my-5">Counter Idle</h2>
+            <?php endif; ?>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="glass-panel p-4 h-100 d-flex flex-column justify-content-center text-center">
+            <h6 class="text-uppercase text-warning fw-bold mb-3">Up Next</h6>
+            <?php if($next_in_line): ?>
+                <h1 class="display-2 fw-bold text-dark mb-2"><?php echo $next_in_line['token_number']; ?></h1>
+                <div class="small text-muted mb-4"><?php echo $next_in_line['cnic']; ?></div>
+                
+                <div class="d-flex gap-2 justify-content-center">
+                    <form method="post" class="w-50">
+                        <input type="hidden" name="call_next_id" value="<?php echo $next_in_line['id']; ?>">
+                        <button type="submit" class="btn btn-dark w-100 btn-lg fw-bold shadow-lg rounded-pill">CALL NEXT</button>
+                    </form>
+                    <?php if($next_in_line['phone']): ?>
+                        <a href="https://wa.me/92<?php echo substr(preg_replace('/\D/', '', $next_in_line['phone']), -10); ?>?text=Your Token <?php echo $next_in_line['token_number']; ?> is ready." target="_blank" class="btn btn-success btn-lg shadow-lg rounded-circle">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    <?php endif; ?>
+                </div>
+            <?php else: ?>
+                <div class="py-4">
+                    <i class="fas fa-mug-hot fa-3x text-muted mb-3"></i>
+                    <h4 class="text-muted">Queue Empty</h4>
+                    <a href="queue.php" class="btn btn-outline-primary mt-2 rounded-pill btn-sm">Issue New Token</a>
+                </div>
+            <?php endif; ?>
+        </div>
+    </div>
+</div>
+
+<script>
+// Urdu Voice Function
+function speakUrdu(num) {
+    if ('speechSynthesis' in window) {
+        var msg = new SpeechSynthesisUtterance("Token Number " + num + ", Counter Par Aayien");
+        msg.lang = 'ur-PK';
+        window.speechSynthesis.speak(msg);
+    } else { alert("Audio not supported."); }
+}
+</script>
+
+<?php include 'includes/footer.php'; ?> 
+ 
+
+==============================================================================
+FILE PATH: D:\websiteproject\versions\portal3\delete_payout.php
+==============================================================================
+
+<?php
+require 'includes/config.php';
+requireAuth(); // Security Check
+
+if(isset($_GET['id'])) {
+    $id = $_GET['id'];
+    
+    // 1. Check if this payout was linked to a Token
+    // (You might need to add token_id to transactions table if not there, 
+    // strictly speaking this is optional but good for consistency)
+    
+    // 2. Delete the Transaction
+    $pdo->prepare("DELETE FROM transactions WHERE id = ?")->execute([$id]);
+    
+    // Log the action
+    if(function_exists('logActivity')) {
+        logActivity($pdo, "Delete Transaction", "Deleted ID: $id");
+    }
+}
+
+header("Location: reports.php"); // Redirect back to reports, not payout
+exit();
+?> 
+ 
+
+==============================================================================
+FILE PATH: D:\websiteproject\versions\portal3\delete_token.php
+==============================================================================
+
+<?php
+require 'includes/config.php';
+requireAuth();
+
+if(isset($_GET['id'])) {
+    $id = $_GET['id'];
+    
+    // Option A: Hard Delete (Remove completely)
+    // $pdo->prepare("DELETE FROM queue_tokens WHERE id = ?")->execute([$id]);
+
+    // Option B: Soft Delete (Mark as cancelled - Recommended)
+    $pdo->prepare("UPDATE queue_tokens SET status='cancelled' WHERE id = ?")->execute([$id]);
+}
+
+header("Location: queue.php");
+exit();
+?> 
+ 
+
+==============================================================================
+FILE PATH: D:\websiteproject\versions\portal3\display.php
+==============================================================================
+
+<?php
+require 'includes/config.php';
+
+// Fetch Current Serving
+$today = date('Y-m-d');
+$current = $pdo->query("SELECT * FROM queue_tokens WHERE status='served' AND DATE(served_at) = '$today' ORDER BY served_at DESC LIMIT 1")->fetch();
+
+// Fetch Next 4 Waiting
+$waiting = $pdo->query("SELECT * FROM queue_tokens WHERE status='waiting' ORDER BY id ASC LIMIT 4")->fetchAll();
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="3"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Queue Display TV</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    
+    <style>
+        body { 
+            background-color: #000; 
+            color: #fff; 
+            height: 100vh; 
+            overflow: hidden; 
+            font-family: 'Segoe UI', sans-serif; 
+        }
+        .container-fluid { height: 100%; padding: 0; }
+        
+        /* LEFT SIDE: NOW SERVING (Green) */
+        .serving-section { 
+            background: linear-gradient(135deg, #004d26 0%, #006400 100%);
+            height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            border-right: 8px solid #FFC107;
+            text-align: center;
+        }
+        
+        .label { 
+            font-size: 3vw; 
+            text-transform: uppercase; 
+            letter-spacing: 5px; 
+            opacity: 0.8; 
+            margin-bottom: 20px; 
+        }
+        
+        .token-main { 
+            font-size: 18vw; 
+            font-weight: 900; 
+            line-height: 1; 
+            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            animation: pulse 2s infinite;
+        }
+        
+        .name-main { 
+            font-size: 4vw; 
+            margin-top: 20px; 
+            color: #FFC107; 
+            font-weight: bold;
+        }
+
+        /* RIGHT SIDE: WAITING LIST (Dark) */
+        .waiting-section { 
+            background: #111; 
+            height: 100vh; 
+            padding: 40px; 
+        }
+
+        .waiting-title { 
+            font-size: 3vw; 
+            color: #fff; 
+            border-bottom: 2px solid #333; 
+            padding-bottom: 20px; 
+            margin-bottom: 30px;
+            font-weight: bold;
+            display: flex; align-items: center; gap: 20px;
+        }
+
+        .list-group-item { 
+            background: #1e1e1e; 
+            color: #fff; 
+            border: 1px solid #333; 
+            font-size: 3vw; 
+            font-weight: bold; 
+            padding: 25px; 
+            margin-bottom: 20px; 
+            border-radius: 20px !important; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .badge-custom { 
+            background: #333; 
+            color: #aaa; 
+            font-size: 2vw; 
+            padding: 10px 20px; 
+            border-radius: 15px; 
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="row g-0">
+    <div class="col-8 serving-section">
+        <div class="label"><i class="fas fa-bell me-3"></i> Now Serving</div>
+        <div class="token-main animate__animated animate__zoomIn">
+            <?php echo $current ? $current['token_number'] : '--'; ?>
+        </div>
+        <div class="name-main">
+            <?php echo $current ? $current['name'] : 'Counter Closed'; ?>
+        </div>
+    </div>
+
+    <div class="col-4 waiting-section">
+        <div class="waiting-title">
+            <i class="fas fa-users text-primary"></i> Next in Line
+        </div>
+        
+        <?php if(count($waiting) > 0): ?>
+            <ul class="list-group">
+                <?php foreach($waiting as $w): ?>
+                <li class="list-group-item animate__animated animate__fadeInRight">
+                    <span class="text-warning"><?php echo $w['token_number']; ?></span>
+                    <span class="badge-custom">WAITING</span>
+                </li>
+                <?php endforeach; ?>
+            </ul>
+        <?php else: ?>
+            <div class="text-center text-muted mt-5">
+                <i class="fas fa-coffee fa-4x mb-3 opacity-25"></i>
+                <h3>Queue Empty</h3>
+            </div>
+        <?php endif; ?>
+    </div>
+</div>
+
+</body>
+</html> 
+ 
+
+==============================================================================
+FILE PATH: D:\websiteproject\versions\portal3\index.php
+==============================================================================
+
+<?php
+// PORTAL ROUTER
+session_start();
+
+// 1. If user is already logged in, go to Dashboard
+if (isset($_SESSION['user_id'])) {
+    header("Location: dashboard.php");
+    exit();
+}
+
+// 2. If not logged in, go to Login Page
+header("Location: login.php");
+exit();
+?> 
+ 
+
+==============================================================================
+FILE PATH: D:\websiteproject\versions\portal3\login.php
+==============================================================================
+
+<?php
+require 'includes/config.php';
+
+// Redirect if already logged in
+if (isset($_SESSION['user_id'])) {
+    header("Location: dashboard.php");
+    exit();
+}
+
+$error = '';
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
+    $stmt->execute([$username]);
+    $user = $stmt->fetch();
+
+    if ($user && password_verify($password, $user['password'])) {
+        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['role'] = $user['role'];
+        $_SESSION['username'] = $user['username'];
+        header("Location: dashboard.php");
+        exit();
+    } else {
+        $error = "Access Denied: Invalid Credentials";
+    }
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Arham Portal - Secure Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #004d26 0%, #000000 100%);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', sans-serif;
+            overflow: hidden;
+        }
+        
+        /* Animated Background Particles */
+        .bg-particles {
+            position: absolute; width: 100%; height: 100%; top: 0; left: 0;
+            background-image: radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+            opacity: 0.5;
+            animation: move 60s linear infinite;
+        }
+        @keyframes move { from { background-position: 0 0; } to { background-position: 100% 100%; } }
+
+        .glass-login {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 50px 40px;
+            border-radius: 25px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            position: relative;
+            z-index: 10;
+        }
+
+        .brand-title {
+            color: #fff;
+            font-weight: 900;
+            font-size: 28px;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .brand-title span { color: #00E5FF; }
+
+        .form-control {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 50px;
+            padding: 15px 25px;
+            color: #fff;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            box-shadow: none;
+        }
+        .form-control::placeholder { color: rgba(255, 255, 255, 0.5); }
+
+        .btn-login {
+            background: linear-gradient(45deg, #00E5FF, #00b8cc);
+            border: none;
+            border-radius: 50px;
+            padding: 15px;
+            width: 100%;
+            font-weight: bold;
+            font-size: 18px;
+            color: #000;
+            box-shadow: 0 5px 15px rgba(0, 229, 255, 0.4);
+            transition: 0.3s;
+        }
+        .btn-login:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0, 229, 255, 0.6); }
+
+        .alert-custom {
+            background: rgba(220, 53, 69, 0.2);
+            border: 1px solid rgba(220, 53, 69, 0.5);
+            color: #ffcccc;
+            border-radius: 15px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-particles"></div>
+
+    <div class="glass-login text-center animate__animated animate__fadeInUp">
+        <div class="brand-title">Arham <span>Portal</span></div>
+        
+        <?php if($error): ?>
+            <div class="alert alert-custom mb-4"><i class="fas fa-exclamation-circle me-2"></i> <?php echo $error; ?></div>
+        <?php endif; ?>
+
+        <form method="POST">
+            <input type="text" name="username" class="form-control" placeholder="Username" required autofocus autocomplete="off">
+            <input type="password" name="password" class="form-control" placeholder="Password" required>
+            
+            <button type="submit" class="btn btn-login mt-3">
+                SECURE ACCESS <i class="fas fa-arrow-right ms-2"></i>
+            </button>
+        </form>
+
+        <div class="mt-4 text-white-50 small">
+            &copy; 2025 Arham Printers & Communications
+        </div>
+    </div>
+
+</body>
+</html> 
+ 
+
+==============================================================================
+FILE PATH: D:\websiteproject\versions\portal3\logout.php
+==============================================================================
+
+<?php
+session_start();
+session_destroy();
+// Redirect to Admin Login (Since index.php is now on BISP domain)
+header("Location: login.php");
+exit();
+?> 
+ 
+
+==============================================================================
+FILE PATH: D:\websiteproject\versions\portal3\night_mode.php
+==============================================================================
+
+<?php 
+require 'includes/header.php'; 
+requireAuth();
+
+// CHECK ADMIN STATUS
+$is_admin = (isset($_SESSION['role']) && $_SESSION['role'] === 'admin');
+
+// --- ADMIN ACTIONS ---
+if ($is_admin) {
+    if (isset($_GET['mark_paid'])) {
+        $pdo->prepare("UPDATE bill_queue SET status='paid' WHERE id=?")->execute([$_GET['mark_paid']]);
+        header("Location: night_mode.php"); exit();
+    }
+    if (isset($_GET['delete_bill'])) {
+        $pdo->prepare("DELETE FROM bill_queue WHERE id=?")->execute([$_GET['delete_bill']]);
+        header("Location: night_mode.php"); exit();
+    }
+}
+
+// FETCH DATA
+$today = date('Y-m-d');
+$bills = $pdo->query("SELECT * FROM bill_queue WHERE status='pending' ORDER BY created_at DESC")->fetchAll();
+
+// STATS
+$bisp_out = $pdo->query("SELECT SUM(amount) FROM transactions WHERE DATE(created_at) = '$today' AND status='success'")->fetchColumn() ?: 0;
+$bill_in = $pdo->query("SELECT SUM(amount) FROM bill_queue WHERE DATE(created_at) = '$today'")->fetchColumn() ?: 0;
+$net_flow = $bisp_out - $bill_in; 
+?>
+
+<link rel="stylesheet" href="css/modern.css">
+
+<div class="modal fade" id="auditModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content glass-panel border-warning bg-dark">
+            <div class="modal-header border-0">
+                <h5 class="fw-bold text-warning"><i class="fas fa-search"></i> ENTRY DETAILS</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body text-center text-white">
+                <div id="audit-result"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h3 class="fw-bold text-primary"><i class="fas fa-moon"></i> Night Shift</h3>
+    <span class="badge bg-<?php echo $is_admin ? 'danger' : 'secondary'; ?>">
+        Logged in as: <?php echo strtoupper($_SESSION['role'] ?? 'GUEST'); ?>
+    </span>
+</div>
+
+<div class="row g-4">
+    
+    <?php if($is_admin): ?>
+    <div class="col-12">
+        <div class="glass-panel p-3 border-warning bg-dark">
+            <div class="d-flex align-items-center gap-3">
+                <div class="fw-bold text-warning text-nowrap"><i class="fas fa-shield-alt"></i> ADMIN AUDIT:</div>
+                <div class="flex-grow-1 position-relative">
+                    <input type="text" id="admin_search" class="form-control fw-bold bg-secondary text-white border-0" placeholder="Search any previous entry (Paid or Pending)...">
+                    <i class="fas fa-search position-absolute top-50 end-0 translate-middle-y me-3 text-white-50"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php endif; ?>
+
+    <div class="col-md-4">
+        <div class="glass-panel p-4 text-center bg-dark text-white border-secondary">
+            <h6 class="fw-bold text-uppercase text-secondary mb-3">Today's Net Position</h6>
+            
+            <div class="d-flex justify-content-between mb-2 small">
+                <span>BISP OUT (Dr):</span>
+                <span class="text-danger fw-bold">- <?php echo number_format($bisp_out); ?></span>
+            </div>
+            <div class="d-flex justify-content-between mb-3 small">
+                <span>BILLS IN (Cr):</span>
+                <span class="text-success fw-bold">+ <?php echo number_format($bill_in); ?></span>
+            </div>
+            
+            <hr class="border-secondary">
+            
+            <h6 class="fw-bold">Required Bank Sync</h6>
+            <h2 class="display-6 fw-bold <?php echo ($net_flow > 0 ? 'text-warning' : 'text-info'); ?>">
+                Rs. <?php echo number_format(abs($net_flow)); ?>
+            </h2>
+            <small class="text-muted">
+                <?php echo ($net_flow > 0) ? "WITHDRAW from Device" : "DEPOSIT to Device"; ?>
+            </small>
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        <div class="glass-panel p-0 overflow-hidden border-0">
+            <div class="p-3 bg-primary text-white d-flex justify-content-between align-items-center">
+                <h5 class="m-0"><i class="fas fa-list-ul me-2"></i> PENDING QUEUE</h5>
+                <span class="badge bg-light text-dark"><?php echo count($bills); ?> ITEMS</span>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="bg-light text-secondary small">
+                        <tr>
+                            <th class="ps-3">DETAILS</th>
+                            <th>REFERENCE ID</th>
+                            <th>AMOUNT</th>
+                            <th class="text-end pe-3">STATUS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($bills as $b): ?>
+                        <tr id="row-<?php echo $b['id']; ?>">
+                            <td class="ps-3">
+                                <div class="fw-bold text-dark"><?php echo $b['consumer_name']; ?></div>
+                                <span class="badge bg-light text-dark border"><?php echo $b['bill_type']; ?></span>
+                            </td>
+                            <td>
+                                <div class="input-group input-group-sm" style="width: 180px;">
+                                    <input type="text" class="form-control font-monospace fw-bold bg-white" value="<?php echo $b['consumer_number']; ?>" id="ref-<?php echo $b['id']; ?>" readonly>
+                                    <button class="btn btn-warning" onclick="copyText('<?php echo $b['id']; ?>')" title="Copy">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </div>
+                            </td>
+                            <td class="fw-bold text-success">Rs. <?php echo number_format($b['amount']); ?></td>
+                            <td class="text-end pe-3">
+                                <?php if($is_admin): ?>
+                                    <div class="btn-group">
+                                        <a href="?mark_paid=<?php echo $b['id']; ?>" class="btn btn-sm btn-success" title="Mark Paid"><i class="fas fa-check"></i></a>
+                                        <a href="?delete_bill=<?php echo $b['id']; ?>" class="btn btn-sm btn-outline-danger" onclick="return confirm('Delete?')" title="Delete"><i class="fas fa-trash"></i></a>
+                                    </div>
+                                <?php else: ?>
+                                    <span class="badge bg-secondary"><i class="fas fa-lock"></i> LOCKED</span>
+                                <?php endif; ?>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div id="liveToast" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+      <div class="toast-body fw-bold"><i class="fas fa-check-circle me-2"></i> Copied to Clipboard!</div>
+    </div>
+  </div>
+</div>
+
+<style>
+/* Dropdown Styling */
+.ui-autocomplete {
+    max-height: 400px; overflow-y: auto; overflow-x: hidden;
+    background: #212529; color: white; border: 1px solid #444;
+    border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    z-index: 1060 !important;
+}
+.ui-menu-item .ui-menu-item-wrapper {
+    padding: 12px; border-bottom: 1px solid #333;
+}
+.ui-menu-item .ui-menu-item-wrapper:hover {
+    background: var(--brand-cyan); color: #000;
+}
+</style>
+
+<script>
+$(document).ready(function() {
+    <?php if($is_admin): ?>
+    // ADMIN AUTOCOMPLETE
+    $("#admin_search").autocomplete({
+        source: function(request, response) {
+            $.getJSON("api_search.php", {
+                type: 'bill_history',
+                term: request.term
+            }, response);
+        },
+        minLength: 0, // Autofetch on click
+        select: function(event, ui) {
+            // Show details in Modal
+            var d = ui.item.data;
+            var badge = (d.status === 'paid') ? '<span class="badge bg-success">PAID</span>' : '<span class="badge bg-warning text-dark">PENDING</span>';
+            var html = `
+                <div class="display-1 text-white mb-2">${badge}</div>
+                <h3 class="text-white">${d.consumer_name}</h3>
+                <h4 class="text-primary font-monospace">${d.consumer_number}</h4>
+                <hr class="border-secondary">
+                <div class="row text-start">
+                    <div class="col-6 text-white-50">Type:</div><div class="col-6 fw-bold text-white text-end">${d.bill_type}</div>
+                    <div class="col-6 text-white-50">Amount:</div><div class="col-6 fw-bold text-success text-end">Rs. ${d.amount}</div>
+                    <div class="col-6 text-white-50">Date:</div><div class="col-6 fw-bold text-white text-end">${d.created_at}</div>
+                </div>
+            `;
+            $('#audit-result').html(html);
+            new bootstrap.Modal(document.getElementById('auditModal')).show();
+            
+            // Clear input
+            $(this).val('');
+            return false;
+        }
+    }).focus(function() {
+        $(this).autocomplete("search", "");
+    });
+    <?php endif; ?>
+});
+
+function copyText(id) {
+    var copyText = document.getElementById("ref-" + id);
+    copyText.select();
+    navigator.clipboard.writeText(copyText.value);
+    
+    var row = document.getElementById("row-" + id);
+    row.style.transition = "background 0.5s";
+    row.style.backgroundColor = "#d1e7dd";
+    
+    const toast = new bootstrap.Toast(document.getElementById('liveToast'));
+    toast.show();
+}
+</script>
+
+<?php include 'includes/footer.php'; ?> 
+ 
+
+==============================================================================
+FILE PATH: D:\websiteproject\versions\portal3\payout.php
+==============================================================================
+
+<?php require 'includes/header.php'; 
+// SECURITY: ADMIN ONLY
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') { die("ACCESS DENIED"); }
+
+// HANDLE PAYOUT
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $cnic = $_POST['cnic'];
+    $amount = str_replace(',', '', $_POST['amount']);
+    $trx_id = $_POST['konnect_trx_id'];
+    $agent_id = $_SESSION['user_id'];
+    
+    // 1. Get/Create Beneficiary
+    $stmt = $pdo->prepare("SELECT id FROM beneficiaries WHERE cnic = ?");
+    $stmt->execute([$cnic]);
+    $ben_id = $stmt->fetchColumn();
+
+    if (!$ben_id) {
+        $pdo->prepare("INSERT INTO beneficiaries (cnic, name, phone) VALUES (?, ?, ?)")->execute([$cnic, $_POST['name'], $_POST['phone']]);
+        $ben_id = $pdo->lastInsertId();
+    }
+
+    // 2. Record Transaction
+    $sql = "INSERT INTO transactions (beneficiary_id, agent_id, amount, income, konnect_trx_id, status) VALUES (?, ?, ?, ?, ?, 'success')";
+    $pdo->prepare($sql)->execute([$ben_id, $agent_id, $amount, 20, $trx_id]); // 20 is fixed commission
+    $txn_id = $pdo->lastInsertId();
+
+    // 3. Close Token if linked
+    if (!empty($_POST['token_num'])) {
+        $pdo->prepare("UPDATE queue_tokens SET status='served', served_at=NOW() WHERE token_number = ? AND DATE(issued_at)=CURDATE()")->execute([$_POST['token_num']]);
+    }
+
+    echo "<script>window.open('print_receipt.php?id=$txn_id', '_blank'); window.location.href='payout.php';</script>";
+    exit();
+}
+
+// Auto-fill from URL
+$pre_cnic = $_GET['cnic'] ?? '';
+?>
+
+<link rel="stylesheet" href="css/modern.css">
+
+<div class="row justify-content-center">
+    <div class="col-md-7">
+        <div class="glass-panel p-5">
+            <h3 class="fw-bold mb-4 text-center"><i class="fas fa-hand-holding-usd text-success"></i> Cash Disbursement</h3>
+            
+            <form method="POST">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="fw-bold small text-muted">CNIC Number</label>
+                        <input type="text" id="cnic" name="cnic" class="form-control form-control-lg fw-bold" placeholder="35202-xxxxxxx-x" value="<?php echo $pre_cnic; ?>" required>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <label class="fw-bold small text-muted">Token # (Optional)</label>
+                        <input type="text" id="token" name="token_num" class="form-control form-control-lg text-center" placeholder="e.g. 05-102">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="fw-bold small text-muted">Beneficiary Name</label>
+                        <input type="text" id="name" name="name" class="form-control" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="fw-bold small text-muted">Phone</label>
+                        <input type="text" id="phone" name="phone" class="form-control">
+                    </div>
+
+                    <div class="col-12"><hr class="my-2"></div>
+
+                    <div class="col-md-6">
+                        <label class="fw-bold small text-muted">Amount (PKR)</label>
+                        <input type="number" name="amount" class="form-control form-control-lg fw-bold text-success" value="10500" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="fw-bold small text-muted">Bank Trx ID (Konnect)</label>
+                        <input type="text" name="konnect_trx_id" class="form-control form-control-lg" placeholder="Last 4-6 digits" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-success w-100 btn-lg rounded-pill mt-4 fw-bold shadow hover-effect">
+                    <i class="fas fa-check-circle me-2"></i> Confirm & Print Receipt
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+$(document).ready(function() {
+    function fill(d) {
+        if(d.cnic) $("#cnic").val(d.cnic);
+        if(d.name) $("#name").val(d.name);
+        if(d.phone) $("#phone").val(d.phone);
+    }
+    $("#cnic").autocomplete({ source: "api_search.php?type=cnic", select: function(e, ui) { fill(ui.item.data); } });
+    $("#token").autocomplete({ source: "api_search.php?type=token", select: function(e, ui) { fill(ui.item.data); } });
+});
+</script>
+
+<?php include 'includes/footer.php'; ?> 
+ 
+
+==============================================================================
+FILE PATH: D:\websiteproject\versions\portal3\print_batch.php
+==============================================================================
+
+<?php
+require 'includes/config.php';
+requireAuth();
+
+// Fetch 20 unprinted tokens
+$tokens = $pdo->query("SELECT * FROM queue_tokens WHERE is_printed=0 ORDER BY id ASC LIMIT 20")->fetchAll();
+
+// Auto-mark as printed
+if(count($tokens) > 0) {
+    $ids = array_column($tokens, 'id');
+    $in  = str_repeat('?,', count($ids) - 1) . '?';
+    $pdo->prepare("UPDATE queue_tokens SET is_printed=1 WHERE id IN ($in)")->execute($ids);
+}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Batch Print (A4)</title>
+    <style>
+        @page { size: A4; margin: 5mm; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; background: #fff; }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 4 Columns */
+            grid-template-rows: repeat(5, 1fr);    /* 5 Rows */
+            gap: 2mm;
+            height: 285mm; /* Fits A4 */
+        }
+        
+        .card {
+            border: 2px dashed #444;
+            border-radius: 8px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 5px;
+        }
+        
+        .brand { font-size: 10px; font-weight: bold; text-transform: uppercase; color: #000; }
+        .token { font-size: 32px; font-weight: 900; margin: 5px 0; font-family: 'Arial Black', sans-serif; }
+        .cnic { font-size: 12px; font-family: monospace; font-weight: bold; letter-spacing: 1px; }
+        .meta { font-size: 9px; color: #555; margin-top: 5px; }
+    </style>
+</head>
+<body onload="window.print()">
+
+    <?php if(count($tokens) == 0): ?>
+        <div style="text-align:center; padding-top:50px;">
+            <h2>Queue is Empty</h2>
+            <p>No unprinted tokens found.</p>
+        </div>
+    <?php else: ?>
+        <div class="grid">
+            <?php foreach($tokens as $t): ?>
+            <div class="card">
+                <div class="brand">Arham BISP Center</div>
+                <div class="token"><?php echo $t['token_number']; ?></div>
+                <div class="cnic"><?php echo $t['cnic']; ?></div>
+                <div class="meta"><?php echo date('d-M h:i A', strtotime($t['issued_at'])); ?></div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
+
+</body>
+</html> 
+ 
+
+==============================================================================
+FILE PATH: D:\websiteproject\versions\portal3\print_receipt.php
+==============================================================================
+
+<?php
+require 'includes/config.php';
+requireAuth();
+
+$id = $_GET['id'];
+$txn = $pdo->prepare("SELECT t.*, b.name, b.cnic FROM transactions t JOIN beneficiaries b ON t.beneficiary_id = b.id WHERE t.id = ?");
+$txn->execute([$id]);
+$row = $txn->fetch();
+
+if(!$row) die("Transaction not found");
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Receipt #<?php echo $id; ?></title>
+    <style>
+        body { width: 72mm; margin: 0 auto; font-family: 'Courier New', monospace; font-size: 12px; }
+        .center { text-align: center; }
+        .bold { font-weight: bold; }
+        .divider { border-top: 1px dashed #000; margin: 5px 0; }
+        .kv-row { display: flex; justify-content: space-between; }
+    </style>
+</head>
+<body onload="window.print();">
+    
+    <div class="center bold" style="font-size: 16px;">ARHAM PRINTERS</div>
+    <div class="center">Jalalpur Jattan</div>
+    <div class="center">0300-6238233</div>
+    
+    <div class="divider"></div>
+    
+    <div class="kv-row"><span>Receipt #:</span> <span><?php echo str_pad($row['id'], 6, '0', STR_PAD_LEFT); ?></span></div>
+    <div class="kv-row"><span>Date:</span> <span><?php echo date('d-M-y h:i A'); ?></span></div>
+    
+    <div class="divider"></div>
+    
+    <div class="bold">Beneficiary Details:</div>
+    <div class="kv-row"><span>Name:</span> <span><?php echo substr($row['name'], 0, 15); ?></span></div>
+    <div class="kv-row"><span>CNIC:</span> <span><?php echo $row['cnic']; ?></span></div>
+    
+    <div class="divider"></div>
+    
+    <div class="kv-row bold" style="font-size: 14px;">
+        <span>AMOUNT PAID:</span>
+        <span>Rs. <?php echo number_format($row['amount']); ?></span>
+    </div>
+    
+    <div class="kv-row"><span>Bank TRX:</span> <span><?php echo $row['konnect_trx_id']; ?></span></div>
+    <div class="kv-row"><span>Agent:</span> <span><?php echo $_SESSION['username'] ?? 'Staff'; ?></span></div>
+    
+    <div class="divider"></div>
+    <div class="center" style="font-size: 10px;">Computer Generated Slip<br>Not valid for legal claims</div>
+    <br>
+</body>
+</html> 
+ 
+
+==============================================================================
+FILE PATH: D:\websiteproject\versions\portal3\print_token.php
+==============================================================================
+
+<?php
+require 'includes/config.php';
+requireAuth();
+
+$id = $_GET['id'] ?? 0;
+$stmt = $pdo->prepare("SELECT * FROM queue_tokens WHERE id = ?");
+$stmt->execute([$id]);
+$token = $stmt->fetch();
+
+if(!$token) die("Token not found");
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Token #<?php echo $token['token_number']; ?></title>
+    <style>
+        body { width: 58mm; margin: 0; font-family: 'Arial', sans-serif; text-align: center; }
+        .header { font-size: 14px; font-weight: bold; text-transform: uppercase; margin-top: 5px; }
+        .sub-header { font-size: 10px; margin-bottom: 5px; }
+        .token-box { border: 2px solid #000; padding: 5px; margin: 5px 0; border-radius: 5px; }
+        .token-num { font-size: 32px; font-weight: 900; }
+        .label { font-size: 10px; text-transform: uppercase; }
+        .details { font-size: 10px; text-align: left; margin-top: 5px; }
+        .footer { font-size: 9px; margin-top: 10px; font-style: italic; }
+    </style>
+</head>
+<body onload="window.print(); setTimeout(window.close, 500);">
+
+    <div class="header">Arham Printers</div>
+    <div class="sub-header">BISP Disbursement Center</div>
+    
+    <div class="token-box">
+        <div class="label">Your Token Number</div>
+        <div class="token-num"><?php echo $token['token_number']; ?></div>
+    </div>
+
+    <div class="details">
+        <strong>CNIC:</strong> <?php echo $token['cnic']; ?><br>
+        <strong>Date:</strong> <?php echo date('d-M-Y h:i A', strtotime($token['issued_at'])); ?>
+    </div>
+
+    <div class="footer">
+        Please wait for your turn.<br>
+        Powered by ArhamSoft
+    </div>
+
+</body>
+</html> 
+ 
+
+==============================================================================
+FILE PATH: D:\websiteproject\versions\portal3\queue.php
+==============================================================================
+
+<?php 
+require 'includes/header.php'; 
+require_once 'includes/intelligence.php';
+
+$alert_html = "";
+
+// HANDLE TOKEN ISSUANCE + FRAUD CHECK
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $cnic = $_POST['cnic'];
+    $name = $_POST['name'] ?? 'Guest';
+    $print_mode = $_POST['print_mode']; // 'thermal' or 'queue'
+    $phone = $_POST['phone'] ?? '';
+
+    // 1. RUN AI FRAUD CHECK
+    $risk = $AI->checkFraudRisk($cnic, $phone);
+
+    if ($risk['score'] >= 50) {
+        // BLOCK: High Risk
+        $alert_html = "<div class='alert alert-danger shadow-lg p-4 mb-4 glass-panel border-danger'>
+            <h3 class='fw-bold'><i class='fas fa-shield-alt'></i> SECURITY BLOCK</h3>
+            <ul class='mb-0 mt-2'>";
+        foreach($risk['alerts'] as $a) { $alert_html .= "<li>$a</li>"; }
+        $alert_html .= "</ul></div>";
+    } else {
+        // SAFE: Process Token
+        // Generate Token Number
+        $today_count = $pdo->query("SELECT COUNT(*) FROM queue_tokens WHERE DATE(issued_at) = CURDATE()")->fetchColumn() + 1;
+        $token_num = date('d') . '-' . str_pad($today_count, 3, '0', STR_PAD_LEFT);
+        
+        // Save
+        $is_printed = ($print_mode == 'thermal') ? 1 : 0;
+        $stmt = $pdo->prepare("INSERT INTO queue_tokens (token_number, cnic, name, issued_by, is_printed) VALUES (?, ?, ?, ?, ?)");
+        $stmt->execute([$token_num, $cnic, $name, $_SESSION['user_id'], $is_printed]);
+        $last_id = $pdo->lastInsertId();
+
+        // Redirect based on mode
+        if ($print_mode == 'thermal') {
+            echo "<script>window.location.href='print_token.php?id=$last_id';</script>";
+        } else {
+            echo "<script>window.location.href='queue.php';</script>"; // Refresh for batch
+        }
+        exit();
+    }
+}
+?>
+
+<script src='https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js'></script>
+
+<div class="row">
+    <div class="col-lg-5 mb-4">
+        
+        <?php echo $alert_html; ?>
+
+        <div class="card shadow-lg border-0 glass-panel">
+            <div class="card-header bg-primary text-white text-center py-3" style="border-radius: 20px 20px 0 0;">
+                <h4 class="mb-0"><i class="fas fa-id-card"></i> Smart Token Issuer</h4>
+            </div>
+            <div class="card-body bg-transparent">
+                
+                <div id="camera-container" class="mb-3 text-center" style="display:none;">
+                    <div style="position: relative;">
+                        <video id="video" width="100%" height="240" autoplay style="border-radius:10px; border:2px solid #333; background:#000; object-fit: cover;"></video>
+                        <div style="position: absolute; top: 10%; left: 10%; width: 80%; height: 80%; border: 2px dashed rgba(255,255,255,0.7); border-radius: 10px; pointer-events: none;"></div>
+                    </div>
+                    <div class="d-flex gap-2 mt-2">
+                        <button type="button" id="capture-btn" class="btn btn-warning flex-grow-1 fw-bold"><i class="fas fa-camera"></i> Capture & Scan</button>
+                        <button type="button" onclick="stopCamera()" class="btn btn-secondary"><i class="fas fa-times"></i></button>
+                    </div>
+                    <div id="ocr-status" class="text-primary fw-bold mt-2 small"></div>
+                </div>
+
+                <form id="tokenForm" method="post">
+                    <div class="d-flex justify-content-between align-items-end mb-2">
+                        <label class="fw-bold">CNIC Number</label>
+                        <button type="button" class="btn btn-sm btn-dark shadow-sm" onclick="startCamera()">
+                            <i class="fas fa-camera"></i> Scan ID
+                        </button>
+                    </div>
+                    
+                    <div class="input-group mb-3">
+                        <span class="input-group-text bg-white"><i class="fas fa-search text-muted"></i></span>
+                        <input type="text" id="cnic" name="cnic" class="form-control form-control-lg fw-bold fs-4 text-primary" placeholder="35202-xxxxxxx-x" required autocomplete="off">
+                    </div>
+                    
+                    <label class="fw-bold">Beneficiary Name</label>
+                    <input type="text" id="name" name="name" class="form-control mb-4" placeholder="Auto-fills if found" autocomplete="off">
+
+                    <div class="row g-2">
+                        <div class="col-6">
+                            <button type="submit" name="print_mode" value="thermal" class="btn btn-dark w-100 py-3 shadow-sm hover-effect">
+                                <i class="fas fa-print fa-lg mb-1"></i><br>Thermal Slip
+                            </button>
+                        </div>
+                        <div class="col-6">
+                            <button type="submit" name="print_mode" value="queue" class="btn btn-outline-primary w-100 py-3 shadow-sm hover-effect">
+                                <i class="fas fa-layer-group fa-lg mb-1"></i><br>Add to Batch
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-7">
+        <div class="card shadow border-0 glass-panel">
+            <div class="card-header d-flex justify-content-between align-items-center bg-white py-3" style="border-radius: 20px 20px 0 0;">
+                <h5 class="mb-0 fw-bold text-secondary">A4 Batch Queue</h5>
+                <a href="print_batch.php" target="_blank" class="btn btn-success shadow-sm">
+                    <i class="fas fa-print"></i> Print Sheet (20)
+                </a>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover mb-0 align-middle">
+                        <thead class="table-dark">
+                            <tr>
+                                <th class="ps-3">Token</th>
+                                <th>CNIC</th>
+                                <th>Name</th>
+                                <th class="text-end pe-3">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="batch-list">
+                            <?php
+                            $batch = $pdo->query("SELECT * FROM queue_tokens WHERE is_printed=0 ORDER BY id ASC LIMIT 20")->fetchAll();
+                            if(count($batch) > 0) {
+                                foreach($batch as $b) {
+                                    echo "<tr>
+                                        <td class='ps-3'><span class='badge bg-warning text-dark fs-6'>{$b['token_number']}</span></td>
+                                        <td class='fw-bold text-primary'>{$b['cnic']}</td>
+                                        <td>{$b['name']}</td>
+                                        <td class='text-end pe-3'>
+                                            <a href='delete_token.php?id={$b['id']}' class='btn btn-sm btn-outline-danger' title='Remove'><i class='fas fa-trash'></i></a>
+                                        </td>
+                                    </tr>";
+                                }
+                            } else {
+                                echo "<tr><td colspan='4' class='text-center p-5 text-muted'><i class='fas fa-box-open fa-3x mb-3 opacity-25'></i><br>Batch queue is empty.</td></tr>";
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+$(document).ready(function() {
+    // --- 1. AUTOCOMPLETE ---
+    $("#cnic").autocomplete({
+        source: "api_search.php?type=cnic",
+        minLength: 3,
+        select: function(event, ui) {
+            $("#cnic").val(ui.item.data.cnic);
+            $("#name").val(ui.item.data.name);
+            $("#name, #cnic").css("background-color", "#d1e7dd");
+            setTimeout(function(){ $("#name, #cnic").css("background-color", ""); }, 800);
+            return false;
+        }
+    }).data("ui-autocomplete")._renderItem = function(ul, item) {
+        return $("<li>").append("<div class='p-2 border-bottom'><strong>" + item.data.cnic + "</strong><br><small class='text-muted'>" + item.data.name + "</small></div>").appendTo(ul);
+    };
+
+    // --- 2. FORMATTER ---
+    $('#cnic').on('input', function() {
+        var val = $(this).val().replace(/\D/g, '');
+        if (val.length > 5) val = val.substring(0, 5) + '-' + val.substring(5);
+        if (val.length > 13) val = val.substring(0, 13) + '-' + val.substring(13, 14);
+        $(this).val(val);
+    });
+
+    // --- 3. CAMERA LOGIC (Retained) ---
+    const video = document.getElementById('video');
+    const cnicInput = document.getElementById('cnic');
+    let streamRef = null;
+
+    window.startCamera = function() {
+        $('#camera-container').slideDown();
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
+            .then(stream => { video.srcObject = stream; streamRef = stream; })
+            .catch(err => { alert("Camera Error: " + err.message); $('#camera-container').hide(); });
+        }
+    }
+
+    window.stopCamera = function() {
+        if(streamRef) { streamRef.getTracks().forEach(track => track.stop()); }
+        $('#camera-container').slideUp();
+    }
+
+    document.getElementById('capture-btn').addEventListener('click', () => {
+        const canvas = document.createElement('canvas');
+        canvas.width = video.videoWidth; canvas.height = video.videoHeight;
+        canvas.getContext('2d').drawImage(video, 0, 0);
+        
+        document.getElementById('ocr-status').innerHTML = "<i class='fas fa-spinner fa-spin'></i> Processing...";
+        
+        Tesseract.recognize(canvas, 'eng').then(({ data: { text } }) => {
+            const cnicMatch = text.match(/\d{5}-?\d{7}-?\d{1}/);
+            if (cnicMatch) {
+                let rawNumbers = cnicMatch[0].replace(/-/g, '');
+                cnicInput.value = rawNumbers;
+                $('#cnic').trigger('input');
+                document.getElementById('ocr-status').innerHTML = "<span class='text-success fw-bold'>CNIC Found!</span>";
+                
+                $.getJSON("api_search.php?type=cnic&term=" + rawNumbers, function(data) {
+                    if(data.length > 0) { $("#name").val(data[0].data.name); }
+                });
+                setTimeout(stopCamera, 1000);
+            } else {
+                document.getElementById('ocr-status').innerHTML = "<span class='text-danger'>Try again.</span>";
+            }
+        });
+    });
+});
+</script>
+
+<?php include 'includes/footer.php'; ?> 
+ 
+
+==============================================================================
+FILE PATH: D:\websiteproject\versions\portal3\reconcile.php
+==============================================================================
+
+<?php include 'includes/header.php'; 
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') { die("ACCESS DENIED"); }
+
+$today = date('Y-m-d');
+$total_paid = $pdo->query("SELECT SUM(amount) FROM transactions WHERE DATE(created_at) = '$today' AND status='success'")->fetchColumn() ?: 0;
+$count = $pdo->query("SELECT COUNT(*) FROM transactions WHERE DATE(created_at) = '$today' AND status='success'")->fetchColumn() ?: 0;
+
+$msg = "";
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $opening = $_POST['opening_cash'];
+    $refill = $_POST['bank_withdrawals'];
+    $closing = $_POST['physical_cash_now'];
+    
+    // Formula: (Opening + Refills) - PaidOut should equal Closing
+    $expected = ($opening + $refill) - $total_paid;
+    $diff = $closing - $expected;
+    
+    $color = ($diff == 0) ? 'success' : (($diff < 0) ? 'danger' : 'warning');
+    $status = ($diff == 0) ? 'Perfect Match' : (($diff < 0) ? 'Cash Shortage' : 'Surplus Cash');
+    
+    $msg = "<div class='alert alert-$color glass-panel text-center'>
+        <h3 class='fw-bold'>$status: Rs. " . number_format($diff) . "</h3>
+        <p class='mb-0'>Expected: " . number_format($expected) . " | Found: " . number_format($closing) . "</p>
+    </div>";
+}
+?>
+
+<link rel="stylesheet" href="css/modern.css">
+
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        
+        <?php echo $msg; ?>
+
+        <div class="glass-panel p-4">
+            <div class="text-center mb-4">
+                <h4 class="fw-bold"><i class="fas fa-balance-scale"></i> Daily Closing</h4>
+                <p class="text-muted"><?php echo date('l, d F Y'); ?></p>
+            </div>
+
+            <div class="alert alert-info text-center border-0 bg-opacity-10">
+                <small class="text-uppercase">Total Disbursed Today</small>
+                <h2 class="fw-bold my-1">Rs. <?php echo number_format($total_paid); ?></h2>
+                <small>(<?php echo $count; ?> Transactions)</small>
+            </div>
+
+            <form method="POST">
+                <div class="mb-3">
+                    <label class="fw-bold small">1. Opening Cash (Morning)</label>
+                    <input type="number" name="opening_cash" class="form-control" required placeholder="0">
+                </div>
+                <div class="mb-3">
+                    <label class="fw-bold small">2. Cash Added (Refills)</label>
+                    <input type="number" name="bank_withdrawals" class="form-control" value="0">
+                </div>
+                <div class="mb-4">
+                    <label class="fw-bold small text-primary">3. Closing Cash (Count Now)</label>
+                    <input type="number" name="physical_cash_now" class="form-control form-control-lg border-primary fw-bold" required placeholder="0">
+                </div>
+                <button class="btn btn-dark w-100 rounded-pill py-3 fw-bold">Calculate Balance</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<?php include 'includes/footer.php'; ?> 
+ 
+
+==============================================================================
+FILE PATH: D:\websiteproject\versions\portal3\reports.php
+==============================================================================
+
+<?php 
+require 'includes/header.php'; 
+// Ensure only Admin
+if ($_SESSION['role'] !== 'admin') { die("ACCESS DENIED"); }
+
+$start_date = $_GET['start'] ?? date('Y-m-d', strtotime('-7 days'));
+$end_date = $_GET['end'] ?? date('Y-m-d');
+
+// SQL for Table
+$rows = $pdo->prepare("SELECT t.*, b.name, b.cnic, u.username FROM transactions t JOIN beneficiaries b ON t.beneficiary_id = b.id LEFT JOIN users u ON t.agent_id = u.id WHERE DATE(t.created_at) BETWEEN ? AND ? ORDER BY t.created_at DESC");
+$rows->execute([$start_date, $end_date]);
+$data = $rows->fetchAll();
+
+// SQL for Chart
+$chart_sql = $pdo->prepare("SELECT DATE(created_at) as date, SUM(amount) as total FROM transactions WHERE DATE(created_at) BETWEEN ? AND ? AND status='success' GROUP BY DATE(created_at)");
+$chart_sql->execute([$start_date, $end_date]);
+$chart_data = $chart_sql->fetchAll();
+
+$dates = []; $totals = [];
+foreach($chart_data as $c) { $dates[] = $c['date']; $totals[] = $c['total']; }
+?>
+
+<link rel="stylesheet" href="css/modern.css">
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h3 class="fw-bold"><i class="fas fa-chart-pie me-2 text-primary"></i> Financial Reports</h3>
+    
+    <form class="d-flex gap-2 glass-panel p-2">
+        <input type="date" name="start" class="form-control form-control-sm border-0 bg-transparent text-dark fw-bold" value="<?php echo $start_date; ?>">
+        <span class="align-self-center text-muted">-</span>
+        <input type="date" name="end" class="form-control form-control-sm border-0 bg-transparent text-dark fw-bold" value="<?php echo $end_date; ?>">
+        <button type="submit" class="btn btn-primary btn-sm rounded-pill px-3">Filter</button>
+    </form>
+</div>
+
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="glass-panel p-4">
+            <h5 class="fw-bold mb-3">Disbursement Trend</h5>
+            <canvas id="payoutChart" height="80"></canvas>
+        </div>
+    </div>
+</div>
+
+<div class="glass-panel p-0 overflow-hidden">
+    <div class="p-3 bg-light border-bottom d-flex justify-content-between">
+        <h6 class="fw-bold m-0 text-uppercase text-secondary">Transaction History</h6>
+        <span class="badge bg-primary"><?php echo count($data); ?> Records</span>
+    </div>
+    
+    <div class="table-responsive">
+        <table class="table table-hover mb-0 align-middle">
+            <thead class="bg-light text-secondary small text-uppercase">
+                <tr>
+                    <th class="ps-4">Date</th>
+                    <th>Beneficiary</th>
+                    <th>CNIC</th>
+                    <th>Amount</th>
+                    <th>Agent</th>
+                    <th class="text-end pe-4">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach($data as $r): ?>
+                <tr class="<?php echo ($r['status']=='void')?'opacity-50 text-decoration-line-through':''; ?>">
+                    <td class="ps-4 fw-bold text-muted"><?php echo date('d M, h:i A', strtotime($r['created_at'])); ?></td>
+                    <td class="fw-bold text-dark"><?php echo $r['name']; ?></td>
+                    <td><span class="badge bg-light text-dark border"><?php echo $r['cnic']; ?></span></td>
+                    <td class="text-success fw-bold">Rs. <?php echo number_format($r['amount']); ?></td>
+                    <td><small class="text-uppercase"><?php echo ucfirst($r['username']); ?></small></td>
+                    <td class="text-end pe-4">
+                        <?php if($r['status'] == 'success'): ?>
+                            <a href="print_receipt.php?id=<?php echo $r['id']; ?>" target="_blank" class="btn btn-sm btn-outline-dark rounded-circle" title="Print"><i class="fas fa-print"></i></a>
+                            <a href="void_transaction.php?id=<?php echo $r['id']; ?>" class="btn btn-sm btn-outline-danger rounded-circle" title="Void"><i class="fas fa-ban"></i></a>
+                        <?php else: ?>
+                            <span class="badge bg-danger">VOIDED</span>
+                        <?php endif; ?>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+                <?php if(count($data)==0): ?>
+                    <tr><td colspan="6" class="text-center p-5 text-muted">No transactions found for this period.</td></tr>
+                <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+// RENDER MODERN CHART
+const ctx = document.getElementById('payoutChart').getContext('2d');
+new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: <?php echo json_encode($dates); ?>,
+        datasets: [{
+            label: 'Total Disbursed (Rs)',
+            data: <?php echo json_encode($totals); ?>,
+            borderColor: '#00E5FF',
+            backgroundColor: 'rgba(0, 229, 255, 0.1)',
+            borderWidth: 3,
+            fill: true,
+            tension: 0.4,
+            pointRadius: 5,
+            pointHoverRadius: 8
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: {
+            y: { grid: { borderDash: [5, 5] }, beginAtZero: true },
+            x: { grid: { display: false } }
+        }
+    }
+});
+</script>
+
+<?php include 'includes/footer.php'; ?> 
+ 
+
+==============================================================================
+FILE PATH: D:\websiteproject\versions\portal3\users.php
+==============================================================================
+
+<?php 
+require 'includes/header.php'; 
+if ($_SESSION['role'] !== 'admin') { die("ACCESS DENIED"); }
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['delete_id'])) {
+        $pdo->prepare("DELETE FROM users WHERE id=?")->execute([$_POST['delete_id']]);
+    } else {
+        $name = $_POST['full_name'];
+        $user = $_POST['username'];
+        $pass = $_POST['password'];
+        $role = $_POST['role'];
+        $hash = password_hash($pass, PASSWORD_BCRYPT);
+        $pdo->prepare("INSERT INTO users (full_name, username, password, role) VALUES (?, ?, ?, ?)")->execute([$name, $user, $hash, $role]);
+    }
+}
+$users = $pdo->query("SELECT * FROM users")->fetchAll();
+?>
+
+<link rel="stylesheet" href="css/modern.css">
+
+<div class="row g-4">
+    <div class="col-md-4">
+        <div class="glass-panel p-4">
+            <h5 class="fw-bold mb-3">Add New Staff</h5>
+            <form method="POST">
+                <input type="text" name="full_name" class="form-control mb-2" placeholder="Full Name" required>
+                <input type="text" name="username" class="form-control mb-2" placeholder="Username" required>
+                <input type="text" name="password" class="form-control mb-2" placeholder="Password" required>
+                <select name="role" class="form-select mb-3">
+                    <option value="user">Staff</option>
+                    <option value="admin">Admin</option>
+                </select>
+                <button class="btn btn-primary w-100 rounded-pill fw-bold">Create User</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        <div class="glass-panel p-0 overflow-hidden">
+            <table class="table table-hover mb-0">
+                <thead class="bg-light"><tr><th class="ps-4">Name</th><th>Username</th><th>Role</th><th></th></tr></thead>
+                <tbody>
+                    <?php foreach($users as $u): ?>
+                    <tr>
+                        <td class="ps-4 fw-bold"><?php echo $u['full_name']; ?></td>
+                        <td><?php echo $u['username']; ?></td>
+                        <td><span class="badge bg-<?php echo ($u['role']=='admin'?'danger':'info'); ?>"><?php echo strtoupper($u['role']); ?></span></td>
+                        <td class="text-end pe-4">
+                            <form method="post" onsubmit="return confirm('Delete?');">
+                                <input type="hidden" name="delete_id" value="<?php echo $u['id']; ?>">
+                                <button class="btn btn-sm btn-outline-danger border-0"><i class="fas fa-trash"></i></button>
+                            </form>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<?php include 'includes/footer.php'; ?> 
+ 
+
+==============================================================================
+FILE PATH: D:\websiteproject\versions\portal3\void_transaction.php
+==============================================================================
+
+<?php 
+require 'includes/header.php'; 
+if ($_SESSION['role'] !== 'admin') { die("ACCESS DENIED"); }
+
+// HANDLE VOID
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $id = $_POST['id'];
+    $reason = $_POST['reason'];
+    
+    // Mark transaction as void instead of deleting (Audit Trail)
+    $stmt = $pdo->prepare("UPDATE transactions SET status = 'void', void_reason = ?, void_by = ? WHERE id = ?");
+    $stmt->execute([$reason, $_SESSION['user_id'], $id]);
+    
+    echo "<script>window.location.href='reports.php';</script>";
+    exit();
+}
+
+$id = $_GET['id'] ?? 0;
+$txn = $pdo->query("SELECT * FROM transactions WHERE id = $id")->fetch();
+if(!$txn) die("Transaction not found");
+?>
+
+<link rel="stylesheet" href="css/modern.css">
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="glass-panel p-5 border-danger" style="border: 1px solid #dc3545;">
+            <div class="text-center text-danger mb-4">
+                <i class="fas fa-exclamation-triangle fa-3x mb-3"></i>
+                <h3 class="fw-bold">Void Transaction #<?php echo $id; ?></h3>
+                <p class="text-white-50">This action will remove the amount from financial totals.</p>
+            </div>
+
+            <div class="bg-dark bg-opacity-50 p-3 rounded mb-4">
+                <div class="d-flex justify-content-between mb-2">
+                    <span>Amount:</span>
+                    <span class="fw-bold text-white">Rs. <?php echo number_format($txn['amount']); ?></span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span>Bank ID:</span>
+                    <span class="fw-bold text-white"><?php echo $txn['konnect_trx_id']; ?></span>
+                </div>
+            </div>
+
+            <form method="post">
+                <input type="hidden" name="id" value="<?php echo $id; ?>">
+                
+                <div class="mb-4">
+                    <label class="fw-bold text-danger">Reason for Voiding (Required)</label>
+                    <textarea name="reason" class="form-control bg-dark text-white border-secondary" rows="3" required placeholder="e.g. Duplicate entry, Wrong amount..."></textarea>
+                </div>
+
+                <div class="d-flex gap-3">
+                    <a href="reports.php" class="btn btn-outline-light w-50 rounded-pill">Cancel</a>
+                    <button type="submit" class="btn btn-danger w-50 rounded-pill fw-bold">Confirm Void</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<?php include 'includes/footer.php'; ?> 
+ 
+
+==============================================================================
+FILE PATH: D:\websiteproject\versions\portal3\manifest.json
+==============================================================================
+
+{
+  "name": "Arham BISP Portal",
+  "short_name": "Arham BISP",
+  "start_url": "index.php",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0d6efd",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/2910/2910768.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+} 
+ 
+modern.css
+==============================================================================
+FILE PATH: D:\websiteproject\versions\portal3\css\modern.css
+==============================================================================
+.
+/* =========================================
+   1. CORE VARIABLES & SETUP
+   ========================================= */
+:root {
+    --primary-gradient: linear-gradient(135deg, #00E5FF 0%, #004d26 100%);
+    --glass-bg: rgba(255, 255, 255, 0.85);
+    --glass-border: 1px solid rgba(255, 255, 255, 0.5);
+    --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.1);
+    --font-urdu: 'Jameel Noori Nastaleeq', serif;
+    --brand-gold: #FFC107;
+    --brand-cyan: #00E5FF;
+}
+
+/* Fix for Slow Network Warning */
+@font-face {
+    font-family: 'Jameel Noori Nastaleeq';
+    src: url('../Jameel Noori Nastaleeq.ttf') format('truetype');
+    font-display: swap;
+}
+
+body {
+    background-color: #f4f7f6;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: background-color 0.3s ease;
+}
+
+/* =========================================
+   2. DARK MODE SUPPORT
+   ========================================= */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --glass-bg: rgba(30, 30, 30, 0.9);
+        --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+        color: #e0e0e0;
+    }
+    body { background-color: #121212 !important; color: #fff !important; }
+    
+    /* Bootstrap Overrides for Dark Mode */
+    .card, .glass-panel { background-color: #1e1e1e !important; color: #fff !important; border-color: #333 !important; }
+    .table { color: #fff !important; }
+    .table-hover tbody tr:hover { background-color: rgba(255, 255, 255, 0.05) !important; color: #fff; }
+    .form-control, .form-select { background-color: #2c2c2c !important; border-color: #444 !important; color: #fff !important; }
+    .form-control:focus { background-color: #333 !important; color: #fff !important; border-color: var(--brand-cyan) !important; }
+    .text-dark { color: #fff !important; }
+    .text-muted { color: #aaa !important; }
+    .bg-light { background-color: #2c2c2c !important; }
+    .modal-content { background-color: #1e1e1e; color: white; }
+    .btn-close { filter: invert(1); }
+}
+
+/* =========================================
+   3. GLASSMORPHISM UI CARDS
+   ========================================= */
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: var(--glass-border);
+    border-radius: 20px;
+    box-shadow: var(--shadow-soft);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden; /* Keeps content inside rounded corners */
+}
+
+.glass-panel:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* =========================================
+   4. INTERACTIVE ELEMENTS (Buttons & Inputs)
+   ========================================= */
+.hover-effect { transition: 0.3s; }
+.hover-effect:hover { transform: scale(1.02); }
+
+.btn {
+    border-radius: 50px; /* Pill shape for all buttons */
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.form-control, .form-select {
+    border-radius: 10px;
+    padding: 10px 15px;
+    border: 1px solid #ced4da;
+    transition: all 0.3s;
+}
+
+.form-control:focus {
+    box-shadow: 0 0 0 0.25rem rgba(0, 229, 255, 0.25);
+    border-color: var(--brand-cyan);
+}
+
+/* =========================================
+   5. ANIMATIONS & BADGES
+   ========================================= */
+/* AI / Live Badge Pulse */
+.ai-badge {
+    background: linear-gradient(45deg, #FFD700, #FF8C00);
+    color: black;
+    font-weight: bold;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(255, 215, 0, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+}
+
+/* Fade In Animation */
+.animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================================
+   6. TABLES & LISTS
+   ========================================= */
+.table-responsive {
+    border-radius: 15px;
+}
+
+.table thead th {
+    border-bottom: 2px solid #e9ecef;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* Row Highlight on Click/Hover */
+.table-hover tbody tr { transition: background-color 0.2s; }
+.table-hover tbody tr:hover {
+    background-color: rgba(0, 229, 255, 0.1); /* Cyan tint */
+    cursor: pointer;
+}
+
+/* =========================================
+   7. SPECIFIC COMPONENTS (Scanner, Login, etc)
+   ========================================= */
+
+/* Login Page Particles */
+.bg-particles {
+    position: absolute; width: 100%; height: 100%; top: 0; left: 0;
+    background-image: radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px);
+    background-size: 30px 30px;
+    opacity: 0.5;
+    animation: moveParticles 60s linear infinite;
+    pointer-events: none;
+}
+@keyframes moveParticles { from { background-position: 0 0; } to { background-position: 100% 100%; } }
+
+/* Camera / Scanner Container */
+#reader {
+    border: 3px solid var(--brand-cyan);
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+    background: #000;
+}
+#reader video { object-fit: cover; width: 100%; }
+
+/* Toast Notification (Copy Success) */
+.toast {
+    background: rgba(25, 135, 84, 0.95) !important; /* Green */
+    color: white;
+    border-radius: 15px;
+    backdrop-filter: blur(5px);
+} 
+ 
+modern.css
+==============================================================================
+FILE PATH: D:\websiteproject\versions\portal3\includes\config.php
+==============================================================================
+
+<?php
+// includes/config.php
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// 1. TIMEZONE
+date_default_timezone_set('Asia/Karachi');
+
+// 2. DATABASE CONFIG
+define('DB_HOST', 'localhost');
+define('DB_NAME', 'arham_portal-323133bb14');
+define('DB_USER', 'root');
+define('DB_PASS', ''); 
+
+try {
+    // --- THE FIX: Force utf8mb4 in the connection string ---
+    $dsn = "mysql:host=".DB_HOST.";dbname=".DB_NAME.";charset=utf8mb4";
+    
+    $options = [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        PDO::ATTR_EMULATE_PREPARES => false,
+    ];
+    
+    $pdo = new PDO($dsn, DB_USER, DB_PASS, $options);
+    
+    // --- THE FIX: Force SQL Mode for Urdu Characters ---
+    $pdo->exec("SET NAMES utf8mb4");
+    $pdo->exec("SET CHARACTER SET utf8mb4");
+    $pdo->exec("SET time_zone = '+05:00';");
+    
+} catch (PDOException $e) {
+    // Show a clean error if DB fails
+    die("<h3>Database Connection Error</h3><p>Please check your config settings.</p>");
+}
+
+// 3. AUTH HELPER
+function requireAuth() {
+    if (!isset($_SESSION['user_id'])) {
+        header("Location: login.php");
+        exit();
+    }
+}
+
+// 4. LOGGER
+function logActivity($pdo, $action, $details = "") {
+    if(isset($_SESSION['user_id'])) {
+        try {
+            $stmt = $pdo->prepare("INSERT INTO system_logs (user_id, action, details, ip_address) VALUES (?, ?, ?, ?)");
+            $stmt->execute([$_SESSION['user_id'], $action, $details, $_SERVER['REMOTE_ADDR']]);
+        } catch (Exception $e) {
+            // Ignore log errors
+        }
+    }
+}
+?> 
+ 
+modern.css
+==============================================================================
+FILE PATH: D:\websiteproject\versions\portal3\includes\footer.php
+==============================================================================
+
+</main>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html> 
+ 
+modern.css
+==============================================================================
+FILE PATH: D:\websiteproject\versions\portal3\includes\header.php
+==============================================================================
+
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+// Redirect if not logged in
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
+require_once __DIR__ . '/config.php';
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arham Printers - Portal</title>
+    
+    <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/2910/2910768.png" type="image/png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="css/modern.css">
+    <link rel="manifest" href="manifest.json">
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body { font-size: .875rem; background-color: #f8f9fa; }
+        .sidebar { position: fixed; top: 0; bottom: 0; left: 0; z-index: 100; padding: 48px 0 0; box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1); background-color: #fff; }
+        @media (max-width: 767.98px) {
+            .sidebar { position: fixed; top: 50px; bottom: 0; left: 0; z-index: 1000; padding: 20px 0; width: 100%; height: auto; background-color: white; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+            .sidebar.collapse:not(.show) { display: none !important; }
+        }
+        .nav-link { font-weight: 500; color: #333; padding: 10px 15px; display: flex; align-items: center; gap: 10px; }
+        .nav-link:hover { color: #007bff; background-color: #f0f8ff; border-right: 3px solid #007bff; }
+        .navbar-brand { padding-top: .75rem; padding-bottom: .75rem; font-size: 1rem; background-color: rgba(0, 0, 0, .25); box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25); }
+        @media print { .sidebar, .navbar, .btn, .no-print { display: none !important; } main { margin: 0 !important; width: 100% !important; } }
+    </style>
+</head>
+<body>
+    
+    <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fw-bold" href="dashboard.php">
+            ARHAM <span class="text-warning">Printers</span>
+        </a>
+        <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-nav w-100 d-none d-md-block">
+            <div class="nav-item text-nowrap d-flex align-items-center justify-content-end px-3">
+                <span class="badge bg-secondary me-3"><?php echo isset($_SESSION['role']) ? strtoupper($_SESSION['role']) : 'USER'; ?></span>
+                <a class="nav-link px-3 text-danger fw-bold" href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </div>
+        <div class="navbar-nav d-md-none px-3">
+             <a class="nav-link text-white small" href="logout.php">Logout</a>
+        </div>
+    </header>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                <div class="position-sticky pt-3">
+                    
+                    <h6 class="sidebar-heading px-3 mt-2 mb-1 text-muted">Operations</h6>
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a class="nav-link" href="dashboard.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                        <li class="nav-item"><a class="nav-link" href="queue.php"><i class="fas fa-ticket-alt"></i> Token Queue</a></li>
+                        <li class="nav-item"><a class="nav-link" href="beneficiaries.php"><i class="fas fa-users"></i> Beneficiaries</a></li>
+                        
+                        <li class="nav-item"><a class="nav-link" href="bills.php"><i class="fas fa-qrcode"></i> Bill Scanner</a></li>
+                        <li class="nav-item"><a class="nav-link" href="night_mode.php"><i class="fas fa-moon"></i> Night Shift</a></li>
+                    </ul>
+
+                    <?php if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin'): ?>
+                    <h6 class="sidebar-heading px-3 mt-4 mb-1 text-muted text-uppercase text-danger">Financials</h6>
+                    <ul class="nav flex-column mb-2">
+                        <li class="nav-item"><a class="nav-link" href="payout.php"><i class="fas fa-hand-holding-usd"></i> Payout Entry</a></li>
+                        <li class="nav-item"><a class="nav-link" href="reports.php"><i class="fas fa-chart-line"></i> Analytics</a></li>
+                        <li class="nav-item"><a class="nav-link text-danger" href="reconcile.php"><i class="fas fa-balance-scale"></i> Cash Closing</a></li>
+                    </ul>
+
+                    <h6 class="sidebar-heading px-3 mt-4 mb-1 text-muted text-uppercase text-primary">System</h6>
+                    <ul class="nav flex-column mb-2">
+                        <li class="nav-item"><a class="nav-link" href="https://bisp.arhamprinters.pk" target="_blank"><i class="fas fa-external-link-alt"></i> View Live Site</a></li>
+                        
+                        <li class="nav-item"><a class="nav-link" href="admin_settings.php"><i class="fas fa-broadcast-tower"></i> Portal Settings</a></li>
+                        <li class="nav-item"><a class="nav-link" href="users.php"><i class="fas fa-user-cog"></i> User Manager</a></li>
+                    </ul>
+                    <?php endif; ?>
+                    
+                    <h6 class="sidebar-heading px-3 mt-4 mb-1 text-muted">Display</h6>
+                    <ul class="nav flex-column mb-2">
+                         <li class="nav-item"><a class="nav-link" href="display.php" target="_blank"><i class="fas fa-tv"></i> TV Mode</a></li>
+                    </ul>
+
+                </div>
+            </nav>
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4"> 
+ 
+modern.css
+==============================================================================
+FILE PATH: D:\websiteproject\versions\portal3\includes\intelligence.php
+==============================================================================
+
+<?php
+class ArhamIntelligence {
+    private $pdo;
+
+    public function __construct($pdo) {
+        $this->pdo = $pdo;
+    }
+
+    // --- 1. FRAUD GUARD (Security Layer) ---
+    public function checkFraudRisk($cnic, $phone = '') {
+        $alerts = [];
+        $risk_score = 0;
+
+        // Rule A: High Frequency (Coming too often - >1 times in 30 days)
+        // Note: Adjust '30 DAY' to your policy preference
+        $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM transactions t JOIN beneficiaries b ON t.beneficiary_id = b.id WHERE b.cnic = ? AND t.created_at > DATE_SUB(NOW(), INTERVAL 30 DAY)");
+        $stmt->execute([$cnic]);
+        $visits = $stmt->fetchColumn();
+        
+        if ($visits >= 1) {
+            $alerts[] = "⚠️ **High Frequency:** Beneficiary was paid recently ($visits times in 30 days).";
+            $risk_score += 40;
+        }
+
+        // Rule B: Phone Hopping (One phone linked to multiple CNICs)
+        if (!empty($phone)) {
+            $stmt = $this->pdo->prepare("SELECT COUNT(DISTINCT cnic) FROM beneficiaries WHERE phone = ?");
+            $stmt->execute([$phone]);
+            $linked_cnics = $stmt->fetchColumn();
+            
+            if ($linked_cnics >= 3) {
+                $alerts[] = "🚨 **Phone Ring:** This number is linked to $linked_cnics different CNICs.";
+                $risk_score += 50;
+            }
+        }
+
+        // Rule C: Queue Flooding (Already waiting in queue today)
+        $today = date('Y-m-d');
+        $stmt = $this->pdo->prepare("SELECT token_number FROM queue_tokens WHERE cnic = ? AND DATE(issued_at) = '$today' AND status='waiting'");
+        $stmt->execute([$cnic]);
+        $existing = $stmt->fetchColumn();
+        
+        if ($existing) {
+            $alerts[] = "🛑 **Duplicate Token:** Already in queue (Token #$existing).";
+            $risk_score += 100; // Immediate block
+        }
+
+        return ['score' => $risk_score, 'alerts' => $alerts];
+    }
+
+    // --- 2. PREDICTIVE ANALYTICS (AI Logic) ---
+    public function predictWaitTime($queue_length) {
+        // Machine Learning: Calculate Moving Average of last 50 transactions
+        $stmt = $this->pdo->query("SELECT AVG(TIMESTAMPDIFF(MINUTE, issued_at, served_at)) as avg_time FROM queue_tokens WHERE status='served' ORDER BY id DESC LIMIT 50");
+        $avg_pace = $stmt->fetchColumn() ?: 5; // Default to 5 mins if no data
+        
+        return round($queue_length * $avg_pace);
+    }
+
+    public function forecastDemand() {
+        // Predict today's total traffic based on previous same-day activity
+        $day_of_week = date('w'); // 0 (Sun) - 6 (Sat)
+        $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM queue_tokens WHERE DAYOFWEEK(issued_at) = ? + 1 AND DATE(issued_at) < CURDATE()");
+        $stmt->execute([$day_of_week]);
+        $avg_traffic = $stmt->fetchColumn(); 
+        
+        // Simple linear projection (Avg of history) or default to 50
+        return $avg_traffic ? round($avg_traffic / 4) : 50; // Approximate average
+    }
+}
+
+// Initialize Global Intelligence if DB connection exists
+if(isset($pdo)) {
+    $AI = new ArhamIntelligence($pdo);
+}
+?> 
+ 
